@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Web 前端接入示例</title>
+		<!-- 验证码程序依赖(必须)。请勿修改以下程序依赖，如通过其他手段规避加载，会导致验证码无法正常更新，对抗能力无法保证，甚至引起误拦截。 -->
+		<script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+		<script type="text/javascript" src="./js/webview.js"></script>
+	</head>
+
+	<body>
+	</body>
+
+	<script>
+		
+
+		// 定义验证码js加载错误处理函数
+		function loadErrorCallback() {
+			var appid = '190971740';
+			// 生成容灾票据或自行做其它处理
+			var ticket = 'terror_1001_' + appid + '_' + Math.floor(new Date().getTime() / 1000);
+			callback({
+				ret: 0,
+				randstr: '@' + Math.random().toString(36).substr(2),
+				ticket: ticket,
+				errorCode: 1001,
+				errorMessage: 'jsload_error'
+			});
+		}
+		
+		// 定义回调函数
+		document.addEventListener('plusready', function() {
+			var wv = plus.webview.currentWebview()
+			
+			// 滑动验证  
+			try {
+				var captcha = new TencentCaptcha('190971740', function callback(res) {
+					if (res.ret === 0) {
+						// 传递的参数
+						uni.postMessage({
+							// 必须是data
+							data: {
+								result: res
+							}
+						});
+						wv.hide()
+					} else{
+						
+						wv.hide()
+					}
+				}, {});
+				captcha.show();
+			} catch (error) {
+				// 加载异常，调用验证码js加载错误处理函数
+				loadErrorCallback();
+			}
+		})
+	</script>
+
+</html>
