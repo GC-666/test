@@ -30,7 +30,7 @@
 				<view v-for="(item,index) in mineFindCollReport" @click="gonav('pages/my/collections/collections')">
 					<tm-image :round="4"  class="flex-start" :width="210" :height="210" :src="item.collImg"></tm-image>
 					<tm-text _class="mt-5 text-overflow " _style="width:180rpx;text-overflow: ellipsis;" :fontSize="26"
-						:label="item.collName"></tm-text>
+						label="1231231231231313123123"></tm-text>
 				</view>
 			</view>
 			<view class="flex flex-between mt-30">
@@ -74,7 +74,7 @@
 					</view>
 				</template>
 			</tm-cell>
-			<tm-cell bottomBorder :margin="[0, 0]" :titleFontSize="28" >
+			<tm-cell bottomBorder :margin="[0, 0]" :titleFontSize="28" @click="gonav('pages/my/set/set')">
 				<template v-slot:title>
 					<view class="flex">
 						<tm-icon class="ml-10" :fontSize="26" name="tmicon-cog-fill"></tm-icon>
@@ -139,6 +139,7 @@
 		userBoxFindCollPageList.value=res;
 	})
 	const loginOnt=()=>{
+		uni.removeStorageSync('token')
 		uni.reLaunch({
 			url:"/pages/login/login"
 		})

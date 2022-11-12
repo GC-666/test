@@ -76,25 +76,27 @@
 	const smsShow = ref(false)
 	const codeText = ref("获取验证码")
 	let wv; //计划创建的webview
-	let pages = getCurrentPages();
-	let page = pages[pages.length - 1];
-	let currentWebview = page.$getAppWebview();
+	
 	// 创建webView
 	const btn = () => {
 		// #ifdef APP-PLUS
-		if (wv) {
-			console.log("已经存在webview");
-			return wv.show();
+		let pages = getCurrentPages();
+		let page = pages[pages.length - 1];
+		let currentWebview = page.$getAppWebview();
+		// if (wv) {
+		// 	console.log("已经存在webview");
+		// 	return wv.show();
 
-		}
+		// }
 		// transparent
 		console.log("不存在webview");
-		wv = plus.webview.create('', 'custom-webview', {
+		wv = plus.webview.create('/static/hybrid/html/index.html', 'custom-webview', {
 			'uni-app': 'none',
 			background: '#f5f5f5',
 			webviewBGTransparent: true
 		})
-		wv.loadURL('/static/hybrid/html/index.html')
+		 wv.show()
+		// wv.loadURL('/static/hybrid/html/index.html')
 		
 		// 此处监听uni.postMessage传递参数  
 		plus.globalEvent.addEventListener('plusMessage', msg => {

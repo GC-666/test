@@ -42,6 +42,15 @@ export function request(url: string = '', params = {}, type: string = 'POST') {
 						url: '/pages/login/login'
 					})
 					return
+				}else if(data.code === "403"){
+					uni.showToast({
+						title: data.info,
+						icon: 'none',
+					});
+					uni.redirectTo({
+						url: '/pages/login/login'
+					})
+					return
 				}else if(data.code === "10000"){
 					resolve(data.data)
 				}else{

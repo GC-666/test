@@ -1,8 +1,8 @@
 <template>
-	
+
 	<tm-app>
-		
-		<tm-navbar hideHome  title="" :height="44" :shadow="0">
+
+		<tm-navbar hideHome title="" :height="44" :shadow="0">
 			<template v-slot:left>
 				<view class="ml-20">
 					<tm-image :width="160" :height="33" :src="logoimg"></tm-image>
@@ -33,12 +33,12 @@
 				</view>
 			</tm-sheet>
 			<!-- 首发 盲盒tabs -->
-			<view class="ml-20 mr-20"> 
+			<view class="ml-20 mr-20">
 				<tm-tabs @change="tabsChange" :itemFontSize="28" :activeFontSize="30" :list="tabsTitle" :width="710"
 					:height="100" default-name="0"></tm-tabs>
 			</view>
-			<tm-sheet :round="4" :shadow="0" :margin="[20,10]" :padding="[0,0]"
-				@click="gonav('pages/shopInfo/shopInfo?id='+data.id)" v-for="data in list" :key="data.id">
+			<tm-sheet :round="4" :shadow="0" :margin="[20,10]" :padding="[0,0]" @click="Go(data.id)"
+				v-for="data in list" :key="data.id">
 				<view class="relative flex flex-row-center-center">
 					<tm-image style="filter: blur(5rpx);" :width="710" :height="600" :src="data.collImg">
 					</tm-image>
@@ -167,8 +167,9 @@
 		{ key: "0", title: "即将开售" },
 		{ key: "1", title: "盲盒" },
 	])
+	const index = ref(0)
 	const tabsChange = (i) => {
-		console.log("----", i);
+		index.value = i
 		list.value = []
 		params.value.page = 1
 		if (i == 0) {
@@ -176,6 +177,19 @@
 		} else {
 			findSaleBoxList()
 		}
+	}
+	const Go = (id) => {
+		if (index.value == 0) {
+			uni.navigateTo({
+				url: '/pages/shop/collection?id=' + id
+			})
+		} else {
+			uni.navigateTo({
+				url: '/pages/shop/box?id=' + id
+			})
+		}
+
+
 	}
 	// 公告请求
 	const notice = ref([])

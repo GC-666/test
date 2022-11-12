@@ -43,6 +43,10 @@ export class Home {
 	static async findSaleCollectionItem(params: any) {
 		return await request("/home/new/findSaleCollectionItem", params, "POST")
 	}
+	// 盲盒 详情
+	static async findSaleBoxItem(params: any) {
+		return await request("/home/new/findSaleBoxItem", params, "POST")
+	}
 }
 
 // 市场
@@ -80,18 +84,37 @@ export class My {
 		return await request("/user/recrod/findCollPageList", params, "POST")
 	}
 	//我的藏品类型详情
-	static async collectionShow(params: any) {
-		return await request("/Collection/show", params, "POST")
+	static async userCollectionFindPageList(params: any) {
+		return await request("/user/collection/findPageList", params, "POST")
+	}
+	//我的藏品详情
+	static async collectionDetails(params: any) {
+		return await request("/Collection/details", params, "POST")
+	}
+	//我的藏品寄售服务费和云钱包
+	static async orderFindMySellServiceCharge(params: any) {
+		return await request("/order/findMySellServiceCharge", params, "POST")
 	}
 	//盲盒
 	static async userBoxFindCollPageList(params: any) {
 		return await request("/user/box/findReportPageList", params, "POST")
 	}
-	//盲盒
+	//验证码
 	static async sendCode(params: any) {
 		return await request("/system/get/verification/code", params, "POST")
 	}
-	
+	 //邀请排行
+	static async ranking(params: any) {
+		return await request("/activity/ranking", params, "POST")
+	} 
+	//邀请排行
+	static async MyInvitation(params: any) {
+		return await request("/activity/MyInvitation", params, "POST")
+	}
+	//可开票订单
+	static async findOpenTicketForOrder(params: any) {
+		return await request("/ticket/findOpenTicketForOrder", params, "POST")
+	}
 	
 	
 }

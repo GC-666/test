@@ -3,10 +3,13 @@ import { createSSRApp } from "vue";
 import * as Pinia from 'pinia';
 import tmui from "./xhui"
 import App from "./App.vue";
-
+import DateUtils from "./utils/dateUtils";
 
 export function createApp() {
 	const app = createSSRApp(App);
+	app.config.globalProperties.DateUtils = DateUtils
+	
+	
 	app.config.globalProperties.gonav = function(data:string) { // 页面跳转的事件\
 		uni.showLoading({
 			title: '加载中',

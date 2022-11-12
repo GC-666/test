@@ -15,8 +15,6 @@
 	</body>
 
 	<script>
-		
-
 		// 定义验证码js加载错误处理函数
 		function loadErrorCallback() {
 			var appid = '190971740';
@@ -30,11 +28,10 @@
 				errorMessage: 'jsload_error'
 			});
 		}
-		
+
 		// 定义回调函数
 		document.addEventListener('plusready', function() {
 			var wv = plus.webview.currentWebview()
-			
 			// 滑动验证  
 			try {
 				var captcha = new TencentCaptcha('190971740', function callback(res) {
@@ -47,8 +44,8 @@
 							}
 						});
 						wv.hide()
-					} else{
-						
+					} else {
+
 						wv.hide()
 					}
 				}, {});
@@ -57,7 +54,7 @@
 				// 加载异常，调用验证码js加载错误处理函数
 				loadErrorCallback();
 			}
-		})
+		}, false)
 	</script>
 
 </html>
