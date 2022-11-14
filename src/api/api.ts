@@ -95,9 +95,33 @@ export class My {
 	static async orderFindMySellServiceCharge(params: any) {
 		return await request("/order/findMySellServiceCharge", params, "POST")
 	}
-	//盲盒
-	static async userBoxFindCollPageList(params: any) {
+	//我的藏品寄售提交
+	static async collectionSell(params: any) {
+		return await request("/Collection/sell", params, "POST")
+	}
+	//我的藏品取消寄售
+	static async collectionWithdraw(params: any) {
+		return await request("/Collection/withdraw", params, "POST")
+	}
+	//我的藏品查询转增人信息
+	static async userNewMiniFindUserName(params: any) {
+		return await request("/user/new/mini/findUserName", params, "POST")
+	}
+	//我的藏品查询转增	
+	static async userNewMiniGive(params: any) {
+		return await request("/user/new/mini/give", params, "POST")
+	}
+	//我的盲盒类型
+	static async userBoxFindReportPageList(params: any) {
 		return await request("/user/box/findReportPageList", params, "POST")
+	}
+	//我的盲盒类型详情
+	static async userBoxFindPageList(params: any) {
+		return await request("/user/box/findPageList", params, "POST")
+	}
+	//我的盲盒详情
+	static async userBoxFindItem(params: any) {
+		return await request("/user/box/findItem", params, "POST")
 	}
 	//验证码
 	static async sendCode(params: any) {
@@ -114,6 +138,34 @@ export class My {
 	//可开票订单
 	static async findOpenTicketForOrder(params: any) {
 		return await request("/ticket/findOpenTicketForOrder", params, "POST")
+	}
+	//获取个人信息
+	static async personal(params: any) {
+		return await request("/mine/personal", params, "POST")
+	}
+	//获取头像
+	static async updateUserInfo(params: any) {
+		return await request("/mine/updateUserInfo", params, "POST")
+	}
+	///实名认证
+	static async addrealname(params: any) {
+		return await request("/mine/addrealname", params, "POST")
+	}
+	//获取实名认证
+	static async realname(params: any) {
+		return await request("/mine/realname", params, "POST")
+	}
+	//资产
+	static async Myassets(params: any) {
+		return await request("/mine/Myassets", params, "POST")
+	}
+	//进入云钱包链接
+	static async openSdCloudWallet(params: any) {
+		return await request("/user/new/mini/openSdCloudWallet", params, "POST")
+	}
+	//开通云钱包
+	static async openSdCloudWallet1(params: any) {
+		return await request("/user/new/mini/openSdCloudWallet", params, "POST")
 	}
 	
 	

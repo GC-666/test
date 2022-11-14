@@ -1,15 +1,20 @@
 <template>
 	<tm-app>
-		<tm-navbar hideHome title="申请开票" :height="44" :shadow="0">
+		<tm-navbar title="申请开票" :height="44" :shadow="0">
 		</tm-navbar>
-		<tm-sheet :shadow="0" :margin="[0,20]" :padding="[0,0]">
-			<tm-checkbox class="ml-10" v-model="loot" :size="25" :round="10">
-				<template v-slot:default="{checked}">
-					<tm-text :fontSize="20" label="个人"></tm-text>
-				</template>
-			</tm-checkbox>
-			<tm-divider color="grey" :margin="[1,1]"></tm-divider>
+		<tm-sheet :shadow="0" :margin="[0,0]" :padding="[10,10]">
+			<view class="flex ">
+				<tm-text :font-size="28" _class="text-weight-b flex-1" label="抬头类型"></tm-text>
+				<view class="flex flex-around">
+
+					<tm-radio-group class="ml-50" v-model="radiolist" direction="row" @change="radioClick">
+						<tm-radio :size="25" :fontSize="22" value="qiye" label="企业单位"></tm-radio>
+						<tm-radio :size="25" :fontSize="22" value="geren" label="个人/非企业单位"></tm-radio>
+					</tm-radio-group>
+				</view>
+			</view>
 		</tm-sheet>
+		<tm-divider color="grey" :margin="[1,1]"></tm-divider>
 	</tm-app>
 </template>
 
@@ -18,7 +23,7 @@
 	import { ref } from 'vue';
 	const orderMoney = ref(0)
 	const orderIds = ref('')
-	const loot = ref(false)
+	const radiolist = ref('')
 	onLoad(() => {
 		let data = uni.getStorageSync('ids')
 		orderMoney.value = data.money
@@ -31,6 +36,9 @@
 			}
 		})
 	})
+	const radioClick = (val) => {
+		console.log(val);
+	}
 </script>
 
 

@@ -1,9 +1,9 @@
 <template>
 	<tm-app>
-		<tm-navbar hideHome title="设置" :height="44" :shadow="0">
+		<tm-navbar  title="设置" :height="44" :shadow="0">
 		</tm-navbar>
 		<tm-sheet :shadow="0" :margin="[0,15]" :padding="[0,0]">
-			<tm-cell _class="text-weight-b" :margin="[0, 0]" :titleFontSize="30" title="个人信息"> </tm-cell>
+			<tm-cell _class="text-weight-b" :margin="[0, 0]" :titleFontSize="30" title="个人信息" @click="gonav('pages/my/set/myinfo/myinfo')"> </tm-cell>
 		</tm-sheet>
 		<tm-sheet :shadow="0" :margin="[0,15]" :padding="[0,0]">
 			<tm-cell _class="text-weight-b" :margin="[0, 0]" :titleFontSize="30" title="关于我们"
@@ -18,7 +18,6 @@
 			<tm-cell _class="text-weight-b" :margin="[0, 0]" :titleFontSize="30" title="修改登入/支付密码">
 			</tm-cell>
 		</tm-sheet>
-
 		<tm-sheet :shadow="0" :margin="[0,15]" :padding="[0,0]">
 			<!-- #ifdef APP-PLUS -->
 			<tm-cell _class="text-weight-b" :margin="[0, 0]" :rightText="`${currentSize}`" :titleFontSize="30"
@@ -28,10 +27,10 @@
 			<tm-cell _class="text-weight-b" :margin="[0, 0]" :titleFontSize="30" title="排行"
 				@click="gonav('pages/my/set/ranking/ranking')"> </tm-cell>
 			<tm-divider color="grey" :margin="[1,1]"></tm-divider>
-			<tm-cell _class="text-weight-b" :margin="[0, 0]" :titleFontSize="30" title="注销账户"> </tm-cell>
+			<tm-cell _class="text-weight-b" :margin="[0, 0]" :titleFontSize="30" title="注销账户"></tm-cell>
 		</tm-sheet>
 		<view class="flex flex-center">
-			<tm-button @lick="logOut" :width="520" :height="70" _class="text-weight-b" :round="4" :margin="[0,30]"
+			<tm-button @click="logOut" :width="520" :height="70" _class="text-weight-b" :round="4" :margin="[0,30]"
 				:fontSize="30" label="退出登录"></tm-button>
 		</view>
 	</tm-app>

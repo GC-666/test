@@ -1,6 +1,6 @@
 <template>
 	<tm-app style="">
-		<tm-navbar hideHome :title="config.collName">
+		<tm-navbar  :title="config.collName">
 		</tm-navbar>
 		<view style="">
 			<tm-sheet :margin="[0,0]">
@@ -9,7 +9,7 @@
 				</tm-tabs>
 			</tm-sheet>
 		</view>
-		<scroll-view scroll-y="true" :style="`height: ${hh}px;`" @scrolltolower="lower">
+		<scroll-view scroll-y="true" :style="`max-height: ${hh}px;`" @scrolltolower="lower">
 			<view style="margin: 0rpx 20rpx 0rpx 20rpx;">
 				<view class="" v-for="(data,index) in userCollectionFindPageList" @click="gonav('pages/my/collections/collectionsDetails?id='+data.id)">
 					<tm-sheet :shadow="0" :margin="[20,20]" :padding="[20,10]">
@@ -30,7 +30,7 @@
 						</view>
 						<view class="flex flex-between" style="margin:10rpx 10rpx 0rpx 10rpx;padding: 0rpx 0rpx 10rpx 0rpx">
 							<view class="flex">
-								<tm-text color="#999" :font-size="18" _class="text-weight-b" :label="data.collTruenumber">
+								<tm-text color="#999" :font-size="22" _class="text-weight-b" :label="data.collTruenumber">
 								</tm-text>
 							</view>
 							<view class="flex mr-2" v-if="data.type=='1' || data.type=='2' ">
@@ -103,7 +103,7 @@
 	const pageData = ref({
 		collId: 0,
 		page:1,
-		limit:10,
+		limit:20,
 		orderByType:1
 	});
 	const bool = ref(true);

@@ -1,19 +1,69 @@
 <template>
-	{{screenWidth}}--{{screenHeight}}--{{windowWidth}}--{{windowHeight}}--{{statusBarHeight}}--{{safeArea}}
+	<tm-app style="">
+		<tm-navbar  title="藏品">
+		</tm-navbar>
+		<view style="">
+				<tm-sheet :margin="[0,0]">
+					<tm-tabs @change="tabsChange" :transprent="false" activeFontColor="#07EBFE" align="center"
+						:list="tabsTitle" :itemHeight="30" :itemWidth="300" :width="700"  default-name="1">
+					</tm-tabs>
+				</tm-sheet>
+			</view>
+		<scroll-view scroll-y="true" :style="`max-height: ${hh}px;`" @scrolltolower="lower">
+			<view class="flex flex-row-center-between flex-wrap" style="margin: 0rpx 20rpx 0rpx 20rpx;">
+				<view v-if="index==1" class="relative" v-for="(data,index) in mineFindCollReport"
+					@click="gonav('pages/my/collections/collectionsType?id='+data.collId+'&collName='+data.collName)">
+					<tm-sheet :shadow="0" :margin="[0,20]" :padding="[0,0]">
+						<tm-image :width="344" :height="344" :src="data.collImg">
+						</tm-image>
+						<view class="" style="margin: 0rpx 10rpx;">
+							<tm-text :font-size="28" _class="text-weight-b" :label="data.collName"></tm-text>
+						</view>
+						<view class="flex flex-between" style="margin: 0rpx 10rpx;padding: 0rpx 0rpx 10rpx 0rpx">
+							<tm-text color="#999" :font-size="18" class="mt-10" :label="data.publisher"></tm-text>
+							<view class="flex">
+								<tm-text color="#999" :font-size="18" _class="text-weight-n" label="数量"></tm-text>
+								<tm-text color="#999" :font-size="18" _class="text-weight-b" :label="data.collCount">
+								</tm-text>
+							</view>
+						</view>
+					</tm-sheet>
+				</view>
+				<view v-else class="relative" v-for="(data,index) in userRecrodFindCollPageList">
+					<tm-sheet :shadow="0" :margin="[0,20]" :padding="[0,0]">
+						<tm-image :width="344" :height="344" :src="data.img">
+						</tm-image>
+						<view class="" style="margin: 0rpx 10rpx;">
+							<tm-text :font-size="28" _class="text-weight-b" :label="data.collName"></tm-text>
+						</view>
+						<view class="flex flex-between" style="margin: 0rpx 10rpx;padding: 0rpx 0rpx 10rpx 0rpx">
+							<tm-text color="#999" :font-size="18" class="mt-10" :label="data.opertionRemarks"></tm-text>
+							<view class="flex">
+								<tm-text color="#999" :font-size="18" _class="text-weight-n" label="¥"></tm-text>
+								<tm-text color="#999" :font-size="18" _class="text-weight-b" :label="data.price">
+								</tm-text>
+							</view>
+						</view>
+					</tm-sheet>
+				</view>
+			</view>
+		</scroll-view>
+	</tm-app>
 </template>
 
 
 <script setup>
-	const {screenWidth,screenHeight,windowWidth, windowHeight, statusBarHeight,safeArea } =uni.getWindowInfo()
-	
-		console.log("屏幕宽度",screenWidth);
-		console.log("屏幕高度",screenHeight);
-		console.log("可使用窗口宽度",windowWidth);
-		console.log("可使用窗口高度",windowHeight);
-		console.log("手机状态栏的高度",statusBarHeight);
-		console.log("安全区域",safeArea);
+	const { screenWidth, screenHeight, windowWidth, windowHeight, statusBarHeight, safeArea, windowTop } = uni
+		.getWindowInfo()
+
+	console.log("屏幕宽度", screenWidth);
+	console.log("屏幕高度", screenHeight);
+	console.log("可使用窗口宽度", windowWidth);
+	console.log("可使用窗口高度", windowHeight);
+	console.log("手机状态栏的高度", statusBarHeight);
+	console.log("安全区域", safeArea);
 	const { height, width, top } = uni.$tm.u.getWindow()
-	const hh=ref("");
+	const hh = ref("");
 	import {
 		onShow,
 		onLoad
@@ -26,18 +76,18 @@
 		reactive,
 		ref
 	} from 'vue';
-	
-	onLoad((e)=>{
-		// // #ifdef APP-PLUS
-		// hh.value = height - 44 - 80 + 6
-		// // #endif
-		// // #ifdef H5
-		// if(windowTop>0){//0		44
-		// 	hh.value = height  - windowTop
-		// }else{
-		// 	hh.value = height   - 80 -6
-		// }
-		// // #endif
+
+	onLoad((e) => {
+		// #ifdef APP-PLUS
+		hh.value = height - 44 - 80 + 6
+		// #endif
+		// #ifdef H5
+		if (windowTop > 0) { //0		44
+			hh.value = height - windowTop
+		} else {
+			hh.value = height - 80 - 6
+		}
+		// #endif
 	})
 
 	const tabsTitle = ref([{
@@ -62,7 +112,7 @@
 	//配置参数
 	const pageData = ref({
 		page: 1,
-		limit: 10
+		limit: 20
 	});
 	const bool = ref(true);
 	// 下拉刷新
@@ -115,7 +165,6 @@
 			})
 		}
 	}
-
 </script>
 
 <style>

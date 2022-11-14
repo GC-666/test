@@ -1,7 +1,7 @@
 <template>
 
 	<tm-app>
-		
+		<view class="statusHeight" :style="{height:statusBarHeight+'px'}"></view>
 		<tm-sheet>
 			<tm-text :font-size="32" label="纵向滚动"></tm-text>
 			<tm-divider></tm-divider>
@@ -20,6 +20,7 @@
 <script setup lang="ts">
 	import tabbar from '@/components/tabbar.vue'
 	import { onShow } from '@dcloudio/uni-app';
+	const statusBarHeight = uni.getSystemInfoSync().statusBarHeight
 	onShow(() => {
 		uni.hideTabBar({
 			animation: false

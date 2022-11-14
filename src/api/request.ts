@@ -1,5 +1,5 @@
 
- const BASE_URL = import.meta.env.VITE_APP_BASE_API
+const BASE_URL = import.meta.env.VITE_APP_BASE_API
 // const BASE_URL = "https://xunmeta.rocknft.top/api"
 
 // 封装 GET POST 请求并导出
@@ -37,29 +37,34 @@ export function request(url: string = '', params = {}, type: string = 'POST') {
 					// 	url: '/pages/error/500'
 					// })
 					return
-				}else if(data.code === "401"){
-					uni.redirectTo({
-						url: '/pages/login/login'
-					})
-					return
-				}else if(data.code === "403"){
+				} else if (data.code === "401") {
 					uni.showToast({
 						title: data.info,
 						icon: 'none',
 					});
-					uni.redirectTo({
+					uni.reLaunch({
 						url: '/pages/login/login'
 					})
 					return
-				}else if(data.code === "10000"){
+				} else if (data.code === "403") {
+					uni.showToast({
+						title: data.info,
+						icon: 'none',
+					});
+					uni.reLaunch({
+						url: '/pages/login/login'
+					})
+					return
+				} else if (data.code === "10000") {
 					resolve(data.data)
-				}else{
+				} else {
 					uni.showToast({
 						title: data.info,
 						icon: 'none',
 					});
+					return
 				}
-				
+
 			},
 			fail: (err) => {
 				if (err.errMsg) {
@@ -69,7 +74,7 @@ export function request(url: string = '', params = {}, type: string = 'POST') {
 					});
 				}
 			},
-			
+
 		})
 
 	})
