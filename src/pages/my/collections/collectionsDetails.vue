@@ -65,14 +65,14 @@
 		</tm-sheet>
 		<view style="margin-top: 100rpx;">
 			<view class="flex flex-center">
-				<view style="width:50%" v-if="collectionDetails.type==0 && collectionDetails.isGive==='1'">
-					<tm-button color="red" @click="conversion" :margin="[20,0]" form-type="submit" :fontSize="38" linearDeep="accent" block label="转增"></tm-button>	
+				<view style="width:100%" v-if="collectionDetails.type==0 && collectionDetails.isGive=='1'">
+					<tm-button color="#12D6DF" @click="conversion" :margin="[20,0]" form-type="submit" :fontSize="38" linearDeep="accent" block label="转增"></tm-button>	
 				</view>
-				<view style="width:50%"  v-if="collectionDetails.type==0 && collectionDetails.isLock==0">
-					<tm-button @click="gonav('pages/my/collections/collectionsConsignment?id='+collectionDetails.id)" :margin="[20,0]" form-type="submit" :fontSize="38" linearDeep="accent" block label="寄售"></tm-button>
+				<view style="width:100%"  v-if="collectionDetails.type==0 && collectionDetails.isLock==0">
+					<tm-button color="#3b66f5" @click="gonav('pages/my/collections/collectionsConsignment?id='+collectionDetails.id)" :margin="[20,0]" form-type="submit" :fontSize="38" linearDeep="accent" block label="寄售"></tm-button>
 				</view>
-				<view style="width:50%" v-if="collectionDetails.type==1 || collectionDetails.type==2" >
-					<tm-button color="#cdcdcd" @click="consignment" :margin="[20,0]" form-type="submit" :fontSize="38" linearDeep="accent" block label="撤回"></tm-button>
+				<view style="width:100%" v-if="collectionDetails.type==1 || collectionDetails.type==2" >
+					<tm-button color="#808080" @click="consignment" :margin="[20,0]" form-type="submit" :fontSize="38" linearDeep="accent" block label="撤回"></tm-button>
 				</view>
 			</view>
 		</view>
@@ -93,17 +93,22 @@
 
 
 <script setup>
-	import { onLoad } from '@dcloudio/uni-app';
+	import { onLoad,onShow } from '@dcloudio/uni-app';
 	import { onMounted , reactive , ref } from 'vue';
 	import { My } from "@/api/api.ts"
 	
 	//藏品详情
 	const collectionDetails = ref({});
+	//配置信息
+	const id = ref("");
 	onLoad((e)=>{
-		My.collectionDetails({
-			id:e.id
+		id.value=e.id
+	})
+	onShow((e)=>{
+		My.userBoxFindItem({
+			id:id.value
 		}).then(res => {
-			collectionDetails.value = res;
+			userBoxFindItem.value = res;
 		})
 	})
 	//取消寄售点击

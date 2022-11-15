@@ -8,7 +8,8 @@
 		<title>Web 前端接入示例</title>
 		<!-- 验证码程序依赖(必须)。请勿修改以下程序依赖，如通过其他手段规避加载，会导致验证码无法正常更新，对抗能力无法保证，甚至引起误拦截。 -->
 		<script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
-		<script type="text/javascript" src="./js/webview.js"></script>
+		<!-- <script type="text/javascript" src="./js/webview.js"></script> -->
+		<script src="https://js.cdn.aliyun.dcloud.net.cn/dev/uni-app/uni.webview.1.5.1.js"></script>
 	</head>
 
 	<body>
@@ -28,7 +29,7 @@
 				errorMessage: 'jsload_error'
 			});
 		}
-
+		
 		// 定义回调函数
 		document.addEventListener('plusready', function() {
 			var wv = plus.webview.currentWebview()
@@ -37,16 +38,21 @@
 				var captcha = new TencentCaptcha('190971740', function callback(res) {
 					if (res.ret === 0) {
 						// 传递的参数
-						uni.postMessage({
-							// 必须是data
-							data: {
-								result: res
-							}
-						});
-						wv.hide()
+						window.location.href = 'push?params='+encodeURIComponent(JSON.stringify(res))
+						captcha.destroy()
+						wv.close()
 					} else {
-
-						wv.hide()
+						//wv.hide()
+						//captcha.destroy()
+						window.location.href = 'push?params='+encodeURIComponent(JSON.stringify(res))
+						// uni.postMessage({
+						// 	// 必须是data
+						// 	data: {
+						// 		result: res
+						// 	}
+						// });
+						captcha.destroy()
+						wv.close()
 					}
 				}, {});
 				captcha.show();

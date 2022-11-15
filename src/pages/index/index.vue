@@ -1,8 +1,7 @@
 <template>
 
 	<tm-app>
-
-		<tm-navbar hideHome title="" :height="44" :shadow="0">
+		<tm-navbar hideHome hideBack title="" :height="44" :shadow="0">
 			<template v-slot:left>
 				<view class="ml-20">
 					<tm-image :width="160" :height="33" :src="logoimg"></tm-image>
@@ -14,12 +13,13 @@
 				</view>
 			</template>
 		</tm-navbar>
-
 		<!-- 首发藏品 -->
 		<scroll-view scroll-y="true" style="height: calc(100vh - 90rpx - 123rpx)" @scrolltolower="lower">
 			<tm-carousel autoplay :margin="[0,0]" :width="710" :height="300" rangKey="img" :list="listimg" model="rect"
 				color="#ccc" @click="carouselClick">
 			</tm-carousel>
+
+
 			<!-- 公告区域 -->
 			<tm-sheet :shadow="0" :margin="[20,10]" :padding="[0,24]" _class="px-20">
 				<view class="flex flex-between" @click="gonav('pages/index/notice/notice')">
@@ -139,11 +139,14 @@
 				</view>
 			</tm-sheet> -->
 
+		<view class="aa" v-if="token==''">
 
+			<!-- <tm-text class="ml-10" color="#fff" :font-size="30" _class="text-weight-b" label="请登录体验更多功能"></tm-text>
+			<tm-button :margin="[10, 10]" :shadow="0" :width="200" :height="60" fontColor="#fff" outlined size="normal" label="立即登录"></tm-button> -->
+			<tm-alert  :margin="[0,0]" text :border="1" :content="content" :height="80"></tm-alert>
+		</view>
 		<tabbar :acc="0"></tabbar>
 	</tm-app>
-
-
 </template>
 <script setup>
 	import tabbar from '@/components/tabbar.vue'
@@ -154,7 +157,13 @@
 	import { useTmpiniaStore } from '@/xhui/tool/lib/tmpinia';
 	import { onShow } from '@dcloudio/uni-app';
 	const store = useTmpiniaStore();
+	const token  = uni.getStorageSync('token')
+	console.log(token);
 	// 下拉刷新
+	const content = ref([{
+		icon: '',
+		content: "请登录体验更多功能"
+	}])
 	const lower = () => {
 		console.log("到底部");
 		if (ListNum.value > 0) {
@@ -263,5 +272,11 @@
 	.countdown {
 		background-color: #666666;
 		border-radius: 20rpx;
+	}
+
+	.aa {
+		width: 100%;
+		position: fixed;
+		bottom: 120rpx;
 	}
 </style>

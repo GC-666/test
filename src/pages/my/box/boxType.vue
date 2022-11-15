@@ -80,7 +80,7 @@
 		}
 		// #endif
 	})
-	import { onLoad } from '@dcloudio/uni-app';
+	import { onShow,onLoad } from '@dcloudio/uni-app';
 	import { onMounted , reactive , ref } from 'vue';
 	import { My } from "@/api/api.ts"
 	
@@ -103,8 +103,8 @@
 		config.value=e;
 		pageData.value.boxId = config.value.id
 	})
-	//页面加载完成执行
-	onMounted(() => {
+	
+	onShow(() => {
 		tabsChange(0);
 	})
 	//配置参数

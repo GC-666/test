@@ -1,6 +1,6 @@
 <template>
 	<tm-app class="overflow-y">
-		<tm-navbar title="藏品详情" :height="44" :shadow="0">
+		<tm-navbar title="藏品寄售" :height="44" :shadow="0">
 		</tm-navbar>
 		<view class="head">
 			<view class="bg"
@@ -115,7 +115,7 @@
 	const config=ref({});
 	//藏品详情
 	const collectionDetails = ref({});
-	//我的藏品寄售服务费和云钱包
+	//我的寄售服务费和云钱包
 	const orderFindMySellServiceCharge = ref({});
 	
 	onLoad((e) => {

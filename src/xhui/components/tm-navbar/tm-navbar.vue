@@ -198,7 +198,7 @@
 	
 	const backhome = ()=>{
 		// reLaunch
-		uni.switchTab({
+		uni.reLaunch({
 			url:props.homePath
 		})
 	}

@@ -123,6 +123,19 @@ export class My {
 	static async userBoxFindItem(params: any) {
 		return await request("/user/box/findItem", params, "POST")
 	}
+	//我的盲盒寄售
+	static async userBoxUpBox(params: any) {
+		return await request("/user/box/upBox", params, "POST")
+	}
+	//我的盲盒取消寄售
+	static async userBoxLowerShelfBox(params: any) {
+		return await request("/user/box/LowerShelfBox", params, "POST")
+	}
+	//我的盲盒开启盲盒
+	static async userBoxOpenBox(params: any) {
+		return await request("/user/box/openBox", params, "POST")
+	}
+	
 	//验证码
 	static async sendCode(params: any) {
 		return await request("/system/get/verification/code", params, "POST")
@@ -166,6 +179,30 @@ export class My {
 	//开通云钱包
 	static async openSdCloudWallet1(params: any) {
 		return await request("/user/new/mini/openSdCloudWallet", params, "POST")
+	}
+	//修改支付密码
+	static async updatetradepassword(params: any) {
+		return await request("/mine/updatetradepassword", params, "POST")
+	}
+	//获取是否设置支付密码
+	static async setup(params: any) {
+		return await request("/mine/setup", params, "POST")
+	}
+	//获取银行卡信息
+	static async Acsecurity(params: any) {
+		return await request("/mine/Acsecurity", params, "POST")
+	}
+	//绑定银行卡
+	static async aplPhone(params: any) {
+		return await request("/mine/aplPhone", params, "POST")
+	}
+	//订单
+	static async placeOrder(params: any) {
+		return await request("/order/placeOrder", params, "POST")
+	}
+	//充值
+	static async orderPay(params: any) {
+		return await request("/order/orderPay", params, "POST")
 	}
 	
 	

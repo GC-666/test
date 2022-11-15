@@ -70,10 +70,10 @@
 				<tm-text :font-size="35" _class="text-weight-b" :label="`开通云钱包需要从账户扣款${data.openCloudWalletMoney}元`">
 				</tm-text>
 			</view>
-
 		</tm-modal>
 	</tm-app>
 </template>
+
 
 <script setup>
 	import { My } from "@/api/api.ts"

@@ -1,7 +1,7 @@
 <template>
 	<tm-app>
 		<view class="statusHeight" :style="{height:statusBarHeight+'px'}"></view>
-		<view class="head mb-30">
+		<view class="head mb-10">
 			<view class="flex flex-end mt-20 mr-42">
 				<tm-icon name="tmicon-share1"></tm-icon>
 			</view>
@@ -30,12 +30,15 @@
 					<tm-icon class="ml-10" :fontSize="26" name="tmicon-angle-right"></tm-icon>
 				</view>
 			</view>
-			<view class="flex flex-wrap flex-between mt-10" style="height:250rpx">
+			<view v-if="mineFindCollReport.length>0" class="flex flex-wrap flex-between mt-10" style="height:250rpx">
 				<view v-for="(item,index) in mineFindCollReport" @click="gonav('pages/my/collections/collections')">
 					<tm-image :round="4" class="flex-start" :width="210" :height="210" :src="item.collImg"></tm-image>
 					<tm-text _class="mt-5 text-overflow " _style="width:180rpx;text-overflow: ellipsis;" :fontSize="26"
 						label="1231231231231313123123"></tm-text>
 				</view>
+			</view>
+			<view v-else class="flex flex-wrap flex-row-center-center" style="height:250rpx">
+				<tm-image :round="4" class="flex-start" :width="210" :height="210" :src="wucangpin"></tm-image>
 			</view>
 			<view class="flex flex-between mt-30">
 				<tm-text style="height: 50rpx;line-height: 50rpx;" :fontSize="26" label="我的盲盒"></tm-text>
@@ -44,17 +47,20 @@
 					<tm-icon class="ml-10" :fontSize="26" name="tmicon-angle-right"></tm-icon>
 				</view>
 			</view>
-			<view class="flex flex-wrap flex-between mt-10" style="height:250rpx">
+			<view v-if="userBoxFindReportPageList.length>0" class="flex flex-wrap flex-between mt-10" style="height:250rpx">
 				<view v-for="(item,index) in userBoxFindReportPageList" @click="gonav('pages/my/box/box')">
 					<tm-image :round="4" class="flex-start" :width="210" :height="210" :src="item.boxImg"></tm-image>
 					<tm-text _class="mt-5 text-overflow " _style="width:180rpx;text-overflow: ellipsis;" :fontSize="26"
 						:label="item.boxName"></tm-text>
 				</view>
 			</view>
+			<view v-else class="flex flex-wrap flex-row-center-center" style="height:250rpx">
+				<tm-image :round="4" class="flex-start" :width="210" :height="210" :src="wucangpin"></tm-image>
+			</view>
 		</tm-sheet>
 
 		<tm-sheet :shadow="0" :margin="[20,20]" :padding="[0,0]">
-			<tm-cell :margin="[0, 0]" :titleFontSize="28">
+			<tm-cell :margin="[0, 0]" :titleFontSize="28" @click="gonav('pages/my/order/order')">
 				<template v-slot:title>
 					<view class="flex">
 						<tm-icon class="ml-10" :fontSize="26" name="tmicon-ios-filing"></tm-icon>
@@ -111,6 +117,7 @@
 	import weishiming from "@/static/my/weishiming.png"
 	import daishenhe from "@/static/my/daishenhe.png"
 	import yishiming from "@/static/my/yishiming.png"
+	import wucangpin from "@/static/my/wucangpin.png"
 
 	const statusBarHeight = uni.getSystemInfoSync().statusBarHeight
 	import {

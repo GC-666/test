@@ -1,9 +1,10 @@
 <template>
 	<tm-app>
-		<tm-navbar  title="设置" :height="44" :shadow="0">
+		<tm-navbar title="设置" :height="44" :shadow="0">
 		</tm-navbar>
 		<tm-sheet :shadow="0" :margin="[0,15]" :padding="[0,0]">
-			<tm-cell _class="text-weight-b" :margin="[0, 0]" :titleFontSize="30" title="个人信息" @click="gonav('pages/my/set/myinfo/myinfo')"> </tm-cell>
+			<tm-cell _class="text-weight-b" :margin="[0, 0]" :titleFontSize="30" title="个人信息"
+				@click="gonav('pages/my/set/myinfo/myinfo')"> </tm-cell>
 		</tm-sheet>
 		<tm-sheet :shadow="0" :margin="[0,15]" :padding="[0,0]">
 			<tm-cell _class="text-weight-b" :margin="[0, 0]" :titleFontSize="30" title="关于我们"
@@ -15,9 +16,15 @@
 			<tm-cell _class="text-weight-b" :margin="[0, 0]" :titleFontSize="30" title="申请开票"
 				@click="gonav('pages/my/set/bill/bill')"> </tm-cell>
 			<tm-divider color="grey" :margin="[1,1]"></tm-divider>
-			<tm-cell _class="text-weight-b" :margin="[0, 0]" :titleFontSize="30" title="修改登入/支付密码">
+			<tm-cell _class="text-weight-b" :margin="[0, 0]" :titleFontSize="30" title="修改登入密码"
+				@click="gonav('pages/my/set/fopwd/fopwd')">
+			</tm-cell>
+			<tm-divider color="grey" :margin="[1,1]"></tm-divider> 
+			<tm-cell _class="text-weight-b" :margin="[0, 0]" :titleFontSize="30" title="修改支付密码"
+				:rightText="set==='1'?'已设置':'请设置支付密码'" @click="gonav('pages/my/set/paypwd/paypwd')">
 			</tm-cell>
 		</tm-sheet>
+		
 		<tm-sheet :shadow="0" :margin="[0,15]" :padding="[0,0]">
 			<!-- #ifdef APP-PLUS -->
 			<tm-cell _class="text-weight-b" :margin="[0, 0]" :rightText="`${currentSize}`" :titleFontSize="30"
@@ -37,6 +44,7 @@
 </template>
 
 <script setup>
+	import { My } from '@/api/api';
 	import { onLoad } from '@dcloudio/uni-app';
 	import { onBeforeMount, ref } from 'vue';
 	const currentSize = ref('')
@@ -88,8 +96,12 @@
 		// #ifdef APP-PLUS
 		getStorageSize()
 		// #endif
-
+		My.setup().then(res => {
+			set.value = res
+		})
 	})
+	const set = ref('')
+
 	// 获取缓存大小
 	const getStorageSize = () => {
 		plus.cache.calculate(function(size) {

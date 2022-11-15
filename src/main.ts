@@ -5,12 +5,19 @@ import tmui from "./xhui"
 import App from "./App.vue";
 import DateUtils from "./utils/dateUtils";
 
+
+
+
 export function createApp() {
 	const app = createSSRApp(App);
 	app.config.globalProperties.DateUtils = DateUtils
-	
-	
-	app.config.globalProperties.gonav = function(data:string) { // 页面跳转的事件\
+	// #ifdef H5
+	let Captcha = new TencentCaptcha('190971740', (res:any) => {
+		uni.$emit('getTicket', res);
+	});
+	app.config.globalProperties.$Captcha = Captcha
+	// #endif
+	app.config.globalProperties.gonav = function(data: string) { // 页面跳转的事件\
 		uni.showLoading({
 			title: '加载中',
 			mask: true

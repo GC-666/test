@@ -4,7 +4,7 @@
 		</tm-navbar>
 		<view class="flex-col 	flex-center	">
 			<tm-text class="mt-14" :font-size="32" _class="text-weight-b" :label="userBoxFindItem.boxName"></tm-text>
-			<view class="flex">
+			<view class="flex flex-center">
 				<tm-text style="background-color: #FFCE92;padding:4rpx 6rpx;border-radius: 8rpx;" class="mt-14" :font-size="18" _class="text-weight-b" label="编号:"></tm-text>
 				<tm-text color="#FFCE92" class="mt-14" :font-size="18" _class="text-weight-n" :label="userBoxFindItem.no"></tm-text>
 			</view>
@@ -18,16 +18,25 @@
 				</view>
 			</view>
 		</view>
+		<view class="detbox">
+			<tm-text style="margin: 0rpx 20rpx;padding: 10rpx 20rpx;" :font-size="30" color="#07EBFE" _class="text-weight-b" label="有机会获得："></tm-text>
+			<tm-sheet :shadow="0" :margin="[20,0]" :padding="[20,10]">
+				<view class="flex flex-between pt-20 pb-20" v-for="(item,index) in userBoxFindItem.boxProbablyList">
+					<tm-text color="#808080" :font-size="22" _class="text-weight-b" :label="item.name"></tm-text>
+					<tm-text :font-size="22" _class="text-weight-b" :label="`概率：${item.chance}%`"></tm-text>
+				</view>
+			</tm-sheet>
+		</view>
 		<view style="margin-top: 100rpx;">
 			<view class="flex flex-center">
-				<view style="width:50%" v-if="userBoxFindItem.type==0 && userBoxFindItem.isGive==='1'">
-					<tm-button color="red" @click="conversion" :margin="[20,0]" form-type="submit" :fontSize="38" linearDeep="accent" block label="转增"></tm-button>	
+				<view v-if="userBoxFindItem.isOpen==0 && userBoxFindItem.type==0" style="width:100%">
+					<tm-button color="#12D6DF" @click="conversion" :margin="[20,0]" form-type="submit" :fontSize="38" linearDeep="accent" block label="开盲盒"></tm-button>	
 				</view>
-				<view style="width:50%"  v-if="userBoxFindItem.type==0 && userBoxFindItem.isLock==0">
-					<tm-button @click="gonav('pages/my/collections/collectionsConsignment?id='+userBoxFindItem.id)" :margin="[20,0]" form-type="submit" :fontSize="38" linearDeep="accent" block label="寄售"></tm-button>
+				<view v-if="userBoxFindItem.isBuy==1 && userBoxFindItem.type==0" style="width:100%">
+					<tm-button color="#3b66f5" @click="gonav('pages/my/box/boxConsignment?id='+userBoxFindItem.id)" :margin="[20,0]" form-type="submit" :fontSize="38" linearDeep="accent" block label="寄售"></tm-button>
 				</view>
-				<view style="width:50%" v-if="userBoxFindItem.type==1 || userBoxFindItem.type==2" >
-					<tm-button color="#cdcdcd" @click="consignment" :margin="[20,0]" form-type="submit" :fontSize="38" linearDeep="accent" block label="撤回"></tm-button>
+				<view v-if="userBoxFindItem.type==3" style="width:100%">
+					<tm-button color="#808080" @click="consignment" :margin="[20,0]" form-type="submit" :fontSize="38" linearDeep="accent" block label="撤回"></tm-button>
 				</view>
 			</view>
 		</view>
@@ -36,124 +45,124 @@
 				<tm-text :font-size="26" label="确认取消寄售"></tm-text>
 			</view>
 		</tm-modal>
-		<tm-modal :height="470" title="转增" okText="确认" splitBtn v-model:show="show2" :beforeClose="beforeClose" @ok="submit2" :close="pwd=''">
-			<tm-input prefix="tmicon-search" @blur="calculation" v-model="phone" placeholder="请输入好友手机号" @search="query" searchLabel="查询" ></tm-input>
-			<view class="flex">
-				<tm-text class="mt-30 mb-30 ml-20" :font-size="26" :label="content"></tm-text>
+		<tm-modal :height="300" title="提示" okText="确认" splitBtn v-model:show="show2" @ok="submit2" >
+			<view class="flex flex-row-center-center">
+				<tm-text :font-size="26" label="确认开启盲盒"></tm-text>
 			</view>
-			<tm-input placeholder="请输入交易密码" v-model="pwd"></tm-input>
+		</tm-modal>
+		<tm-overlay v-model:show="show3" :overlayClick="false">
+			<view class="cover">
+			</view>
+		</tm-overlay>
+		<tm-modal :height="340" title="恭喜" okText="确认" splitBtn v-model:show="show4" @cancel="cancel" @ok="submit3" >
+			<view class="flex flex-row-center-center">
+				<tm-text :font-size="26" :label="`恭喜获得“藏品:${openRemarks}”`"></tm-text>
+			</view>
+			<view class="flex flex-row-center-center mt-10">
+				<tm-text :font-size="26" label="已放入我的收藏，快去看看吧”"></tm-text>
+			</view>
 		</tm-modal>
 	</tm-app>
 </template>
 
 
 <script setup>
-	import { onLoad } from '@dcloudio/uni-app';
+	import { onLoad,onShow } from '@dcloudio/uni-app';
 	import { onMounted , reactive , ref } from 'vue';
 	import { My } from "@/api/api.ts"
 	import bg1 from "@/static/img/shopBg.png"
 	import bg from "@/static/img/bg.png"
+	import kj from "@/static/my/kj.gif"
 	import { useTmpiniaStore } from '@/xhui/tool/lib/tmpinia';
 	const store = useTmpiniaStore();
 	
-	//藏品详情
+	//盲盒详情
 	const userBoxFindItem = ref({});
+	//配置信息
+	const id = ref("");
 	onLoad((e)=>{
+		id.value=e.id
+	})
+	onShow((e)=>{
 		My.userBoxFindItem({
-			id:e.id
+			id:id.value
 		}).then(res => {
 			userBoxFindItem.value = res;
 		})
 	})
+	
+	//开启盲盒
+	const show2 = ref(false);
+	//点击开盲盒
+	const conversion=()=>{
+		show2.value=true
+	}
+	//开奖动画
+	const show3 = ref(false);
+	//开启盲盒
+	const show4 = ref(false);
+	//开启的奖励
+	const openRemarks = ref("");
+	//点击确认开盲盒
+	const submit2=()=>{
+		show3.value=true;
+		My.userBoxOpenBox({
+			id: userBoxFindItem.value.id,
+		}).then(res => {
+			setTimeout(()=>{
+				openRemarks.value=res.openRemarks;
+				show4.value=true;
+				show3.value=false
+			},5000)
+		})
+	}
+	//点击确认奖励
+	const submit3=()=>{
+		uni.navigateBack({
+			delta:1,
+		})
+	}
+	//点击取消奖励
+	const cancel=()=>{
+		My.userBoxFindItem({
+			id:id.value
+		}).then(res => {
+			userBoxFindItem.value = res;
+		})
+	}
+	
+	//寄售提示
+	const show = ref(false);
 	//取消寄售点击
 	const consignment=()=>{
 		show.value=true;
 	}
-	//转增
-	const show2 = ref(false);
-	//点击转增
-	const conversion=()=>{
-		show2.value=true
-	}
-	//查询转增人
-	const phone = ref("");
-	const content = ref("");
-	const show3=ref(false);
-	const query=()=>{
-		My.userNewMiniFindUserName({
-			toUserPhone:phone.value
-		}).then(res => {
-			show3.value=true;
-			content.value="好友名称:"+res.nickname;
-		})
-	}
-	//手机号输入框改变
-	const calculation=()=>{
-		console.log(phone.value);
-		show3.value=false;
-	}
-	//点击确认转增
-	const submit2=()=>{
-		My.userNewMiniGive({
-			id: collectionDetails.value.id,
-			password: pwd.value,
-			toUserPhone: phone.value
-		}).then(res => {
-			uni.navigateBack({
-				delta:1,
-			})
-		})
-	}
-	//交易密码
-	const pwd = ref("");
-	const beforeClose=()=>{
-		if(show3.value){
-			if(pwd.value!=''){
-				return true;
-			}else{
-				uni.showToast({
-					title: "未输入密码",
-					icon: 'none'
-				})
-			}
-		}else{
-			uni.showToast({
-				title: "未点击查询",
-				icon: 'none'
-			})
-		}
-		return false;
-	}
-	
-	
-	//寄售提示
-	const show = ref(false);
 	//取消寄售提交
 	const submit=()=>{
-		My.collectionWithdraw({
-			id: collectionDetails.value.id
+		My.userBoxLowerShelfBox({
+			id: userBoxFindItem.value.id
 		}).then(res => {
-			My.collectionDetails({
-				id:collectionDetails.value.id
+			My.userBoxFindItem({
+				id:userBoxFindItem.value.id
 			}).then(res => {
-				collectionDetails.value = res;
+				userBoxFindItem.value = res;
 			})
 		})
-	}
-	
-	//海峡连
-	const aa=()=>{
-		// #ifdef H5
-			window.location.href="https://explorer.straitchain.com/#/index"
-		// #endif
-		// #ifdef APP-PLUS
-			plus.runtime.openURL("https://explorer.straitchain.com/#/index")
-		// #endif
 	}
 	
 </script>
 
 <style>
+	.cover {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-image: url("@/static/my/kj.gif");
+		background-size: 100% 100%;
+		z-index: 1;
+	}
 	.img {
 		display: flex;
 		justify-content: center;
