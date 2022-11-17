@@ -21,21 +21,21 @@
 						<view class="flex">
 							<view class="flex">
 								<view class="round-tl-5 round-bl-5 flex flex-center"
-									style="width: 100rpx; background-color: #FFCE92; " >
-									<tm-text class="ma-5" color="#25262E" :font-size="18" _class="text-weight-n" label="发行量"></tm-text>
+									style="width: 100rpx; background-color: #FFD7A7; " >
+									<tm-text class="ma-5"  :font-size="18" _class="text-weight-n" label="发行量"></tm-text>
 								</view>
-								<view class="round-tr-5 round-br-5 flex flex-center" style="width: 85rpx;">
+								<view class="round-tr-5 round-br-5 flex flex-center" style="width: 85rpx;background-color: #FFE6C8;">
 									<tm-text  class="ma-5" :font-size="18" _class="text-weight-n" :label="data.presale">
 									</tm-text>
 								</view>
 							</view>
 							<view class="flex ml-20">
 								<view class="round-tl-5 round-bl-5 flex flex-center"
-									style="width: 100rpx; background-color: #FFCE92;" >
-									<tm-text class="ma-5" color="#25262E" :font-size="18" _class="text-weight-n" label="已售"></tm-text>
+									style="width: 80rpx; background-color: #FFD7A7;" >
+									<tm-text class="ma-5"  :font-size="18" _class="text-weight-n" label="已售"></tm-text>
 								</view>
-								<view class="round-tr-5 round-br-5 flex flex-center" style="width: 85rpx;">
-									<tm-text class="ma-5" :font-size="18" _class="text-weight-n" :label="data.sold">
+								<view class="round-tr-5 round-br-5 flex flex-center" style="width: 85rpx;background-color: #FFE6C8;">
+									<tm-text class="ma-5" :font-size="18"  _class="text-weight-n" :label="data.sold">
 									</tm-text>
 								</view>
 							</view>
@@ -44,7 +44,7 @@
 				</view>
 				<view class="flex flex-col ma-15">
 					<view class="flex  flex-col-bottom-center ">
-						<tm-text :font-size="18" _class="text-weight-n" label="¥"></tm-text>
+						<tm-text :font-size="18" _class="text-weight-n flex-row-bottom-end mb--8" label="¥"></tm-text>
 						<tm-text class="ml-10" :font-size="38" _class="text-weight-b" :label="data.price">
 						</tm-text>
 					</view>
@@ -113,7 +113,7 @@
 					<view class="flex flex-row-center-between aa">
 						<view class="flex flex-col ml-40">
 							<view class="flex  flex-col-bottom-center ">
-								<tm-text :font-size="18" _class="text-weight-n" label="¥"></tm-text>
+								<tm-text :font-size="18" _class="text-weight-n flex-row-bottom-end mb--8" label="¥"></tm-text>
 								<tm-text class="ml-10" :font-size="38" _class="text-weight-b" :label="data.price">
 								</tm-text>
 							</view>

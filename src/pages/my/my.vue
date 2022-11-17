@@ -22,11 +22,11 @@
 			<tm-image v-if="user.adventureIsOpen=='1'" style="margin: 0rpx auto;" :width="710" :height="148"
 				:src="user.adventureCoverImg"></tm-image>
 		</view>
-		<tm-sheet :shadow="0" :margin="[20,0]" :padding="[10,10]">
-			<view class="flex flex-between">
-				<tm-text style="height: 50rpx;line-height: 50rpx;" :fontSize="26" label="我的藏品"></tm-text>
+		<tm-sheet :round="4" :shadow="0" :margin="[20,0]" :padding="[10,10]">
+			<view class="flex flex-between mt-15">
+				<tm-text  :fontSize="26" _class="text-weight-b" label="我的藏品"></tm-text>
 				<view class="flex" @click="gonav('pages/my/collections/collections')">
-					<tm-text style="height: 50rpx;line-height: 50rpx;" :fontSize="26" label="更多"></tm-text>
+					<tm-text  :fontSize="26" label="更多"></tm-text>
 					<tm-icon class="ml-10" :fontSize="26" name="tmicon-angle-right"></tm-icon>
 				</view>
 			</view>
@@ -40,8 +40,8 @@
 			<view v-else class="flex flex-wrap flex-row-center-center" style="height:250rpx">
 				<tm-image :round="4" class="flex-start" :width="210" :height="210" :src="wucangpin"></tm-image>
 			</view>
-			<view class="flex flex-between mt-30">
-				<tm-text style="height: 50rpx;line-height: 50rpx;" :fontSize="26" label="我的盲盒"></tm-text>
+			<view class="flex flex-between mt-20">
+				<tm-text  :fontSize="26" _class="text-weight-b" label="我的盲盒"></tm-text>
 				<view class="flex" @click="gonav('pages/my/box/box')">
 					<tm-text style="height: 50rpx;line-height: 50rpx;" :fontSize="26" label="更多"></tm-text>
 					<tm-icon class="ml-10" :fontSize="26" name="tmicon-angle-right"></tm-icon>
@@ -59,8 +59,8 @@
 			</view>
 		</tm-sheet>
 
-		<tm-sheet :shadow="0" :margin="[20,20]" :padding="[0,0]">
-			<tm-cell :margin="[0, 0]" :titleFontSize="28" @click="gonav('pages/my/order/order')">
+		<tm-sheet :round="4"  :shadow="0" :margin="[20,20]" :padding="[0,0]">
+			<tm-cell  :margin="[0, 0]" :titleFontSize="28" @click="gonav('pages/my/order/order')">
 				<template v-slot:title>
 					<view class="flex">
 						<tm-icon class="ml-10" :fontSize="26" name="tmicon-ios-filing"></tm-icon>
@@ -106,12 +106,10 @@
 			</tm-cell> -->
 		</tm-sheet>
 
-		<tabbar :acc="3"></tabbar>
 	</tm-app>
 </template>
 
 <script setup>
-	import tabbar from '@/components/tabbar.vue'
 	import { onShow } from '@dcloudio/uni-app';
 	import { My } from "@/api/api.ts"
 	import weishiming from "@/static/my/weishiming.png"

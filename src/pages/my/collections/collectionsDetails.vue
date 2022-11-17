@@ -105,10 +105,10 @@
 		id.value=e.id
 	})
 	onShow((e)=>{
-		My.userBoxFindItem({
+		My.collectionDetails({
 			id:id.value
 		}).then(res => {
-			userBoxFindItem.value = res;
+			collectionDetails.value = res;
 		})
 	})
 	//取消寄售点击

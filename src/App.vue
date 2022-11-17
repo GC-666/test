@@ -2,11 +2,7 @@
 	import { onLaunch, onShow } from "@dcloudio/uni-app"
 
 	import silenceUpdate from '@/uni_modules/rt-uni-update/js_sdk/silence-update.js' //引入静默更新
-	onLaunch(() => {
-		uni.hideTabBar({
-			animation: false
-		})
-	})
+	
 	onShow(() => {
 		console.log("1");
 		

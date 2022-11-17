@@ -44,7 +44,7 @@
 					</tm-image>
 					<!--  t-50 l-50 r-50 -->
 					<view class="absolute">
-						<tm-image :transprent="false" color="#07EBFE" :round="4" :width="468" :height="468"
+						<tm-image  :round="4" :width="468" :height="468"
 							:src="data.collImg">
 						</tm-image>
 					</view>
@@ -81,7 +81,7 @@
 						</view>
 						<view class="flex flex-col">
 							<view class="flex  flex-col-bottom-center ">
-								<tm-text color="#FFCE92" :font-size="18" _class="text-weight-n" label="¥"></tm-text>
+								<tm-text color="#FFCE92" :font-size="18" _class="text-weight-n flex-row-bottom-end mb--10" label="¥"></tm-text>
 								<tm-text class="ml-10" color="#FFCE92" :font-size="38" _class="text-weight-b"
 									:label="data.price">
 								</tm-text>
@@ -145,17 +145,15 @@
 			<tm-button :margin="[10, 10]" :shadow="0" :width="200" :height="60" fontColor="#fff" outlined size="normal" label="立即登录"></tm-button> -->
 			<tm-alert  :margin="[0,0]" text :border="1" :content="content" :height="80"></tm-alert>
 		</view>
-		<tabbar :acc="0"></tabbar>
 	</tm-app>
 </template>
 <script setup>
-	import tabbar from '@/components/tabbar.vue'
 	import { Home } from "@/api/api.ts"
 	import logoimg from "@/static/logo.png"
 	import noticeImg from "@/static/img/noticeImg.png"
 	import { onMounted, ref } from "vue";
 	import { useTmpiniaStore } from '@/xhui/tool/lib/tmpinia';
-	import { onShow } from '@dcloudio/uni-app';
+	import { onShow ,onLoad} from '@dcloudio/uni-app';
 	const store = useTmpiniaStore();
 	const token  = uni.getStorageSync('token')
 	console.log(token);
@@ -165,7 +163,6 @@
 		content: "请登录体验更多功能"
 	}])
 	const lower = () => {
-		console.log("到底部");
 		if (ListNum.value > 0) {
 			params.value.page += 1
 			findSaleCollectionList()
@@ -260,11 +257,7 @@
 			color.value = '#FFCC00'
 		}
 	}
-	onShow(() => {
-		uni.hideTabBar({
-			animation: false
-		})
-	})
+	
 	//获取手机状态栏高度
 	console.log(uni.getSystemInfoSync().statusBarHeight);
 </script>

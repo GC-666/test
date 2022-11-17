@@ -18,8 +18,8 @@
 			</view>
 			<tm-form-item label=""
 				:rules="[{required:true,message:'请输入姓名',validator:(val)=> val === '' ? false : true}]">
-				<tm-input placeholder="请输入姓名" :inputPadding="[0,0]" v-model="show.name"
-					:transprent="true" :showBottomBotder="false">
+				<tm-input placeholder="请输入姓名" :inputPadding="[0,0]" v-model="show.name" :transprent="true"
+					:showBottomBotder="false">
 				</tm-input>
 			</tm-form-item>
 			<view style="margin: 20rpx 0rpx  20rpx 12rpx;">
@@ -46,14 +46,7 @@
 			</tm-form-item>
 			<tm-button form-type="submit" :fontSize="38" linearDeep="accent" block label="立即绑定"></tm-button>
 			<view class="flex-row-center-center mt-10">
-				<tm-checkbox class="flex-row-center-center" v-model="loot" :size="28" :round="10">
-					<template v-slot:default="{checked}">
-						<view class="flex flex-row">
-							<tm-text :fontSize="20" label="我已经阅读并同意"></tm-text>
-							<tm-text :fontSize="20" color="red" label="《浔画账户钱包充值协议》"></tm-text>
-						</view>
-					</template>
-				</tm-checkbox>
+				<tm-text :fontSize="22" color="#808080" class="text-weight-s" label="温馨提示：银行卡账号一年只能更换一次"></tm-text>
 			</view>
 		</tm-form>
 	</tm-app>
@@ -77,25 +70,19 @@
 		code: '',
 		phone: '',
 		name: '',
-		phone1:''
+		phone1: ''
 	})
-	const loot = ref(false);
 	const confirm = (e) => {
 		if (show.code != "" && show.phone != "" && show.name != "" && show.phone1 != "") {
-			if (loot.value) {
-				My.aplPhone({code:e.data.code,phone:e.data.phone,name:e.data.name}).then(res=>{
-					uni.showToast({
-						title: "绑定成功",
-						icon: "none",
-					})
-					uni.navigateBack({delta:1})
-				})
-			} else {
+
+			My.aplPhone({ code: e.data.code, phone: e.data.phone, name: e.data.name }).then(res => {
 				uni.showToast({
-					title: "未阅读充值协议",
+					title: "绑定成功",
 					icon: "none",
 				})
-			}
+				uni.navigateBack({ delta: 1 })
+			})
+
 		}
 	}
 	// 创建webView
@@ -158,23 +145,24 @@
 	}
 	let second = ref(60)
 	const sendCode = (data) => {
-		My.sendCode({ phone: show.phone1, type: 'alipay_code_', randstr: data.randstr, ticket: data.ticket }).then(res => {
-			uni.showToast({
-				title: '发送成功',
-				icon: 'none'
-			})
-			const timer = setInterval(() => {
-				second.value--
-				codeText.value = second.value + "秒后获取"
-				smsShow.value = true
-				if (second.value <= 0) {
-					smsShow.value = false
-					codeText.value = "重新获取"
-					clearInterval(timer)
-				}
+		My.sendCode({ phone: show.phone1, type: 'alipay_code_', randstr: data.randstr, ticket: data.ticket }).then(
+			res => {
+				uni.showToast({
+					title: '发送成功',
+					icon: 'none'
+				})
+				const timer = setInterval(() => {
+					second.value--
+					codeText.value = second.value + "秒后获取"
+					smsShow.value = true
+					if (second.value <= 0) {
+						smsShow.value = false
+						codeText.value = "重新获取"
+						clearInterval(timer)
+					}
 
-			}, 1000)
-		})
+				}, 1000)
+			})
 	}
 </script>
 

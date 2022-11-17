@@ -50,10 +50,18 @@ export class Home {
 }
 
 // 市场
-export class market {
-	// 轮播图
-	static async bannerList(params: any) {
-		return await request("/Home/bannerList", params, "POST")
+export class Market {
+	// 市场
+	static async findMarketList(params: any) {
+		return await request("/market/new/findMarketList", params, "POST")
+	}
+	// 市场
+	static async show(params: any) {
+		return await request("/Market/show", params, "POST")
+	}
+	// 寄售藏品详情
+	static async details(params: any) {
+		return await request("/Market/details", params, "POST")
 	}
 }
 
@@ -204,13 +212,21 @@ export class My {
 	static async orderPay(params: any) {
 		return await request("/order/orderPay", params, "POST")
 	}
+	//资金流水
+	static async walletList(params: any) {
+		return await request("/users/wallet/details/findList", params, "POST")
+	}
+	//积分
+	static async integalList(params: any) {
+		return await request("/users/integal/details/findList", params, "POST")
+	}
 	
 	
 }
 // 活动
-export class activity {
-	// 轮播图
-	static async bannerList(params: any) {
-		return await request("/Home/bannerList", params, "POST")
+export class Activity {
+	//合成列表
+	static async composeFindList(params: any) {
+		return await request("/compose/findList", params, "POST")
 	}
 }

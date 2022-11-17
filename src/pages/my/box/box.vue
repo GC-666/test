@@ -2,7 +2,7 @@
 	<tm-app style="">
 		<tm-navbar  title="盲盒">
 		</tm-navbar>
-		<scroll-view scroll-y="true" :style="`max-height: ${hh}px;`" @scrolltolower="lower">
+		<scroll-view scroll-y="true" :style="`height: calc(100vh - 82rpx - 88rpx - ${statusBarHeight}rpx)`" @scrolltolower="lower">
 			<view class="flex flex-row-center-between flex-wrap" style="margin: 0rpx 20rpx 0rpx 20rpx;">
 				<view class="relative" v-for="(data,index) in userBoxFindReportPageList"
 					@click="gonav('pages/my/box/boxType?id='+data.boxId+'&boxName='+data.boxName)">
@@ -59,7 +59,7 @@
 	})
 	
 	//页面加载完成执行
-	onMounted(() => {
+	onShow(() => {
 		tabsChange();
 	})
 	//藏品类型列表

@@ -2,7 +2,7 @@
 	<tm-app>
 		<tm-navbar title="我的资产">
 		</tm-navbar>
-	<!-- 	<view class="flex flex-center mt-n15">
+		<!-- 	<view class="flex flex-center mt-n15">
 			<tm-text color="#808080" :fontSize="22" label="总资产（元）"></tm-text>
 		</view> -->
 		<!-- <view class="flex flex-center">
@@ -30,9 +30,11 @@
 				<tm-text :fontSize="22" _class="text-weight-b" label="充值"
 					@click="gonav('pages/my/mymoney/money/money')"></tm-text>
 				<tm-divider vertical :height="50"></tm-divider>
-				<tm-text :fontSize="22" _class="text-weight-b" label="提现"></tm-text>
+				<tm-text :fontSize="22" _class="text-weight-b" label="提现"
+					@click="gonav('pages/my/mymoney/geymoney/geymoney')"></tm-text>
 				<tm-divider vertical :height="50"></tm-divider>
-				<tm-text :fontSize="22" _class="text-weight-b" label="资金流水"></tm-text>
+				<tm-text :fontSize="22" _class="text-weight-b" label="资金流水"
+					@click="gonav('pages/my/mymoney/moneydetail/moneydetail')"></tm-text>
 			</view>
 		</view>
 
@@ -60,12 +62,13 @@
 			<view class="flex ml-10">
 				<tm-text :fontSize="50" :label="data.integal"></tm-text>
 			</view>
-			<tm-divider :margin="[1,10]"></tm-divider>
+			<tm-divider  :margin="[1,10]"></tm-divider>
 			<view class="flex ml-20" style="height: 50rpx;align-items: center;">
-				<tm-text :fontSize="22" _class="text-weight-b" label="积分流水"></tm-text>
+				<tm-text :fontSize="22" _class="text-weight-b" label="积分流水"
+					@click="gonav('pages/my/mymoney/moneydetail/integraldetail')"></tm-text>
 			</view>
 		</view>
-		<tm-modal :height="300" splitBtn title="开通云钱包" v-model:show="Cloudshow" @ok="cloudOpen">
+		<tm-modal :height="300" splitBtn title="开通云钱包" okText="确定" v-model:show="Cloudshow" @ok="cloudOpen">
 			<view class="flex flex-center">
 				<tm-text :font-size="35" _class="text-weight-b" :label="`开通云钱包需要从账户扣款${data.openCloudWalletMoney}元`">
 				</tm-text>

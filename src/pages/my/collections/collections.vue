@@ -3,13 +3,13 @@
 		<tm-navbar  title="藏品">
 		</tm-navbar>
 		<view style="">
-				<tm-sheet :margin="[0,0]">
-					<tm-tabs @change="tabsChange" :transprent="false" activeFontColor="#07EBFE" align="center"
-						:list="tabsTitle" :itemHeight="30" :itemWidth="300" :width="700"  default-name="1">
-					</tm-tabs>
-				</tm-sheet>
-			</view>
-		<scroll-view scroll-y="true" :style="`max-height: ${hh}px;`" @scrolltolower="lower">
+			<tm-sheet :margin="[0,0]">
+				<tm-tabs @change="tabsChange" :transprent="false" activeFontColor="#07EBFE" align="center"
+					:list="tabsTitle" :itemHeight="30" :itemWidth="300" :width="700"  default-name="1">
+				</tm-tabs>
+			</tm-sheet>
+		</view>
+		<scroll-view :style="`height: calc(100vh - 82rpx - 88rpx - ${statusBarHeight}rpx)`" scroll-y="true" @scrolltolower="lower">
 			<view class="flex flex-row-center-between flex-wrap" style="margin: 0rpx 20rpx 0rpx 20rpx;">
 				<view v-if="index==1" class="relative" v-for="(data,index) in mineFindCollReport"
 					@click="gonav('pages/my/collections/collectionsType?id='+data.collId+'&collName='+data.collName)">
@@ -53,16 +53,6 @@
 
 
 <script setup>
-	const { screenWidth, screenHeight, windowWidth, windowHeight, statusBarHeight, safeArea, windowTop } = uni
-		.getWindowInfo()
-
-	console.log("屏幕宽度", screenWidth);
-	console.log("屏幕高度", screenHeight);
-	console.log("可使用窗口宽度", windowWidth);
-	console.log("可使用窗口高度", windowHeight);
-	console.log("手机状态栏的高度", statusBarHeight);
-	console.log("安全区域", safeArea);
-	const { height, width, top } = uni.$tm.u.getWindow()
 	const hh = ref("");
 	import {
 		onShow,
@@ -76,20 +66,6 @@
 		reactive,
 		ref
 	} from 'vue';
-
-	onLoad((e) => {
-		// #ifdef APP-PLUS
-		hh.value = height - 44 - 80 + 6
-		// #endif
-		// #ifdef H5
-		if (windowTop > 0) { //0		44
-			hh.value = height - windowTop
-		} else {
-			hh.value = height - 80 - 6
-		}
-		// #endif
-	})
-
 	const tabsTitle = ref([{
 			key: "1",
 			title: "我的藏品"
@@ -104,7 +80,7 @@
 	//藏品类型列表
 	const mineFindCollReport = ref({});
 	//页面加载完成执行
-	onMounted(() => {
+	onShow(() => {
 		tabsChange(1);
 	})
 	//藏品记录列表

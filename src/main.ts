@@ -11,8 +11,9 @@ import DateUtils from "./utils/dateUtils";
 export function createApp() {
 	const app = createSSRApp(App);
 	app.config.globalProperties.DateUtils = DateUtils
+	app.config.globalProperties.statusBarHeight = uni.getSystemInfoSync().statusBarHeight
 	// #ifdef H5
-	let Captcha = new TencentCaptcha('190971740', (res:any) => {
+	let Captcha = new TencentCaptcha('190971740', (res: any) => {
 		uni.$emit('getTicket', res);
 	});
 	app.config.globalProperties.$Captcha = Captcha

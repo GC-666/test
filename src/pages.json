@@ -328,6 +328,51 @@
             }
             
         }
+        ,{
+            "path" : "pages/my/mymoney/geymoney/geymoney",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/my/mymoney/moneydetail/moneydetail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/my/mymoney/moneydetail/integraldetail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/market/shop/shop",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/market/shop/goodpage",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 
 	"globalStyle": {
@@ -338,14 +383,35 @@
 		"navigationStyle": "custom"
 	},
 	"tabBar": {
+		"blurEffect":"extralight",
+		"color": "#999",
+		"selectedColor": "#07EBFE",
+		"borderStyle":"white",
+		"fontSize":"15px",
 		"list": [{
-				"pagePath": "pages/index/index"
+				"pagePath": "pages/index/index",
+				"text": "首页",
+				"iconPath": "static/tabBar/index.png",
+				"selectedIconPath": "static/tabBar/index-activate.png"
 			},
 			{
-				"pagePath": "pages/market/market"
+				"pagePath": "pages/market/market",
+				"text": "市场",
+				"iconPath": "static/tabBar/market.png",
+				"selectedIconPath": "static/tabBar/market-activate.png"
 			},
-			{ "pagePath": "pages/activity/activity" },
-			{"pagePath": "pages/my/my"}
+			{
+				"pagePath": "pages/activity/activity",
+				"text": "活动",
+				"iconPath": "static/tabBar/activity.png",
+				"selectedIconPath": "static/tabBar/activity-activate.png"
+			},
+			{
+				"pagePath": "pages/my/my",
+				"text": "我的",
+				"iconPath": "static/tabBar/my.png",
+				"selectedIconPath": "static/tabBar/my-activate.png"
+			}
 		]
 	}
 }

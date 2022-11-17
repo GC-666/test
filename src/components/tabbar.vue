@@ -10,7 +10,6 @@
 			<tm-tabbar-item activeColor="orange" open-type='switchTab' url="/pages/my/my" text="我的"
 				icon='tmicon-collection-fill'></tm-tabbar-item>
 		</tm-tabbar>
-
 	</view>
 
 </template>

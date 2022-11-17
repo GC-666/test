@@ -1,6 +1,6 @@
 
-//const BASE_URL = import.meta.env.VITE_APP_BASE_API
- const BASE_URL = "https://xunmeta.rocknft.top/api"
+const BASE_URL = import.meta.env.VITE_APP_BASE_API
+ //const BASE_URL = "https://xunmeta.rocknft.top/api"
 
 // 封装 GET POST 请求并导出
 export function request(url: string = '', params = {}, type: string = 'POST') {

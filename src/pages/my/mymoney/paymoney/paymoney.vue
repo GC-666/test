@@ -86,7 +86,6 @@
 				mask: true
 			});
 			let order = res.operationData;
-			
 			My.orderPay({ payType: '03', id: order.id }).then(resPay => {
 				
 				let unionLink = resPay.payData.payUrl;

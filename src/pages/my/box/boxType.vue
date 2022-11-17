@@ -9,7 +9,7 @@
 				</tm-tabs>
 			</tm-sheet>
 		</view>
-		<scroll-view scroll-y="true" :style="`max-height: ${hh}px;`" @scrolltolower="lower">
+		<scroll-view scroll-y="true" :style="`height: calc(100vh - 82rpx - 88rpx - ${statusBarHeight}rpx)`" @scrolltolower="lower">
 			<view style="margin: 0rpx 20rpx 0rpx 20rpx;">
 				<view class="" v-for="(data,index) in userBoxFindPageList"
 					@click="gonav('pages/my/box/boxDetails?id='+data.id)">
