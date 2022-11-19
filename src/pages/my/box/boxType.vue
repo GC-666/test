@@ -1,6 +1,6 @@
 <template>
 	<tm-app style="">
-		<tm-navbar  :title="config.boxName">
+		<tm-navbar :title="config.boxName">
 		</tm-navbar>
 		<view style="">
 			<tm-sheet :margin="[0,0]">
@@ -9,7 +9,7 @@
 				</tm-tabs>
 			</tm-sheet>
 		</view>
-		<scroll-view scroll-y="true" :style="`height: calc(100vh - 82rpx - 88rpx - ${statusBarHeight}rpx)`" @scrolltolower="lower">
+		<scroll-view scroll-y="true" class="scroll-Y" @scrolltolower="lower">
 			<view style="margin: 0rpx 20rpx 0rpx 20rpx;">
 				<view class="" v-for="(data,index) in userBoxFindPageList"
 					@click="gonav('pages/my/box/boxDetails?id='+data.id)">
@@ -64,26 +64,15 @@
 
 
 <script setup>
-	const { screenHeight, windowHeight, windowTop } =uni.getWindowInfo()
-	const { height, width, top } = uni.$tm.u.getWindow()
-	
-	const hh=ref("");
-	onLoad((e)=>{
-		// #ifdef APP-PLUS
-		hh.value = height - 44 - 80 + 6
-		// #endif
-		// #ifdef H5
-		if(windowTop>0){//0		44
-			hh.value = height  - windowTop
-		}else{
-			hh.value = height   - 80 -6
-		}
-		// #endif
+
+	const hh = ref("");
+	onLoad((e) => {
+		
 	})
-	import { onShow,onLoad } from '@dcloudio/uni-app';
-	import { onMounted , reactive , ref } from 'vue';
+	import { onShow, onLoad } from '@dcloudio/uni-app';
+	import { onMounted, reactive, ref } from 'vue';
 	import { My } from "@/api/api.ts"
-	
+
 	const tabsTitle = ref([{
 			key: "0",
 			title: "未开启"
@@ -96,14 +85,14 @@
 	//类型下标
 	const index = ref(0);
 	//配置参数
-	const config=ref({});
+	const config = ref({});
 	//盲盒类型详情
 	const userBoxFindPageList = ref({});
-	onLoad((e)=>{
-		config.value=e;
+	onLoad((e) => {
+		config.value = e;
 		pageData.value.boxId = config.value.id
 	})
-	
+
 	onShow(() => {
 		tabsChange(0);
 	})
@@ -129,10 +118,10 @@
 			})
 		}
 	}
-	
+
 	const tabsChange = (i) => {
 		index.value = i;
-		pageData.value.boxType=i;
+		pageData.value.boxType = i;
 		pageData.value.page = 1;
 		userBoxFindPageList.value = [];
 		My.userBoxFindPageList(pageData.value).then(res => {
@@ -144,9 +133,10 @@
 			}
 		})
 	}
-	
 </script>
 
 <style>
-
+	.scroll-Y {
+		height: calc(100vh - var(--status-bar-height) - 172rpx);
+	}
 </style>

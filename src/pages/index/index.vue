@@ -14,12 +14,12 @@
 			</template>
 		</tm-navbar>
 		<!-- 首发藏品 -->
-		<scroll-view scroll-y="true" style="height: calc(100vh - 90rpx - 123rpx)" @scrolltolower="lower">
+		<scroll-view scroll-y="true" :style="`height: calc(100vh - 88rpx - ${statusBarHeight}rpx - ${windowBottom}px)`"
+			@scrolltolower="lower">
+
 			<tm-carousel autoplay :margin="[0,0]" :width="710" :height="300" rangKey="img" :list="listimg" model="rect"
 				color="#ccc" @click="carouselClick">
 			</tm-carousel>
-
-
 			<!-- 公告区域 -->
 			<tm-sheet :shadow="0" :margin="[20,10]" :padding="[0,24]" _class="px-20">
 				<view class="flex flex-between" @click="gonav('pages/index/notice/notice')">
@@ -32,11 +32,13 @@
 					<tm-icon :font-size="25" name="tmicon-angle-right"></tm-icon>
 				</view>
 			</tm-sheet>
+
 			<!-- 首发 盲盒tabs -->
 			<view class="ml-20 mr-20">
 				<tm-tabs @change="tabsChange" :itemFontSize="28" :activeFontSize="30" :list="tabsTitle" :width="710"
 					:height="100" default-name="0"></tm-tabs>
 			</view>
+
 			<tm-sheet :round="4" :shadow="0" :margin="[20,10]" :padding="[0,0]" @click="Go(data.id)"
 				v-for="data in list" :key="data.id">
 				<view class="relative flex flex-row-center-center">
@@ -44,27 +46,28 @@
 					</tm-image>
 					<!--  t-50 l-50 r-50 -->
 					<view class="absolute">
-						<tm-image  :round="4" :width="468" :height="468"
+						<tm-image model="aspectFill" :border="4" color="black" :round="4" :width="468" :height="468"
 							:src="data.collImg">
 						</tm-image>
 					</view>
 				</view>
-				<view class="absolute ml-20 mt-20">
+
+				<view class="absolute ml-20 mt-10">
 					<view class="flex countdown">
 						<view class="flex">
 							<view class="flex ml-10 mr-10 mt-5 mb-5" v-if="data.diffSeconds==='0'">
-								<tm-icon :fontSize="25" color="#07EBFE" name="tmicon-wind-smile"></tm-icon>
-								<tm-text color="#07EBFE" fontSiz="24" :label="data.statusName"></tm-text>
-								<view class="" v-if="data.diffSeconds!=='0'">
-									<tm-countdown color="#07EBFE" :time="parseInt(data.diffSeconds)" format="HH:MM:SS"
-										autoStart></tm-countdown>
-								</view>
+								<tm-icon :fontSize="28" :color="data.status =='3'?'#999999':'#07EBFE'"
+									name="tmicon-wind-smile"></tm-icon>
+								<tm-text class="ml-5" :color="data.status =='3'?'#999999':'#07EBFE'" fontSiz="24"
+									:label="data.statusName">
+								</tm-text>
 							</view>
+
 							<view class="flex ml-10 mr-10  mt-5 mb-5" v-if="data.diffSeconds!=='0'">
-								<tm-icon :fontSize="25" color="#07EBFE" name="tmicon-wind-smile"></tm-icon>
-								<tm-text color="#07EBFE" fontSiz="24" label="即将开售: "></tm-text>
-								<tm-countdown color="#07EBFE" :time="parseInt(data.diffSeconds)" format="HH:MM:SS"
-									autoStart></tm-countdown>
+								<tm-icon :fontSize="28" color="#07EBFE" name="tmicon-wind-smile"></tm-icon>
+								<tm-text class="ml-5" color="#07EBFE" fontSiz="24" label="即将开售："></tm-text>
+								<tm-countdown class="text-size-n" color="#07EBFE" :time="parseInt(data.diffSeconds)"
+									format="HH:MM:SS" autoStart></tm-countdown>
 							</view>
 						</view>
 					</view>
@@ -81,7 +84,8 @@
 						</view>
 						<view class="flex flex-col">
 							<view class="flex  flex-col-bottom-center ">
-								<tm-text color="#FFCE92" :font-size="18" _class="text-weight-n flex-row-bottom-end mb--10" label="¥"></tm-text>
+								<tm-text color="#FFCE92" :font-size="18"
+									_class="text-weight-n flex-row-bottom-end mb--10" label="¥"></tm-text>
 								<tm-text class="ml-10" color="#FFCE92" :font-size="38" _class="text-weight-b"
 									:label="data.price">
 								</tm-text>
@@ -91,7 +95,6 @@
 				</tm-sheet>
 			</tm-sheet>
 		</scroll-view>
-
 		<!-- 首发藏品后6个 -->
 		<!-- <tm-sheet :shadow="0" :margin="[20,15]" :padding="[0,0]">
 				<view class="flex flex-row-center-between flex-wrap">
@@ -143,8 +146,9 @@
 
 			<!-- <tm-text class="ml-10" color="#fff" :font-size="30" _class="text-weight-b" label="请登录体验更多功能"></tm-text>
 			<tm-button :margin="[10, 10]" :shadow="0" :width="200" :height="60" fontColor="#fff" outlined size="normal" label="立即登录"></tm-button> -->
-			<tm-alert  :margin="[0,0]" text :border="1" :content="content" :height="80"></tm-alert>
+			<tm-alert :margin="[0,0]" text :border="1" :content="content" :height="80"></tm-alert>
 		</view>
+
 	</tm-app>
 </template>
 <script setup>
@@ -153,20 +157,29 @@
 	import noticeImg from "@/static/img/noticeImg.png"
 	import { onMounted, ref } from "vue";
 	import { useTmpiniaStore } from '@/xhui/tool/lib/tmpinia';
-	import { onShow ,onLoad} from '@dcloudio/uni-app';
+	import { onShow, onLoad } from '@dcloudio/uni-app';
 	const store = useTmpiniaStore();
-	const token  = uni.getStorageSync('token')
-	console.log(token);
+	const token = uni.getStorageSync('token')
+	const windowBottom = uni.getSystemInfoSync().windowBottom;
+	console.log(store.tmStore.color);
 	// 下拉刷新
 	const content = ref([{
 		icon: '',
 		content: "请登录体验更多功能"
 	}])
 	const lower = () => {
-		if (ListNum.value > 0) {
-			params.value.page += 1
-			findSaleCollectionList()
+		if (index.value == 0) {
+			if (ListNum.value > 0) {
+				params.value.page += 1
+				findSaleCollectionList()
+			}
+		} else {
+			if (ListNum.value > 0) {
+				params.value.page += 1
+				findSaleBoxList()
+			}
 		}
+
 	}
 	// 首发盲盒tabs
 	const tabsTitle = ref([
@@ -175,6 +188,7 @@
 	])
 	const index = ref(0)
 	const tabsChange = (i) => {
+		if (index.value == i) return
 		index.value = i
 		list.value = []
 		params.value.page = 1
@@ -199,17 +213,11 @@
 	}
 	// 公告请求
 	const notice = ref([])
-	Home.findPageList({ page: 1, limit: 1, objectType: 0 }).then(res => {
-		notice.value = res
-	})
+	
 
 	// 轮播图 相关
 	const listimg = ref([])
-	Home.bannerList().then(res => {
-		listimg.value = res.map((item) => {
-			return { type: 'img', ...item }
-		})
-	})
+	
 	// 轮播图点击
 	const carouselClick = (i) => {
 		listimg.value.forEach((item, index) => {
@@ -240,6 +248,15 @@
 		})
 	}
 	onMounted(() => {
+		console.log(111);
+		Home.bannerList().then(res => {
+			listimg.value = res.map((item) => {
+				return { type: 'img', ...item }
+			})
+		})
+		Home.findPageList({ page: 1, limit: 1, objectType: 0 }).then(res => {
+			notice.value = res
+		})
 		findSaleCollectionList()
 	})
 	// 切换暗黑 样式
@@ -257,9 +274,6 @@
 			color.value = '#FFCC00'
 		}
 	}
-	
-	//获取手机状态栏高度
-	console.log(uni.getSystemInfoSync().statusBarHeight);
 </script>
 <style>
 	.countdown {

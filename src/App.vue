@@ -1,11 +1,8 @@
 <script setup>
 	import { onLaunch, onShow } from "@dcloudio/uni-app"
-
 	import silenceUpdate from '@/uni_modules/rt-uni-update/js_sdk/silence-update.js' //引入静默更新
 	
 	onShow(() => {
-		console.log("1");
-		
 		//#ifdef APP-PLUS 
 
 		// 获取本地应用资源版本号

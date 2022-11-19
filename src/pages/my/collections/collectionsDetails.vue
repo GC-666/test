@@ -59,14 +59,14 @@
 					<tm-text color="#808080" :font-size="22" _class="text-weight-b" label="海峡链"></tm-text>
 				</view>
 				<view class="" style="width: 375rpx;">
-					<tm-text @click="aa" color="#07EBFE"  :font-size="22" _class="text-weight-b" label="点击跳转"></tm-text>
+					<tm-text @click="aa" :color="bgColor"  :font-size="22" _class="text-weight-b" label="点击跳转"></tm-text>
 				</view>
 			</view>
 		</tm-sheet>
 		<view style="margin-top: 100rpx;">
 			<view class="flex flex-center">
 				<view style="width:100%" v-if="collectionDetails.type==0 && collectionDetails.isGive=='1'">
-					<tm-button color="#12D6DF" @click="conversion" :margin="[20,0]" form-type="submit" :fontSize="38" linearDeep="accent" block label="转增"></tm-button>	
+					<tm-button @click="conversion" :margin="[20,0]" form-type="submit" :fontSize="38" linearDeep="accent" block label="转增"></tm-button>	
 				</view>
 				<view style="width:100%"  v-if="collectionDetails.type==0 && collectionDetails.isLock==0">
 					<tm-button color="#3b66f5" @click="gonav('pages/my/collections/collectionsConsignment?id='+collectionDetails.id)" :margin="[20,0]" form-type="submit" :fontSize="38" linearDeep="accent" block label="寄售"></tm-button>

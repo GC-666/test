@@ -4,14 +4,12 @@ import * as Pinia from 'pinia';
 import tmui from "./xhui"
 import App from "./App.vue";
 import DateUtils from "./utils/dateUtils";
-
-
-
-
 export function createApp() {
 	const app = createSSRApp(App);
 	app.config.globalProperties.DateUtils = DateUtils
 	app.config.globalProperties.statusBarHeight = uni.getSystemInfoSync().statusBarHeight
+	// 自定义的颜色  和主题色 保持一致
+	app.config.globalProperties.bgColor = "#07EBFE"
 	// #ifdef H5
 	let Captcha = new TencentCaptcha('190971740', (res: any) => {
 		uni.$emit('getTicket', res);

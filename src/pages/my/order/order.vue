@@ -1,69 +1,132 @@
 <template>
 	<tm-app style="">
-		<tm-navbar  title="藏品">
+		<tm-navbar  title="订单管理">
 		</tm-navbar>
-		<view style="">
-				<tm-sheet :margin="[0,0]">
-					<tm-tabs @change="tabsChange" :transprent="false" activeFontColor="#07EBFE" align="center"
-						:list="tabsTitle" :itemHeight="30" :itemWidth="300" :width="700"  default-name="1">
-					</tm-tabs>
-				</tm-sheet>
-			</view>
-		<scroll-view scroll-y="true" :style="`max-height: ${hh}px;`" @scrolltolower="lower">
-			<view class="flex flex-row-center-between flex-wrap" style="margin: 0rpx 20rpx 0rpx 20rpx;">
-				<view v-if="index==1" class="relative" v-for="(data,index) in mineFindCollReport"
-					@click="gonav('pages/my/collections/collectionsType?id='+data.collId+'&collName='+data.collName)">
-					<tm-sheet :shadow="0" :margin="[0,20]" :padding="[0,0]">
-						<tm-image :width="344" :height="344" :src="data.collImg">
-						</tm-image>
-						<view class="" style="margin: 0rpx 10rpx;">
-							<tm-text :font-size="28" _class="text-weight-b" :label="data.collName"></tm-text>
-						</view>
-						<view class="flex flex-between" style="margin: 0rpx 10rpx;padding: 0rpx 0rpx 10rpx 0rpx">
-							<tm-text color="#999" :font-size="18" class="mt-10" :label="data.publisher"></tm-text>
-							<view class="flex">
-								<tm-text color="#999" :font-size="18" _class="text-weight-n" label="数量"></tm-text>
-								<tm-text color="#999" :font-size="18" _class="text-weight-b" :label="data.collCount">
-								</tm-text>
+		<view class="aaaa">
+			<tm-sheet :round="0" :shadow="0" :margin="[0,0]" :padding="[0,0]">
+				<view class="flex flex-around " style="align-items: center;height: 100rpx;">
+					<tm-text :color="acvite === 0? `${bgColor}` :''"
+						:class="acvite === 0? `text-weight-b active` :'text-weight-n'" :font-size="acvite === 0? 30: 28"
+						label="全部" @click="tabsClick(0)"></tm-text>
+					<view class="flex" @click="tabsClick(1)">
+						<tm-text :color="acvite ===1? `${bgColor}` :''"
+							:class="acvite === 1? `text-weight-b active` :'text-weight-n'"
+							:font-size="acvite === 1? 30: 28" label="已完成"></tm-text>
+						<tm-icon class="ml-5" v-if="!typeShow" :color="acvite === 1? bgColor:''" :fontSize="25"
+							name="tmicon-angle-down"></tm-icon>
+						<tm-icon class="ml-5" v-if="typeShow" :color="bgColor" :fontSize="25" name="tmicon-angle-up">
+						</tm-icon>
+					</view>
+					<tm-text :color="acvite === 2? `${bgColor}` :''"
+						:class="acvite === 2? `text-weight-b active` :'text-weight-n'" :font-size="acvite === 2? 30: 28"
+						label="待付款" @click="tabsClick(2)"></tm-text>
+					<tm-text :color="acvite === 3? `${bgColor}` :''"
+						:class="acvite === 3? `text-weight-b active` :'text-weight-n'" :font-size="acvite === 3? 30: 28"
+						label="已失效" @click="tabsClick(3)"></tm-text>
+					
+				</view>
+				<tm-sheet v-if="typeShow" :round="0" :shadow="0" :margin="[0,0]" :padding="[0,0]">
+					<tm-sheet class="absolute flex flex-around" :width="750" :round="0" :shadow="0" :margin="[0,0]"
+						:padding="[0,0]">
+						<view class="flex overflow-y flex-wrap" style="max-height: 500rpx;">
+							<view class="">
+								<tm-tag checkable :checked="acc ===0? true :false" size="m" label="全部"
+									@click="tagChange(0)"></tm-tag>
+							</view>
+							<view class="">
+								<tm-tag checkable :checked="acc ===1? true :false" size="m" label="首发"
+									@click="tagChange(1)"></tm-tag>
+							</view>
+							<view class="">
+								<tm-tag checkable :checked="acc ===2? true :false" size="m" label="市场"
+									@click="tagChange(2)"></tm-tag>
+							</view>
+							<view class="">
+								<tm-tag checkable :checked="acc ===3? true :false" size="m" label="寄售"
+									@click="tagChange(3)"></tm-tag>
+							</view>
+							<view class="">
+								<tm-tag checkable :checked="acc ===4? true :false" size="m" label="充值"
+									@click="tagChange(4)"></tm-tag>
+							</view>
+							<view class="">
+								<tm-tag checkable :checked="acc ===5? true :false" size="m" label="提现"
+									@click="tagChange(5)"></tm-tag>
 							</view>
 						</view>
 					</tm-sheet>
-				</view>
-				<view v-else class="relative" v-for="(data,index) in userRecrodFindCollPageList">
-					<tm-sheet :shadow="0" :margin="[0,20]" :padding="[0,0]">
-						<tm-image :width="344" :height="344" :src="data.img">
-						</tm-image>
-						<view class="" style="margin: 0rpx 10rpx;">
-							<tm-text :font-size="28" _class="text-weight-b" :label="data.collName"></tm-text>
-						</view>
-						<view class="flex flex-between" style="margin: 0rpx 10rpx;padding: 0rpx 0rpx 10rpx 0rpx">
-							<tm-text color="#999" :font-size="18" class="mt-10" :label="data.opertionRemarks"></tm-text>
-							<view class="flex">
-								<tm-text color="#999" :font-size="18" _class="text-weight-n" label="¥"></tm-text>
-								<tm-text color="#999" :font-size="18" _class="text-weight-b" :label="data.price">
-								</tm-text>
+				</tm-sheet>
+			</tm-sheet>
+		</view>
+		<scroll-view  class="scroll-Y" scroll-y="true" @scrolltolower="lower">
+			<view class="flex flex-row-center-between flex-wrap" style="margin: 0rpx 20rpx 0rpx 20rpx;">
+				<view class="relative" v-for="(data,index) in orderFindPageList">
+					<tm-sheet :shadow="0" :margin="[0,20]" :padding="[20,20]" style="width:710rpx">
+						<view class="flex flex-between" >
+							<view class="flex flex-center">
+								<tm-text :font-size="18" _class="text-weight-s" :label="`订单编号:${data.orderNo}`"></tm-text>
 							</view>
+							<view class="flex flex-center" v-if="data.orderStatus==0">
+								<tm-text  :font-size="28" color="red" _class="text-weight-b" label="剩余时间:"></tm-text>
+								<tm-countdown  class="text-size-n ml-10" color="red" :time="parseInt(data.endTime)-new Date().getTime()" format="HH:MM:SS"
+									autoStart></tm-countdown>
+							</view>
+							<tm-text color="red" v-else-if="data.orderStatus==1" :font-size="22" _class="text-weight-b" label="待发货"></tm-text>
+							<tm-text color="green" v-else-if="data.orderStatus==2" :font-size="22" _class="text-weight-b" label="已完成"></tm-text>
+							<tm-text v-else-if="data.orderStatus==9" :font-size="22" _class="text-weight-b" label="已失效"></tm-text>
+						</view>
+						<view class="flex flex-between mt-20" >
+							<view class="flex">
+								<tm-image :round="3" :width="120" :height="120" :src="data.objectImg">
+								</tm-image>
+								<view class="flex flex-col flex-around ml-20">
+									<tm-text :font-size="26" _class="text-weight-b" :label="data.objectName"></tm-text>
+									<tm-text :font-size="18" _class="text-weight-s" :label="`类型:${data.orderTypeName}`"></tm-text>
+									<tm-text v-if="data.orderStatus==0" :font-size="18" _class="text-weight-s" label="状态:待付款"></tm-text>
+									<tm-text v-else-if="data.orderStatus==1" :font-size="18" _class="text-weight-s" label="状态:待发货"></tm-text>
+									<tm-text v-else-if="data.orderStatus==2" :font-size="18" _class="text-weight-s" label="状态:已完成"></tm-text>
+									<tm-text v-else-if="data.orderStatus==9" :font-size="18" _class="text-weight-s" label="状态:已失效"></tm-text>
+								</view>
+							</view>
+							<view class="flex flex-col flex-row-bottom-end">
+								<tm-text class="mb-10" :font-size="18" _class="text-weight-s" :label="`订单时间:${DateUtils.formatDateTime(data.orderTime)}`"></tm-text>
+								<view class="flex">
+									<tm-text :font-size="28" _class="text-weight-b" label="¥"></tm-text>
+									<tm-text :font-size="28" _class="text-weight-b" :label="data.totalMoney"></tm-text>
+								</view>
+							</view>
+						</view>
+						<view class="flex flex-row-bottom-end mt-20">
+							<tm-button  @click="kefu" :margin="[0, 0]" :padding="[0,4]"
+							 :height="40" :width="160" outlined :round="20" size="normal"
+							  fontColor="#FBB900" color="#FBB900" :shadow="0"
+							  label="联系客服"></tm-button>
+							<tm-button :margin="[10, 0]" :padding="[0,4]"
+							 @click="gonav('pages/my/order/orderDetails?id='+data.id)" 
+							 :height="40" :width="160" outlined :round="20" size="normal" :shadow="0"
+							  label="查看详情"></tm-button>
+							<tm-button  v-if="data.orderStatus==0" :margin="[10, 0]" :padding="[0,4]"
+							 @click="orderCancel(data.id)" 
+							 :height="40" :width="160" outlined :round="20" size="normal" :shadow="0"
+							 fontColor="#808080" color="#808080"
+							  label="取消订单"></tm-button>
+							<tm-button  v-if="data.orderStatus==0" :margin="[10, 0]" :padding="[0,4]"
+							@click="gonav('pages/my/order/orderpay?id='+data.id)" 
+							 :height="40" :width="160" outlined :round="20" size="normal" :shadow="0"
+							 fontColor="#EB3938" color="#EB3938"
+							  label="立即支付"></tm-button>
 						</view>
 					</tm-sheet>
 				</view>
 			</view>
 		</scroll-view>
+		
+		<view v-show="cover" class="cover" @click.stop="cover=false;typeShow = false"></view>
 	</tm-app>
 </template>
 
 
 <script setup>
-	const { screenWidth, screenHeight, windowWidth, windowHeight, statusBarHeight, safeArea, windowTop } = uni
-		.getWindowInfo()
-
-	console.log("屏幕宽度", screenWidth);
-	console.log("屏幕高度", screenHeight);
-	console.log("可使用窗口宽度", windowWidth);
-	console.log("可使用窗口高度", windowHeight);
-	console.log("手机状态栏的高度", statusBarHeight);
-	console.log("安全区域", safeArea);
-	const { height, width, top } = uni.$tm.u.getWindow()
-	const hh = ref("");
 	import {
 		onShow,
 		onLoad
@@ -76,97 +139,138 @@
 		reactive,
 		ref
 	} from 'vue';
-
-	onLoad((e) => {
-		// #ifdef APP-PLUS
-		hh.value = height - 44 - 80 + 6
-		// #endif
-		// #ifdef H5
-		if (windowTop > 0) { //0		44
-			hh.value = height - windowTop
-		} else {
-			hh.value = height - 80 - 6
-		}
-		// #endif
+	
+	const list = ref([])
+	const acvite = ref(0)
+	const typeShow = ref(false)
+	const cover = ref(false)
+	const params=ref({
+		page : 1,
+		limit : 20,
+		orderType : "",
+		orderStatus : ""
 	})
-
-	const tabsTitle = ref([{
-			key: "1",
-			title: "我的藏品"
-		},
-		{
-			key: "2",
-			title: "藏品记录"
-		}
-	]);
-	//类型下标
-	const index = ref(1);
-	//藏品类型列表
-	const mineFindCollReport = ref({});
-	//页面加载完成执行
-	onMounted(() => {
-		tabsChange(1);
-	})
-	//藏品记录列表
-	const userRecrodFindCollPageList = ref({});
-	//配置参数
-	const pageData = ref({
-		page: 1,
-		limit: 20
-	});
-	const bool = ref(true);
-	// 下拉刷新
-	const lower = () => {
-		pageData.value.page = pageData.value.page + 1;
-		if (bool.value) {
-			if (index.value == 1) {
-				My.mineFindCollReport(pageData.value).then(res => {
-					mineFindCollReport.value = mineFindCollReport.value.concat(res)
-					if (res.length = pageData.value.limit) {
-						bool.value = true;
-					} else {
-						bool.value = false;
-					}
-				})
+	const tabsClick = (i) => {
+		acvite.value = i
+		params.value.page = 1
+		list.value = []
+		if (i == 0) {
+			params.value.orderType="";
+			params.value.orderStatus="";
+			typeShow.value = false
+			cover.value = false
+		} else if (i == 1) {
+			params.value.orderType="";
+			params.value.orderStatus="2";
+			if (typeShow.value) {
+				typeShow.value = false
+				cover.value = false
 			} else {
-				My.userRecrodFindCollPageList(pageData.value).then(res => {
-					userRecrodFindCollPageList.value = userRecrodFindCollPageList.value.concat(res)
-					if (res.length = pageData.value.limit) {
-						bool.value = true;
-					} else {
-						bool.value = false;
-					}
-				})
+				typeShow.value = true
+				cover.value = true
 			}
+		} else if (i == 2) {
+			params.value.orderType="";
+			params.value.orderStatus="0";
+			typeShow.value = false
+			cover.value = false
+		} else if (i == 3) {
+			params.value.orderType="";
+			params.value.orderStatus="9";
+			typeShow.value = false
+			cover.value = false
+		}
+		tabsChange();
+	}
+	
+	const acc = ref(0)
+	const tagChange = (index) => {
+		params.value.orderStatus="2";
+		if(index==0){
+			params.value.orderType="";
+		}else if(index==1){
+			params.value.orderType="";
+		}else if(index==2){
+			params.value.orderType="";
+		}else if(index==3){
+			params.value.orderType="";
+		}else if(index==4){
+			params.value.orderType="00";
+		}else if(index==5){
+			params.value.orderType="01";
+		}
+		acc.value = index
+		tabsChange();
+	}
+	//页面加载完成执行
+	onShow(() => {
+		tabsChange();
+	})
+	//订单列表
+	const orderFindPageList = ref({});
+	const bool = ref(true);
+	const tabsChange = (i) => {
+		params.value.page = 1;
+		orderFindPageList.value = [];
+		My.orderFindPageList(params.value).then(res => {
+			orderFindPageList.value = res;
+			if (res.length == params.value.limit) {
+				bool.value = true;
+			} else {
+				bool.value = false;
+			}
+		})
+	}
+	const lower = () => {
+		params.value.page = params.value.page + 1;
+		if (bool.value) {
+			My.orderFindPageList(params.value).then(res => {
+				orderFindPageList.value = orderFindPageList.value.concat(res)
+				if (res.length = params.value.limit) {
+					bool.value = true;
+				} else {
+					bool.value = false;
+				}
+			})
 		}
 	}
-	const tabsChange = (i) => {
-		index.value = i;
-		pageData.value.page = 1;
-		mineFindCollReport.value = [];
-		userRecrodFindCollPageList.value = [];
-		if (i == 1) {
-			My.mineFindCollReport(pageData.value).then(res => {
-				mineFindCollReport.value = res;
-				if (res.length == pageData.value.limit) {
-					bool.value = true;
-				} else {
-					bool.value = false;
-				}
-			})
-		} else {
-			My.userRecrodFindCollPageList(pageData.value).then(res => {
-				userRecrodFindCollPageList.value = res;
-				if (res.length == pageData.value.limit) {
-					bool.value = true;
-				} else {
-					bool.value = false;
-				}
-			})
-		}
+	
+	const kefu = () => {
+		// #ifdef APP-PLUS
+		plus.runtime.openURL('https://xunmeta.rocknft.top/chat.html')
+		// #endif
+		// #ifdef H5
+		window.location.href = 'https://xunmeta.rocknft.top/chat.html'
+		// #endif
+	}
+	//订单取消
+	const orderCancel = (id) => {
+		My.orderCancel({
+			id:id
+		}).then(res => {
+			
+		})
 	}
 </script>
 
 <style>
 
+	.aaaa {
+		position: relative;
+		background-color: #fff;
+		z-index: 11;
+	}
+	.cover {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(0, 0, 0, 0.5);
+		z-index: 1;
+	}
+
+	.scroll-Y {
+		height: calc(100vh - var(--status-bar-height) - 188rpx - var(--window-bottom));
+	}
 </style>

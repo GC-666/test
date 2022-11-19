@@ -28,10 +28,6 @@
 
 
 <script setup>
-	const { screenWidth, screenHeight, windowWidth, windowHeight, statusBarHeight, safeArea, windowTop } = uni
-		.getWindowInfo()
-	const { height, width, top } = uni.$tm.u.getWindow()
-	const hh = ref("");
 	import {
 		onShow,
 		onLoad
@@ -44,19 +40,6 @@
 		reactive,
 		ref
 	} from 'vue';
-
-	onLoad((e) => {
-		// #ifdef APP-PLUS
-		hh.value = height - 44 - 80 + 6
-		// #endif
-		// #ifdef H5
-		if (windowTop > 0) { //0		44
-			hh.value = height - windowTop
-		} else {
-			hh.value = height - 80 - 6
-		}
-		// #endif
-	})
 	
 	//页面加载完成执行
 	onShow(() => {

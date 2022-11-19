@@ -5,11 +5,11 @@
 			@change="tabsChange"></tm-tabs>
 			
 		<view class="" v-if="noticeList.length>0" >
-			<scroll-view scroll-y="true" :style="`height: ${hh}px;`">
+			<scroll-view scroll-y="true" class="scroll-Y" >
 				<tm-sheet :shadow="0" :margin="[20,10]" :round="5" v-for="(item,index) in noticeList" :key="item.id">
 					<tm-cell :margin="[0, 0]" :padding="[0,10]" :titleFontSize="28">
 						<template v-slot:title>
-							<tm-text _class="text-weight-b" :fontSize="26" :label="item.name"></tm-text>
+							<tm-text _class="text-weight-b" :fontSize="30" :label="item.name"></tm-text>
 						</template>
 						<template v-slot:right>
 							<view class="flex">
@@ -21,9 +21,9 @@
 						<view class="flex ma-10 flex-row-center-between"
 							@click="gonav('pages/index/notice/noticeDesc/noticeDesc?id='+data.id)">
 							<view class="flex  flex-col">
-								<tm-text :font-size="22" :label="data.name"></tm-text>
+								<tm-text :font-size="28" :label="data.name"></tm-text>
 								<view class="mt-20">
-									<tm-text color="#808080" :fontSize="18" :label="DateUtils.formatDateTime(data.upTime)">
+									<tm-text color="#808080" :fontSize="22" :label="DateUtils.formatDateTime(data.upTime)">
 									</tm-text>
 								</view>
 							</view>
@@ -37,15 +37,15 @@
 		</view>
 
 		<view class="" v-if="noticeList1.length>0" >
-			<scroll-view scroll-y="true" :style="`height: ${hh}px;`"  @scrolltolower="lower">
+			<scroll-view scroll-y="true" class="scroll-Y"  @scrolltolower="lower">
 				<tm-sheet :shadow="0" :margin="[20,10]" :round="5">
 					<view class="" v-for="item in noticeList1">
 						<view class="flex ma-10 flex-row-center-between"
 							@click="gonav('pages/index/notice/noticeDesc/noticeDesc?id='+item.id)">
 							<view class="flex  flex-col">
-								<tm-text :font-size="22" :label="item.name"></tm-text>
+								<tm-text :font-size="28" :label="item.name"></tm-text>
 								<view class="mt-20">
-									<tm-text color="#808080" :fontSize="18"
+									<tm-text color="#808080" :fontSize="22"
 										:label="DateUtils.formatDateTime(item.upTime)">
 									</tm-text>
 								</view>
@@ -62,13 +62,7 @@
 </template>
 
 <script setup>
-	const { height, width, top } = uni.$tm.u.getWindow()
-	// #ifdef APP-PLUS
-	const hh = height - 44 - 80
-	// #endif
-	// #ifdef H5
-	const hh = height  - 80 -10
-	// #endif
+	
 	
 	import { Home } from "@/api/api.ts"
 	import { onMounted, ref } from "vue";
@@ -135,5 +129,9 @@
 </script>
 
 <style>
-	.aa {}
+	.scroll-Y {
+		height: calc(100vh - var(--status-bar-height) - 172rpx);
+	}
+	
+	
 </style>

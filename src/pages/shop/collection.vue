@@ -21,21 +21,23 @@
 						<view class="flex">
 							<view class="flex">
 								<view class="round-tl-5 round-bl-5 flex flex-center"
-									style="width: 100rpx; background-color: #FFD7A7; " >
-									<tm-text class="ma-5"  :font-size="18" _class="text-weight-n" label="发行量"></tm-text>
+									style="width: 100rpx; background-color: #FFD7A7; ">
+									<tm-text class="ma-5" :font-size="22" _class="text-weight-n" label="发行量"></tm-text>
 								</view>
-								<view class="round-tr-5 round-br-5 flex flex-center" style="width: 85rpx;background-color: #FFE6C8;">
-									<tm-text  class="ma-5" :font-size="18" _class="text-weight-n" :label="data.presale">
+								<view class="round-tr-5 round-br-5 flex flex-center"
+									style="width: 85rpx;background-color: #FFE6C8;">
+									<tm-text class="ma-5" :font-size="22" _class="text-weight-n" :label="data.presale">
 									</tm-text>
 								</view>
 							</view>
 							<view class="flex ml-20">
 								<view class="round-tl-5 round-bl-5 flex flex-center"
-									style="width: 80rpx; background-color: #FFD7A7;" >
-									<tm-text class="ma-5"  :font-size="18" _class="text-weight-n" label="已售"></tm-text>
+									style="width: 80rpx; background-color: #FFD7A7;">
+									<tm-text class="ma-5" :font-size="22" _class="text-weight-n" label="已售"></tm-text>
 								</view>
-								<view class="round-tr-5 round-br-5 flex flex-center" style="width: 85rpx;background-color: #FFE6C8;">
-									<tm-text class="ma-5" :font-size="18"  _class="text-weight-n" :label="data.sold">
+								<view class="round-tr-5 round-br-5 flex flex-center"
+									style="width: 85rpx;background-color: #FFE6C8;">
+									<tm-text class="ma-5" :font-size="22" _class="text-weight-n" :label="data.sold">
 									</tm-text>
 								</view>
 							</view>
@@ -86,19 +88,18 @@
 				</view>
 			</view>
 		</tm-sheet>
-		<tm-sheet :style="{'color': store.tmStore.dark?'#fff': '#25262E','font-size': '22rpx'}" :round="3" :shadow="0" :margin="[20,20]" :padding="[20,10]" v-if="data.details">
+		<tm-sheet :style="{'color': store.tmStore.dark?'#fff': '#25262E','font-size': '22rpx'}" :round="3" :shadow="0"
+			:margin="[20,20]" :padding="[20,10]" v-if="data.details">
 			<view class="flex">
 				<tm-html :content="data.details"></tm-html>
 
 			</view>
 		</tm-sheet>
-
-		<tm-sheet style="margin-bottom: 100rpx;" :round="3" :shadow="0" :margin="[20,20]" :padding="[0,10]"
-			v-if="data.details">
+		<tm-sheet style="margin-bottom: 100rpx;" :round="3" :shadow="0" :margin="[20,20]" :padding="[0,10]">
 			<view class="">
-
 				<tm-text class="ml-25 mt-20" :font-size="35" _class="text-weight-b" label="购买须知"></tm-text>
-				<view class="ml-25" :style="{'color': store.tmStore.dark?'#fff': '#25262E','font-size': '22rpx','text-indent': '0.5cm' }">
+				<view class="ml-25"
+					:style="{'color': store.tmStore.dark?'#fff': '#25262E','font-size': '22rpx','text-indent': '0.5cm' }">
 					数字藏品为虚拟数字商品，而非实物，仅限实名认证为年满14周岁的中国大陆用户购买。数字藏品的版权由发行方或原创者拥有，除另行取得版权拥有者书面同意外，不得将数字藏品用于任何商业用途，不支持退换。本商品源文件不支持本地下载。请勿对数字藏品进行炒作、场外交易、欺诈，或以任何其他非法方式进行使用
 				</view>
 
@@ -113,24 +114,31 @@
 					<view class="flex flex-row-center-between aa">
 						<view class="flex flex-col ml-40">
 							<view class="flex  flex-col-bottom-center ">
-								<tm-text :font-size="18" _class="text-weight-n flex-row-bottom-end mb--8" label="¥"></tm-text>
+								<tm-text :font-size="18" _class="text-weight-n flex-row-bottom-end mb--8" label="¥">
+								</tm-text>
 								<tm-text class="ml-10" :font-size="38" _class="text-weight-b" :label="data.price">
 								</tm-text>
 							</view>
 						</view>
 						<view class="mr-50">
 							<tm-button :round="13" :margin="[0, 10]" :padding="[0,0]" :shadow="0" :height="60"
-								:width="200" label="立即购买"></tm-button>
+								:width="200" label="立即购买" @click="placeOrder"></tm-button>
 						</view>
 					</view>
 				</tm-sheet>
 			</view>
 		</view>
+		<tm-modal :height="350" splitBtn title="温馨提示" okText="确定" v-model:show="orderShow" @ok="pay(order.operationData.id)">
+			<view class="flex flex-center">
+				<tm-text :font-size="30" _class="text-weight-n" :label="order.operationMsg">
+				</tm-text>
+			</view>
+		</tm-modal>
 	</tm-app>
 </template>
 
 <script setup>
-	import { Home } from "@/api/api.ts"
+	import { Home ,My} from "@/api/api.ts"
 	import { onLoad } from "@dcloudio/uni-app";
 	import { onBeforeMount, ref } from "vue";
 	import bg1 from "@/static/img/shopBg.png"
@@ -139,6 +147,8 @@
 	const store = useTmpiniaStore();
 	const id = ref('')
 	const data = ref({})
+	const order = ref({})
+	const orderShow = ref(false)
 	onLoad((o) => {
 		id.value = o.id
 	})
@@ -147,6 +157,24 @@
 			data.value = res
 		})
 	})
+	const pay = (id) => {
+		console.log(id);
+		uni.navigateTo({
+			url:'/pages/my/order/orderpay?id='+id
+		})
+	}
+	const placeOrder = () => {
+		My.placeOrder({type:'02',id:id.value}).then(res => {
+			if (res.operationCode == '01') {
+				orderShow.value = true
+				order.value = res
+				return
+			}
+			uni.navigateTo({
+				url:'/pages/my/order/orderpay?id='+res.operationData.id
+			})
+		})
+	}
 </script>
 
 <style>

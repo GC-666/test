@@ -30,7 +30,7 @@
 		<view style="margin-top: 100rpx;">
 			<view class="flex flex-center">
 				<view v-if="userBoxFindItem.isOpen==0 && userBoxFindItem.type==0" style="width:100%">
-					<tm-button color="#12D6DF" @click="conversion" :margin="[20,0]" form-type="submit" :fontSize="38" linearDeep="accent" block label="开盲盒"></tm-button>	
+					<tm-button @click="conversion" :margin="[20,0]" form-type="submit" :fontSize="38" linearDeep="accent" block label="开盲盒"></tm-button>	
 				</view>
 				<view v-if="userBoxFindItem.isBuy==1 && userBoxFindItem.type==0" style="width:100%">
 					<tm-button color="#3b66f5" @click="gonav('pages/my/box/boxConsignment?id='+userBoxFindItem.id)" :margin="[20,0]" form-type="submit" :fontSize="38" linearDeep="accent" block label="寄售"></tm-button>

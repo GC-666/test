@@ -67,8 +67,8 @@
 					<tm-text color="#808080" :font-size="22" _class="text-weight-b" label="预计收入"></tm-text>
 				</view>
 				<view class="flex flex-row-center-center">
-					<tm-icon :fontSize="22" color="#07EBFE" name="tmicon-renminbi3"></tm-icon>
-					<tm-text color="#07EBFE" :font-size="30" _class="text-weight-b" :label="getprice"></tm-text>
+					<tm-icon :fontSize="22" :color="bgColor" name="tmicon-renminbi3"></tm-icon>
+					<tm-text :color="bgColor" :font-size="30" _class="text-weight-b" :label="getprice"></tm-text>
 				</view>
 			</view>
 		</tm-sheet>

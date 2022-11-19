@@ -45,7 +45,7 @@
 				</view>
 				<view class="flex flex-col ma-15">
 					<view class="flex  flex-col-bottom-center ">
-						<tm-text :font-size="18" _class="text-weight-n" label="¥"></tm-text>
+						<tm-text :font-size="18" _class="text-weight-n" class="flex-row-bottom-end mb--10" label="¥"></tm-text>
 						<tm-text class="ml-10" :font-size="38" _class="text-weight-b" :label="data.price">
 						</tm-text>
 					</view>
@@ -64,25 +64,25 @@
 					<tm-icon name="tmicon-huiyuan"></tm-icon>
 
 
-					<tm-text class="mt-20 mb-20" :font-size="18" _class="text-weight-s" label="唯一编号"></tm-text>
+					<tm-text class="mt-20 mb-20" :font-size="22" _class="text-weight-s" label="唯一编号"></tm-text>
 
 
 				</view>
 				<view class="">
 					<tm-icon name="tmicon-md-ribbon"></tm-icon>
 
-					<tm-text class="mt-20 mb-20" :font-size="18" _class="text-weight-s" label="可信记录"></tm-text>
+					<tm-text class="mt-20 mb-20" :font-size="22" _class="text-weight-s" label="可信记录"></tm-text>
 
 				</view>
 				<view class="">
 					<tm-icon name="tmicon-md-ribbon"></tm-icon>
 
-					<tm-text class="mt-20 mb-20" :font-size="18" _class="text-weight-s" label="永久存证"></tm-text>
+					<tm-text class="mt-20 mb-20" :font-size="22" _class="text-weight-s" label="永久存证"></tm-text>
 
 				</view>
 				<view class="">
 					<tm-icon name="tmicon-md-ribbon"></tm-icon>
-					<tm-text class="mt-20 mb-20" :font-size="18" _class="text-weight-s" label="不可篡改"></tm-text>
+					<tm-text class="mt-20 mb-20" :font-size="22" _class="text-weight-s" label="不可篡改"></tm-text>
 
 				</view>
 			</view>
@@ -129,24 +129,30 @@
 					<view class="flex flex-row-center-between aa">
 						<view class="flex flex-col ml-40">
 							<view class="flex  flex-col-bottom-center ">
-								<tm-text :font-size="18" _class="text-weight-n" label="¥"></tm-text>
+								<tm-text :font-size="18" _class="text-weight-n" class="flex-row-bottom-end mb--10" label="¥"></tm-text>
 								<tm-text class="ml-10" :font-size="38" _class="text-weight-b" :label="data.price">
 								</tm-text>
 							</view>
 						</view>
 						<view class="mr-50">
 							<tm-button :round="13" :margin="[0, 10]" :padding="[0,0]" :shadow="0" :height="60"
-								:width="200" label="立即购买"></tm-button>
+								:width="200" label="立即购买" @click="placeOrder"></tm-button>
 						</view>
 					</view>
 				</tm-sheet>
 			</view>
 		</view>
+		<tm-modal :height="300" splitBtn title="温馨提示" okText="确定" v-model:show="orderShow" @ok="pay(order.operationData.id)">
+			<view class="flex flex-center">
+				<tm-text :font-size="30" _class="text-weight-n" :label="order.operationMsg">
+				</tm-text>
+			</view>
+		</tm-modal>
 	</tm-app>
 </template>
 
 <script setup>
-	import { Home } from "@/api/api.ts"
+	import { Home,My } from "@/api/api.ts"
 	import { onLoad } from "@dcloudio/uni-app";
 	import { onBeforeMount, ref } from "vue";
 	import bg1 from "@/static/img/shopBg.png"
@@ -155,14 +161,34 @@
 	const store = useTmpiniaStore();
 	const id = ref('')
 	const data = ref({})
+	const order = ref({})
+	const orderShow = ref(false)
 	onLoad((o) => {
 		id.value = o.id
 	})
+	const pay = (id) => {
+		console.log(id);
+		uni.navigateTo({
+			url:'/pages/my/order/orderpay?id='+id
+		})
+	}
 	onBeforeMount(() => {
 		Home.findSaleBoxItem({ id: id.value }).then(res => {
 			data.value = res
 		})
 	})
+	const placeOrder = () => {
+		My.placeOrder({type:'03',id:id.value}).then(res => {
+			if (res.operationCode == '01') {
+				orderShow.value = true
+				order.value = res
+				return
+			}
+			uni.navigateTo({
+				url:'/pages/my/order/orderpay?id='+res.operationData.id
+			})
+		})
+	}
 </script>
 
 <style>

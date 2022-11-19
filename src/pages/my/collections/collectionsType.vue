@@ -9,7 +9,7 @@
 				</tm-tabs>
 			</tm-sheet>
 		</view>
-		<scroll-view scroll-y="true" :style="`height: calc(100vh - 82rpx - 88rpx - ${statusBarHeight}rpx)`" @scrolltolower="lower">
+		<scroll-view scroll-y="true" class="scroll-Y" @scrolltolower="lower">
 			<view style="margin: 0rpx 20rpx 0rpx 20rpx;">
 				<view class="" v-for="(data,index) in userCollectionFindPageList" @click="gonav('pages/my/collections/collectionsDetails?id='+data.id)">
 					<tm-sheet :shadow="0" :margin="[20,20]" :padding="[20,10]">
@@ -124,5 +124,7 @@
 </script>
 
 <style>
-
+.scroll-Y {
+		height: calc(100vh - var(--status-bar-height) - 172rpx);
+	}
 </style>

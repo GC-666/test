@@ -2,15 +2,16 @@
 	<tm-app>
 		<tm-navbar hideHome title="申请开票" :height="44" :shadow="0">
 			<template v-slot:right>
-				<tm-text class="mr-20" :fontSize="22" label="开票记录"></tm-text>
+				<tm-text class="mr-20" :fontSize="22" label="开票记录" @click="gonav('pages/my/set/bill/billlist')">
+				</tm-text>
 			</template>
 		</tm-navbar>
 
 		<!-- 可开票列表 -->
 
-		<scroll-view scroll-y="true" :style="`height: ${hh}px;`" @scrolltolower="lower">
+		<scroll-view scroll-y="true" class="scroll-Y" @scrolltolower="lower">
 			<tm-sheet :round="3" :border="item.c? '4':'0'" :shadow="0" :margin="[20,20]" :padding="[0,10]"
-				v-for="item in list" :key="item.id" @click="checkOrder(item)">
+				v-for="(item,index) in list" :key="index">
 				<view class="flex flex-between">
 					<view class="">
 						<tm-text class="ma-20 text-weight-b" :fontSize="26" :label="item.objectTruenumber"></tm-text>
@@ -34,44 +35,34 @@
 		</scroll-view>
 
 		<view class="fixed b-0 r-0 l-0" :style="{'background-color': store.tmStore.dark?'#fff': '#25262E' }">
-			<view class="" style="">
-				<tm-sheet _class=" " :round="0" :shadow="2" :margin="[0,0]" :padding="[0,0]">
-					<view class="flex flex-row-center-between">
-						<view class="flex flex-col">
 
-							<tm-checkbox class="ml-10" v-model="loot" :size="25" :round="10" @change="checkbox">
-								<template v-slot:default="{checked}">
-									<tm-text :fontSize="20" :label="checkboxText"></tm-text>
-								</template>
-							</tm-checkbox>
-							<view class="flex ml-20 mb-10 mt-15">
-								<tm-text color="#808080" :fontSize="18" label="已选中订单数量:"></tm-text>
-								<tm-text class="ml-10" :fontSize="18" :label="count"></tm-text>
-								<tm-text class="ml-20" color="#808080" :fontSize="18" label=" 开票金额:"></tm-text>
-								<tm-text class="ml-10" :fontSize="18" :label="`￥${money}`"></tm-text>
-							</view>
-						</view>
-						<view class="mr-50">
-							<tm-button :round="13" :margin="[0, 10]" :padding="[0,0]" :shadow="0" :height="60"
-								:width="200" label="申请开票" @click="tobill"></tm-button>
+			<tm-sheet _class=" " :round="0" :shadow="2" :margin="[0,0]" :padding="[0,0]">
+				<view class="flex flex-row-center-between">
+					<view class="flex flex-col">
+
+						<tm-checkbox class="ml-10" v-model="loot" :size="25" :round="10" @change="checkbox">
+							<template v-slot:default="{checked}">
+								<tm-text :fontSize="20" :label="checkboxText"></tm-text>
+							</template>
+						</tm-checkbox>
+						<view class="flex ml-20 mb-10 mt-15">
+							<tm-text color="#808080" :fontSize="18" label="已选中订单数量:"></tm-text>
+							<tm-text class="ml-10" :fontSize="18" :label="count"></tm-text>
+							<tm-text class="ml-20" color="#808080" :fontSize="18" label=" 开票金额:"></tm-text>
+							<tm-text class="ml-10" :fontSize="18" :label="`￥${money}`"></tm-text>
 						</view>
 					</view>
-				</tm-sheet>
-			</view>
+					<view class="mr-50">
+						<tm-button :round="13" :margin="[0, 10]" :padding="[0,0]" :shadow="0" :height="60" :width="200"
+							label="申请开票" @click="tobill"></tm-button>
+					</view>
+				</view>
+			</tm-sheet>
 		</view>
 	</tm-app>
 </template>
 
 <script setup>
-	const { height, width, top } = uni.$tm.u.getWindow()
-	// #ifdef APP-PLUS
-	const hh = height - 44 - 80
-	// #endif
-	// #ifdef H5
-	const hh = height - 80 - 14
-	// #endif
-
-
 	import { onBeforeMount, ref } from 'vue'
 	import { useTmpiniaStore } from '@/xhui/tool/lib/tmpinia';
 	import { My } from "@/api/api.ts"
@@ -107,19 +98,7 @@
 		}
 		console.log(loot.value);
 	}
-	// 未完善
-	const checkOrder = (i) => {
-		count.value = list.value.length
-		list.value.forEach((item) => {
-			if (i.id == item.id && item.c) {
-				ids.push(item.id)
-				item.c = true
-				money.value = money.value + keepTwoDecimal(item.payMoney)
-				money.value = keepTwoDecimal(money.value)
-			}
 
-		})
-	}
 	// 结算
 	const tobill = () => {
 		if (ids.length <= 0) {
@@ -130,9 +109,10 @@
 			return
 		}
 		let data = {
-			"ids": ids
+			"ids": ids,
+			"money": money.value
 		}
-		uni.setStorageSync('ids', data)
+		uni.setStorageSync('data', data)
 		uni.navigateTo({
 			url: '/pages/my/set/bill/billorder',
 		})

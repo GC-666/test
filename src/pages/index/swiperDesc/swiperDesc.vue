@@ -5,6 +5,16 @@
 		</tm-navbar>
 		<tm-html :content="rx"></tm-html>
 	</tm-app>
+	<tm-app>
+		<tm-navbar  title="详情" :height="44" :shadow="0">
+	
+		</tm-navbar>
+		<tm-sheet :shadow="0" :margin="[0,0]" :round="0">
+			<tm-html :content="rx"></tm-html>
+	
+		</tm-sheet>
+	
+	</tm-app>
 </template>
 
 <script setup>

@@ -1,6 +1,8 @@
 <template>
 	<tm-app>
-		<view class="statusHeight" :style="{height:statusBarHeight+'px'}"></view>
+		<!-- <view class="statusHeight" :style="{height:statusBarHeight+'px'}"></view> -->
+		<tm-sheet  :margin="[0,statusBarHeight]" :padding="[0,0]">
+		</tm-sheet>
 		<view class="head mb-10">
 			<view class="flex flex-end mt-20 mr-42">
 				<tm-icon name="tmicon-share1"></tm-icon>
@@ -34,7 +36,7 @@
 				<view v-for="(item,index) in mineFindCollReport" @click="gonav('pages/my/collections/collections')">
 					<tm-image :round="4" class="flex-start" :width="210" :height="210" :src="item.collImg"></tm-image>
 					<tm-text _class="mt-5 text-overflow " _style="width:180rpx;text-overflow: ellipsis;" :fontSize="26"
-						label="1231231231231313123123"></tm-text>
+						:label="item.collName"></tm-text>
 				</view>
 			</view>
 			<view v-else class="flex flex-wrap flex-row-center-center" style="height:250rpx">
@@ -60,7 +62,7 @@
 		</tm-sheet>
 
 		<tm-sheet :round="4"  :shadow="0" :margin="[20,20]" :padding="[0,0]">
-			<tm-cell  :margin="[0, 0]" :titleFontSize="28" @click="gonav('pages/my/order/order')">
+			<tm-cell  :margin="[20, 20]" :padding="[0, 0]" :titleFontSize="28" @click="gonav('pages/my/order/order')">
 				<template v-slot:title>
 					<view class="flex">
 						<tm-icon class="ml-10" :fontSize="26" name="tmicon-ios-filing"></tm-icon>
@@ -69,7 +71,7 @@
 				</template>
 			</tm-cell>
 			<tm-divider color="grey" :margin="[1,1]"></tm-divider>
-			<tm-cell :margin="[0, 0]" :titleFontSize="28" @click="gonav('pages/my/mymoney/mymoney')">
+			<tm-cell :margin="[20, 20]" :padding="[0, 0]" :titleFontSize="28" @click="gonav('pages/my/mymoney/mymoney')">
 				<template v-slot:title>
 					<view class="flex">
 						<tm-icon class="ml-10" :fontSize="26" name="tmicon-qiandai"></tm-icon>
@@ -78,7 +80,7 @@
 				</template>
 			</tm-cell>
 			<tm-divider color="grey" :margin="[1,1]"></tm-divider>
-			<tm-cell :margin="[0, 0]" :titleFontSize="28">
+			<tm-cell :margin="[20, 20]" :padding="[0, 0]" :titleFontSize="28">
 				<template v-slot:title>
 					<view class="flex">
 						<tm-icon class="ml-10" :fontSize="26" name="tmicon-headset-fill"></tm-icon>
@@ -87,7 +89,7 @@
 				</template>
 			</tm-cell>
 			<tm-divider color="grey" :margin="[1,1]"></tm-divider>
-			<tm-cell :margin="[0, 0]" :titleFontSize="28" @click="gonav('pages/my/set/set')">
+			<tm-cell :margin="[20, 20]" :padding="[0, 0]" :titleFontSize="28" @click="gonav('pages/my/set/set')">
 				<template v-slot:title>
 					<view class="flex">
 						<tm-icon class="ml-10" :fontSize="26" name="tmicon-cog-fill"></tm-icon>
@@ -105,7 +107,9 @@
 				</template>
 			</tm-cell> -->
 		</tm-sheet>
-
+		<!-- #ifdef APP-PLUS -->
+		<view class="bottom"></view>
+		<!-- #endif -->
 	</tm-app>
 </template>
 
@@ -180,5 +184,9 @@
 		height: 148rpx;
 		width: 710rpx;
 		margin: 0rpx auto;
+	}
+	
+	.bottom{
+		padding-bottom: var(--window-bottom);
 	}
 </style>

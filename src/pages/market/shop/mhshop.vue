@@ -6,14 +6,15 @@
 		<tm-tabs :itemWidth="120" align="center" :list="tabsTitle" :width="750" :height="300" default-name="4"
 			@change="tabsChange">
 		</tm-tabs>
-		<scroll-view scroll-y="true" class="scroll-Y" @scrolltolower="lower">
+		<scroll-view scroll-y="true" class="scroll-Y"  @scrolltolower="lower">
 			<tm-sheet :shadow="0" :round="4" :margin="[20,10]" :padding="[0,0]" v-for="(item,index) in list"
-				@click="gonav('pages/market/shop/goodpage?id='+item.id)">
+				@click="gonav('pages/market/shop/mhgoodpage?id='+item.id)">
 				<view class="flex flex-between mt-20 ml-20 mr-20">
 					<view class="flex flex-row-center-start">
 						<tm-icon v-if="item.type == '2'" :fontSize="25" name="tmicon-wind-smile">
 						</tm-icon>
-						<tm-text class="text-weight-b" :fontSize="32" :label="item.name"></tm-text>
+						<tm-text class="text-weight-b"
+							 :fontSize="32" :label="item.name"></tm-text>
 						<tm-text v-if="item.type=='2'" _class="text-weight-s ml-10" :fontSize="22" label="交易中">
 						</tm-text>
 					</view>
@@ -22,8 +23,8 @@
 				</view>
 
 				<view class="flex flex-between mt-20 ml-20 mr-10 mb-20">
-					<tm-text _class="text-overflow " color="#A6A6A6" _style="" :fontSize="22" :label="`编号：${item.no}`">
-					</tm-text>
+					<tm-text _class="text-overflow " color="#A6A6A6" _style=""
+						:fontSize="22" :label="`编号：${item.no}`"></tm-text>
 					<view class="flex flex-end">
 						<view class="" v-for="i in item.payTypeList">
 							<tm-icon v-if="i.type=='00'  " _class=" mr-10" :fontSize="25" name="tmicon-wind-smile">
@@ -50,51 +51,52 @@
 	])
 
 	const params = ref({
-		type: 4,
-		screanTxt: '',
+		orderType: 4,
+		collid: '',
 		classIds: '',
-		pageNo: 1,
-		pageSize: 20,
-		collid: 0
+		page: 1,
+		limit: 20,
+		id: 0
 	})
 	const lower = () => {
 		if (count.value > 0) {
-			params.value.pageNo += 1
-			show()
+			params.value.page += 1
+			findMarketBoxList()
 		}
 	}
 	const tabsChange = (i) => {
 		list.value = []
-		params.value.pageNo = 1
+		params.value.page = 1
 		if (i == 2) {
-			params.value.type = 4
+			params.value.orderType = 4
 		} else {
-			params.value.type = i
+			params.value.orderType = i
 		}
-		show()
+		findMarketBoxList()
 	}
 	const count = ref(0)
 	const list = ref([])
 	const name = ref('')
 	onShow(() => {
-		params.value.pageNo = 1
-		list.value = []
-		show()
+		params.value.page = 1
+		list.value=[]
+		findMarketBoxList()
 	})
-	const show = () => {
-		Market.show(params.value).then(res => {
+	const findMarketBoxList = () => {
+		Market.findMarketBoxList(params.value).then(res => {
 			count.value = res.length
 			list.value = list.value.concat(res)
 		})
 	}
 	onLoad((e) => {
-		params.value.collid = e.id
+		params.value.id = e.id
 		name.value = e.name
 	})
 </script>
 
 <style>
-	.scroll-Y {
-		height: calc(100vh - var(--status-bar-height) - 172rpx);
-	}
+	
+	 .scroll-Y {
+	  height: calc(100vh - var(--status-bar-height) - 172rpx);
+	 }
 </style>

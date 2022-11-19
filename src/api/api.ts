@@ -55,13 +55,25 @@ export class Market {
 	static async findMarketList(params: any) {
 		return await request("/market/new/findMarketList", params, "POST")
 	}
-	// 市场
+	// 藏品市场
 	static async show(params: any) {
 		return await request("/Market/show", params, "POST")
 	}
 	// 寄售藏品详情
 	static async details(params: any) {
 		return await request("/Market/details", params, "POST")
+	}
+	// 获取市场分类
+	static async classification(params: any) {
+		return await request("/Market/classification", params, "POST")
+	}
+	// 盲盒二级市场
+	static async findMarketBoxList(params: any) {
+		return await request("/market/new/findMarketBoxList", params, "POST")
+	}
+	// 盲盒二级市场
+	static async findMarketBoxItem(params: any) {
+		return await request("/market/new/findMarketBoxItem", params, "POST")
 	}
 }
 
@@ -143,6 +155,10 @@ export class My {
 	static async userBoxOpenBox(params: any) {
 		return await request("/user/box/openBox", params, "POST")
 	}
+	//我的订单	
+	static async orderFindPageList(params: any) {
+		return await request("/order/findPageList", params, "POST")
+	}
 	
 	//验证码
 	static async sendCode(params: any) {
@@ -220,6 +236,18 @@ export class My {
 	static async integalList(params: any) {
 		return await request("/users/integal/details/findList", params, "POST")
 	}
+	//开票记录
+	static async findUserTicketRecord(params: any) {
+		return await request("/ticket/findUserTicketRecord", params, "POST")
+	}
+	//订单查询
+	static async find(params: any) {
+		return await request("/order/find", params, "POST")
+	}
+	//订单取消
+	static async orderCancel(params: any) {
+		return await request("/order/cancel", params, "POST")
+	}
 	
 	
 }
@@ -229,4 +257,13 @@ export class Activity {
 	static async composeFindList(params: any) {
 		return await request("/compose/findList", params, "POST")
 	}
+	//合成详情
+	static async composeFind(params: any) {
+		return await request("/compose/find", params, "POST")
+	}
+	//合成
+	static async composeCompose(params: any) {
+		return await request("/compose/compose", params, "POST")
+	}
+	
 }
