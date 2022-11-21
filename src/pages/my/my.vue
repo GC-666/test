@@ -1,12 +1,12 @@
 <template>
 	<tm-app>
 		<!-- <view class="statusHeight" :style="{height:statusBarHeight+'px'}"></view> -->
-		<tm-sheet  :margin="[0,statusBarHeight]" :padding="[0,0]">
+		<tm-sheet  :margin="[0,0]" :padding="[0,statusBarHeight]">
 		</tm-sheet>
-		<view class="head mb-10">
-			<view class="flex flex-end mt-20 mr-42">
+		<view class="head pt-20">
+			<!-- <view class="flex flex-end mt-20 mr-42">
 				<tm-icon name="tmicon-share1"></tm-icon>
-			</view>
+			</view> -->
 			<view class="headUser flex flex-between">
 				<tm-image :round="25" class="mt--34 ml-35" :width="128" :height="128" :src="user.avatar"></tm-image>
 				<view class="flex-5 mt-2">
@@ -169,7 +169,7 @@
 	.head {
 		background-image: url("@/static/my/head.png");
 		background-size: 100% 100%;
-		height: 372rpx;
+		height: 310rpx;
 	}
 
 	.headUser {

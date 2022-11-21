@@ -158,7 +158,7 @@
 		id.value=e.id
 	})
 	//每次加载页面执行
-	onShow((e)=>{
+	onShow(()=>{
 		Activity.composeFind({
 			id:id.value
 		}).then(res => {

@@ -29,11 +29,22 @@
 			<tm-divider color="grey" :margin="[1,1]"></tm-divider>
 			<view class="flex ma-15 flex-between">
 				<tm-text :font-size="25" _class="text-weight-n" label="订单ID号"></tm-text>
+
 				<view class="flex flex-center">
 					<tm-text :font-size="32" _class="text-weight-n" :label="data.orderNo"></tm-text>
 				</view>
 			</view>
 		</tm-sheet>
+		<tm-sheet v-if="data.orderStatus == 0" :round="0" :shadow="0" :margin="[20,20]" :padding="[20,20]">
+			<view class="flex flex-between">
+				<tm-text :font-size="28" color="red" _class="text-weight-b" label="剩余时间:"></tm-text>
+				<tm-countdown  class="text-size-n ml-10" color="red" @change="change"
+					:time="parseInt(data.endTime)- new Date().getTime()" format="HH:MM:SS" autoStart>
+				</tm-countdown>
+				
+			</view>
+		</tm-sheet>
+
 		<tm-sheet :round="3" :shadow="0" :margin="[20,10]" :padding="[0,10]">
 			<tm-text class="ml-15" :font-size="30" _class="text-weight-b" label="支付方式"></tm-text>
 			<tm-divider color="grey" :margin="[1,10]"></tm-divider>
@@ -88,6 +99,15 @@
 	onLoad((o) => {
 		id.value = o.id
 	})
+	const seconds = ref('')
+	const change = (e) => {
+		if (e.value.seconds == '00' && e.value.minutes == "00") {
+			data.value = {}
+			setTimeout(()=>{
+				find()
+			},5000)
+		}
+	}
 	const inp = ref('')
 	const placeOrder = () => {
 		if (radiolist.value == '00' && inp.value == '') {
@@ -131,24 +151,25 @@
 	const boxlistchange = (e) => {
 		console.log(e);
 	}
-	onBeforeMount(() => {
+	const find = ()=>{
 		My.find({ id: id.value }).then(res => {
 			data.value = res.data
 			payList.value = res.payTypeList
-			
 			res.payTypeList.forEach((item, index) => {
 				console.log();
 				let i = Object.values(item).includes('05')
-
 				if (i) {
 					radiolist.value = '05'
 				} else {
 					radiolist.value = '00'
 				}
-
+		
 			})
-
+		
 		})
+	}
+	onBeforeMount(() => {
+		find()
 	})
 </script>
 

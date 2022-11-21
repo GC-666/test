@@ -1,11 +1,15 @@
 <template>
 	<tm-app>
-		<tm-navbar hideHome title="公告中心" :height="44" :shadow="0"></tm-navbar>
+		<tm-navbar  title="公告中心" :height="44" :shadow="0"></tm-navbar>
+		<tm-sheet v-if="active!=0" :margin="[0,0]" :padding="[0,0]">
+			<tm-input v-model="noticeParams.name" @confirm="confirm" :margin="[10,10]"  placeholder="请输入搜索内容" ></tm-input>
+		</tm-sheet>
 		<tm-tabs swiper :itemWidth="115" :list="tabsTitle" :width="750" :default-name="defaultName"
 			@change="tabsChange"></tm-tabs>
-			
-		<view class="" v-if="noticeList.length>0" >
-			<scroll-view scroll-y="true" class="scroll-Y" >
+
+		
+		<view class="" v-if="noticeList.length>0">
+			<scroll-view scroll-y="true" class="scroll-Y1">
 				<tm-sheet :shadow="0" :margin="[20,10]" :round="5" v-for="(item,index) in noticeList" :key="item.id">
 					<tm-cell :margin="[0, 0]" :padding="[0,10]" :titleFontSize="28">
 						<template v-slot:title>
@@ -23,7 +27,8 @@
 							<view class="flex  flex-col">
 								<tm-text :font-size="28" :label="data.name"></tm-text>
 								<view class="mt-20">
-									<tm-text color="#808080" :fontSize="22" :label="DateUtils.formatDateTime(data.upTime)">
+									<tm-text color="#808080" :fontSize="22"
+										:label="DateUtils.formatDateTime(data.upTime)">
 									</tm-text>
 								</view>
 							</view>
@@ -36,8 +41,8 @@
 			</scroll-view>
 		</view>
 
-		<view class="" v-if="noticeList1.length>0" >
-			<scroll-view scroll-y="true" class="scroll-Y"  @scrolltolower="lower">
+		<view class="" v-if="noticeList1.length>0">
+			<scroll-view scroll-y="true" class="scroll-Y" @scrolltolower="lower">
 				<tm-sheet :shadow="0" :margin="[20,10]" :round="5">
 					<view class="" v-for="item in noticeList1">
 						<view class="flex ma-10 flex-row-center-between"
@@ -62,8 +67,6 @@
 </template>
 
 <script setup>
-	
-	
 	import { Home } from "@/api/api.ts"
 	import { onMounted, ref } from "vue";
 	const id = ref('')
@@ -80,8 +83,14 @@
 		type: null,
 		page: 1,
 		limit: 20,
+		name:"",
 	})
-
+	const confirm = ()=>{
+		noticeList1.value = [];
+		noticeParams.value.page = 1
+		getNoticeList()
+		console.log(noticeParams.value.name);
+	}
 	// 下拉刷新
 	const lower = () => {
 		console.log("到底部");
@@ -90,9 +99,11 @@
 			getNoticeList()
 		}
 	}
+	const active = ref(0)
 	// tabs 切换
 	const tabsChange = (i) => {
-		console.log(i);
+		noticeParams.value.name = ''
+		active.value = i
 		noticeList1.value = [];
 		noticeList.value = [];
 		noticeParams.value.page = 1
@@ -130,8 +141,9 @@
 
 <style>
 	.scroll-Y {
+		height: calc(100vh - var(--status-bar-height) - 256rpx);
+	}
+	.scroll-Y1 {
 		height: calc(100vh - var(--status-bar-height) - 172rpx);
 	}
-	
-	
 </style>

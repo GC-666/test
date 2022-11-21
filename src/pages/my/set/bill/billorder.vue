@@ -6,7 +6,7 @@
 			<tm-form-item required label="抬头类型" field="radio" :rules="[{required:true,message:'请选择抬头类型'}]">
 				<tm-radio-group v-model="show.typeRadio">
 					<tm-radio :size="26" label="企业单位" value="0"></tm-radio>
-					<tm-radio :size="26" label="个人/企业单位" value="1"></tm-radio>
+					<tm-radio :size="26" label="个人/非企业单位" value="1"></tm-radio>
 				</tm-radio-group>
 			</tm-form-item>
 			<view class="" v-if="show.typeRadio==0">
@@ -21,7 +21,13 @@
 					</tm-input>
 				</tm-form-item>
 			</view>
-
+			<view class="" v-if="show.typeRadio==1">
+				<tm-form-item required label="抬头名称" field="name" :rules="[{required:true,message:'请输入抬头名称'}]">
+					<tm-input placeholder="请选择抬头名称" :inputPadding="[0,0]" v-model="show.pName" :transprent="true"
+						:showBottomBotder="false">
+					</tm-input>
+				</tm-form-item>
+			</view>
 			<tm-form-item required label="接收方式" field="modeRadio" :rules="[{required:true,message:'请选择接收方式'}]">
 				<tm-radio-group v-model="show.modeRadio">
 					<tm-radio :size="26" label="电子接收" value="0"></tm-radio>
@@ -34,38 +40,36 @@
 						suffix="tmicon-angle-right" placeholder="请选择所在地区地址" disabled :transprent="true"
 						:showBottomBotder="false"></tm-input>
 				</tm-form-item>
-				<tm-form-item required label="详细地址" field="addr" :rules="[{required:true,message:'请输入详细地址'}]">
+				<tm-form-item :border="false" required label="详细地址" field="addr" :rules="[{required:true,message:'请输入详细地址'}]">
 					<tm-input placeholder="请输入详细地址" :inputPadding="[0,0]" v-model="show.addr" :transprent="true"
 						:showBottomBotder="false">
 					</tm-input>
 				</tm-form-item>
 			</view>
 			<view class="" v-if="show.modeRadio==0">
-				<tm-form-item required label="邮箱地址" field="mail" :rules="[{required:true,message:'请输入邮箱'}]">
+				<tm-form-item :border="false" required label="邮箱地址" field="mail" :rules="[{required:true,message:'请输入邮箱'}]">
 					<tm-input placeholder="请输入邮箱" :inputPadding="[0,0]" v-model="show.mail" :transprent="true"
 						:showBottomBotder="false">
 					</tm-input>
 				</tm-form-item>
 			</view>
-			<tm-form-item label="总金额" :margin="[15, 0]">
-				<tm-cell :margin="[0, 20]" :padding="[0, 0]">
-					<template v-slot:title>
-						<view class="flex">
-							<tm-text class="ml-44 text-weight-b" color="red" :fontSize="32" :label="orderMoney">
-							</tm-text>
-							<tm-text class="text-weight-b" color="#000" :fontSize="32" label="元">
-							</tm-text>
-						</view>
-					</template>
-				</tm-cell>
-			</tm-form-item>
+
 			<view class="fixed flex flex-center"
 				style="bottom:0rpx;left: 0;right: 0; background-color: #fff;width: 100%;height: 100rpx;">
-
 				<tm-button form-type="submit" :height="60" :width="710" label="提交开票"></tm-button>
 			</view>
 		</tm-form>
-
+		<tm-cell :margin="[0, 0]" :titleFontSize="30" title="总金额">
+			<template v-slot:right>
+				<view class="flex">
+					<tm-text class="ml-44 text-weight-b" color="red" :fontSize="32" :label="orderMoney">
+					</tm-text>
+					<tm-text class="text-weight-b" color="#000" :fontSize="32" label="元">
+					</tm-text>
+				</view>
+			</template>
+		</tm-cell>
+		
 		<tm-city-picker v-model="show.city" v-model:model-str="show.cityStr" v-model:show="showCity"
 			:default-value="show.city"></tm-city-picker>
 	</tm-app>
@@ -95,6 +99,7 @@
 		addr: '', //地址
 		mail: '', //邮箱
 		cityStr: "",
+		pName:'',//个人抬头
 		name: '', //公司名称
 		duty: '' //公司税号
 	})

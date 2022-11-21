@@ -119,18 +119,8 @@
 </script>
 <style>
 	
-	
-	/* #ifdef APP-PLUS */
-	.scroll-Y {
-		height: calc(100vh - var(--status-bar-height) - 64rpx - var(--window-bottom));
-	}
-	
-	/* #endif */
-	/* #ifdef H5 */
-	
 	.scroll-Y {
 		height: calc(100vh - var(--status-bar-height) - 82rpx - var(--window-bottom));
 	}
 	
-	/* #endif */
 </style>

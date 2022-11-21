@@ -1,6 +1,6 @@
 <template>
 	<tm-app style="">
-		<tm-navbar  title="订单管理">
+		<tm-navbar title="订单管理">
 		</tm-navbar>
 		<view class="aaaa">
 			<tm-sheet :round="0" :shadow="0" :margin="[0,0]" :padding="[0,0]">
@@ -23,7 +23,7 @@
 					<tm-text :color="acvite === 3? `${bgColor}` :''"
 						:class="acvite === 3? `text-weight-b active` :'text-weight-n'" :font-size="acvite === 3? 30: 28"
 						label="已失效" @click="tabsClick(3)"></tm-text>
-					
+
 				</view>
 				<tm-sheet v-if="typeShow" :round="0" :shadow="0" :margin="[0,0]" :padding="[0,0]">
 					<tm-sheet class="absolute flex flex-around" :width="750" :round="0" :shadow="0" :margin="[0,0]"
@@ -58,38 +58,49 @@
 				</tm-sheet>
 			</tm-sheet>
 		</view>
-		<scroll-view  class="scroll-Y" scroll-y="true" @scrolltolower="lower">
+		<scroll-view class="scroll-Y" scroll-y="true" @scrolltolower="lower">
 			<view class="flex flex-row-center-between flex-wrap" style="margin: 0rpx 20rpx 0rpx 20rpx;">
 				<view class="relative" v-for="(data,index) in orderFindPageList">
 					<tm-sheet :shadow="0" :margin="[0,20]" :padding="[20,20]" style="width:710rpx">
-						<view class="flex flex-between" >
+						<view class="flex flex-between">
 							<view class="flex flex-center">
-								<tm-text :font-size="18" _class="text-weight-s" :label="`订单编号:${data.orderNo}`"></tm-text>
+								<tm-text :font-size="18" _class="text-weight-s" :label="`订单编号:${data.orderNo}`">
+								</tm-text>
 							</view>
 							<view class="flex flex-center" v-if="data.orderStatus==0">
-								<tm-text  :font-size="28" color="red" _class="text-weight-b" label="剩余时间:"></tm-text>
-								<tm-countdown  class="text-size-n ml-10" color="red" :time="parseInt(data.endTime)-new Date().getTime()" format="HH:MM:SS"
-									autoStart></tm-countdown>
+								<tm-text :font-size="28" color="red" _class="text-weight-b" label="剩余时间:"></tm-text>
+								<tm-countdown class="text-size-n ml-10" color="red"
+									:time="parseInt(data.endTime)-new Date().getTime()" format="HH:MM:SS" autoStart>
+								</tm-countdown>
 							</view>
-							<tm-text color="red" v-else-if="data.orderStatus==1" :font-size="22" _class="text-weight-b" label="待发货"></tm-text>
-							<tm-text color="green" v-else-if="data.orderStatus==2" :font-size="22" _class="text-weight-b" label="已完成"></tm-text>
-							<tm-text v-else-if="data.orderStatus==9" :font-size="22" _class="text-weight-b" label="已失效"></tm-text>
+							<tm-text color="red" v-else-if="data.orderStatus==1" :font-size="22" _class="text-weight-b"
+								label="待发货"></tm-text>
+							<tm-text color="green" v-else-if="data.orderStatus==2" :font-size="22"
+								_class="text-weight-b" label="已完成"></tm-text>
+							<tm-text v-else-if="data.orderStatus==9" :font-size="22" _class="text-weight-b" label="已失效">
+							</tm-text>
 						</view>
-						<view class="flex flex-between mt-20" >
+						<view class="flex flex-between mt-20">
 							<view class="flex">
 								<tm-image :round="3" :width="120" :height="120" :src="data.objectImg">
 								</tm-image>
 								<view class="flex flex-col flex-around ml-20">
 									<tm-text :font-size="26" _class="text-weight-b" :label="data.objectName"></tm-text>
-									<tm-text :font-size="18" _class="text-weight-s" :label="`类型:${data.orderTypeName}`"></tm-text>
-									<tm-text v-if="data.orderStatus==0" :font-size="18" _class="text-weight-s" label="状态:待付款"></tm-text>
-									<tm-text v-else-if="data.orderStatus==1" :font-size="18" _class="text-weight-s" label="状态:待发货"></tm-text>
-									<tm-text v-else-if="data.orderStatus==2" :font-size="18" _class="text-weight-s" label="状态:已完成"></tm-text>
-									<tm-text v-else-if="data.orderStatus==9" :font-size="18" _class="text-weight-s" label="状态:已失效"></tm-text>
+									<tm-text :font-size="18" _class="text-weight-s" :label="`类型:${data.orderTypeName}`">
+									</tm-text>
+									<tm-text v-if="data.orderStatus==0" :font-size="18" _class="text-weight-s"
+										label="状态:待付款"></tm-text>
+									<tm-text v-else-if="data.orderStatus==1" :font-size="18" _class="text-weight-s"
+										label="状态:待发货"></tm-text>
+									<tm-text v-else-if="data.orderStatus==2" :font-size="18" _class="text-weight-s"
+										label="状态:已完成"></tm-text>
+									<tm-text v-else-if="data.orderStatus==9" :font-size="18" _class="text-weight-s"
+										label="状态:已失效"></tm-text>
 								</view>
 							</view>
 							<view class="flex flex-col flex-row-bottom-end">
-								<tm-text class="mb-10" :font-size="18" _class="text-weight-s" :label="`订单时间:${DateUtils.formatDateTime(data.orderTime)}`"></tm-text>
+								<tm-text class="mb-10" :font-size="18" _class="text-weight-s"
+									:label="`订单时间:${DateUtils.formatDateTime(data.orderTime)}`"></tm-text>
 								<view class="flex">
 									<tm-text :font-size="28" _class="text-weight-b" label="¥"></tm-text>
 									<tm-text :font-size="28" _class="text-weight-b" :label="data.totalMoney"></tm-text>
@@ -97,30 +108,25 @@
 							</view>
 						</view>
 						<view class="flex flex-row-bottom-end mt-20">
-							<tm-button  @click="kefu" :margin="[0, 0]" :padding="[0,4]"
-							 :height="40" :width="160" outlined :round="20" size="normal"
-							  fontColor="#FBB900" color="#FBB900" :shadow="0"
-							  label="联系客服"></tm-button>
+							<tm-button @click="kefu" :margin="[0, 0]" :padding="[0,4]" :height="40" :width="160"
+								outlined :round="20" size="normal" fontColor="#FBB900" color="#FBB900" :shadow="0"
+								label="联系客服"></tm-button>
 							<tm-button :margin="[10, 0]" :padding="[0,4]"
-							 @click="gonav('pages/my/order/orderDetails?id='+data.id)" 
-							 :height="40" :width="160" outlined :round="20" size="normal" :shadow="0"
-							  label="查看详情"></tm-button>
-							<tm-button  v-if="data.orderStatus==0" :margin="[10, 0]" :padding="[0,4]"
-							 @click="orderCancel(data.id)" 
-							 :height="40" :width="160" outlined :round="20" size="normal" :shadow="0"
-							 fontColor="#808080" color="#808080"
-							  label="取消订单"></tm-button>
-							<tm-button  v-if="data.orderStatus==0" :margin="[10, 0]" :padding="[0,4]"
-							@click="gonav('pages/my/order/orderpay?id='+data.id)" 
-							 :height="40" :width="160" outlined :round="20" size="normal" :shadow="0"
-							 fontColor="#EB3938" color="#EB3938"
-							  label="立即支付"></tm-button>
+								@click="gonav('pages/my/order/orderDetails?id='+data.id)" :height="40" :width="160"
+								outlined :round="20" size="normal" :shadow="0" label="查看详情"></tm-button>
+							<tm-button v-if="data.orderStatus==0" :margin="[10, 0]" :padding="[0,4]"
+								@click="orderCancel(data.id)" :height="40" :width="160" outlined :round="20"
+								size="normal" :shadow="0" fontColor="#808080" color="#808080" label="取消订单"></tm-button>
+							<tm-button v-if="data.orderStatus==0" :margin="[10, 0]" :padding="[0,4]"
+								@click="gonav('pages/my/order/orderpay?id='+data.id)" :height="40" :width="160" outlined
+								:round="20" size="normal" :shadow="0" fontColor="#EB3938" color="#EB3938" label="立即支付">
+							</tm-button>
 						</view>
 					</tm-sheet>
 				</view>
 			</view>
 		</scroll-view>
-		
+
 		<view v-show="cover" class="cover" @click.stop="cover=false;typeShow = false"></view>
 	</tm-app>
 </template>
@@ -139,29 +145,29 @@
 		reactive,
 		ref
 	} from 'vue';
-	
+
 	const list = ref([])
 	const acvite = ref(0)
 	const typeShow = ref(false)
 	const cover = ref(false)
-	const params=ref({
-		page : 1,
-		limit : 20,
-		orderType : "",
-		orderStatus : ""
+	const params = ref({
+		page: 1,
+		limit: 20,
+		orderType: "",
+		orderStatus: ""
 	})
 	const tabsClick = (i) => {
 		acvite.value = i
 		params.value.page = 1
 		list.value = []
 		if (i == 0) {
-			params.value.orderType="";
-			params.value.orderStatus="";
+			params.value.orderType = "";
+			params.value.orderStatus = "";
 			typeShow.value = false
 			cover.value = false
 		} else if (i == 1) {
-			params.value.orderType="";
-			params.value.orderStatus="2";
+			params.value.orderType = "";
+			params.value.orderStatus = "2";
 			if (typeShow.value) {
 				typeShow.value = false
 				cover.value = false
@@ -170,34 +176,34 @@
 				cover.value = true
 			}
 		} else if (i == 2) {
-			params.value.orderType="";
-			params.value.orderStatus="0";
+			params.value.orderType = "";
+			params.value.orderStatus = "0";
 			typeShow.value = false
 			cover.value = false
 		} else if (i == 3) {
-			params.value.orderType="";
-			params.value.orderStatus="9";
+			params.value.orderType = "";
+			params.value.orderStatus = "9";
 			typeShow.value = false
 			cover.value = false
 		}
 		tabsChange();
 	}
-	
+
 	const acc = ref(0)
 	const tagChange = (index) => {
-		params.value.orderStatus="2";
-		if(index==0){
-			params.value.orderType="";
-		}else if(index==1){
-			params.value.orderType="";
-		}else if(index==2){
-			params.value.orderType="";
-		}else if(index==3){
-			params.value.orderType="";
-		}else if(index==4){
-			params.value.orderType="00";
-		}else if(index==5){
-			params.value.orderType="01";
+		params.value.orderStatus = "2";
+		if (index == 0) {
+			params.value.orderType = "";
+		} else if (index == 1) {
+			params.value.orderType = "";
+		} else if (index == 2) {
+			params.value.orderType = "";
+		} else if (index == 3) {
+			params.value.orderType = "";
+		} else if (index == 4) {
+			params.value.orderType = "00";
+		} else if (index == 5) {
+			params.value.orderType = "01";
 		}
 		acc.value = index
 		tabsChange();
@@ -234,7 +240,7 @@
 			})
 		}
 	}
-	
+
 	const kefu = () => {
 		// #ifdef APP-PLUS
 		plus.runtime.openURL('https://xunmeta.rocknft.top/chat.html')
@@ -246,20 +252,20 @@
 	//订单取消
 	const orderCancel = (id) => {
 		My.orderCancel({
-			id:id
+			id: id
 		}).then(res => {
-			
+
 		})
 	}
 </script>
 
 <style>
-
 	.aaaa {
 		position: relative;
 		background-color: #fff;
 		z-index: 11;
 	}
+
 	.cover {
 		position: fixed;
 		top: 0;

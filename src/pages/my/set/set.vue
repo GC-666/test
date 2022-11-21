@@ -10,7 +10,8 @@
 			<tm-cell _class="text-weight-b" :margin="[0, 0]" :titleFontSize="30" title="关于我们"
 				@click="gonav('pages/my/set/about/about')"> </tm-cell>
 			<tm-divider color="grey" :margin="[1,1]"></tm-divider>
-			<tm-cell _class="text-weight-b" :margin="[0, 0]" :titleFontSize="30" title="邀请好友"> </tm-cell>
+			<tm-cell _class="text-weight-b" :margin="[0, 0]" :titleFontSize="30" title="邀请好友"
+				@click="gonav('pages/my/set/share/share')"> </tm-cell>
 		</tm-sheet>
 		<tm-sheet :shadow="0" :margin="[0,15]" :padding="[0,0]">
 			<tm-cell _class="text-weight-b" :margin="[0, 0]" :titleFontSize="30" title="申请开票"
@@ -19,12 +20,12 @@
 			<tm-cell _class="text-weight-b" :margin="[0, 0]" :titleFontSize="30" title="修改登入密码"
 				@click="gonav('pages/my/set/fopwd/fopwd')">
 			</tm-cell>
-			<tm-divider color="grey" :margin="[1,1]"></tm-divider> 
+			<tm-divider color="grey" :margin="[1,1]"></tm-divider>
 			<tm-cell _class="text-weight-b" :margin="[0, 0]" :titleFontSize="30" title="修改支付密码"
 				:rightText="set==='1'?'已设置':'请设置支付密码'" @click="gonav('pages/my/set/paypwd/paypwd')">
 			</tm-cell>
 		</tm-sheet>
-		
+
 		<tm-sheet :shadow="0" :margin="[0,15]" :padding="[0,0]">
 			<!-- #ifdef APP-PLUS -->
 			<tm-cell _class="text-weight-b" :margin="[0, 0]" :rightText="`${currentSize}`" :titleFontSize="30"

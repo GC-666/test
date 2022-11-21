@@ -14,9 +14,7 @@
 			</template>
 		</tm-navbar>
 		<!-- 首发藏品 -->
-		<scroll-view scroll-y="true" :style="`height: calc(100vh - 88rpx - ${statusBarHeight}rpx - ${windowBottom}px)`"
-			@scrolltolower="lower">
-
+		<scroll-view scroll-y="true" class="scroll-Y" @scrolltolower="lower">
 			<tm-carousel autoplay :margin="[0,0]" :width="710" :height="300" rangKey="img" :list="listimg" model="rect"
 				color="#ccc" @click="carouselClick">
 			</tm-carousel>
@@ -38,62 +36,64 @@
 				<tm-tabs @change="tabsChange" :itemFontSize="28" :activeFontSize="30" :list="tabsTitle" :width="710"
 					:height="100" default-name="0"></tm-tabs>
 			</view>
-
-			<tm-sheet :round="4" :shadow="0" :margin="[20,10]" :padding="[0,0]" @click="Go(data.id)"
-				v-for="data in list" :key="data.id">
-				<view class="relative flex flex-row-center-center">
-					<tm-image style="filter: blur(5rpx);" :width="710" :height="600" :src="data.collImg">
-					</tm-image>
-					<!--  t-50 l-50 r-50 -->
-					<view class="absolute">
-						<tm-image model="aspectFill" :border="4" color="black" :round="4" :width="468" :height="468"
-							:src="data.collImg">
+			<view class="mt--20">
+				<tm-sheet :round="0" :shadow="0" :margin="[20,20]" :padding="[0,0]" @click="Go(data.id)"
+					v-for="data in list" :key="data.id">
+					<view class="relative flex flex-row-center-center">
+						<tm-image style="filter: blur(5rpx);" :width="710" :height="600" :src="data.collImg">
 						</tm-image>
+						<!--  t-50 l-50 r-50 -->
+						<view class="absolute">
+							<tm-image model="aspectFill" :border="4" color="black" :round="4" :width="468" :height="468"
+								:src="data.collImg">
+							</tm-image>
+						</view>
 					</view>
-				</view>
-
-				<view class="absolute ml-20 mt-10">
-					<view class="flex countdown">
-						<view class="flex">
-							<view class="flex ml-10 mr-10 mt-5 mb-5" v-if="data.diffSeconds==='0'">
-								<tm-icon :fontSize="28" :color="data.status =='3'?'#999999':'#07EBFE'"
-									name="tmicon-wind-smile"></tm-icon>
-								<tm-text class="ml-5" :color="data.status =='3'?'#999999':'#07EBFE'" fontSiz="24"
-									:label="data.statusName">
-								</tm-text>
-							</view>
-
-							<view class="flex ml-10 mr-10  mt-5 mb-5" v-if="data.diffSeconds!=='0'">
-								<tm-icon :fontSize="28" color="#07EBFE" name="tmicon-wind-smile"></tm-icon>
-								<tm-text class="ml-5" color="#07EBFE" fontSiz="24" label="即将开售："></tm-text>
-								<tm-countdown class="text-size-n" color="#07EBFE" :time="parseInt(data.diffSeconds)"
-									format="HH:MM:SS" autoStart></tm-countdown>
+				
+					<view class="absolute ml-20 mt-10">
+						<view class="flex countdown">
+							<view class="flex">
+								<view class="flex ml-10 mr-10 mt-5 mb-5" v-if="data.diffSeconds==='0'">
+									<tm-icon :fontSize="28" :color="data.status =='3'?'#999999':'#07EBFE'"
+										name="tmicon-wind-smile"></tm-icon>
+									<tm-text class="ml-5" :color="data.status =='3'?'#999999':'#07EBFE'" fontSiz="24"
+										:label="data.statusName">
+									</tm-text>
+								</view>
+				
+								<view class="flex ml-10 mr-10  mt-5 mb-5" v-if="data.diffSeconds!=='0'">
+									<tm-icon :fontSize="28" color="#07EBFE" name="tmicon-wind-smile"></tm-icon>
+									<tm-text class="ml-5" color="#07EBFE" fontSiz="24" label="即将开售："></tm-text>
+									<tm-countdown class="text-size-n" color="#07EBFE" :time="parseInt(data.diffSeconds)"
+										format="HH:MM:SS" autoStart></tm-countdown>
+								</view>
 							</view>
 						</view>
 					</view>
-				</view>
-				<tm-sheet :shadow="0" :margin="[20,20]" :padding="[0,0]">
-					<view class="flex flex-row-center-between">
-						<view class="flex">
-							<tm-avatar :round="12" :img="data.creatorImg"></tm-avatar>
-							<view class="flex flex-col ml-20" style="justify-content: space-around;">
-								<tm-text :font-size="28" _class="text-weight-b" :label="data.collName"></tm-text>
-								<tm-text color="#999" :font-size="18" _class="text-weight-n" :label="data.creatorName">
-								</tm-text>
+					<tm-sheet :shadow="0" :margin="[20,20]" :padding="[0,0]">
+						<view class="flex flex-row-center-between">
+							<view class="flex">
+								<tm-avatar :round="12" :img="data.creatorImg"></tm-avatar>
+								<view class="flex flex-col ml-20" style="justify-content: space-around;">
+									<tm-text :font-size="28" _class="text-weight-b" :label="data.collName"></tm-text>
+									<tm-text color="#999" :font-size="18" _class="text-weight-n" :label="data.creatorName">
+									</tm-text>
+								</view>
+							</view>
+							<view class="flex flex-col">
+								<view class="flex  flex-col-bottom-center ">
+									<tm-text color="#FFCE92" :font-size="18"
+										_class="text-weight-n flex-row-bottom-end mb--10" label="¥"></tm-text>
+									<tm-text class="ml-10" color="#FFCE92" :font-size="38" _class="text-weight-b"
+										:label="data.price">
+									</tm-text>
+								</view>
 							</view>
 						</view>
-						<view class="flex flex-col">
-							<view class="flex  flex-col-bottom-center ">
-								<tm-text color="#FFCE92" :font-size="18"
-									_class="text-weight-n flex-row-bottom-end mb--10" label="¥"></tm-text>
-								<tm-text class="ml-10" color="#FFCE92" :font-size="38" _class="text-weight-b"
-									:label="data.price">
-								</tm-text>
-							</view>
-						</view>
-					</view>
+					</tm-sheet>
 				</tm-sheet>
-			</tm-sheet>
+			</view>
+			
 		</scroll-view>
 		<!-- 首发藏品后6个 -->
 		<!-- <tm-sheet :shadow="0" :margin="[20,15]" :padding="[0,0]">
@@ -142,11 +142,31 @@
 				</view>
 			</tm-sheet> -->
 
-		<view class="aa" v-if="token==''">
+		<view class="aa" v-show="is">
 
 			<!-- <tm-text class="ml-10" color="#fff" :font-size="30" _class="text-weight-b" label="请登录体验更多功能"></tm-text>
 			<tm-button :margin="[10, 10]" :shadow="0" :width="200" :height="60" fontColor="#fff" outlined size="normal" label="立即登录"></tm-button> -->
-			<tm-alert :margin="[0,0]" text :border="1" :content="content" :height="80"></tm-alert>
+			<view class="felx" style="align-items: center;">
+				<tm-alert :margin="[5,0]" :padding="[20,30]" text :border="1" :content="content" :height="100">
+					<template v-slot:right>
+						<view class="felx ">
+							<view class="flex-end 5 mt--20">
+								<tm-icon name="tmicon-times-circle" @click="is = false"></tm-icon>
+							</view>
+							<view class="mr-n20 mt--20">
+								<tm-button :margin="[10, 0]" :shadow="0" :width="160" :height="50" black label="立即登录"
+									@click="login">
+								</tm-button>
+							</view>
+						</view>
+
+					</template>
+
+
+				</tm-alert>
+
+			</view>
+
 		</view>
 
 	</tm-app>
@@ -159,14 +179,25 @@
 	import { useTmpiniaStore } from '@/xhui/tool/lib/tmpinia';
 	import { onShow, onLoad } from '@dcloudio/uni-app';
 	const store = useTmpiniaStore();
-	const token = uni.getStorageSync('token')
-	const windowBottom = uni.getSystemInfoSync().windowBottom;
-	console.log(store.tmStore.color);
+	const is = ref(true);
+	const test = () => {
+		const token = uni.getStorageSync('token')
+		if (token) {
+			is.value = false
+		} else {
+			is.value = true
+		}
+	}
 	// 下拉刷新
 	const content = ref([{
 		icon: '',
-		content: "请登录体验更多功能"
+		title: "请登录体验更多功能",
 	}])
+	const login = () => {
+		uni.reLaunch({
+			url: '/pages/login/login'
+		})
+	}
 	const lower = () => {
 		if (index.value == 0) {
 			if (ListNum.value > 0) {
@@ -213,11 +244,11 @@
 	}
 	// 公告请求
 	const notice = ref([])
-	
+
 
 	// 轮播图 相关
 	const listimg = ref([])
-	
+
 	// 轮播图点击
 	const carouselClick = (i) => {
 		listimg.value.forEach((item, index) => {
@@ -248,7 +279,7 @@
 		})
 	}
 	onMounted(() => {
-		console.log(111);
+		test()
 		Home.bannerList().then(res => {
 			listimg.value = res.map((item) => {
 				return { type: 'img', ...item }
@@ -282,8 +313,12 @@
 	}
 
 	.aa {
-		width: 100%;
+		width: 750rpx;
 		position: fixed;
-		bottom: 120rpx;
+		bottom: calc(var(--window-bottom) + 10rpx);
+	}
+
+	.scroll-Y {
+		height: calc(100vh - var(--status-bar-height) - 88rpx - var(--window-bottom));
 	}
 </style>

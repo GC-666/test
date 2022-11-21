@@ -265,5 +265,13 @@ export class Activity {
 	static async composeCompose(params: any) {
 		return await request("/compose/compose", params, "POST")
 	}
+	//夺宝
+	static async lootFindItem(params: any) {
+		return await request("/loot/findItem", params, "POST")
+	}
+	//夺宝抽奖
+	static async lootLuckDraw(params: any) {
+		return await request("/loot/luckDraw", params, "POST")
+	}
 	
 }
