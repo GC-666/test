@@ -47,20 +47,20 @@
 		</view>
 		<!-- :style="`height: calc(100vh  - 190rpx - 50px - ${statusBarHeight}px  - ${windowBottom}px)`" -->
 		<scroll-view scroll-y="true" class="scroll-Y" @scrolltolower="lower">
-			<view class="flex flex-between flex-wrap">
+			<view v-if="list.length>0" class="flex flex-between flex-wrap ml-5 mr-5">
 				<view v-for="(data,index) in list" @click="toShop(data)">
 					<tm-sheet :shadow="0" :round="4" :margin="[10,15]" :padding="[0,0]">
-						<view class="">
-							<tm-image extra :width="344" :height="344" :src="data.img">
-								<template v-slot:extra>
-									<view class="flex flex-center ml-20 mr-20"
-										:style="`background-image: url(${bg});background-size: 100% 100%;width:300rpx;height:40rpx`">
-										<tm-text :font-size="28" _class="text-weight-n" label="流通量:300"></tm-text>
-									</view>
-								</template>
-							</tm-image>
-						</view>
-						<tm-text :font-size="30" _class="text-weight-b ml-20" class=" mt-15" :label="data.name">
+						<tm-image extra class="round-t-4" :width="348" :height="344" :src="data.img">
+							<template v-slot:extra>
+								<view class="flex flex-center ml-20 mr-20"
+									:style="`background-image: url(${bg});background-size: 100% 100%;width:300rpx;height:40rpx`">
+									<tm-text :font-size="28" _class="text-weight-n" :label="`流通量:${data.circulation}`">
+									</tm-text>
+								</view>
+							</template>
+						</tm-image>
+						<tm-text :font-size="30" _class="text-overflow text-weight-b ml-20"
+							_style="width: 330rpx;text-overflow: ellipsis;" class=" mt-15" :label="data.name">
 						</tm-text>
 						<tm-text :font-size="20" _class="text-weight-s ml-20" class=" mt-15" :label="data.publisher">
 						</tm-text>
@@ -71,21 +71,24 @@
 							</view>
 							<view class="flex flex-center"
 								style="width: 108rpx;height: 40rpx;background-color: #FFE6C8;border-radius:  0 10rpx 10rpx 0 ;">
-								<tm-text color="#1A1A1A" :font-size="22" _class="text-weight-n" label="999"></tm-text>
+								<tm-text color="#1A1A1A" :font-size="22" _class="text-weight-n" :label="data.limits">
+								</tm-text>
 							</view>
 						</view>
 						<view class="flex mb-15">
-							<tm-text :font-size="22" class="text-weight-n ml-20 mt-8 flex-row-bottom-center mb--10"
-								label="¥"></tm-text>
+							<tm-text :font-size="26" class="text-weight-n ml-20 mt-8 flex-row-bottom-center" label="¥">
+							</tm-text>
 							<tm-text :font-size="38" class="text-weight-b ml-4 mt-8 flex-row-bottom-center"
-								label="9999.00"></tm-text>
-							<tm-text :font-size="22" class="text-weight-n ml-4 mt-8 flex-row-bottom-center mb--10"
-								label="起"></tm-text>
+								:label="data.minPrice"></tm-text>
+							<tm-text :font-size="20" class="text-weight-n ml-4 mt-8 flex-row-bottom-center" label="起">
+							</tm-text>
 						</view>
 					</tm-sheet>
 				</view>
 			</view>
-
+			<view v-else class="flex flex-wrap flex-row-center-center" style="margin-top:150rpx">
+				<tm-image :round="4" class="flex-start" :width="350" :height="350" :src="wushuju"></tm-image>
+			</view>
 		</scroll-view>
 
 		<view v-show="cover" class="cover" @click.stop="cover=false;typeShow = false"></view>
@@ -96,6 +99,7 @@
 	import { Market } from "@/api/api.ts"
 	import { onMounted, ref } from 'vue';
 	import bg from "@/static/img/scbg.png"
+	import wushuju from "@/static/my/wushuju.png"
 	const list = ref([])
 	const typeShow = ref(false)
 	const cover = ref(false)
@@ -148,12 +152,13 @@
 	const acc = ref('')
 	const tagChange = (val, index) => {
 		acc.value = index
+
+		list.value = []
 		params.value.classId = val.value
 		params.value.page = 1
 		params.value.type = 1
 		params.value.name = ''
 		params.value.isRecommend = ''
-		list.value = []
 		findMarketList()
 	}
 	const getClassification = () => {
@@ -174,14 +179,15 @@
 	})
 	const acvite = ref(0)
 	const tabsClick = (i) => {
+		inp.value = ''
 		if (i != 3) {
 			if (acvite.value == i) return
 		}
 		acvite.value = i
 		params.value.page = 1
-		list.value = []
 		params.value.name = ''
 		params.value.classId = ''
+
 		if (i == 3) {
 			if (typeShow.value) {
 				typeShow.value = false
@@ -191,18 +197,21 @@
 				cover.value = true
 			}
 		} else if (i == 0) {
+			list.value = []
 			typeShow.value = false
 			cover.value = false
 			params.value.isRecommend = 1
 			params.value.type = 1
 			findMarketList()
 		} else if (i == 1) {
+			list.value = []
 			typeShow.value = false
 			cover.value = false
 			params.value.type = 1
 			params.value.isRecommend = ''
 			findMarketList()
 		} else if (i == 2) {
+			list.value = []
 			typeShow.value = false
 			cover.value = false
 			params.value.isRecommend = ''

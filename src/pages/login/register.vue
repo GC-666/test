@@ -38,8 +38,8 @@
 					<template v-slot:default="{checked}">
 						<view class="flex flex-row">
 							<tm-text :fontSize="20" label="我已经阅读并同意"></tm-text>
-							<tm-text :fontSize="20" color="red" label="《用户服务协议》"></tm-text>
-							<tm-text :fontSize="20" color="red" label="《隐私权政策》"></tm-text>
+							<tm-text @click="gonav('pages/login/proUser')" :fontSize="20" color="red" label="《用户服务协议》"></tm-text>
+							<tm-text @click="gonav('pages/login/proSecret')" :fontSize="20" color="red" label="《隐私权政策》"></tm-text>
 						</view>
 					</template>
 				</tm-checkbox>
@@ -118,7 +118,7 @@
 		let currentWebview = page.$getAppWebview();
 		// 此处监听uni.postMessage传递参数  
 		wv.overrideUrlLoading({ mode: 'reject' }, e => {
-			var params = JSON.parse(decodeURIComponent(e.url.split('push?params=')[1]))
+			let params = JSON.parse(decodeURIComponent(e.url.split('push?params=')[1]))
 			
 			if (params.ret == 0) {
 				sendCode(params)

@@ -170,7 +170,7 @@
 			sourceType: [type === 1 ? 'album' : 'camera'], //从相册选择
 			success: (res) => {
 
-				var imgPath = res.tempFilePaths[0]
+				let imgPath = res.tempFilePaths[0]
 				headimg.value = res.tempFilePaths[0]
 
 				uni.showLoading({
@@ -183,7 +183,7 @@
 					name: 'uploadFile',
 					success: (res) => {
 						if (res.data) {
-							var data = JSON.parse(res.data)
+							let data = JSON.parse(res.data)
 							headimg1.value = "/" + data.data
 							subimg()
 						}

@@ -32,7 +32,7 @@
 		<tm-sheet :shadow="0" :margin="[20,0]" :padding="[20,10]">
 			<view class="flex flex-between pt-20 pb-20">
 				<view class="flex flex-row-center-center">
-					<tm-icon  name="tmicon-alipay"></tm-icon>
+					<tm-icon  name="xh-zhanghuqianbao" :font-size="35"></tm-icon>
 					<tm-text class="ml-10" color="#808080" :font-size="22" _class="text-weight-b" label="平台钱包"></tm-text>
 				</view>
 				<tm-checkbox-group @change="boxlistchange" v-model="checkboxlist">
@@ -42,7 +42,7 @@
 			<tm-divider color="grey" :margin="[1,1]"></tm-divider>
 			<view class="flex flex-between pt-20 pb-20">
 				<view class="flex flex-row-center-center">
-					<tm-icon name="tmicon-alipay"></tm-icon>
+					<tm-icon name="xh-yunqianbao" :font-size="35"></tm-icon>
 					<tm-text class="ml-10" color="#808080" :font-size="22" _class="text-weight-b" label="云钱包"></tm-text>
 					<tm-text class="ml-10" color="red" :font-size="22" _class="text-weight-b" label="(推荐)"></tm-text>
 				</view>
@@ -122,7 +122,7 @@
 	const paymentPlatform = ref([]);
 	const boxlistchange=(e)=>{
 		paymentPlatform.value=[];
-		for(var i=0;i<e.length;i++){
+		for(let i=0;i<e.length;i++){
 			if(e[i]=="00"){
 				paymentPlatform.value.push({
 					type:"00",

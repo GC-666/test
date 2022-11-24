@@ -12,32 +12,32 @@
 			</view>
 		</view>
 
-		<tm-sheet :round="3" :shadow="0" :margin="[20,20]" :padding="[0,0]">
+		<tm-sheet :round="3" :shadow="0" :margin="[20,10]" :padding="[0,0]">
 			<view class="flex flex-row-center-between">
 				<view class="flex ma-15">
 					<tm-avatar :round="12" :img="data.creatorImg"></tm-avatar>
 					<view class="flex flex-col ml-20" style="justify-content: space-around;">
-						<tm-text :font-size="28" _class="text-weight-b" :label="data.collName"></tm-text>
+						<tm-text :fontSize="28" _class="text-weight-b" :label="data.collName"></tm-text>
 						<view class="flex">
 							<view class="flex">
 								<view class="round-tl-5 round-bl-5 flex flex-center"
 									style="width: 100rpx; background-color: #FFD7A7; ">
-									<tm-text class="ma-5" :font-size="22" _class="text-weight-n" label="发行量"></tm-text>
+									<tm-text class="ma-5" :fontSize="22" color="#25262E" _class="text-weight-n" label="发行量"></tm-text>
 								</view>
 								<view class="round-tr-5 round-br-5 flex flex-center"
 									style="width: 85rpx;background-color: #FFE6C8;">
-									<tm-text class="ma-5" :font-size="22" _class="text-weight-n" :label="data.presale">
+									<tm-text class="ma-5" :fontSize="22" color="#25262E" _class="text-weight-n" :label="data.presale">
 									</tm-text>
 								</view>
 							</view>
 							<view class="flex ml-20">
 								<view class="round-tl-5 round-bl-5 flex flex-center"
 									style="width: 80rpx; background-color: #FFD7A7;">
-									<tm-text class="ma-5" :font-size="22" _class="text-weight-n" label="已售"></tm-text>
+									<tm-text class="ma-5" :fontSize="22" color="#25262E" _class="text-weight-n" label="已售"></tm-text>
 								</view>
 								<view class="round-tr-5 round-br-5 flex flex-center"
 									style="width: 85rpx;background-color: #FFE6C8;">
-									<tm-text class="ma-5" :font-size="22" _class="text-weight-n" :label="data.sold">
+									<tm-text class="ma-5" :fontSize="22" color="#25262E" _class="text-weight-n" :label="data.sold">
 									</tm-text>
 								</view>
 							</view>
@@ -46,15 +46,15 @@
 				</view>
 				<view class="flex flex-col ma-15">
 					<view class="flex  flex-col-bottom-center ">
-						<tm-text :font-size="18" _class="text-weight-n flex-row-bottom-end mb--8" label="¥"></tm-text>
-						<tm-text class="ml-10" :font-size="38" _class="text-weight-b" :label="data.price">
+						<tm-text :fontSize="18" _class="text-weight-n flex-row-bottom-end mb--8" label="¥"></tm-text>
+						<tm-text class="ml-10" :fontSize="38" _class="text-weight-b" :label="data.price">
 						</tm-text>
 					</view>
 				</view>
 			</view>
 		</tm-sheet>
 
-		<tm-sheet :round="3" :shadow="0" :margin="[20,20]" :padding="[0,0]">
+		<tm-sheet :round="3" :shadow="0" :margin="[20,10]" :padding="[0,0]">
 			<view class="flex">
 				<tm-text class="ml-25 mt-20" :font-size="35" _class="text-weight-b" label="数字收藏小贴士"></tm-text>
 				<tm-text class="ml-15 mt-32 " _class="text-size-xxs" label="购买即可体验内容"></tm-text>
@@ -62,40 +62,40 @@
 			<view class="mt-20 flex flex-around">
 				<view class="">
 
-					<tm-icon name="tmicon-huiyuan"></tm-icon>
+					<tm-icon name="xh-bianhao" :font-size="40"></tm-icon>
 
 
-					<tm-text class="mt-20 mb-20" :font-size="18" _class="text-weight-s" label="唯一编号"></tm-text>
+					<tm-text class="mt-20 mb-20" :font-size="28" _class="text-weight-s" label="唯一编号"></tm-text>
 
 
 				</view>
 				<view class="">
-					<tm-icon name="tmicon-md-ribbon"></tm-icon>
-
-					<tm-text class="mt-20 mb-20" :font-size="18" _class="text-weight-s" label="可信记录"></tm-text>
-
-				</view>
-				<view class="">
-					<tm-icon name="tmicon-md-ribbon"></tm-icon>
-
-					<tm-text class="mt-20 mb-20" :font-size="18" _class="text-weight-s" label="永久存证"></tm-text>
+					<tm-icon name="xh-kexin" :font-size="40"></tm-icon>
+					<tm-text class="mt-20 mb-20" :font-size="28" _class="text-weight-s" label="可信记录"></tm-text>
 
 				</view>
 				<view class="">
-					<tm-icon name="tmicon-md-ribbon"></tm-icon>
-					<tm-text class="mt-20 mb-20" :font-size="18" _class="text-weight-s" label="不可篡改"></tm-text>
+					<tm-icon name="xh-cunzheng" :font-size="40"></tm-icon>
+
+					<tm-text class="mt-20 mb-20" :font-size="28" _class="text-weight-s" label="永久存证"></tm-text>
+
+				</view>
+				<view class="">
+					<tm-icon name="xh-bukecuangai" :font-size="40"></tm-icon>
+					<tm-text class="mt-20 mb-20" :font-size="28" _class="text-weight-s" label="不可篡改"></tm-text>
 
 				</view>
 			</view>
 		</tm-sheet>
 		<tm-sheet :style="{'color': store.tmStore.dark?'#fff': '#25262E','font-size': '22rpx'}" :round="3" :shadow="0"
-			:margin="[20,20]" :padding="[20,10]" v-if="data.details">
+			:margin="[20,10]" :padding="[20,10]" v-if="data.details">
+			<tm-text class="mt-20 mb-20" :fontSize="30" _class="text-weight-b" label="作品故事"></tm-text>
 			<view class="flex">
 				<tm-html :content="data.details"></tm-html>
 
 			</view>
 		</tm-sheet>
-		<tm-sheet style="margin-bottom: 100rpx;" :round="3" :shadow="0" :margin="[20,20]" :padding="[0,10]">
+		<tm-sheet style="margin-bottom: 100rpx;" :round="3" :shadow="0" :margin="[20,10]" :padding="[0,10]">
 			<view class="">
 				<tm-text class="ml-25 mt-20" :font-size="35" _class="text-weight-b" label="购买须知"></tm-text>
 				<view class="ml-25"

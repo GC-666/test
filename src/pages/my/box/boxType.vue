@@ -10,10 +10,10 @@
 			</tm-sheet>
 		</view>
 		<scroll-view scroll-y="true" class="scroll-Y" @scrolltolower="lower">
-			<view style="margin: 0rpx 20rpx 0rpx 20rpx;">
+			<view v-if="userBoxFindPageList.length>0" style="margin: 0rpx 20rpx 0rpx 20rpx;">
 				<view class="" v-for="(data,index) in userBoxFindPageList"
 					@click="gonav('pages/my/box/boxDetails?id='+data.id)">
-					<tm-sheet :shadow="0" :margin="[20,20]" :padding="[20,10]">
+					<tm-sheet :round="4" :shadow="0" :margin="[20,20]" :padding="[20,10]">
 						<view class="flex flex-between" style="margin: 0rpx 10rpx;">
 							<tm-text :font-size="32" _class="text-weight-b" :label="config.boxName"></tm-text>
 							<view class="flex flex-center">
@@ -58,6 +58,9 @@
 					</tm-sheet>
 				</view>
 			</view>
+			<view v-else class="flex flex-wrap flex-row-center-center" style="margin-top:150rpx">
+				<tm-image :round="4" class="flex-start" :width="350" :height="350" :src="wushuju"></tm-image>
+			</view>
 		</scroll-view>
 	</tm-app>
 </template>
@@ -73,6 +76,7 @@
 	import { onMounted, reactive, ref } from 'vue';
 	import { My } from "@/api/api.ts"
 
+	import wushuju from "@/static/my/wushuju.png"
 	const tabsTitle = ref([{
 			key: "0",
 			title: "未开启"
@@ -80,6 +84,10 @@
 		{
 			key: "1",
 			title: "已开启"
+		},
+		{
+			key: "2",
+			title: "寄售中"
 		},
 	]);
 	//类型下标
@@ -94,7 +102,7 @@
 	})
 
 	onShow(() => {
-		tabsChange(0);
+		tabsChange(index.value);
 	})
 	//配置参数
 	const pageData = ref({

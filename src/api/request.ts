@@ -1,9 +1,8 @@
 
-const BASE_URL = import.meta.env.VITE_APP_BASE_API
-// const BASE_URL = "https://xunmeta.rocknft.top/api"
-
+//const BASE_URL = import.meta.env.VITE_APP_BASE_API
+const BASE_URL = "https://xunmeta.rocknft.top/api"
 // 封装 GET POST 请求并导出
-export function request(url: string = '', params = {}, type: string = 'POST') {
+export function request(url: string = '', params = {}, type: "POST" | undefined) {
 	//设置 url params type 的默认值
 	let headerReSet = {
 		'Content-Type': 'application/x-www-form-urlencoded',

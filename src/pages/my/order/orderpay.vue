@@ -29,13 +29,12 @@
 			<tm-divider color="grey" :margin="[1,1]"></tm-divider>
 			<view class="flex ma-15 flex-between">
 				<tm-text :font-size="25" _class="text-weight-n" label="订单ID号"></tm-text>
-
 				<view class="flex flex-center">
 					<tm-text :font-size="32" _class="text-weight-n" :label="data.orderNo"></tm-text>
 				</view>
 			</view>
 		</tm-sheet>
-		<tm-sheet v-if="data.orderStatus == 0" :round="0" :shadow="0" :margin="[20,20]" :padding="[20,20]">
+		<tm-sheet v-if="data.orderStatus == 0" :round="0" :shadow="0" :margin="[20,10]" :padding="[20,20]">
 			<view class="flex flex-between">
 				<tm-text :font-size="28" color="red" _class="text-weight-b" label="剩余时间:"></tm-text>
 				<tm-countdown  class="text-size-n ml-10" color="red" @change="change"
@@ -50,7 +49,9 @@
 			<tm-divider color="grey" :margin="[1,10]"></tm-divider>
 			<view class="ml-15 flex flex-between pt-20 pb-20" v-for="item in payList">
 				<view class="flex flex-row-center-center">
-					<tm-icon name="tmicon-alipay"></tm-icon>
+					<tm-icon v-if="item.key==='00'"  name="xh-zhanghuqianbao"></tm-icon>
+					<tm-icon  v-if="item.key==='04'" :fontSize="38" name="xh-bonus-line"></tm-icon>
+					<tm-icon  v-if="item.key==='05'" name="xh-zhanghuqianbao"></tm-icon>
 					<tm-text class="ml-10" color="#808080" :font-size="22" _class="text-weight-b" :label="item.value">
 					</tm-text>
 				</view>
@@ -60,7 +61,8 @@
 				</tm-radio-group>
 			</view>
 		</tm-sheet>
-		<tm-sheet v-if="radiolist=='00'" :round="3" :shadow="0" :margin="[20,10]" :padding="[0,10]">
+		
+		<tm-sheet v-if="radiolist=='00' || radiolist=='04'" :round="3" :shadow="0" :margin="[20,10]" :padding="[0,10]">
 			<tm-text class="ml-15" :font-size="30" _class="text-weight-b" label="支付密码"></tm-text>
 			<tm-input :margin="[20,10]" outlined v-model="inp" placeholder="请输入支付密码">
 			</tm-input>
@@ -110,13 +112,7 @@
 	}
 	const inp = ref('')
 	const placeOrder = () => {
-		if (radiolist.value == '00' && inp.value == '') {
-			uni.showToast({
-				title: '请输入密码',
-				icon: 'none'
-			})
-			return
-		}
+		
 		if (radiolist.value == '') {
 			uni.showToast({
 				title: '请选择支付方式',
@@ -124,8 +120,15 @@
 			})
 			return
 		}
+		if ((radiolist.value == '00' && inp.value=='') || (radiolist.value == '04' && inp.value=='')) {
+			uni.showToast({
+				title: '请输入密码',
+				icon: 'none'
+			})
+			return
+		}
 		My.orderPay({ payType: radiolist.value, id: id.value, payPassword: inp.value, isRemember: 0 }).then(res => {
-			if (radiolist.value == '00') {
+			if (radiolist.value == '00' || radiolist.value=='04') {
 				uni.showToast({
 					title: '支付成功',
 					icon: 'none'

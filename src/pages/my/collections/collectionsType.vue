@@ -10,12 +10,12 @@
 			</tm-sheet>
 		</view>
 		<scroll-view scroll-y="true" class="scroll-Y" @scrolltolower="lower">
-			<view style="margin: 0rpx 20rpx 0rpx 20rpx;">
+			<view v-if="userCollectionFindPageList.length>0" style="margin: 0rpx 20rpx 0rpx 20rpx;">
 				<view class="" v-for="(data,index) in userCollectionFindPageList" @click="gonav('pages/my/collections/collectionsDetails?id='+data.id)">
 					<tm-sheet :shadow="0" :margin="[20,20]" :padding="[20,10]">
 						<view class="flex flex-between" style="margin: 0rpx 10rpx;">
 							<tm-text :font-size="32" _class="text-weight-b" :label="data.collName"></tm-text>
-							<view class="flex">
+							<view class="flex flex-center">
 								<!-- <tm-text v-if="data.type=='0'" color="#07EBFE" :font-size="26" _class="text-weight-b" label="已开启">
 								</tm-text>
 								<tm-text v-if="data.type=='1'" color="#07EBFE" :font-size="26" _class="text-weight-b" label="出售中">
@@ -23,8 +23,8 @@
 								<tm-text v-if="data.type=='2'" color="#07EBFE" :font-size="26" _class="text-weight-b" label="交易中">
 								</tm-text> -->
 								
-								<tm-text color="#07EBFE" :font-size="22" _class="text-weight-n" label="买入价:"></tm-text>
-								<tm-text color="#07EBFE" :font-size="26" _class="text-weight-b" :label="data.buyPrice">
+								<tm-text  :font-size="18" _class="text-weight-n" label="买入价："></tm-text>
+								<tm-text color="red" :font-size="26" _class="text-weight-b" :label="data.buyPrice">
 								</tm-text>
 							</view>
 						</view>
@@ -42,6 +42,9 @@
 					</tm-sheet>
 				</view>
 			</view>
+			<view v-else class="flex flex-wrap flex-row-center-center" style="margin-top:150rpx">
+				<tm-image :round="4" class="flex-start" :width="350" :height="350" :src="wushuju"></tm-image>
+			</view>
 		</scroll-view>
 	</tm-app>
 </template>
@@ -52,6 +55,7 @@
 	import { onShow,onLoad } from '@dcloudio/uni-app';
 	import { onMounted , reactive , ref } from 'vue';
 	import { My } from "@/api/api.ts"
+	import wushuju from "@/static/my/wushuju.png"
 	
 	const tabsTitle = ref([{
 			key: "1",

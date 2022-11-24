@@ -82,7 +82,7 @@
 			</view>
 		</tm-modal>
 		<tm-modal :height="470" title="转增" okText="确认" splitBtn v-model:show="show2" :beforeClose="beforeClose" @ok="submit2" :close="pwd=''">
-			<tm-input prefix="tmicon-search" @blur="calculation" v-model="phone" placeholder="请输入好友手机号" @search="query" searchLabel="查询" ></tm-input>
+			<tm-input prefix="tmicon-search" @blur="calculation" v-model="phone" placeholder="请输入好友手机号" @search="query" searchLabel="搜索" ></tm-input>
 			<view class="flex">
 				<tm-text class="mt-30 mb-30 ml-20" :font-size="26" :label="content"></tm-text>
 			</view>
@@ -121,7 +121,7 @@
 	const conversion=()=>{
 		show2.value=true
 	}
-	//查询转增人
+	//搜索转增人
 	const phone = ref("");
 	const content = ref("");
 	const show3=ref(false);
@@ -145,6 +145,10 @@
 			password: pwd.value,
 			toUserPhone: phone.value
 		}).then(res => {
+			uni.showToast({
+				title: "转增成功",
+				icon: 'none'
+			})
 			uni.navigateBack({
 				delta:1,
 			})
@@ -164,7 +168,7 @@
 			}
 		}else{
 			uni.showToast({
-				title: "未点击查询",
+				title: "未搜索到好友",
 				icon: 'none'
 			})
 		}

@@ -34,8 +34,8 @@
 			<!-- #endif -->
 			<tm-cell _class="text-weight-b" :margin="[0, 0]" :titleFontSize="30" title="排行"
 				@click="gonav('pages/my/set/ranking/ranking')"> </tm-cell>
-			<tm-divider color="grey" :margin="[1,1]"></tm-divider>
-			<tm-cell _class="text-weight-b" :margin="[0, 0]" :titleFontSize="30" title="注销账户"></tm-cell>
+			<!-- <tm-divider color="grey" :margin="[1,1]"></tm-divider>
+			<tm-cell _class="text-weight-b" :margin="[0, 0]" :titleFontSize="30" title="注销账户"></tm-cell> -->
 		</tm-sheet>
 		<view class="flex flex-center">
 			<tm-button @click="logOut" :width="520" :height="70" _class="text-weight-b" :round="4" :margin="[0,30]"

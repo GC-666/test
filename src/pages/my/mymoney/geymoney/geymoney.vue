@@ -6,10 +6,10 @@
 		<view class="mt-n14">
 			<tm-text :fontSize="26" class="text-weight-b  ml-20" label="提现方式"></tm-text>
 			<tm-sheet :shadow="0" :margin="[20,20]" :padding="[0,0]">
-				<tm-cell :margin="[0, 10]" rightText="单笔提现金额必须为100的倍数" :rightTextSize="15" @click="">
+				<tm-cell :margin="[10, 10]" :padding="[0,0]" rightText="单笔提现金额必须为100的倍数" :rightTextSize="15" @click="">
 					<template v-slot:title>
 						<view class="flex" style="align-items: center;">
-							<tm-icon class="ml-10" :fontSize="46" name="tmicon-yinhangqia"></tm-icon>
+							<tm-icon class="ml-10" :fontSize="70" name="xh-yinlian"></tm-icon>
 						</view>
 					</template>
 				</tm-cell>

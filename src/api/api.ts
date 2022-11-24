@@ -230,9 +230,10 @@ export class My {
 	}
 	//资金流水
 	static async walletList(params: any) {
+		// return await request("/users/wallet/details/findList", params, "POST")
 		return await request("/users/wallet/details/findList", params, "POST")
 	}
-	//积分
+	//积分流水
 	static async integalList(params: any) {
 		return await request("/users/integal/details/findList", params, "POST")
 	}
@@ -248,7 +249,18 @@ export class My {
 	static async orderCancel(params: any) {
 		return await request("/order/cancel", params, "POST")
 	}
-	
+	//协议接口
+	static async homeAgreementss(params: any) {
+		return await request("/Home/agreementss", params, "POST")
+	}
+	//申请开票
+	static async openTicket(params: any) {
+		return await request("/ticket/openTicket", params, "POST")
+	}
+	//分享
+	static async inviteInfo(params: any) {
+		return await request("/mine/inviteInfo", params, "POST")
+	}
 	
 }
 // 活动

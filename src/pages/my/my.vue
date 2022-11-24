@@ -1,24 +1,25 @@
 <template>
 	<tm-app>
 		<!-- <view class="statusHeight" :style="{height:statusBarHeight+'px'}"></view> -->
-		<tm-sheet  :margin="[0,0]" :padding="[0,statusBarHeight]">
+		<tm-sheet :margin="[0,0]" :padding="[0,statusBarHeight]">
 		</tm-sheet>
-		<view class="head pt-20">
+		<view class="head pt-20" :style="user.adventureIsOpen=='1'?'height: 310rpx;':'height: 210rpx;'">
 			<!-- <view class="flex flex-end mt-20 mr-42">
 				<tm-icon name="tmicon-share1"></tm-icon>
 			</view> -->
-			<view class="headUser flex flex-between">
+			<view class="headUser flex flex-between mt-30">
 				<tm-image :round="25" class="mt--34 ml-35" :width="128" :height="128" :src="user.avatar"></tm-image>
-				<view class="flex-5 mt-2">
-					<tm-text class="text-weight-b" color="#333333" :fontSize="38" :label="user.nickname"></tm-text>
+				<view class="flex-5 mt-2 ml-20">
+					<tm-text class="text-weight-b" _class="text-overflow text-weight-b"
+						_style="width: 330rpx;text-overflow: ellipsis;" color="#333333" :fontSize="38"
+						:label="user.nickname"></tm-text>
 					<tm-text class="mt-18" color="#999999" :fontSize="22" :label="user.phone"></tm-text>
 				</view>
-				<view class="flex-row-center-end">
-					<tm-image v-if="user.realnametype==0" class="flex-start mr-35" :width="103" :height="40"
-						:src="weishiming"></tm-image>
-					<tm-image v-else-if="user.realnametype==1" class="flex-start mr-35" :width="103" :height="40"
-						:src="daishenhe"></tm-image>
-					<tm-image v-else class="flex-start mr-35" :width="103" :height="40" :src="yishiming"></tm-image>
+				<view class="flex-row-center-end mr-20">
+					<tm-icon v-if="user.realnametype==0" :fontSize="40" name="xh-weishiming"></tm-icon>
+					<tm-icon v-if="user.realnametype==1" :fontSize="40" name="xh-daishenhe"></tm-icon>
+					<tm-icon v-if="user.realnametype==2" :fontSize="40" name="xh-yishiming"></tm-icon>
+
 				</view>
 			</view>
 			<tm-image v-if="user.adventureIsOpen=='1'" style="margin: 0rpx auto;" :width="710" :height="148"
@@ -26,9 +27,9 @@
 		</view>
 		<tm-sheet :round="4" :shadow="0" :margin="[20,0]" :padding="[10,10]">
 			<view class="flex flex-between mt-15">
-				<tm-text  :fontSize="26" _class="text-weight-b" label="我的藏品"></tm-text>
+				<tm-text :fontSize="26" _class="text-weight-b" label="我的藏品"></tm-text>
 				<view class="flex" @click="gonav('pages/my/collections/collections')">
-					<tm-text  :fontSize="26" label="更多"></tm-text>
+					<tm-text :fontSize="26" label="更多"></tm-text>
 					<tm-icon class="ml-10" :fontSize="26" name="tmicon-angle-right"></tm-icon>
 				</view>
 			</view>
@@ -40,16 +41,17 @@
 				</view>
 			</view>
 			<view v-else class="flex flex-wrap flex-row-center-center" style="height:250rpx">
-				<tm-image :round="4" class="flex-start" :width="210" :height="210" :src="wucangpin"></tm-image>
+				<tm-image :round="4" class="flex-start" :width="210" :height="210" :src="wushuju"></tm-image>
 			</view>
 			<view class="flex flex-between mt-20">
-				<tm-text  :fontSize="26" _class="text-weight-b" label="我的盲盒"></tm-text>
+				<tm-text :fontSize="26" _class="text-weight-b" label="我的盲盒"></tm-text>
 				<view class="flex" @click="gonav('pages/my/box/box')">
 					<tm-text style="height: 50rpx;line-height: 50rpx;" :fontSize="26" label="更多"></tm-text>
 					<tm-icon class="ml-10" :fontSize="26" name="tmicon-angle-right"></tm-icon>
 				</view>
 			</view>
-			<view v-if="userBoxFindReportPageList.length>0" class="flex flex-wrap flex-between mt-10" style="height:250rpx">
+			<view v-if="userBoxFindReportPageList.length>0" class="flex flex-wrap flex-between mt-10"
+				style="height:250rpx">
 				<view v-for="(item,index) in userBoxFindReportPageList" @click="gonav('pages/my/box/box')">
 					<tm-image :round="4" class="flex-start" :width="210" :height="210" :src="item.boxImg"></tm-image>
 					<tm-text _class="mt-5 text-overflow " _style="width:180rpx;text-overflow: ellipsis;" :fontSize="26"
@@ -57,34 +59,35 @@
 				</view>
 			</view>
 			<view v-else class="flex flex-wrap flex-row-center-center" style="height:250rpx">
-				<tm-image :round="4" class="flex-start" :width="210" :height="210" :src="wucangpin"></tm-image>
+				<tm-image :round="4" class="flex-start" :width="210" :height="210" :src="wushuju"></tm-image>
 			</view>
 		</tm-sheet>
 
-		<tm-sheet :round="4"  :shadow="0" :margin="[20,20]" :padding="[0,0]">
-			<tm-cell  :margin="[20, 20]" :padding="[0, 0]" :titleFontSize="28" @click="gonav('pages/my/order/order')">
+		<tm-sheet :round="4" :shadow="0" :margin="[20,20]" :padding="[0,0]">
+			<tm-cell :margin="[20, 20]" :padding="[0, 0]" :titleFontSize="28" @click="gonav('pages/my/order/order')">
 				<template v-slot:title>
 					<view class="flex">
-						<tm-icon class="ml-10" :fontSize="26" name="tmicon-ios-filing"></tm-icon>
+						<tm-icon class="ml-10" :fontSize="32" name="xh-dingdan"></tm-icon>
 						<tm-text class="ml-44" :fontSize="26" label="我的订单"></tm-text>
 					</view>
 				</template>
 			</tm-cell>
 			<tm-divider color="grey" :margin="[1,1]"></tm-divider>
-			<tm-cell :margin="[20, 20]" :padding="[0, 0]" :titleFontSize="28" @click="gonav('pages/my/mymoney/mymoney')">
+			<tm-cell :margin="[20, 20]" :padding="[0, 0]" :titleFontSize="28"
+				@click="gonav('pages/my/mymoney/mymoney')">
 				<template v-slot:title>
 					<view class="flex">
-						<tm-icon class="ml-10" :fontSize="26" name="tmicon-qiandai"></tm-icon>
+						<tm-icon class="ml-10" :fontSize="32" name="xh-zichan"></tm-icon>
 						<tm-text class="ml-44" :fontSize="26" label="我的资产"></tm-text>
 					</view>
 				</template>
 			</tm-cell>
 			<tm-divider color="grey" :margin="[1,1]"></tm-divider>
-			<tm-cell :margin="[20, 20]" :padding="[0, 0]" :titleFontSize="28">
+			<tm-cell :margin="[20, 20]" :padding="[0, 0]" :titleFontSize="28" @click="kefu">
 				<template v-slot:title>
 					<view class="flex">
-						<tm-icon class="ml-10" :fontSize="26" name="tmicon-headset-fill"></tm-icon>
-						<tm-text class="ml-44" :fontSize="26" label="在线客服" @click="kefu"></tm-text>
+						<tm-icon class="ml-10" :fontSize="32" name="xh-kefu"></tm-icon>
+						<tm-text class="ml-44" :fontSize="26" label="在线客服" ></tm-text>
 					</view>
 				</template>
 			</tm-cell>
@@ -92,7 +95,7 @@
 			<tm-cell :margin="[20, 20]" :padding="[0, 0]" :titleFontSize="28" @click="gonav('pages/my/set/set')">
 				<template v-slot:title>
 					<view class="flex">
-						<tm-icon class="ml-10" :fontSize="26" name="tmicon-cog-fill"></tm-icon>
+						<tm-icon class="ml-10" :fontSize="32" name="xh-shezhi"></tm-icon>
 						<tm-text class="ml-44" :fontSize="26" label="设置"></tm-text>
 					</view>
 				</template>
@@ -116,10 +119,7 @@
 <script setup>
 	import { onShow } from '@dcloudio/uni-app';
 	import { My } from "@/api/api.ts"
-	import weishiming from "@/static/my/weishiming.png"
-	import daishenhe from "@/static/my/daishenhe.png"
-	import yishiming from "@/static/my/yishiming.png"
-	import wucangpin from "@/static/my/wucangpin.png"
+	import wushuju from "@/static/my/wushuju.png"
 
 	const statusBarHeight = uni.getSystemInfoSync().statusBarHeight
 	import {
@@ -169,7 +169,7 @@
 	.head {
 		background-image: url("@/static/my/head.png");
 		background-size: 100% 100%;
-		height: 310rpx;
+
 	}
 
 	.headUser {
@@ -185,8 +185,8 @@
 		width: 710rpx;
 		margin: 0rpx auto;
 	}
-	
-	.bottom{
+
+	.bottom {
 		padding-bottom: var(--window-bottom);
 	}
 </style>

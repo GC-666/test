@@ -16,10 +16,9 @@
 		</tm-sheet>
 		<view class="flex flex-col flex-center mt-47">
 			<view class="flex">
-				<tm-text color="#808080" :fontSize="18" label="《用户服务协议》"></tm-text>
-				<tm-text color="#808080" :fontSize="18" label="《隐私权政策》"></tm-text>
+				<tm-text @click="gonav('pages/my/set/about/aboutUs')" color="#808080" :fontSize="18" label="《关于我们》"></tm-text>
 			</view>
-			<view class="" style="margin-top: 10rpx;">
+			<view class="" style="margin-top: 30rpx;">
 				<tm-text color="#808080" :fontSize="18"  label="Copyright 2021 All Rights Reserveed"></tm-text>
 			</view>
 			

@@ -127,7 +127,7 @@
 		let currentWebview = page.$getAppWebview();
 		// 此处监听uni.postMessage传递参数  
 		wv.overrideUrlLoading({ mode: 'reject' }, e => {
-			var params = JSON.parse(decodeURIComponent(e.url.split('push?params=')[1]))
+			let params = JSON.parse(decodeURIComponent(e.url.split('push?params=')[1]))
 
 			if (params.ret == 0) {
 				sendCode(params)

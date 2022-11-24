@@ -27,9 +27,9 @@
 						:fontSize="22" :label="`编号：${item.no}`"></tm-text>
 					<view class="flex flex-end">
 						<view class="" v-for="i in item.payTypeList">
-							<tm-icon v-if="i.type=='00'  " _class=" mr-10" :fontSize="25" name="tmicon-wind-smile">
+							<tm-icon v-if="i.type=='00'  " _class=" mr-10" :fontSize="35" name="xh-zhanghuqianbao">
 							</tm-icon>
-							<tm-icon v-if="i.type=='05' " _class=" mr-10" :fontSize="25" name="tmicon-wind-smile">
+							<tm-icon v-if="i.type=='05' " _class=" mr-10" :fontSize="35" name="xh-yunqianbao">
 							</tm-icon>
 						</view>
 					</view>

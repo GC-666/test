@@ -164,9 +164,9 @@
 		}).then(res => {
 			syntheticMaterialList.value=[];
 			res.image=res.imgPath+res.img;
-			for(var i=0;i<res.materialList.length;i++){
-				var count=0;
-				for(var j=0;j<res.materialList[i].userCollList.length;j++){
+			for(let i=0;i<res.materialList.length;i++){
+				let count=0;
+				for(let j=0;j<res.materialList[i].userCollList.length;j++){
 					if(res.materialList[i].userCollList[j].isSelect){
 						count++;
 						syntheticMaterialList.value.push(res.materialList[i].userCollList[j]);
@@ -196,8 +196,8 @@
 	//合成提交的参数
 	const syntheticMaterialList = ref([]);
 	const setSyntheticMaterialList=(e)=>{
-		var bool=true;
-		for(var i=0;i<syntheticMaterialList.value.length;i++){
+		let bool=true;
+		for(let i=0;i<syntheticMaterialList.value.length;i++){
 			if(syntheticMaterialList.value[i].id==composeFind.value.materialList[index.value].userCollList[e].id){
 				syntheticMaterialList.value.splice(i, 1);
 				composeFind.value.materialList[index.value].userCollList[e].isSelect=false;
@@ -224,15 +224,10 @@
 			collJson:JSON.stringify(syntheticMaterialList.value)
 		}).then(res => {
 			uni.navigateTo({
-				url: '/pages/activity/syn/synDetailsSuccess?config='+encodeURIComponent(JSON.stringify(composeFind.value.collectionsList[0])), 
+				url: '/pages/activity/syn/synDetailsSuccess?config='+encodeURIComponent(JSON.stringify(res)), 
 				success: function() {
 				}
 			})
-			// uni.navigateTo({
-			// 	url: '/pages/activity/syn/synDetailsSuccess?config='+encodeURIComponent(JSON.stringify(res)), 
-			// 	success: function() {
-			// 	}
-			// })
 		})
 	}
 	

@@ -30,13 +30,12 @@
 					<tm-icon :font-size="25" name="tmicon-angle-right"></tm-icon>
 				</view>
 			</tm-sheet>
-
 			<!-- 首发 盲盒tabs -->
 			<view class="ml-20 mr-20">
 				<tm-tabs @change="tabsChange" :itemFontSize="28" :activeFontSize="30" :list="tabsTitle" :width="710"
 					:height="100" default-name="0"></tm-tabs>
 			</view>
-			<view class="mt--20">
+			<view v-if="list.length>0" class="mt--20">
 				<tm-sheet :round="0" :shadow="0" :margin="[20,20]" :padding="[0,0]" @click="Go(data.id)"
 					v-for="data in list" :key="data.id">
 					<view class="relative flex flex-row-center-center">
@@ -49,20 +48,25 @@
 							</tm-image>
 						</view>
 					</view>
-				
-					<view class="absolute ml-20 mt-10">
+					<view class="absolute ml-20 mt-2">
 						<view class="flex countdown">
 							<view class="flex">
-								<view class="flex ml-10 mr-10 mt-5 mb-5" v-if="data.diffSeconds==='0'">
-									<tm-icon :fontSize="28" :color="data.status =='3'?'#999999':'#07EBFE'"
-										name="tmicon-wind-smile"></tm-icon>
-									<tm-text class="ml-5" :color="data.status =='3'?'#999999':'#07EBFE'" fontSiz="24"
-										:label="data.statusName">
-									</tm-text>
+								<view class="flex ml-10 mr-10 mt-5 mb-5" v-if="data.diffSeconds ==='0'">
+									<view class="flex flex-center" style="align-items: center;"
+										v-if="data.status=='2' || data.status=='3'">
+										<tm-icon class="pt-2" :fontSize="40" color="#999999" name="xh-gantanhaozhong">
+										</tm-icon>
+										<tm-text class="ml-5" color="#999999" fontSiz="24" :label="data.statusName">
+										</tm-text>
+									</view>
+									<view class="flex flex-center" style="align-items: center;" v-if="data.status=='1'">
+										<tm-icon class="mt-2" :fontSize="40" color="#07EBFE" name="xh-remen"></tm-icon>
+										<tm-text class="ml-5" color="#07EBFE" fontSiz="24" :label="data.statusName">
+										</tm-text>
+									</view>
 								</view>
-				
 								<view class="flex ml-10 mr-10  mt-5 mb-5" v-if="data.diffSeconds!=='0'">
-									<tm-icon :fontSize="28" color="#07EBFE" name="tmicon-wind-smile"></tm-icon>
+									<tm-icon class="pt-2" :fontSize="30" color="#07EBFE" name="xh-remen"></tm-icon>
 									<tm-text class="ml-5" color="#07EBFE" fontSiz="24" label="即将开售："></tm-text>
 									<tm-countdown class="text-size-n" color="#07EBFE" :time="parseInt(data.diffSeconds)"
 										format="HH:MM:SS" autoStart></tm-countdown>
@@ -75,8 +79,11 @@
 							<view class="flex">
 								<tm-avatar :round="12" :img="data.creatorImg"></tm-avatar>
 								<view class="flex flex-col ml-20" style="justify-content: space-around;">
-									<tm-text :font-size="28" _class="text-weight-b" :label="data.collName"></tm-text>
-									<tm-text color="#999" :font-size="18" _class="text-weight-n" :label="data.creatorName">
+									<tm-text :font-size="28" _class="text-overflow text-weight-b"
+										_style="width: 330rpx;text-overflow: ellipsis;" :label="data.collName">
+									</tm-text>
+									<tm-text color="#999" :font-size="18" _class="text-weight-n"
+										:label="data.creatorName">
 									</tm-text>
 								</view>
 							</view>
@@ -93,7 +100,9 @@
 					</tm-sheet>
 				</tm-sheet>
 			</view>
-			
+			<view v-else class="flex flex-wrap flex-row-center-center" style="margin-top:150rpx">
+				<tm-image :round="4" class="flex-start" :width="350" :height="350" :src="wushuju"></tm-image>
+			</view>
 		</scroll-view>
 		<!-- 首发藏品后6个 -->
 		<!-- <tm-sheet :shadow="0" :margin="[20,15]" :padding="[0,0]">
@@ -141,9 +150,7 @@
 					</view>
 				</view>
 			</tm-sheet> -->
-
 		<view class="aa" v-show="is">
-
 			<!-- <tm-text class="ml-10" color="#fff" :font-size="30" _class="text-weight-b" label="请登录体验更多功能"></tm-text>
 			<tm-button :margin="[10, 10]" :shadow="0" :width="200" :height="60" fontColor="#fff" outlined size="normal" label="立即登录"></tm-button> -->
 			<view class="felx" style="align-items: center;">
@@ -159,16 +166,10 @@
 								</tm-button>
 							</view>
 						</view>
-
 					</template>
-
-
 				</tm-alert>
-
 			</view>
-
 		</view>
-
 	</tm-app>
 </template>
 <script setup>
@@ -178,6 +179,7 @@
 	import { onMounted, ref } from "vue";
 	import { useTmpiniaStore } from '@/xhui/tool/lib/tmpinia';
 	import { onShow, onLoad } from '@dcloudio/uni-app';
+	import wushuju from "@/static/my/wushuju.png"
 	const store = useTmpiniaStore();
 	const is = ref(true);
 	const test = () => {
@@ -288,6 +290,13 @@
 		Home.findPageList({ page: 1, limit: 1, objectType: 0 }).then(res => {
 			notice.value = res
 		})
+		if (!store.tmStore.dark) {
+			name.value = "tmicon-md-moon"
+			color.value = ''
+		} else {
+			name.value = "tmicon-ios-sunny"
+			color.value = '#FFCC00'
+		}
 		findSaleCollectionList()
 	})
 	// 切换暗黑 样式
@@ -308,7 +317,7 @@
 </script>
 <style>
 	.countdown {
-		background-color: #666666;
+		background-color: rgba(0, 0, 0, 0.6);
 		border-radius: 20rpx;
 	}
 
@@ -316,6 +325,7 @@
 		width: 750rpx;
 		position: fixed;
 		bottom: calc(var(--window-bottom) + 10rpx);
+
 	}
 
 	.scroll-Y {

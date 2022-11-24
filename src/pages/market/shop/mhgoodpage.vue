@@ -1,17 +1,17 @@
 <template>
 	<tm-app class="overflow-y">
-		<tm-navbar hideHome title="盲盒详情" :height="44" :shadow="0">
+		<tm-navbar title="盲盒详情" :height="44" :shadow="0">
 		</tm-navbar>
 		<view class="head">
 			<view class="bg"
 				:style="{'background-image': store.tmStore.dark? `url(${bg})`: `url(${bg1})` ,'background-size':' 100% 100%','margin':'0 auto','position':'relative','width':'500rpx','height':'200rpx'}">
 				<view class="img">
-					<tm-image preview :round="4" :width="300" :height="300" :src="data.collImg">
+					<tm-image preview :round="4" :width="300" :height="300" :src="data.img">
 					</tm-image>
 				</view>
 			</view>
 		</view>
-		<tm-sheet :round="3" :shadow="0" :margin="[20,20]" :padding="[0,0]">
+		<!-- <tm-sheet :round="3" :shadow="0" :margin="[20,20]" :padding="[0,0]">
 			<view class="flex flex-row-center-between">
 				<view class="flex ma-15">
 					<tm-avatar :round="12" :img="data.creatorImg"></tm-avatar>
@@ -24,8 +24,8 @@
 									<tm-text class="ma-5" color="#25262E" :font-size="22" _class="text-weight-n"
 										label="限量"></tm-text>
 								</view>
-								<view class="round-tr-5 round-br-5 flex flex-center" style="width: 85rpx;">
-									<tm-text class="ma-5" :font-size="22" _class="text-weight-n" :label="data.presale">
+								<view class="round-tr-5 round-br-5 flex flex-center" style="width: 85rpx;background-color: #FFE6C8;">
+									<tm-text class="ma-5" :font-size="22" color="#25262E" _class="text-weight-n" :label="data.presale">
 									</tm-text>
 								</view>
 							</view>
@@ -35,8 +35,8 @@
 									<tm-text class="ma-5" color="#25262E" :font-size="22" _class="text-weight-n"
 										label="剩余"></tm-text>
 								</view>
-								<view class="round-tr-5 round-br-5 flex flex-center" style="width: 85rpx;">
-									<tm-text class="ma-5" :font-size="22" _class="text-weight-n" :label="data.sold">
+								<view class="round-tr-5 round-br-5 flex flex-center" style="width: 85rpx;background-color: #FFE6C8;">
+									<tm-text class="ma-5" :font-size="22" color="#25262E" _class="text-weight-n" :label="data.sold">
 									</tm-text>
 								</view>
 							</view>
@@ -51,9 +51,9 @@
 					</view>
 				</view>
 			</view>
-		</tm-sheet>
+		</tm-sheet> -->
 
-		<tm-sheet :round="3" :shadow="0" :margin="[20,20]" :padding="[0,0]">
+		<tm-sheet :round="3" :shadow="0" :margin="[20,10]" :padding="[0,0]">
 			<view class="flex">
 				<tm-text class="ml-25 mt-20" :font-size="35" _class="text-weight-b" label="数字收藏小贴士"></tm-text>
 				<tm-text class="ml-15 mt-32 " _class="text-size-xxs" label="购买即可体验内容"></tm-text>
@@ -61,55 +61,54 @@
 			<view class="mt-20 flex flex-around">
 				<view class="">
 
-					<tm-icon name="tmicon-huiyuan"></tm-icon>
+					<tm-icon name="xh-bianhao" :fontSize="40"></tm-icon>
 
-
-					<tm-text class="mt-20 mb-20" :font-size="22" _class="text-weight-s" label="唯一编号"></tm-text>
+					<tm-text class="mt-20 mb-20" :font-size="28" _class="text-weight-s" label="唯一编号"></tm-text>
 
 
 				</view>
 				<view class="">
-					<tm-icon name="tmicon-md-ribbon"></tm-icon>
+					<tm-icon name="xh-kexin" :fontSize="40"></tm-icon>
 
-					<tm-text class="mt-20 mb-20" :font-size="22" _class="text-weight-s" label="可信记录"></tm-text>
-
-				</view>
-				<view class="">
-					<tm-icon name="tmicon-md-ribbon"></tm-icon>
-
-					<tm-text class="mt-20 mb-20" :font-size="22" _class="text-weight-s" label="永久存证"></tm-text>
+					<tm-text class="mt-20 mb-20" :font-size="28" _class="text-weight-s" label="可信记录"></tm-text>
 
 				</view>
 				<view class="">
-					<tm-icon name="tmicon-md-ribbon"></tm-icon>
-					<tm-text class="mt-20 mb-20" :font-size="22" _class="text-weight-s" label="不可篡改"></tm-text>
+					<tm-icon name="xh-cunzheng" :fontSize="40"></tm-icon>
+
+					<tm-text class="mt-20 mb-20" :font-size="28" _class="text-weight-s" label="永久存证"></tm-text>
+
+				</view>
+				<view class="">
+					<tm-icon name="xh-bukecuangai" :fontSize="40"></tm-icon>
+					<tm-text class="mt-20 mb-20" :font-size="28" _class="text-weight-s" label="不可篡改"></tm-text>
 
 				</view>
 			</view>
 		</tm-sheet>
-
 		<tm-sheet :style="{'color': store.tmStore.dark?'#fff': '#25262E','font-size': '22rpx'}" :round="3" :shadow="0"
-			:margin="[20,20]" :padding="[20,10]" v-if="data.probablyList">
+			:margin="[20,10]" :padding="[20,10]" v-if="data.probablyList">
 			<view class="flex">
 				<tm-text class="ml-20" :font-size="35" _class="text-weight-b" label="可能获得"></tm-text>
 			</view>
-			<tm-sheet :round="3" :shadow="4" :margin="[20,20]" :padding="[20,10]" v-for="(item,i) in data.probablyList" :key="i">
+			<tm-sheet :round="3" :shadow="4" :margin="[20,10]" :padding="[20,10]" v-for="(item,i) in data.probablyList"
+				:key="i">
 				<view class="flex  flex-between">
 					<view class="flex">
 						<tm-image preview :round="4" :width="135" :height="125" :src="item.img">
 						</tm-image>
 						<view class="flex flex-col flex-around">
 							<tm-text class="ml-20" :font-size="30" _class="text-weight-b" :label="item.name"></tm-text>
-							<tm-text class="ml-20" :font-size="22" _class="text-weight-n" :label="`概率：${item.chance}%`"></tm-text>
+							<tm-text class="ml-20" :font-size="22" _class="text-weight-n" :label="`概率：${item.chance}%`">
+							</tm-text>
 						</view>
 					</view>
-					<tm-text class="flex-center" :font-size="25" _class="text-weight-b" :label="item.name"></tm-text>
+					<!-- <tm-text class="flex-center" :font-size="25" _class="text-weight-b" :label="item.name"></tm-text> -->
 				</view>
 			</tm-sheet>
 		</tm-sheet>
 
-		<tm-sheet style="margin-bottom: 100rpx;" :round="3" :shadow="0" :margin="[20,20]" :padding="[0,10]"
-			v-if="data.details">
+		<tm-sheet style="margin-bottom: 100rpx;" :round="3" :shadow="0" :margin="[20,10]" :padding="[0,10]">
 			<view class="">
 
 				<tm-text class="ml-25 mt-20" :font-size="35" _class="text-weight-b" label="购买须知"></tm-text>
@@ -129,7 +128,8 @@
 					<view class="flex flex-row-center-between aa">
 						<view class="flex flex-col ml-40">
 							<view class="flex  flex-col-bottom-center ">
-								<tm-text :font-size="18" _class="text-weight-n" class="flex-row-bottom-end mb--10" label="¥"></tm-text>
+								<tm-text :font-size="18" _class="text-weight-n" class="flex-row-bottom-end mb--10"
+									label="¥"></tm-text>
 								<tm-text class="ml-10" :font-size="38" _class="text-weight-b" :label="data.price">
 								</tm-text>
 							</view>
@@ -142,7 +142,8 @@
 				</tm-sheet>
 			</view>
 		</view>
-		<tm-modal :height="300" splitBtn title="温馨提示" okText="确定" v-model:show="orderShow" @ok="pay(order.operationData.id)">
+		<tm-modal :height="300" splitBtn title="温馨提示" okText="确定" v-model:show="orderShow"
+			@ok="pay(order.operationData.id)">
 			<view class="flex flex-center">
 				<tm-text :font-size="30" _class="text-weight-n" :label="order.operationMsg">
 				</tm-text>
@@ -152,7 +153,7 @@
 </template>
 
 <script setup>
-	import { Market,My } from "@/api/api.ts"
+	import { Market, My } from "@/api/api.ts"
 	import { onLoad } from "@dcloudio/uni-app";
 	import { onBeforeMount, ref } from "vue";
 	import bg1 from "@/static/img/shopBg.png"
@@ -169,7 +170,7 @@
 	const pay = (id) => {
 		console.log(id);
 		uni.navigateTo({
-			url:'/pages/my/order/orderpay?id='+id
+			url: '/pages/my/order/orderpay?id=' + id
 		})
 	}
 	onBeforeMount(() => {
@@ -178,14 +179,14 @@
 		})
 	})
 	const placeOrder = () => {
-		My.placeOrder({type:'07',id:id.value}).then(res => {
+		My.placeOrder({ type: '07', id: id.value }).then(res => {
 			if (res.operationCode == '01') {
 				orderShow.value = true
 				order.value = res
 				return
 			}
 			uni.navigateTo({
-				url:'/pages/my/order/orderpay?id='+res.operationData.id
+				url: '/pages/my/order/orderpay?id=' + res.operationData.id
 			})
 		})
 	}

@@ -1,19 +1,10 @@
 <template>
 	<tm-app>
-		<tm-navbar hideHome title="详情" :height="44" :shadow="0">
-			
-		</tm-navbar>
-		<tm-html :content="rx"></tm-html>
-	</tm-app>
-	<tm-app>
 		<tm-navbar  title="详情" :height="44" :shadow="0">
-	
 		</tm-navbar>
-		<tm-sheet :shadow="0" :margin="[0,0]" :round="0">
-			<tm-html :content="rx"></tm-html>
-	
-		</tm-sheet>
-	
+		<view class="main" >
+			<tm-html class="mt-10 ml-20 mr-20" :content="rx"></tm-html>
+		</view>
 	</tm-app>
 </template>
 
@@ -35,4 +26,7 @@
 
 <style>
 
+.main{
+	background-color: #fbf9f9;
+}
 </style>

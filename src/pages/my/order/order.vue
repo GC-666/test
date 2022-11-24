@@ -59,12 +59,12 @@
 			</tm-sheet>
 		</view>
 		<scroll-view class="scroll-Y" scroll-y="true" @scrolltolower="lower">
-			<view class="flex flex-row-center-between flex-wrap" style="margin: 0rpx 20rpx 0rpx 20rpx;">
+			<view v-if="orderFindPageList.length>0"  class="flex flex-row-center-between flex-wrap" style="margin: 0rpx 20rpx 0rpx 20rpx;">
 				<view class="relative" v-for="(data,index) in orderFindPageList">
-					<tm-sheet :shadow="0" :margin="[0,20]" :padding="[20,20]" style="width:710rpx">
+					<tm-sheet :round="4" :shadow="0" :margin="[0,10]" :padding="[20,20]" style="width:710rpx">
 						<view class="flex flex-between">
 							<view class="flex flex-center">
-								<tm-text :font-size="18" _class="text-weight-s" :label="`订单编号:${data.orderNo}`">
+								<tm-text :font-size="22" _class="text-weight-s" :label="`订单编号:${data.orderNo}`">
 								</tm-text>
 							</view>
 							<view class="flex flex-center" v-if="data.orderStatus==0">
@@ -82,25 +82,33 @@
 						</view>
 						<view class="flex flex-between mt-20">
 							<view class="flex">
-								<tm-image :round="3" :width="120" :height="120" :src="data.objectImg">
+								<tm-image v-if="data.orderType=='00'" :round="3" :width="120" :height="120"
+									:src="chongzhi">
+								</tm-image>
+								<tm-image v-else-if="data.orderType=='01'" :round="3" :width="120" :height="120"
+									:src="tixian">
+								</tm-image>
+								<tm-image v-else :round="3" :width="120" :height="120" :src="data.objectImg">
 								</tm-image>
 								<view class="flex flex-col flex-around ml-20">
-									<tm-text :font-size="26" _class="text-weight-b" :label="data.objectName"></tm-text>
-									<tm-text :font-size="18" _class="text-weight-s" :label="`类型:${data.orderTypeName}`">
+									<tm-text :font-size="26" _class="text-overflow text-weight-b"
+										_style="width: 230rpx;text-overflow: ellipsis;" :label="data.objectName">
 									</tm-text>
-									<tm-text v-if="data.orderStatus==0" :font-size="18" _class="text-weight-s"
+									<tm-text :font-size="22" _class="text-weight-s" :label="`类型:${data.orderTypeName}`">
+									</tm-text>
+									<tm-text v-if="data.orderStatus==0" :font-size="22" _class="text-weight-s"
 										label="状态:待付款"></tm-text>
-									<tm-text v-else-if="data.orderStatus==1" :font-size="18" _class="text-weight-s"
+									<tm-text v-else-if="data.orderStatus==1" :font-size="22" _class="text-weight-s"
 										label="状态:待发货"></tm-text>
-									<tm-text v-else-if="data.orderStatus==2" :font-size="18" _class="text-weight-s"
+									<tm-text v-else-if="data.orderStatus==2" :font-size="22" _class="text-weight-s"
 										label="状态:已完成"></tm-text>
-									<tm-text v-else-if="data.orderStatus==9" :font-size="18" _class="text-weight-s"
+									<tm-text v-else-if="data.orderStatus==9" :font-size="22" _class="text-weight-s"
 										label="状态:已失效"></tm-text>
 								</view>
 							</view>
 							<view class="flex flex-col flex-row-bottom-end">
-								<tm-text class="mb-10" :font-size="18" _class="text-weight-s"
-									:label="`订单时间:${DateUtils.formatDateTime(data.orderTime)}`"></tm-text>
+								<tm-text class="mb-10" :font-size="22" _class="text-weight-s"
+									:label="`${DateUtils.formatDateTime(data.orderTime)}`"></tm-text>
 								<view class="flex">
 									<tm-text :font-size="28" _class="text-weight-b" label="¥"></tm-text>
 									<tm-text :font-size="28" _class="text-weight-b" :label="data.totalMoney"></tm-text>
@@ -108,9 +116,9 @@
 							</view>
 						</view>
 						<view class="flex flex-row-bottom-end mt-20">
-							<tm-button @click="kefu" :margin="[0, 0]" :padding="[0,4]" :height="40" :width="160"
-								outlined :round="20" size="normal" fontColor="#FBB900" color="#FBB900" :shadow="0"
-								label="联系客服"></tm-button>
+							<tm-button v-if="data.orderStatus==0 || data.orderStatus==1" @click="kefu" :margin="[0, 0]"
+								:padding="[0,4]" :height="40" :width="160" outlined :round="20" size="normal"
+								fontColor="#FBB900" color="#FBB900" :shadow="0" label="联系客服"></tm-button>
 							<tm-button :margin="[10, 0]" :padding="[0,4]"
 								@click="gonav('pages/my/order/orderDetails?id='+data.id)" :height="40" :width="160"
 								outlined :round="20" size="normal" :shadow="0" label="查看详情"></tm-button>
@@ -124,6 +132,9 @@
 						</view>
 					</tm-sheet>
 				</view>
+			</view>
+			<view v-else class="flex flex-wrap flex-row-center-center" style="margin-top:150rpx">
+				<tm-image :round="4" class="flex-start" :width="350" :height="350" :src="wushuju"></tm-image>
 			</view>
 		</scroll-view>
 
@@ -145,6 +156,9 @@
 		reactive,
 		ref
 	} from 'vue';
+	import chongzhi from "@/static/my/chongzhi.png"
+	import tixian from "@/static/my/tixian.png"
+	import wushuju from "@/static/my/wushuju.png"
 
 	const list = ref([])
 	const acvite = ref(0)
@@ -152,21 +166,14 @@
 	const cover = ref(false)
 	const params = ref({
 		page: 1,
-		limit: 20,
-		orderType: "",
+		limit: 10,
+		orderNewType: "",
 		orderStatus: ""
 	})
 	const tabsClick = (i) => {
 		acvite.value = i
-		params.value.page = 1
-		list.value = []
-		if (i == 0) {
-			params.value.orderType = "";
-			params.value.orderStatus = "";
-			typeShow.value = false
-			cover.value = false
-		} else if (i == 1) {
-			params.value.orderType = "";
+		if (i == 1) {
+			params.value.orderNewType = "";
 			params.value.orderStatus = "2";
 			if (typeShow.value) {
 				typeShow.value = false
@@ -175,41 +182,50 @@
 				typeShow.value = true
 				cover.value = true
 			}
-		} else if (i == 2) {
-			params.value.orderType = "";
-			params.value.orderStatus = "0";
-			typeShow.value = false
-			cover.value = false
-		} else if (i == 3) {
-			params.value.orderType = "";
-			params.value.orderStatus = "9";
-			typeShow.value = false
-			cover.value = false
+		} else {
+			params.value.page = 1
+			list.value = []
+			if (i == 0) {
+				params.value.orderNewType = "";
+				params.value.orderStatus = "";
+				typeShow.value = false
+				cover.value = false
+			} else if (i == 2) {
+				params.value.orderNewType = "";
+				params.value.orderStatus = "0";
+				typeShow.value = false
+				cover.value = false
+			} else if (i == 3) {
+				params.value.orderNewType = "";
+				params.value.orderStatus = "9";
+				typeShow.value = false
+				cover.value = false
+			}
+			tabsChange();
 		}
-		tabsChange();
 	}
 
 	const acc = ref(0)
 	const tagChange = (index) => {
 		params.value.orderStatus = "2";
 		if (index == 0) {
-			params.value.orderType = "";
+			params.value.orderNewType = "";
 		} else if (index == 1) {
-			params.value.orderType = "";
+			params.value.orderNewType = "01";
 		} else if (index == 2) {
-			params.value.orderType = "";
+			params.value.orderNewType = "02";
 		} else if (index == 3) {
-			params.value.orderType = "";
+			params.value.orderNewType = "03";
 		} else if (index == 4) {
-			params.value.orderType = "00";
+			params.value.orderNewType = "04";
 		} else if (index == 5) {
-			params.value.orderType = "01";
+			params.value.orderNewType = "05";
 		}
 		acc.value = index
 		tabsChange();
 	}
 	//页面加载完成执行
-	onShow(() => {
+	onMounted(() => {
 		tabsChange();
 	})
 	//订单列表

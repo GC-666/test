@@ -454,6 +454,42 @@
             }
             
         }
+        ,{
+            "path" : "pages/login/proSecret",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/login/proUser",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/my/collections/saleAgreement",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/my/set/about/aboutUs",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 
 	"globalStyle": {
@@ -472,26 +508,26 @@
 		"list": [{
 				"pagePath": "pages/index/index",
 				"text": "首页",
-				"iconPath": "static/tabBar/index.png",
-				"selectedIconPath": "static/tabBar/index-activate.png"
+				"iconPath": "/static/tabbar/index.png",
+				"selectedIconPath": "static/tabbar/index-activate.png"
 			},
 			{
 				"pagePath": "pages/market/market",
 				"text": "市场",
-				"iconPath": "static/tabBar/market.png",
-				"selectedIconPath": "static/tabBar/market-activate.png"
+				"iconPath": "/static/tabbar/market.png",
+				"selectedIconPath": "static/tabbar/market-activate.png"
 			},
 			{
 				"pagePath": "pages/activity/activity",
 				"text": "活动",
-				"iconPath": "static/tabBar/activity.png",
-				"selectedIconPath": "static/tabBar/activity-activate.png"
+				"iconPath": "/static/tabbar/activity.png",
+				"selectedIconPath": "static/tabbar/activity-activate.png"
 			},
 			{
 				"pagePath": "pages/my/my",
 				"text": "我的",
-				"iconPath": "static/tabBar/my.png",
-				"selectedIconPath": "static/tabBar/my-activate.png"
+				"iconPath": "/static/tabbar/my.png",
+				"selectedIconPath": "static/tabbar/my-activate.png"
 			}
 		]
 	}

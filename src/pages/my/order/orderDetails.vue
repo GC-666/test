@@ -4,7 +4,11 @@
 		</tm-navbar>
 		<tm-sheet :shadow="0" :margin="[20,20]" :padding="[20,20]" style="width:710rpx">
 			<view class="flex">
-				<tm-image :round="3" :width="120" :height="120" :src="find.objectImg">
+				<tm-image v-if="find.orderType=='00'" :round="3" :width="120" :height="120" :src="chongzhi">
+				</tm-image>
+				<tm-image v-else-if="find.orderType=='01'" :round="3" :width="120" :height="120" :src="tixian">
+				</tm-image>
+				<tm-image v-else :round="3" :width="120" :height="120" :src="find.objectImg">
 				</tm-image>
 				<view class="flex flex-col flex-around ml-20">
 					<tm-text :font-size="26" _class="text-weight-b" :label="find.objectName"></tm-text>
@@ -43,10 +47,10 @@
 				<tm-text :font-size="22" _class="text-weight-b" :label="DateUtils.formatDateTime(find.payTime)"></tm-text>
 			</view>
 			<tm-divider color="grey" :margin="[1,1]" v-if="find.payTime!=null"></tm-divider>
-			<view class="flex flex-between pt-20 pb-20" v-if="find.payTime!=null" >
+			<!-- <view class="flex flex-between pt-20 pb-20" v-if="find.payTime!=null" >
 				<tm-text color="#808080" :font-size="22" label="支付方式"></tm-text>
 				<tm-text :font-size="22" _class="text-weight-b" :label="find.payType"></tm-text>
-			</view>
+			</view> -->
 			<tm-divider color="grey" :margin="[1,1]" v-if="find.orderStatus == '失效订单'"></tm-divider>
 			<view class="flex flex-between pt-20 pb-20" v-if="find.orderStatus == '失效订单'">
 				<tm-text color="#808080" :font-size="22" label="失效原因"></tm-text>
@@ -64,14 +68,15 @@
 				<tm-text :font-size="22" _class="text-weight-b" :label="find.totalMoney"></tm-text>
 			</view>
 			<tm-divider color="grey" :margin="[1,1]"></tm-divider>
-			<view class="flex flex-between pt-20 pb-20">
+			<view class="flex flex-between pt-20 pb-20" v-if="find.orderStatus == '2'">
 				<tm-text color="#808080" :font-size="22" label="到款账户"></tm-text>
-				<tm-text v-if="true" :font-size="22" _class="text-weight-b" label="余额"></tm-text>
-				<tm-text v-else-if="false" :font-size="22" _class="text-weight-b" label="云钱包"></tm-text>
+				<tm-text v-if="find.payType=='00'" :font-size="22" _class="text-weight-b" label="余额"></tm-text>
+				<tm-text v-else-if="find.payType=='03'" :font-size="22" _class="text-weight-b" label="余额"></tm-text>
+				<tm-text v-else-if="find.payType=='04'" :font-size="22" _class="text-weight-b" label="积分"></tm-text>
+				<tm-text v-else-if="find.payType=='05'" :font-size="22" _class="text-weight-b" label="云钱包"></tm-text>
 			</view>
-			<tm-divider color="grey" :margin="[1,1]"></tm-divider>
 		</tm-sheet>
-		<tm-sheet _class="flex-col">
+		<!-- <tm-sheet _class="flex-col">
 			<view >
 				<tm-timeline >
 					<tm-timeline-item style="width:500rpx" color="green" :size="32" type="fill" icon="tmicon-check" time="藏品上架成功">
@@ -82,7 +87,7 @@
 					</tm-timeline-item>
 				</tm-timeline>
 			</view>
-		</tm-sheet>
+		</tm-sheet> -->
 	</tm-app>
 </template>
 
@@ -90,6 +95,8 @@
 	import { onShow,onLoad } from '@dcloudio/uni-app';
 	import { onMounted , reactive , ref } from 'vue';
 	import { My } from "@/api/api.ts"
+	import chongzhi from "@/static/my/chongzhi.png"
+	import tixian from "@/static/my/tixian.png"
 	const id=ref(0);
 	const find=ref({});
 	onLoad((e)=>{

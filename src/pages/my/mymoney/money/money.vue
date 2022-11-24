@@ -5,7 +5,7 @@
 		<tm-text :fontSize="26" class="text-weight-b mt-n10 ml-20" label="请选择支付方式"></tm-text>
 		<view class="flex flex-around">
 			<view class="zf mt-n10" @click="gonav('pages/my/mymoney/paymoney/paymoney')">
-				<tm-icon :fontSize="80" name="tmicon-yinhangqia"></tm-icon>
+				<tm-icon :fontSize="80" name="xh-yinlian"></tm-icon>
 				<tm-text :fontSize="22" class="text-weight-n " label="银联"></tm-text>
 			</view>
 			<view class="zf mt-n10">
@@ -24,11 +24,11 @@
 		</view>
 		<view class="mt-n25">
 			<tm-sheet :shadow="0" :margin="[0,0]" :padding="[0,0]">
-				<tm-cell :margin="[10, 10]" :titleFontSize="28" :rightText="rightText"
+				<tm-cell :margin="[10, 0]" :padding="[0,0]" :titleFontSize="28" :rightText="rightText"
 					@click="gonav('pages/my/mymoney/bdyhk/bdyhk')">
 					<template v-slot:title>
-						<view class="flex" style="align-items: center;">
-							<tm-icon class="ml-10" :fontSize="46" name="tmicon-yinhangqia"></tm-icon>
+						<view class="flex " style="align-items: center;">
+							<tm-icon class="ml-10" :fontSize="70" name="xh-yinlian"></tm-icon>
 							<tm-text class="ml-44" :fontSize="26" :label="data.alipay"></tm-text>
 						</view>
 					</template>

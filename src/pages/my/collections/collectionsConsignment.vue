@@ -37,7 +37,7 @@
 		<tm-sheet :shadow="0" :margin="[20,0]" :padding="[20,10]">
 			<view class="flex flex-between pt-20 pb-20">
 				<view class="flex flex-row-center-center">
-					<tm-icon  name="tmicon-alipay"></tm-icon>
+					<tm-icon  name="xh-zhanghuqianbao" :font-size="35"></tm-icon>
 					<tm-text class="ml-10" color="#808080" :font-size="22" _class="text-weight-b" label="平台钱包"></tm-text>
 				</view>
 				<tm-checkbox-group @change="boxlistchange" v-model="checkboxlist">
@@ -47,7 +47,7 @@
 			<tm-divider color="grey" :margin="[1,1]"></tm-divider>
 			<view class="flex flex-between pt-20 pb-20">
 				<view class="flex flex-row-center-center">
-					<tm-icon name="tmicon-alipay"></tm-icon>
+					<tm-icon name="xh-yunqianbao" :font-size="35"></tm-icon>
 					<tm-text class="ml-10" color="#808080" :font-size="22" _class="text-weight-b" label="云钱包"></tm-text>
 					<tm-text class="ml-10" color="red" :font-size="22" _class="text-weight-b" label="(推荐)"></tm-text>
 				</view>
@@ -86,8 +86,18 @@
 				</view>
 			</view>
 		</tm-sheet>
-		<view style="margin-top: 50rpx;">
+		<view style="margin-top: 30rpx;">
 			<tm-button @click="consignment" :margin="[40,0]" form-type="submit" :fontSize="38" linearDeep="accent" block label="寄售"></tm-button>
+		</view>
+		<view class="flex-row-center-center mt-20 mb-40">
+			<tm-checkbox class="flex-row-center-center" v-model="loot" :size="28" :round="10">
+				<template v-slot:default="{checked}">
+					<view class="flex flex-row">
+						<tm-text :fontSize="20" label="我已经阅读并同意"></tm-text>
+						<tm-text @click="gonav('pages/my/collections/saleAgreement')" :fontSize="20" color="red" label="《用户出售协议》"></tm-text>
+					</view>
+				</template>
+			</tm-checkbox>
 		</view>
 		<tm-modal :height="380" title="提示" splitBtn okText="确认" v-model:show="show" :beforeClose="beforeClose" @ok="submit" :close="pwd=''">
 			<tm-input placeholder="请输入交易密码" v-model="pwd"></tm-input>
@@ -106,6 +116,7 @@
 	import bg from "@/static/img/bg.png"
 	import { useTmpiniaStore } from '@/xhui/tool/lib/tmpinia';
 	const store = useTmpiniaStore();
+	const loot = ref(true);
 	
 	const price = ref("")
 	const checkboxlist = reactive();
@@ -135,7 +146,7 @@
 	const paymentPlatform = ref([]);
 	const boxlistchange=(e)=>{
 		paymentPlatform.value=[];
-		for(var i=0;i<e.length;i++){
+		for(let i=0;i<e.length;i++){
 			if(e[i]=="00"){
 				paymentPlatform.value.push({
 					type:"00",
@@ -168,19 +179,26 @@
 	const content = ref("");
 	//寄售点击
 	const consignment=()=>{
-		if(getprice.value>0){
-			if(paymentPlatform.value.length>0){
-					show.value=true;
-					content.value="预计获得："+getprice.value+"元";
+		if(loot.value){
+			if(getprice.value>0){
+				if(paymentPlatform.value.length>0){
+						show.value=true;
+						content.value="预计获得："+getprice.value+"元";
+				}else{
+					uni.showToast({
+						title: "未选择支付方式",
+						icon: 'none'
+					})
+				}
 			}else{
 				uni.showToast({
-					title: "未选择支付方式",
+					title: "未输入价格",
 					icon: 'none'
 				})
 			}
 		}else{
 			uni.showToast({
-				title: "未输入价格",
+				title: "未阅读用户出售协议",
 				icon: 'none'
 			})
 		}
