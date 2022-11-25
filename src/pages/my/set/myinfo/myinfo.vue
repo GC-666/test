@@ -49,7 +49,7 @@
 				</view>
 			</tm-sheet>
 		</view>
-		
+
 		<tm-sheet :round="0" :margin="[0,20]" :padding="[20,30]" :shadow="0">
 			<view class="flex flex-row-center-between" @click="gonav('pages/my/set/name/name')">
 				<tm-text :font-size="30" _class="text-weight-b" label="实名认证"></tm-text>
@@ -64,11 +64,11 @@
 				</view>
 				<tm-divider color="grey" :margin="[0,1]"></tm-divider>
 				<view class="flex flex-center mt-30 mb-20">
-					<tm-text :font-size="30" _class="text-weight-b" label="从相册中选择" @click="albumClick(1)"></tm-text>
+					<tm-text :font-size="30" _class="text-weight-b" label="从相册中选择" @click="albumClick()"></tm-text>
 				</view>
 				<tm-divider color="grey" :margin="[0,1]"></tm-divider>
 				<view class="flex flex-center mt-30 mb-5">
-					<tm-text :font-size="30" _class="text-weight-b" label="拍照" @click="albumClick(2)"></tm-text>
+					<tm-text :font-size="30" _class="text-weight-b" label="拍照" @click="albumClick1()"></tm-text>
 				</view>
 				<tm-divider color="grey" :border="10"></tm-divider>
 				<view class="flex flex-center mt-10">
@@ -162,20 +162,55 @@
 	}
 	/* 修改昵称 结束 */
 	// 从相册中选择  拍照
-	const albumClick = (type) => {
+	const albumClick = () => {
 		// 1 相册  2 拍照
 		uni.chooseImage({
 			count: 1, //默认9
 			sizeType: ['compressed'], //可以指定是原图还是压缩图，默认二者都有
-			sourceType: [type === 1 ? 'album' : 'camera'], //从相册选择
+			sourceType: ['album'], //从相册选择
 			success: (res) => {
 
 				let imgPath = res.tempFilePaths[0]
 				headimg.value = res.tempFilePaths[0]
-
-				uni.showLoading({
-
+				uni.showLoading({})
+				uni.uploadFile({
+					url: baseUrl + '/upload',
+					method: 'POST',
+					filePath: imgPath,
+					name: 'uploadFile',
+					success: (res) => {
+						if (res.data) {
+							let data = JSON.parse(res.data)
+							headimg1.value = "/" + data.data
+							subimg()
+						}
+					},
+					complete: () => {
+						uni.hideLoading()
+					},
+					fail: (err) => {
+						if (err) {
+							uni.showToast({
+								icon: 'none',
+								title: '服务器繁忙' //'服务器繁忙'
+							})
+						}
+					}
 				})
+			}
+		});
+	}
+	const albumClick1 = () => {
+		// 2 拍照
+		uni.chooseImage({
+			count: 1, //默认9
+			sizeType: ['compressed'], //可以指定是原图还是压缩图，默认二者都有
+			sourceType: ['camera'], //从相册选择
+			success: (res) => {
+
+				let imgPath = res.tempFilePaths[0]
+				headimg.value = res.tempFilePaths[0]
+				uni.showLoading({})
 				uni.uploadFile({
 					url: baseUrl + '/upload',
 					method: 'POST',

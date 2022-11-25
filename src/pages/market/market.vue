@@ -50,7 +50,7 @@
 			<view v-if="list.length>0" class="flex flex-between flex-wrap ml-5 mr-5">
 				<view v-for="(data,index) in list" @click="toShop(data)">
 					<tm-sheet :shadow="0" :round="4" :margin="[10,15]" :padding="[0,0]">
-						<tm-image extra class="round-t-4" :width="348" :height="344" :src="data.img">
+						<tm-image extra class="round-t-4" :width="348" :height="344"  model="aspectFill" :src="data.img">
 							<template v-slot:extra>
 								<view class="flex flex-center ml-20 mr-20"
 									:style="`background-image: url(${bg});background-size: 100% 100%;width:300rpx;height:40rpx`">

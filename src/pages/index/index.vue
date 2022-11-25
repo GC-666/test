@@ -9,21 +9,21 @@
 			</template>
 			<template v-slot:right>
 				<view class="mr-20">
-					<tm-icon :font-size="30" :color="color" :name="name" @click="setDark"></tm-icon>
+					<tm-image :width="45" :height="45" :src="indexr" @click="kefu"></tm-image>
 				</view>
 			</template>
 		</tm-navbar>
 		<!-- 首发藏品 -->
 		<scroll-view scroll-y="true" class="scroll-Y" @scrolltolower="lower">
-			<tm-carousel autoplay :margin="[0,0]" :width="710" :height="300" rangKey="img" :list="listimg" model="rect"
-				color="#ccc" @click="carouselClick">
+			<tm-carousel autoplay :round="4" :margin="[0,5]" :width="710" :height="300" rangKey="img" :list="listimg"
+				model="rect" color="#ccc" @click="carouselClick">
 			</tm-carousel>
 			<!-- 公告区域 -->
-			<tm-sheet :shadow="0" :margin="[20,10]" :padding="[0,24]" _class="px-20">
+			<tm-sheet :shadow="0" :round="4" :margin="[20,20]" :padding="[0,10]" _class="px-20">
 				<view class="flex flex-between" @click="gonav('pages/index/notice/notice')">
-					<tm-image :width="100" :height="30" :src="noticeImg"></tm-image>
+					<tm-image :width="100" :height="40" :src="noticeImg"></tm-image>
 					<view class="ml-20" v-for="i in notice" :key="i.id">
-						<tm-text _class="text-overflow" _style="width: 498rpx;text-overflow: ellipsis;" :fontSize="22"
+						<tm-text _class="text-overflow" _style="width: 498rpx;text-overflow: ellipsis;" :fontSize="28"
 							:label="i.name">
 						</tm-text>
 					</view>
@@ -31,24 +31,30 @@
 				</view>
 			</tm-sheet>
 			<!-- 首发 盲盒tabs -->
-			<view class="ml-20 mr-20">
-				<tm-tabs @change="tabsChange" :itemFontSize="28" :activeFontSize="30" :list="tabsTitle" :width="710"
-					:height="100" default-name="0"></tm-tabs>
+			<view class="ml-20 mr-20 flex">
+				<tm-text :fontSize="36" :color="index==0?'#07EBFE' :'' " label="即将开售"
+					@click="tabsChange(0)"></tm-text>
+				<tm-text :fontSize="36" :color="index==1? '#07EBFE' :'' " class="ml-20" label="盲盒"
+					@click="tabsChange(1)">
+				</tm-text>
+
+				<!-- <tm-tabs :round="4" @change="tabsChange" :itemFontSize="28" :activeFontSize="30" :list="tabsTitle"
+					:width="710" :height="60" default-name="0"></tm-tabs> -->
 			</view>
-			<view v-if="list.length>0" class="mt--20">
-				<tm-sheet :round="0" :shadow="0" :margin="[20,20]" :padding="[0,0]" @click="Go(data.id)"
+			<view v-if="list.length>0" class="mt-20">
+				<tm-sheet :round="4" :shadow="0" :margin="[20,20]" :padding="[0,0]" @click="Go(data.id)"
 					v-for="data in list" :key="data.id">
-					<view class="relative flex flex-row-center-center">
-						<tm-image style="filter: blur(5rpx);" :width="710" :height="600" :src="data.collImg">
+					<view class="relative flex flex-row-center-center ">
+						<tm-image style="filter: blur(5rpx);border-radius: 20rpx 20rpx 0rpx 0rpx;" :width="710"
+							:height="834" :src="data.collImg">
 						</tm-image>
 						<!--  t-50 l-50 r-50 -->
-						<view class="absolute">
-							<tm-image model="aspectFill" :border="4" color="black" :round="4" :width="468" :height="468"
-								:src="data.collImg">
+						<view class="absolute bb">
+							<tm-image model="aspectFill" :round="4" :width="448" :height="448" :src="data.collImg">
 							</tm-image>
 						</view>
 					</view>
-					<view class="absolute ml-20 mt-2">
+					<view class="absolute ml-25 mt-25">
 						<view class="flex countdown">
 							<view class="flex">
 								<view class="flex ml-10 mr-10 mt-5 mb-5" v-if="data.diffSeconds ==='0'">
@@ -177,10 +183,9 @@
 	import logoimg from "@/static/logo.png"
 	import noticeImg from "@/static/img/noticeImg.png"
 	import { onMounted, ref } from "vue";
-	import { useTmpiniaStore } from '@/xhui/tool/lib/tmpinia';
 	import { onShow, onLoad } from '@dcloudio/uni-app';
 	import wushuju from "@/static/my/wushuju.png"
-	const store = useTmpiniaStore();
+	import indexr from "@/static/img/indexr.png"
 	const is = ref(true);
 	const test = () => {
 		const token = uni.getStorageSync('token')
@@ -290,29 +295,16 @@
 		Home.findPageList({ page: 1, limit: 1, objectType: 0 }).then(res => {
 			notice.value = res
 		})
-		if (!store.tmStore.dark) {
-			name.value = "tmicon-md-moon"
-			color.value = ''
-		} else {
-			name.value = "tmicon-ios-sunny"
-			color.value = '#FFCC00'
-		}
 		findSaleCollectionList()
 	})
-	// 切换暗黑 样式
-	const name = ref('tmicon-md-moon')
-	const color = ref('')
 	// 暗黑模式切换
-	const setDark = () => {
-		if (store.tmStore.dark) {
-			name.value = "tmicon-md-moon"
-			store.setTmVuetifyDark(false)
-			color.value = ''
-		} else {
-			name.value = "tmicon-ios-sunny"
-			store.setTmVuetifyDark(true)
-			color.value = '#FFCC00'
-		}
+	const kefu = () => {
+		// #ifdef APP-PLUS
+		plus.runtime.openURL('https://xunmeta.rocknft.top/chat.html')
+		// #endif
+		// #ifdef H5
+		window.location.href = 'https://xunmeta.rocknft.top/chat.html'
+		// #endif
 	}
 </script>
 <style>
@@ -326,6 +318,16 @@
 		position: fixed;
 		bottom: calc(var(--window-bottom) + 10rpx);
 
+	}
+
+	.bb {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 464rpx;
+		height: 464rpx;
+		background-image: url('@/static/img/indexbg.png');
+		background-size: 100% 100%;
 	}
 
 	.scroll-Y {

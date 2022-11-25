@@ -23,7 +23,7 @@
             </tm-sheet>
         </view>
         <!-- 子菜单 -->
-        <view :userInteractionEnabled="showActions" v-if="_actionsItem.length>0&&showActions" class="absolute flex " :style="[AcionPos_xy]">
+        <view :userInteractionEnabled="showActions" v-if="_actionsItem.length>0&&showActions" class="absolute flex" :style="[AcionPos_xy]">
             <view :style="[{width:(props.width)+'rpx',height:(props.height)+'rpx'}]" class="flex-center">
                 <tm-sheet
 				:followTheme="props.followTheme"

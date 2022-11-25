@@ -23,7 +23,8 @@
 							<tm-image v-else-if="data.goodsType==1" preview class="ml-8 mt-8" :round="4" :width="154"
 								:height="154" :src="jifen">
 							</tm-image>
-							<tm-image v-else preview class="ml-8 mt-8" :round="4" :width="154" :height="154" :src="data.goodsImg">
+							<tm-image v-else preview class="ml-8 mt-8" :round="4" :width="154" :height="154"
+								:src="data.goodsImg">
 							</tm-image>
 							<view class="flex flex-center">
 								<tm-text _class="text-overflow text-weight-b"
@@ -58,14 +59,14 @@
 						<view v-if="lootFindItem.isLoot==1" class="right flex flex-row-center-start"
 							@click="luckDraw(5)">
 							<view class="flex flex-col flex-center mt-36 ml-40">
-								<tm-text _class="text-weight-b" color="#922503" :font-size="26" label="5连抽"></tm-text>
+								<tm-text _class="text-weight-b" color="#922503" :font-size="26" label="五连抽"></tm-text>
 								<tm-text _class="text-weight-b" color="#922503" :font-size="26"
 									:label="`${lootFindItem.fiveValue}积分`"></tm-text>
 							</view>
 						</view>
 						<view v-else class="rightno flex flex-row-center-start">
 							<view class="flex flex-col flex-center mt-36 ml-40">
-								<tm-text _class="text-weight-b" color="#f5f5f5" :font-size="26" label="5连抽"></tm-text>
+								<tm-text _class="text-weight-b" color="#f5f5f5" :font-size="26" label="五连抽"></tm-text>
 								<tm-text _class="text-weight-b" color="#f5f5f5" :font-size="26"
 									:label="`${lootFindItem.fiveValue}积分`"></tm-text>
 							</view>

@@ -3,10 +3,11 @@
 		<!-- <view class="statusHeight" :style="{height:statusBarHeight+'px'}"></view> -->
 		<tm-sheet :margin="[0,0]" :padding="[0,statusBarHeight]">
 		</tm-sheet>
-		<view class="head pt-20" :style="user.adventureIsOpen=='1'?'height: 310rpx;':'height: 210rpx;'">
-			<!-- <view class="flex flex-end mt-20 mr-42">
-				<tm-icon name="tmicon-share1"></tm-icon>
-			</view> -->
+		<view class="head pt-20" style="height: 210rpx;">
+			<view class="flex flex-end mr-20">
+				<tm-icon name="tmicon-share1" @click="gonav('pages/my/set/share/share')"></tm-icon>
+				<tm-icon class="ml-40" :font-size="30" :color="color" :name="name" @click="setDark"></tm-icon>
+			</view>
 			<view class="headUser flex flex-between mt-30">
 				<tm-image :round="25" class="mt--34 ml-35" :width="128" :height="128" :src="user.avatar"></tm-image>
 				<view class="flex-5 mt-2 ml-20">
@@ -22,14 +23,15 @@
 
 				</view>
 			</view>
-			<tm-image v-if="user.adventureIsOpen=='1'" style="margin: 0rpx auto;" :width="710" :height="148"
-				:src="user.adventureCoverImg"></tm-image>
 		</view>
-		<tm-sheet :round="4" :shadow="0" :margin="[20,0]" :padding="[10,10]">
-			<view class="flex flex-between mt-15">
-				<tm-text :fontSize="26" _class="text-weight-b" label="我的藏品"></tm-text>
+		<tm-image v-if="user.adventureIsOpen=='1'" style="margin: -30rpx auto 0rpx auto;" :width="710" :height="148"
+			:src="user.adventureCoverImg"></tm-image>
+		<tm-sheet :round="4" :shadow="0" :margin="[20,30]" :padding="[10,10]">
+			<view class="flex flex-between">
+				<tm-text style="height: 50rpx;line-height: 50rpx;" :fontSize="26" _class="text-weight-b" label="我的藏品">
+				</tm-text>
 				<view class="flex" @click="gonav('pages/my/collections/collections')">
-					<tm-text :fontSize="26" label="更多"></tm-text>
+					<tm-text style="height: 50rpx;line-height: 50rpx;" :fontSize="26" label="更多"></tm-text>
 					<tm-icon class="ml-10" :fontSize="26" name="tmicon-angle-right"></tm-icon>
 				</view>
 			</view>
@@ -43,8 +45,11 @@
 			<view v-else class="flex flex-wrap flex-row-center-center" style="height:250rpx">
 				<tm-image :round="4" class="flex-start" :width="210" :height="210" :src="wushuju"></tm-image>
 			</view>
-			<view class="flex flex-between mt-20">
-				<tm-text :fontSize="26" _class="text-weight-b" label="我的盲盒"></tm-text>
+		</tm-sheet>
+		<tm-sheet :round="4" :shadow="0" :margin="[20,0]" :padding="[10,10]">
+			<view class="flex flex-between">
+				<tm-text style="height: 50rpx;line-height: 50rpx;" :fontSize="26" _class="text-weight-b" label="我的盲盒">
+				</tm-text>
 				<view class="flex" @click="gonav('pages/my/box/box')">
 					<tm-text style="height: 50rpx;line-height: 50rpx;" :fontSize="26" label="更多"></tm-text>
 					<tm-icon class="ml-10" :fontSize="26" name="tmicon-angle-right"></tm-icon>
@@ -63,7 +68,7 @@
 			</view>
 		</tm-sheet>
 
-		<tm-sheet :round="4" :shadow="0" :margin="[20,20]" :padding="[0,0]">
+		<tm-sheet :round="4" :shadow="0" :margin="[20,30]" :padding="[0,0]">
 			<tm-cell :margin="[20, 20]" :padding="[0, 0]" :titleFontSize="28" @click="gonav('pages/my/order/order')">
 				<template v-slot:title>
 					<view class="flex">
@@ -87,7 +92,7 @@
 				<template v-slot:title>
 					<view class="flex">
 						<tm-icon class="ml-10" :fontSize="32" name="xh-kefu"></tm-icon>
-						<tm-text class="ml-44" :fontSize="26" label="在线客服" ></tm-text>
+						<tm-text class="ml-44" :fontSize="26" label="在线客服"></tm-text>
 					</view>
 				</template>
 			</tm-cell>
@@ -120,6 +125,8 @@
 	import { onShow } from '@dcloudio/uni-app';
 	import { My } from "@/api/api.ts"
 	import wushuju from "@/static/my/wushuju.png"
+	import { useTmpiniaStore } from '@/xhui/tool/lib/tmpinia';
+	const store = useTmpiniaStore();
 
 	const statusBarHeight = uni.getSystemInfoSync().statusBarHeight
 	import {
@@ -163,21 +170,40 @@
 			url: "/pages/login/login"
 		})
 	} */
+
+
+	// 切换暗黑 样式
+	const name = ref('tmicon-md-moon')
+	const color = ref('')
+	// 暗黑模式切换
+	const setDark = () => {
+		if (store.tmStore.dark) {
+			name.value = "tmicon-md-moon"
+			store.setTmVuetifyDark(false)
+			color.value = ''
+		} else {
+			name.value = "tmicon-ios-sunny"
+			store.setTmVuetifyDark(true)
+			color.value = '#FFCC00'
+		}
+	}
 </script>
 
 <style>
 	.head {
 		background-image: url("@/static/my/head.png");
 		background-size: 100% 100%;
-
+		position: relative;
 	}
 
 	.headUser {
-		background-color: #fff;
-		height: 120rpx;
-		width: 680rpx;
-		margin: 34rpx auto 0rpx auto;
-		border-radius: 10rpx 10rpx 0rpx 0rpx;
+		position: absolute;
+		bottom: -12rpx;
+		left: 40rpx;
+		background-image: url("@/static/my/head2.png");
+		background-size: 100% 100%;
+		height: 161rpx;
+		width: 670rpx;
 	}
 
 	.work {
