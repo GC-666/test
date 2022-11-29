@@ -90,7 +90,6 @@
 		uni.$on('getTicket', res => {
 			if (res.ret == 0) {
 				sendCode(res)
-
 			} else {
 				uni.showToast({
 					title: '请完成验证',

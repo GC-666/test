@@ -1,5 +1,5 @@
 <template>
-	<tm-app >
+	<tm-app>
 		<tm-navbar title="资金流水">
 		</tm-navbar>
 		<view class="zhye ">
@@ -12,56 +12,54 @@
 			</view>
 		</view>
 		<tm-sheet :margin="[0,10]">
-			<tm-tabs @change="tabsChange" :transprent="false" activeFontColor="#07EBFE" align="center"
-				:list="tabsTitle" :itemHeight="30" :itemWidth="100" :width="700" :height="30" default-name="-1">
+			<tm-tabs @change="tabsChange" :transprent="false" activeFontColor="#07EBFE" align="center" :list="tabsTitle"
+				:itemHeight="30" :itemWidth="100" :width="700" :height="30" default-name="-1">
 			</tm-tabs>
 		</tm-sheet>
 		<view class="aaaa" style="padding: 0rpx 20rpx;">
-			<tm-sheet class="flex mt-20" :width="670" :round="3" :shadow="0" :margin="[0,0]"
-				:padding="[20,10]">
+			<tm-sheet class="flex mt-20" :width="670" :round="3" :shadow="0" :margin="[0,0]" :padding="[20,10]">
 				<view class="flex" @click="tabsClick()">
 					<tm-text class="text-weight-b " :font-size="30" label="时间范围"></tm-text>
-					<tm-icon class="ml-5" v-if="!typeShow" :color="''" :fontSize="25"
-						name="tmicon-angle-down"></tm-icon>
+					<tm-icon class="ml-5" v-if="!typeShow" :color="''" :fontSize="25" name="tmicon-angle-down">
+					</tm-icon>
 					<tm-icon class="ml-5" v-if="typeShow" :color="bgColor" :fontSize="25" name="tmicon-angle-up">
 					</tm-icon>
 				</view>
 				<view v-if="typeShow" class="flex overflow-y flex-wrap" style="max-height: 500rpx;">
-					<tm-tag checkable :checked="acc ===1? true :false" size="s" label="最近7天"
-						@click="tagChange(1)"></tm-tag>
-					<tm-tag checkable :checked="acc ===2? true :false" size="s" label="最近15天"
-						@click="tagChange(2)"></tm-tag>
+					<tm-tag checkable :checked="acc ===1? true :false" size="s" label="最近7天" @click="tagChange(1)">
+					</tm-tag>
+					<tm-tag checkable :checked="acc ===2? true :false" size="s" label="最近15天" @click="tagChange(2)">
+					</tm-tag>
 					<tm-tag checkable :checked="acc ===3? true :false" class="" size="s" label="最近30天"
 						@click="tagChange(3)"></tm-tag>
 				</view>
 			</tm-sheet>
 		</view>
-		<scroll-view scroll-y="true" class="scroll-Y" @scrolltolower="lower">
-			<view v-if="list.length>0" >
-				<tm-sheet :round="5" :shadow="0" :margin="[20,10]" :padding="[10,10]" v-for="item in list" :key="item.id">
-					<view class="flex flex-between ma-10">
-				
-						<tm-text class="ml-14 text-weight-b" :fontSize="26" :label="item.typeName"></tm-text>
-						<view class="flex">
-							<tm-text v-if="item.type=='10'||item.type=='11'||item.type=='12'||item.type=='30' ||item.type=='51'"
-								class="ml-14 text-weight-b" :fontSize="22" label="-"></tm-text>
-							<tm-text v-else class="ml-14 text-weight-b" :fontSize="22" label="+"></tm-text>
-							<tm-text class="mr-14" :fontSize="26" :label="`￥${item.money}`"></tm-text>
-						</view>
-				
-					</view>
-					<view class="flex flex-between ma-10">
-						<tm-text class="ml-14" color='#808080' :fontSize="26" :label="DateUtils.formatDateTime(item.payTime)"></tm-text>
-						<tm-text class="mr-14" color='#808080' :fontSize="18" :label="`余额：${item.afterMoney}`"></tm-text>
-					</view>
-				</tm-sheet>
-			</view>
-			<view v-else class="flex flex-wrap flex-row-center-center" style="margin-top:150rpx">
-				<tm-image :round="4" class="flex-start" :width="350" :height="350" :src="wushuju"></tm-image>
-			</view>
-		</scroll-view>
-		
+		<scroll-view scroll-y="true" class="scroll-Y" @scrolltolower="lower" v-if="list.length>0">
+			<tm-sheet :round="5" :shadow="0" :margin="[20,10]" :padding="[10,10]" v-for="item in list" :key="item.id">
+				<view class="flex flex-between ma-10">
 
+					<tm-text class="ml-14 text-weight-b" :fontSize="26" :label="item.typeName"></tm-text>
+					<view class="flex">
+						<tm-text
+							v-if="item.type=='10'||item.type=='11'||item.type=='12'||item.type=='30' ||item.type=='51'"
+							class="ml-14 text-weight-b" :fontSize="22" label="-"></tm-text>
+						<tm-text v-else class="ml-14 text-weight-b" :fontSize="22" label="+"></tm-text>
+						<tm-text class="mr-14" :fontSize="26" :label="`￥${item.money}`"></tm-text>
+					</view>
+
+				</view>
+				<view class="flex flex-between ma-10">
+					<tm-text class="ml-14" color='#808080' :fontSize="26"
+						:label="DateUtils.formatDateTime(item.payTime)"></tm-text>
+					<tm-text class="mr-14" color='#808080' :fontSize="18" :label="`余额：${item.afterMoney}`"></tm-text>
+				</view>
+			</tm-sheet>
+		</scroll-view>
+
+		<view v-if="list.length<=0" class="flex flex-wrap flex-row-center-center" style="margin-top:150rpx">
+			<tm-image :round="4" class="flex-start" :width="320" :height="280" :src="wushuju"></tm-image>
+		</view>
 
 		<view v-show="cover" class="cover" @click.stop="cover=false;typeShow = false"></view>
 	</tm-app>
@@ -69,7 +67,7 @@
 
 <script setup>
 	import DateUtils from "@/utils/dateUtils";
-	import { onShow,onLoad } from '@dcloudio/uni-app';
+	import { onShow, onLoad } from '@dcloudio/uni-app';
 	import { My } from "@/api/api.ts"
 	import { onMounted, ref } from "vue";
 	import wushuju from "@/static/my/wushuju.png"
@@ -97,8 +95,8 @@
 	//类型下标
 	const index = ref(-1);
 	const money = ref(1);
-	onLoad((e)=>{
-		money.value=e.money;
+	onLoad((e) => {
+		money.value = e.money;
 	})
 	const list = ref([])
 	const count = ref(0)
@@ -106,8 +104,8 @@
 		type: "",
 		page: 1,
 		limit: 20,
-		payStartDate:"",
-		payEndDate:"",
+		payStartDate: "",
+		payEndDate: "",
 	})
 	const lower = () => {
 		if (count.value > 0) {
@@ -121,7 +119,7 @@
 	const typeShow = ref(false)
 	const cover = ref(false)
 	const acc = ref(0)
-	
+
 	const tabsClick = (i) => {
 		if (typeShow.value) {
 			typeShow.value = false
@@ -132,30 +130,30 @@
 		}
 	}
 	const tabsChange = (i) => {
-		if(i>-1){
-			params.value.type=i
-		}else{
-			params.value.type=""
+		if (i > -1) {
+			params.value.type = i
+		} else {
+			params.value.type = ""
 		}
-		index.value=i
+		index.value = i
 		list.value = []
 		findList()
 	}
 	const tagChange = (i) => {
-		if(i==1 && acc.value!=i){//最近7天
-			params.value.payStartDate=DateUtils.getLastNDays(7);
-			params.value.payEndDate=DateUtils.getLastNDays(0);
-		}else if(i==2 && acc.value!=i){//最近15天
-			params.value.payStartDate=DateUtils.getLastNDays(15);
-			params.value.payEndDate=DateUtils.getLastNDays(0);
-		}else if(i==3 && acc.value!=i){//最近30天
-			params.value.payStartDate=DateUtils.getLastNDays(30);
-			params.value.payEndDate=DateUtils.getLastNDays(0);
-		}else{
-			params.value.payStartDate="";
-			params.value.payEndDate="";
+		if (i == 1 && acc.value != i) { //最近7天
+			params.value.payStartDate = DateUtils.getLastNDays(7);
+			params.value.payEndDate = DateUtils.getLastNDays(0);
+		} else if (i == 2 && acc.value != i) { //最近15天
+			params.value.payStartDate = DateUtils.getLastNDays(15);
+			params.value.payEndDate = DateUtils.getLastNDays(0);
+		} else if (i == 3 && acc.value != i) { //最近30天
+			params.value.payStartDate = DateUtils.getLastNDays(30);
+			params.value.payEndDate = DateUtils.getLastNDays(0);
+		} else {
+			params.value.payStartDate = "";
+			params.value.payEndDate = "";
 		}
-		acc.value=i
+		acc.value = i
 		list.value = [];
 		findList()
 	}
@@ -174,6 +172,7 @@
 		background-image: url('@/static/img/zhqb.png');
 		background-size: 100% 100%;
 	}
+
 	.active {
 		border: 1px solid #07EBFE;
 	}
@@ -202,6 +201,7 @@
 		border-radius: 10rpx;
 		margin: 30rpx;
 	}
+
 	.scroll-Y {
 		height: calc(100vh - var(--status-bar-height) - 88rpx - 190rpx);
 	}

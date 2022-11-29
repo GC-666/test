@@ -285,5 +285,32 @@ export class Activity {
 	static async lootLuckDraw(params: any) {
 		return await request("/loot/luckDraw", params, "POST")
 	}
+	//余额转积分
+	static async lootBalanceToIntegral(params: any) {
+		return await request("/loot/balanceToIntegral", params, "POST")
+	}
+}
+export class Role {
+	//冒险记录
+	static async findTaskRecrodList(params: any) {
+		return await request("/hero/task/findTaskRecrodList", params, "POST")
+	}
+	//任务列表
+	static async findTaskList(params: any) {
+		return await request("/hero/task/findTaskList", params, "POST")
+	}
+	//一键冒险
+	static async heroOnekeyWork(params: any) {
+		return await request("/hero/task/heroOnekeyWork", params, "POST")
+	}
+	//一键领取
+	static async heroOnekeyReceive(params: any) {
+		return await request("/hero/task/heroOnekeyReceive", params, "POST")
+	}
+	//我的英雄列表
+	static async findUserHeroList(params: any) {
+		return await request("/adventure/findUserHeroList", params, "POST")
+	}
+	
 	
 }

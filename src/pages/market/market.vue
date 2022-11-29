@@ -46,8 +46,8 @@
 			</tm-sheet>
 		</view>
 		<!-- :style="`height: calc(100vh  - 190rpx - 50px - ${statusBarHeight}px  - ${windowBottom}px)`" -->
-		<scroll-view scroll-y="true" class="scroll-Y" @scrolltolower="lower">
-			<view v-if="list.length>0" class="flex flex-between flex-wrap ml-5 mr-5">
+		<scroll-view scroll-y="true" class="scroll-Y" @scrolltolower="lower"  v-if="list.length>0">
+			<view class="flex flex-between flex-wrap ml-5 mr-5">
 				<view v-for="(data,index) in list" @click="toShop(data)">
 					<tm-sheet :shadow="0" :round="4" :margin="[10,15]" :padding="[0,0]">
 						<tm-image extra class="round-t-4" :width="348" :height="344"  model="aspectFill" :src="data.img">
@@ -86,11 +86,11 @@
 					</tm-sheet>
 				</view>
 			</view>
-			<view v-else class="flex flex-wrap flex-row-center-center" style="margin-top:150rpx">
-				<tm-image :round="4" class="flex-start" :width="350" :height="350" :src="wushuju"></tm-image>
-			</view>
+			
 		</scroll-view>
-
+		<view v-if="list.length<=0" class="flex flex-wrap flex-row-center-center" style="margin-top:150rpx">
+			<tm-image :round="4" class="flex-start" :width="320" :height="280" :src="wushuju"></tm-image>
+		</view>
 		<view v-show="cover" class="cover" @click.stop="cover=false;typeShow = false"></view>
 	</tm-app>
 </template>
@@ -228,7 +228,6 @@
 		background-color: #fff;
 		z-index: 11;
 	}
-
 
 	.cover {
 		position: fixed;

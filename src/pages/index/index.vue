@@ -83,7 +83,17 @@
 					<tm-sheet :shadow="0" :margin="[20,20]" :padding="[0,0]">
 						<view class="flex flex-row-center-between">
 							<view class="flex">
-								<tm-avatar :round="12" :img="data.creatorImg"></tm-avatar>
+								<!-- <tm-avatar :round="12" :img="data.creatorImg"></tm-avatar> -->
+								
+								<tm-image v-if="data.creatorImg=='' || data.creatorImg==null" 
+									:round="25" :width="80" :height="80" :src="userHead">
+								</tm-image>
+								<tm-image v-else :round="25" :width="80" :height="80" :src="data.creatorImg">
+									<template v-slot:error>
+										<tm-image :width="80" :height="80" :src="userHead">
+										</tm-image>
+									</template>
+								</tm-image>
 								<view class="flex flex-col ml-20" style="justify-content: space-around;">
 									<tm-text :font-size="28" _class="text-overflow text-weight-b"
 										_style="width: 330rpx;text-overflow: ellipsis;" :label="data.collName">
@@ -186,6 +196,7 @@
 	import { onShow, onLoad } from '@dcloudio/uni-app';
 	import wushuju from "@/static/my/wushuju.png"
 	import indexr from "@/static/img/indexr.png"
+	import userHead from "@/static/my/userHead.png"
 	const is = ref(true);
 	const test = () => {
 		const token = uni.getStorageSync('token')

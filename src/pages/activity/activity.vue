@@ -8,8 +8,9 @@
 				:itemHeight="30" :itemWidth="300" :width="700" :default-name="index">
 			</tm-tabs>
 		</tm-sheet>
-		<scroll-view v-if="index==1" scroll-y="true" class="scroll-Y" @scrolltolower="lower">
-			<view v-if="composeFindList.length>0" class="flex flex-wrap flex-center" style="">
+		<scroll-view scroll-y="true" class="scroll-Y" @scrolltolower="lower"
+			v-if="composeFindList.length>0 && index==1">
+			<view class="flex flex-wrap flex-center" style="">
 				<view class="relative" v-for="(data,index) in composeFindList"
 					@click="gonav('pages/activity/syn/synDetails?id='+data.id)" style="width: 710rpx;">
 					<tm-sheet :round="4" :shadow="0" :margin="[0,10]" :padding="[20,20]">
@@ -50,11 +51,10 @@
 					</tm-sheet>
 				</view>
 			</view>
-			<view v-else class="flex flex-wrap flex-row-center-center" style="margin-top:150rpx">
-				<tm-image :round="4" class="flex-start" :width="350" :height="350" :src="wushuju"></tm-image>
-			</view>
-			
 		</scroll-view>
+		<view v-if="composeFindList.length<=0" class="flex flex-wrap flex-row-center-center" style="margin-top:150rpx">
+			<tm-image :round="4" class="flex-start" :width="320" :height="280" :src="wushuju"></tm-image>
+		</view>
 		<view v-if="index==2">
 			<tm-image @click="gonav('pages/activity/loot/loot')" class="mb-10" :width="750" :height="350" :src="jfdb">
 			</tm-image>
@@ -88,7 +88,7 @@
 	const composeFindList = ref({});
 	//页面加载完成执行
 	onShow(() => {
-		
+
 	})
 	//类型下标
 	const index = ref(1);

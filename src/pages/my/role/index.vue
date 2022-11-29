@@ -1,20 +1,23 @@
 <template>
-
 	<tm-app>
 		<tm-navbar title="浔画打工">
 			<template v-slot:right>
-				<tm-icon  :fontSize="28" name="tmicon-clock"></tm-icon>
+				<tm-icon _class="mr-20" :fontSize="28" name="tmicon-question-circle" @click="showWin = !showWin">
+				</tm-icon>
 			</template>
 		</tm-navbar>
-		<view class="" v-show="acc==0">
+		<view class="" v-if="acc==0">
 			<take></take>
 		</view>
-		<view class="" v-show="acc==1">
+		<view class="" v-if="acc==1">
 			<draw></draw>
 		</view>
-		<view class="" v-show="acc==2">
+		<view class="" v-if="acc==2">
 			<role></role>
 		</view>
+		<tm-drawer :round="4" title="冒险说明" placement="center" hideCancel okText="关闭" v-model:show="showWin">
+
+		</tm-drawer>
 		<view class="">
 			<tm-tabbar :autoSelect="false" v-model:active="acc">
 				<tm-tabbar-item @click="change(0)" text="冒险" icon='tmicon-cog-fill'></tm-tabbar-item>
@@ -34,6 +37,7 @@
 	import draw from '@/pages/my/role/draw.vue'
 	// tabbar 下标
 	const acc = ref(0)
+	const showWin = ref(false)
 	const bottom = ref('')
 	onBeforeMount(() => {
 		if (uni.getSystemInfoSync().platform == "ios") {

@@ -35,8 +35,7 @@
 				</view>
 			</tm-sheet>
 		</view>
-		<scroll-view scroll-y="true" class="scroll-Y" @scrolltolower="lower">
-			<view v-if="list.length>0" >
+		<scroll-view scroll-y="true" class="scroll-Y" @scrolltolower="lower" v-if="list.length>0">
 				<tm-sheet :round="5" :shadow="0" :margin="[20,10]" :padding="[10,10]" v-for="item in list" :key="item.id">
 					<view class="flex flex-between ma-10">
 				
@@ -54,12 +53,10 @@
 						<tm-text class="mr-14" color='#808080' :fontSize="18" :label="`余额：${item.afterMoney}`"></tm-text>
 					</view>
 				</tm-sheet>
-			</view>
-			<view v-else class="flex flex-wrap flex-row-center-center" style="margin-top:150rpx">
-				<tm-image :round="4" class="flex-start" :width="350" :height="350" :src="wushuju"></tm-image>
-			</view>
 		</scroll-view>
-		
+		<view v-if="list.length<=0" class="flex flex-wrap flex-row-center-center" style="margin-top:150rpx">
+			<tm-image :round="4" class="flex-start" :width="320" :height="280" :src="wushuju"></tm-image>
+		</view>
 
 
 		<view v-show="cover" class="cover" @click.stop="cover=false;typeShow = false"></view>

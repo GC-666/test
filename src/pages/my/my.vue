@@ -9,7 +9,12 @@
 				<tm-icon class="ml-40" :font-size="30" :color="color" :name="name" @click="setDark"></tm-icon>
 			</view>
 			<view class="headUser flex flex-between mt-30">
-				<tm-image :round="25" class="mt--34 ml-35" :width="128" :height="128" :src="user.avatar"></tm-image>
+				<tm-image :round="25" class="mt--34 ml-35" :width="128" :height="128" :src="user.avatar">
+					<template v-slot:error>
+						<tm-image :width="128" :height="128" :src="userHead">
+						</tm-image>
+					</template>
+				</tm-image>
 				<view class="flex-5 mt-2 ml-20">
 					<tm-text class="text-weight-b" _class="text-overflow text-weight-b"
 						_style="width: 330rpx;text-overflow: ellipsis;" color="#333333" :fontSize="38"
@@ -25,7 +30,7 @@
 			</view>
 		</view>
 		<tm-image v-if="user.adventureIsOpen=='1'" style="margin: -30rpx auto 0rpx auto;" :width="710" :height="148"
-			:src="user.adventureCoverImg"></tm-image>
+			:src="user.adventureCoverImg" @click="gonav('pages/my/role/index')"></tm-image>
 		<tm-sheet :round="4" :shadow="0" :margin="[20,30]" :padding="[10,10]">
 			<view class="flex flex-between">
 				<tm-text style="height: 50rpx;line-height: 50rpx;" :fontSize="26" _class="text-weight-b" label="我的藏品">
@@ -125,6 +130,7 @@
 	import { onShow } from '@dcloudio/uni-app';
 	import { My } from "@/api/api.ts"
 	import wushuju from "@/static/my/wushuju.png"
+	import userHead from "@/static/my/userHead.png"
 	import { useTmpiniaStore } from '@/xhui/tool/lib/tmpinia';
 	const store = useTmpiniaStore();
 

@@ -1,6 +1,6 @@
 <template>
 	<tm-app>
-		<tm-navbar  title="申请开票" :height="44" :shadow="0">
+		<tm-navbar title="申请开票" :height="44" :shadow="0">
 			<template v-slot:right>
 				<tm-text class="mr-20" :fontSize="22" label="开票记录" @click="gonav('pages/my/set/bill/billlist')">
 				</tm-text>
@@ -9,46 +9,41 @@
 
 		<!-- 可开票列表 -->
 
-		<scroll-view scroll-y="true" class="scroll-Y" @scrolltolower="lower">
-			<view v-if="list.length>0">
-				<tm-sheet :round="3" :shadow="0" :margin="[20,20]" :padding="[0,10]" v-for="(item,index) in list"
-					:key="index">
-					<view class="flex flex-between">
-						<view class="flex">
-							<tm-checkbox class="ml-10" v-model="item.checked" :size="25" :round="10"
-								@change="checkbox1(item)">
-								<template v-slot:default="{checked}">
-									<tm-text :fontSize="20"></tm-text>
-								</template>
-							</tm-checkbox>
-							<view class="">
-								<tm-text class="ma-20 text-weight-b" :fontSize="26" :label="item.objectTruenumber">
-								</tm-text>
-								<tm-text class="ma-20 " color="#1A1A1A" :fontSize="18" :label="`订单编号：${item.orderNo}`">
-								</tm-text>
-								<tm-text class="ma-20" color="#1A1A1A" :fontSize="18"
-									:label="`时间：${DateUtils.formatDateTime(item.payTime)}`">
-								</tm-text>
-							</view>
-						</view>
-						<view class="flex flex-around flex-col">
-							<tm-text class="mr-20 " :fontSize="22" :label="item.orderStatusRemarks"></tm-text>
-							<view class="flex mr-20 flex-end">
-								<tm-text class="text-size-xxs" color="red" label="￥"></tm-text>
-								<tm-text class="text-weight-b" color="red" :fontSize="30" :label="item.payMoney"></tm-text>
-							</view>
-
+		<scroll-view scroll-y="true" class="scroll-Y" @scrolltolower="lower" v-if="list.length>0">
+			<tm-sheet :round="3" :shadow="0" :margin="[20,20]" :padding="[0,10]" v-for="(item,index) in list"
+				:key="index">
+				<view class="flex flex-between">
+					<view class="flex">
+						<tm-checkbox class="ml-10" v-model="item.checked" :size="25" :round="10"
+							@change="checkbox1(item)">
+							<template v-slot:default="{checked}">
+								<tm-text :fontSize="20"></tm-text>
+							</template>
+						</tm-checkbox>
+						<view class="">
+							<tm-text class="ma-20 text-weight-b" :fontSize="26" :label="item.objectTruenumber">
+							</tm-text>
+							<tm-text class="ma-20 " color="#1A1A1A" :fontSize="18" :label="`订单编号：${item.orderNo}`">
+							</tm-text>
+							<tm-text class="ma-20" color="#1A1A1A" :fontSize="18"
+								:label="`时间：${DateUtils.formatDateTime(item.payTime)}`">
+							</tm-text>
 						</view>
 					</view>
-				</tm-sheet>
-			</view>
-			<view v-else class="flex flex-wrap flex-row-center-center" style="margin-top:150rpx">
-				<tm-image :round="4" class="flex-start" :width="350" :height="350" :src="wushuju"></tm-image>
-			</view>
-				
+					<view class="flex flex-around flex-col">
+						<tm-text class="mr-20 " :fontSize="22" :label="item.orderStatusRemarks"></tm-text>
+						<view class="flex mr-20 flex-end">
+							<tm-text class="text-size-xxs" color="red" label="￥"></tm-text>
+							<tm-text class="text-weight-b" color="red" :fontSize="30" :label="item.payMoney"></tm-text>
+						</view>
 
+					</view>
+				</view>
+			</tm-sheet>
 		</scroll-view>
-
+		<view v-if="list.length<=0" class="flex flex-wrap flex-row-center-center" style="margin-top:150rpx">
+			<tm-image :round="4" class="flex-start" :width="320" :height="280" :src="wushuju"></tm-image>
+		</view>
 		<view v-if="list.length>0" class="fixed b-0 r-0 l-0"
 			:style="{'background-color': store.tmStore.dark?'#fff': '#25262E' }">
 			<tm-sheet _class=" " :round="0" :shadow="2" :margin="[0,0]" :padding="[0,0]">

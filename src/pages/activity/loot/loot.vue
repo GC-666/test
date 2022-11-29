@@ -8,7 +8,7 @@
 				<tm-text color="#fff" :font-size="26" _class="text-weight-b"
 					:label="`积分剩余:${lootFindItem.userIntegal}`"></tm-text>
 				<view class="baoxiang flex flex-between">
-					<tm-image style="margin-top: 170rpx;" :round="4" :width="256" :height="61" :src="jifenduihuan">
+					<tm-image @click="gonav('pages/activity/loot/lootExchange')" style="margin-top: 170rpx;" :round="4" :width="256" :height="61" :src="jifenduihuan">
 					</tm-image>
 					<tm-image style="margin-top: 90rpx;" :round="4" :width="256" :height="61" :src="wodejilu">
 					</tm-image>
@@ -176,7 +176,6 @@
 		let arr = jackpotList.value;
 		//intime 值越大旋转时间越长  即旋转速度
 		let intime = 100;
-
 		//判断是否开启夺宝
 		if (data.isLoot != "1") {
 			uni.showToast({
@@ -193,6 +192,10 @@
 			//判断是否能抽奖		根据剩余积分和抽奖所需积分
 			if (parseInt(data.userIntegal) <= parseInt(data.freeConsume)) {
 				Luck.value = false;
+				uni.showToast({
+					title: "积分不足,无法夺宝",
+					icon: 'none'
+				})
 				return;
 			}
 			Activity.lootLuckDraw({ type: 0 }).then(res => {

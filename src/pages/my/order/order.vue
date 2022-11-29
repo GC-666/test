@@ -58,8 +58,8 @@
 				</tm-sheet>
 			</tm-sheet>
 		</view>
-		<scroll-view class="scroll-Y" scroll-y="true" @scrolltolower="lower">
-			<view v-if="orderFindPageList.length>0"  class="flex flex-row-center-between flex-wrap" style="margin: 0rpx 20rpx 0rpx 20rpx;">
+		<scroll-view class="scroll-Y" scroll-y="true" @scrolltolower="lower" v-if="orderFindPageList.length>0">
+			<view  class="flex flex-row-center-between flex-wrap" style="margin: 0rpx 20rpx 0rpx 20rpx;">
 				<view class="relative" v-for="(data,index) in orderFindPageList">
 					<tm-sheet :round="4" :shadow="0" :margin="[0,10]" :padding="[20,20]" style="width:710rpx">
 						<view class="flex flex-between">
@@ -133,11 +133,10 @@
 					</tm-sheet>
 				</view>
 			</view>
-			<view v-else class="flex flex-wrap flex-row-center-center" style="margin-top:150rpx">
-				<tm-image :round="4" class="flex-start" :width="350" :height="350" :src="wushuju"></tm-image>
-			</view>
 		</scroll-view>
-
+		<view v-if="orderFindPageList.length<=0" class="flex flex-wrap flex-row-center-center" style="margin-top:150rpx">
+			<tm-image :round="4" class="flex-start" :width="320" :height="280" :src="wushuju"></tm-image>
+		</view>
 		<view v-show="cover" class="cover" @click.stop="cover=false;typeShow = false"></view>
 	</tm-app>
 </template>
