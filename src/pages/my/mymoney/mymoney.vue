@@ -42,7 +42,6 @@
 				<tm-icon :fontSize="35" name="xh-yunqianbao"></tm-icon>
 				<tm-text :fontSize="28" class="ml-10" label="云钱包"></tm-text>
 			</view>
-
 			<view class="mt-n19">
 				<view class="" style="border: 1rpx solid #fff;width: 100%;overflow: hidden;"></view>
 			</view>
@@ -102,6 +101,7 @@
 		} else if (data.value.isCloudWallet === '1') {
 			My.openSdCloudWallet().then(res => {
 				// #ifdef H5
+
 				window.location.href = res
 				// #endif
 				// #ifdef APP-PLUS
@@ -112,7 +112,6 @@
 		}
 	}
 </script>
-
 <style>
 	.zhye {
 

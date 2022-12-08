@@ -6,7 +6,7 @@
 			<view v-if="userBoxFindReportPageList.length>0" class="flex flex-row-center-between flex-wrap" style="margin: 0rpx 20rpx 0rpx 20rpx;">
 				<view class="relative" v-for="(data,index) in userBoxFindReportPageList"
 					@click="gonav('pages/my/box/boxType?id='+data.boxId+'&boxName='+data.boxName)">
-					<tm-sheet :round="4" :shadow="0" :margin="[0,20]" :padding="[0,0]">
+					<tm-sheet :round="4" :shadow="0" :margin="[0,10]" :padding="[0,0]">
 						<tm-image class="round-t-4" :width="344" :height="344" :src="data.boxImg">
 						</tm-image>
 						<view class="" style="margin: 0rpx 20rpx;">

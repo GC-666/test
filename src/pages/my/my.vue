@@ -131,7 +131,7 @@
 	import { My } from "@/api/api.ts"
 	import wushuju from "@/static/my/wushuju.png"
 	import userHead from "@/static/my/userHead.png"
-	import { useTmpiniaStore } from '@/xhui/tool/lib/tmpinia';
+	import { useTmpiniaStore } from '@/tmui/tool/lib/tmpinia';
 	const store = useTmpiniaStore();
 
 	const statusBarHeight = uni.getSystemInfoSync().statusBarHeight

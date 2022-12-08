@@ -21,6 +21,9 @@
 					<tm-text :color="acvite === 2? `${bgColor}` :''"
 						:class="acvite === 2? `text-weight-b active` :'text-weight-n'" :font-size="acvite === 2? 30: 28"
 						label="盲盒" @click="tabsClick(2)"></tm-text>
+					<tm-text :color="acvite === 4? `${bgColor}` :''"
+						:class="acvite === 4? `text-weight-b active` :'text-weight-n'" :font-size="acvite === 2? 30: 28"
+						label="求购" @click="tabsClick(4)"></tm-text>
 					<view class="flex" @click="tabsClick(3)">
 						<tm-text :color="acvite ===3? `${bgColor}` :''"
 							:class="acvite === 3? `text-weight-b active` :'text-weight-n'"
@@ -46,11 +49,11 @@
 			</tm-sheet>
 		</view>
 		<!-- :style="`height: calc(100vh  - 190rpx - 50px - ${statusBarHeight}px  - ${windowBottom}px)`" -->
-		<scroll-view scroll-y="true" class="scroll-Y" @scrolltolower="lower"  v-if="list.length>0">
+		<scroll-view scroll-y="true" class="scroll-Y" @scrolltolower="lower" v-if="list.length>0">
 			<view class="flex flex-between flex-wrap ml-5 mr-5">
-				<view v-for="(data,index) in list" @click="toShop(data)">
-					<tm-sheet :shadow="0" :round="4" :margin="[10,15]" :padding="[0,0]">
-						<tm-image extra class="round-t-4" :width="348" :height="344"  model="aspectFill" :src="data.img">
+				<view v-for="(data,index) in list">
+					<tm-sheet :shadow="0" :round="4" :margin="[10,15]" :padding="[0,0]" @click="toShop(data)">
+						<tm-image extra class="round-t-4" :width="348" :height="344" model="aspectFill" :src="data.img">
 							<template v-slot:extra>
 								<view class="flex flex-center ml-20 mr-20"
 									:style="`background-image: url(${bg});background-size: 100% 100%;width:300rpx;height:40rpx`">
@@ -86,9 +89,109 @@
 					</tm-sheet>
 				</view>
 			</view>
-			
 		</scroll-view>
-		<view v-if="list.length<=0" class="flex flex-wrap flex-row-center-center" style="margin-top:150rpx">
+		<view v-if="acvite==4" class="ml-20 mr-20 scroll-Y2" style="overflow-y: auto;">
+			<view class="buybeijing flex flex-center">
+				<view class="flex flex-around" style="width:710rpx">
+					<view class="flex flex-col flex-center">
+						<tm-image :round="4" :width="68" :height="68" :src="buy"></tm-image>
+						<tm-text class="mt-15" color="#fff" :font-size="26" label="买"></tm-text>
+						<tm-text class="mt-15" color="#fff" :font-size="26" label="1899"></tm-text>
+					</view>
+					<view class="flex flex-col flex-center">
+						<tm-image :round="4" :width="68" :height="68" :src="sell"></tm-image>
+						<tm-text class="mt-15" color="#fff" :font-size="26" label="卖"></tm-text>
+						<tm-text class="mt-15" color="#fff" :font-size="26" label="1974"></tm-text>
+					</view>
+					<view class="flex flex-col flex-center">
+						<tm-image :round="4" :width="68" :height="68" :src="transaction"></tm-image>
+						<tm-text class="mt-15" color="#fff" :font-size="26" label="交易数"></tm-text>
+						<tm-text class="mt-15" color="#fff" :font-size="26" label="1974"></tm-text>
+					</view>
+					<view class="flex flex-col flex-center">
+						<tm-image :round="4" :width="68" :height="68" :src="money"></tm-image>
+						<tm-text class="mt-15" color="#fff" :font-size="26" label="总金额"></tm-text>
+						<tm-text class="mt-15" color="#fff" :font-size="26" label="9999+"></tm-text>
+					</view>
+				</view>
+			</view>
+			<view class="flex flex-row-center-start" style="width:710rpx">
+				<tm-image class="mt-15 mb-15" :width="35" :height="35" :src="sell2"></tm-image>
+				<tm-text _class="text-weight-b ml-15" :font-size="36" label="卖出"></tm-text>
+			</view>
+			<tm-sheet :shadow="0" :round="4" :margin="[0,0]" :padding="[0,20]">
+				<view class="flex flex-around">
+					<tm-text _class="text-weight-b " :font-size="30" label="藏家"></tm-text>
+					<tm-text _class="text-weight-b " :font-size="30" label="ID"></tm-text>
+					<tm-text _class="text-weight-b " :font-size="30" label="藏品"></tm-text>
+					<tm-text _class="text-weight-b " :font-size="30" label="卖"></tm-text>
+					<tm-text _class="text-weight-b " :font-size="30" label="数量"></tm-text>
+				</view>
+				<view v-for="(data,index) in 4">
+					<view class="flex flex-around">
+						<view class="flex flex-center" style="width:20%">
+							<tm-text _class="text-weight-b " :font-size="22" label="Xaadfwe"></tm-text>
+						</view>
+						<view class="flex flex-center" style="width:20%">
+							<tm-text _class="text-weight-b " :font-size="22" label="159***922"></tm-text>
+						</view>
+						<view class="flex flex-col flex-center" style="width:20%">
+							<tm-image class="mb-10" :width="90" :height="90" :src="a1"></tm-image>
+							<tm-text _class="text-weight-b" :font-size="18" label="萌萌星球"></tm-text>
+						</view>
+						<view class="flex flex-center" style="width:20%">
+							<tm-text _class="text-weight-b " :font-size="22" label="￥922"></tm-text>
+						</view>
+						<view class="flex flex-center" style="width:20%">
+							<tm-text _class="text-weight-b " :font-size="22" label="159922"></tm-text>
+						</view>
+					</view>
+					<tm-divider v-if="index!=3" color="#f5f5f5"></tm-divider>
+				</view>
+			</tm-sheet>
+			<view class="flex flex-row-center-start" style="width:710rpx">
+				<tm-image class="mt-15 mb-15" :width="35" :height="35" :src="buy2"></tm-image>
+				<tm-text _class="text-weight-b ml-15" :font-size="36" label="买入"></tm-text>
+			</view>
+			<tm-sheet :shadow="0" :round="4" :margin="[0,0]" :padding="[0,20]">
+				<view class="flex flex-around">
+					<tm-text _class="text-weight-b " :font-size="30" label="藏家"></tm-text>
+					<tm-text _class="text-weight-b " :font-size="30" label="ID"></tm-text>
+					<tm-text _class="text-weight-b " :font-size="30" label="藏品"></tm-text>
+					<tm-text _class="text-weight-b " :font-size="30" label="卖"></tm-text>
+					<tm-text _class="text-weight-b " :font-size="30" label="数量"></tm-text>
+				</view>
+				<view v-for="(data,index) in 4">
+					<view class="flex flex-around">
+						<view class="flex flex-center" style="width:20%">
+							<tm-text _class="text-weight-b " :font-size="22" label="Xaadfwe"></tm-text>
+						</view>
+						<view class="flex flex-center" style="width:20%">
+							<tm-text _class="text-weight-b " :font-size="22" label="159***922"></tm-text>
+						</view>
+						<view class="flex flex-col flex-center" style="width:20%">
+							<tm-image class="mb-10" :width="90" :height="90" :src="a1"></tm-image>
+							<tm-text _class="text-weight-b" :font-size="18" label="萌萌星球"></tm-text>
+						</view>
+						<view class="flex flex-center" style="width:20%">
+							<tm-text _class="text-weight-b " :font-size="22" label="￥922"></tm-text>
+						</view>
+						<view class="flex flex-center" style="width:20%">
+							<tm-text _class="text-weight-b " :font-size="22" label="159922"></tm-text>
+						</view>
+					</view>
+					<tm-divider v-if="index!=3" color="#f5f5f5"></tm-divider>
+				</view>
+			</tm-sheet>
+		</view>
+		<view class="buysellbeijing flex flex-center" v-if="acvite==4">
+			<view class="flex flex-around " style="width:600rpx">
+				<tm-image @click="gonav('pages/market/buy/buy')" :width="202" :height="65" :src="likebuy"></tm-image>
+				<tm-image @click="gonav('pages/market/buy/sell')" :width="202" :height="65" :src="likesell"></tm-image>
+			</view>
+		</view>
+		<view v-if="list.length<=0 && acvite!=4" class="flex flex-wrap flex-row-center-center"
+			style="margin-top:150rpx">
 			<tm-image :round="4" class="flex-start" :width="320" :height="280" :src="wushuju"></tm-image>
 		</view>
 		<view v-show="cover" class="cover" @click.stop="cover=false;typeShow = false"></view>
@@ -100,6 +203,15 @@
 	import { onMounted, ref } from 'vue';
 	import bg from "@/static/img/scbg.png"
 	import wushuju from "@/static/my/wushuju.png"
+	import buy from "@/static/market/buy.png"
+	import sell from "@/static/market/sell.png"
+	import transaction from "@/static/market/transaction.png"
+	import money from "@/static/market/money.png"
+	import sell2 from "@/static/market/sell2.png"
+	import buy2 from "@/static/market/buy2.png"
+	import a1 from "@/static/market/1.png"
+	import likebuy from "@/static/market/likebuy.png"
+	import likesell from "@/static/market/likesell.png"
 	const list = ref([])
 	const typeShow = ref(false)
 	const cover = ref(false)
@@ -126,8 +238,10 @@
 	}
 	onMounted(() => {
 		params.value.isRecommend = 1
-		findMarketList()
-		getClassification()
+		//findMarketList()
+		//getClassification()
+
+		tabsClick(4);
 	})
 	const confirm = () => {
 		list.value = []
@@ -151,8 +265,8 @@
 	}
 	const acc = ref('')
 	const tagChange = (val, index) => {
+		console.log(val);
 		acc.value = index
-
 		list.value = []
 		params.value.classId = val.value
 		params.value.page = 1
@@ -166,7 +280,6 @@
 			classification.value = res.map((item, index) => {
 				return { label: item.name, value: item.id, }
 			})
-
 		})
 	}
 	const params = ref({
@@ -218,6 +331,13 @@
 
 			params.value.type = 2
 			findMarketList()
+		} else if (i == 4) {
+			//求购
+			console.log(1);
+			list.value = []
+			typeShow.value = false
+			cover.value = false
+
 		}
 	}
 </script>
@@ -239,7 +359,27 @@
 		z-index: 1;
 	}
 
+	.buybeijing {
+		background-image: url("@/static/market/buybj.png");
+		background-size: 100% 100%;
+		width: 710rpx;
+		height: 277rpx;
+	}
+
 	.scroll-Y {
 		height: calc(100vh - var(--status-bar-height) - 188rpx - var(--window-bottom));
+	}
+
+	.scroll-Y2 {
+		height: calc(100vh - var(--status-bar-height) - 188rpx - var(--window-bottom) - 136rpx);
+	}
+
+	.buysellbeijing {
+		position: fixed;
+		bottom: var(--window-bottom);
+		background-image: url("@/static/market/buysell.png");
+		background-size: 100% 100%;
+		width: 750rpx;
+		height: 136rpx;
 	}
 </style>

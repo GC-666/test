@@ -28,7 +28,7 @@
 	import { onMounted , reactive , ref } from 'vue';
 	import bg1 from "@/static/img/shopBg.png"
 	import bg from "@/static/img/bg.png"
-	import { useTmpiniaStore } from '@/xhui/tool/lib/tmpinia';
+	import { useTmpiniaStore } from '@/tmui/tool/lib/tmpinia';
 	const store = useTmpiniaStore();
 	//配置信息
 	const config = ref("");

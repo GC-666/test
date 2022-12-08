@@ -73,7 +73,7 @@
 	import bg1 from "@/static/img/shopBg.png"
 	import bg from "@/static/img/bg.png"
 	import kj from "@/static/my/kj.gif"
-	import { useTmpiniaStore } from '@/xhui/tool/lib/tmpinia';
+	import { useTmpiniaStore } from '@/tmui/tool/lib/tmpinia';
 	const store = useTmpiniaStore();
 	
 	//盲盒详情

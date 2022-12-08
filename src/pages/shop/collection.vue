@@ -22,22 +22,26 @@
 							<view class="flex">
 								<view class="round-tl-5 round-bl-5 flex flex-center"
 									style="width: 100rpx; background-color: #FFD7A7; ">
-									<tm-text class="ma-5" :fontSize="22" color="#25262E" _class="text-weight-n" label="发行量"></tm-text>
+									<tm-text class="ma-5" :fontSize="22" color="#25262E" _class="text-weight-n"
+										label="发行量"></tm-text>
 								</view>
 								<view class="round-tr-5 round-br-5 flex flex-center"
 									style="width: 85rpx;background-color: #FFE6C8;">
-									<tm-text class="ma-5" :fontSize="22" color="#25262E" _class="text-weight-n" :label="data.presale">
+									<tm-text class="ma-5" :fontSize="22" color="#25262E" _class="text-weight-n"
+										:label="data.presale">
 									</tm-text>
 								</view>
 							</view>
 							<view class="flex ml-20">
 								<view class="round-tl-5 round-bl-5 flex flex-center"
 									style="width: 80rpx; background-color: #FFD7A7;">
-									<tm-text class="ma-5" :fontSize="22" color="#25262E" _class="text-weight-n" label="已售"></tm-text>
+									<tm-text class="ma-5" :fontSize="22" color="#25262E" _class="text-weight-n"
+										label="已售"></tm-text>
 								</view>
 								<view class="round-tr-5 round-br-5 flex flex-center"
 									style="width: 85rpx;background-color: #FFE6C8;">
-									<tm-text class="ma-5" :fontSize="22" color="#25262E" _class="text-weight-n" :label="data.sold">
+									<tm-text class="ma-5" :fontSize="22" color="#25262E" _class="text-weight-n"
+										:label="data.sold">
 									</tm-text>
 								</view>
 							</view>
@@ -128,7 +132,8 @@
 				</tm-sheet>
 			</view>
 		</view>
-		<tm-modal :height="350" splitBtn title="温馨提示" okText="确定" v-model:show="orderShow" @ok="pay(order.operationData.id)">
+		<tm-modal :height="350" splitBtn title="温馨提示" okText="确定" v-model:show="orderShow"
+			@ok="pay(order.operationData.id)">
 			<view class="flex flex-center">
 				<tm-text :font-size="30" _class="text-weight-n" :label="order.operationMsg">
 				</tm-text>
@@ -138,12 +143,12 @@
 </template>
 
 <script setup>
-	import { Home ,My} from "@/api/api.ts"
+	import { Home, My } from "@/api/api.ts"
 	import { onLoad } from "@dcloudio/uni-app";
 	import { onBeforeMount, ref } from "vue";
 	import bg1 from "@/static/img/shopBg.png"
 	import bg from "@/static/img/bg.png"
-	import { useTmpiniaStore } from '@/xhui/tool/lib/tmpinia';
+	import { useTmpiniaStore } from '@/tmui/tool/lib/tmpinia';
 	const store = useTmpiniaStore();
 	const id = ref('')
 	const data = ref({})
@@ -160,18 +165,18 @@
 	const pay = (id) => {
 		console.log(id);
 		uni.navigateTo({
-			url:'/pages/my/order/orderpay?id='+id
+			url: '/pages/my/order/orderpay?id=' + id
 		})
 	}
 	const placeOrder = () => {
-		My.placeOrder({type:'02',id:id.value}).then(res => {
+		My.placeOrder({ type: '02', id: id.value }).then(res => {
 			if (res.operationCode == '01') {
 				orderShow.value = true
 				order.value = res
 				return
 			}
 			uni.navigateTo({
-				url:'/pages/my/order/orderpay?id='+res.operationData.id
+				url: '/pages/my/order/orderpay?id=' + res.operationData.id
 			})
 		})
 	}

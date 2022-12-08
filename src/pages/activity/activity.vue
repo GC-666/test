@@ -59,7 +59,8 @@
 			<tm-image @click="gonav('pages/activity/loot/loot')" class="mb-10" :width="750" :height="350" :src="jfdb">
 			</tm-image>
 			<tm-image class="mb-10" :width="750" :height="350" :src="jfdh"></tm-image>
-			<tm-image :width="750" :height="350" :src="jfsc"></tm-image>
+			<!-- <tm-image :width="750" :height="350" :src="jfsc"></tm-image> -->
+			<tm-image @click="gonav('pages/activity/pointsMall/pointsMall')" :width="750" :height="350" :src="jfsc"></tm-image>
 		</view>
 	</tm-app>
 </template>

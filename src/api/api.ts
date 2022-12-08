@@ -261,6 +261,35 @@ export class My {
 	static async inviteInfo(params: any) {
 		return await request("/mine/inviteInfo", params, "POST")
 	}
+	//查询用户所有收货地址
+	static async getUserAddressList(params: any) {
+		return await request("/userAddress/getUserAddressList", params, "POST")
+	}
+	//添加用户收货地址
+	static async addUserAddress(params: any) {
+		return await request("/userAddress/addUserAddress", params, "POST")
+	}
+	//修改用户收货地址
+	static async updateUserAddress(params: any) {
+		return await request("/userAddress/updateUserAddress", params, "POST")
+	}
+	//删除用户收货地址
+	static async deleteAddress(params: any) {
+		return await request("/userAddress/deleteAddress", params, "POST")
+	}
+	//根据地址id查询地址详情
+	static async getUserAddressById(params: any) {
+		return await request("/userAddress/getUserAddressById", params, "POST")
+	}
+	//修改为默认地址
+	static async updateDefaultAddress(params: any) {
+		return await request("/userAddress/updateDefaultAddress", params, "POST")
+	}
+	//获取用户默认地址
+	static async getDefaultAddress(params: any) {
+		return await request("/userAddress/getDefaultAddress", params, "POST")
+	}
+	
 	
 }
 // 活动
@@ -289,6 +318,22 @@ export class Activity {
 	static async lootBalanceToIntegral(params: any) {
 		return await request("/loot/balanceToIntegral", params, "POST")
 	}
+	//获取我可兑换的藏品
+	static async lootFindUserGrantExchange(params: any) {
+		return await request("/loot/findUserGrantExchange", params, "POST")
+	}
+	//藏品兑换积分
+	static async lootIntegralExchange(params: any) {
+		return await request("/loot/integralExchange", params, "POST")
+	}
+	//用户中奖记录
+	static async lootFindUserItemRecordList(params: any) {
+		return await request("/loot/findUserItemRecordList", params, "POST")
+	}
+	//用户兑换记录
+	static async lootFindExchangeRecordPageList(params: any) {
+		return await request("/loot/findExchangeRecordPageList", params, "POST")
+	}
 }
 export class Role {
 	//冒险记录
@@ -310,6 +355,17 @@ export class Role {
 	//我的英雄列表
 	static async findUserHeroList(params: any) {
 		return await request("/adventure/findUserHeroList", params, "POST")
+	}
+	
+	
+}
+export class Ver {
+	//版本更新
+	static async getEdition(params: any) {
+		return await request("/editionManage/getEdition", params, "POST")
+	}
+	static async find(params: any) {
+		return await request("/editionManage/find", params, "POST")
 	}
 	
 	

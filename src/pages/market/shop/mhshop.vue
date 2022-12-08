@@ -6,15 +6,14 @@
 		<tm-tabs :itemWidth="120" align="center" :list="tabsTitle" :width="750" :height="300" default-name="4"
 			@change="tabsChange">
 		</tm-tabs>
-		<scroll-view scroll-y="true" class="scroll-Y"  @scrolltolower="lower">
+		<scroll-view scroll-y="true" class="scroll-Y" @scrolltolower="lower" v-if="list.length>0">
 			<tm-sheet :shadow="0" :round="4" :margin="[20,10]" :padding="[0,0]" v-for="(item,index) in list"
 				@click="gonav('pages/market/shop/mhgoodpage?id='+item.id)">
 				<view class="flex flex-between mt-20 ml-20 mr-20">
 					<view class="flex flex-row-center-start">
 						<tm-icon v-if="item.type == '2'" :fontSize="25" name="tmicon-wind-smile">
 						</tm-icon>
-						<tm-text class="text-weight-b"
-							 :fontSize="32" :label="item.name"></tm-text>
+						<tm-text class="text-weight-b" :fontSize="32" :label="item.name"></tm-text>
 						<tm-text v-if="item.type=='2'" _class="text-weight-s ml-10" :fontSize="22" label="交易中">
 						</tm-text>
 					</view>
@@ -23,8 +22,8 @@
 				</view>
 
 				<view class="flex flex-between mt-20 ml-20 mr-10 mb-20">
-					<tm-text _class="text-overflow " color="#A6A6A6" _style=""
-						:fontSize="22" :label="`编号：${item.no}`"></tm-text>
+					<tm-text _class="text-overflow " color="#A6A6A6" _style="" :fontSize="22" :label="`编号：${item.no}`">
+					</tm-text>
 					<view class="flex flex-end">
 						<view class="" v-for="i in item.payTypeList">
 							<tm-icon v-if="i.type=='00'  " _class=" mr-10" :fontSize="35" name="xh-zhanghuqianbao">
@@ -36,6 +35,9 @@
 				</view>
 			</tm-sheet>
 		</scroll-view>
+		<view v-if="list.length<=0" class="flex flex-wrap flex-row-center-center" style="margin-top:150rpx">
+			<tm-image :round="4" class="flex-start" :width="320" :height="280" :src="wushuju"></tm-image>
+		</view>
 	</tm-app>
 </template>
 <script setup>
@@ -43,6 +45,8 @@
 	import { onLoad, onShow } from '@dcloudio/uni-app';
 	import { Market } from "@/api/api.ts"
 	import { onMounted, ref } from 'vue';
+
+	import wushuju from "@/static/my/wushuju.png"
 	const tabsTitle = ref([
 		{ key: "4", title: "综合" },
 		{ key: "1", title: "最新" },
@@ -79,7 +83,7 @@
 	const name = ref('')
 	onShow(() => {
 		params.value.page = 1
-		list.value=[]
+		list.value = []
 		findMarketBoxList()
 	})
 	const findMarketBoxList = () => {
@@ -95,8 +99,7 @@
 </script>
 
 <style>
-	
-	 .scroll-Y {
-	  height: calc(100vh - var(--status-bar-height) - 172rpx);
-	 }
+	.scroll-Y {
+		height: calc(100vh - var(--status-bar-height) - 172rpx);
+	}
 </style>

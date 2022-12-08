@@ -14,7 +14,7 @@
 		ref
 	} from 'vue';
 	import { onLoad,onShow } from '@dcloudio/uni-app';
-	import { useTmpiniaStore } from '@/xhui/tool/lib/tmpinia';
+	import { useTmpiniaStore } from '@/tmui/tool/lib/tmpinia';
 	const store = useTmpiniaStore();
 	const homeAgreementss = ref("")	
 

@@ -6,7 +6,7 @@
 		<tm-tabs :itemWidth="120" align="center" :list="tabsTitle" :width="750" :height="300" default-name="4"
 			@change="tabsChange">
 		</tm-tabs>
-		<scroll-view scroll-y="true" class="scroll-Y" @scrolltolower="lower">
+		<scroll-view scroll-y="true" class="scroll-Y" @scrolltolower="lower" v-if="list.length>0">
 			<view v-if="list.length>0">
 				<tm-sheet :shadow="0" :round="4" :margin="[20,10]" :padding="[0,0]" v-for="(item,index) in list"
 					@click="gonav('pages/market/shop/goodpage?id='+item.id)">
@@ -23,7 +23,8 @@
 					</view>
 
 					<view class="flex flex-between mt-20 ml-20 mr-10 mb-20">
-						<tm-text _class="text-overflow " color="#A6A6A6" _style="" :fontSize="22" :label="`编号：${item.no}`">
+						<tm-text _class="text-overflow " color="#A6A6A6" _style="" :fontSize="22"
+							:label="`编号：${item.no}`">
 						</tm-text>
 						<view class="flex flex-end">
 							<view class="" v-for="i in item.payTypeList">
@@ -36,10 +37,10 @@
 					</view>
 				</tm-sheet>
 			</view>
-			<view v-else class="flex flex-wrap flex-row-center-center" style="margin-top:150rpx">
-				<tm-image :round="4" class="flex-start" :width="350" :height="350" :src="wushuju"></tm-image>
-			</view>
 		</scroll-view>
+		<view v-if="list.length<=0" class="flex flex-wrap flex-row-center-center" style="margin-top:150rpx">
+			<tm-image :round="4" class="flex-start" :width="320" :height="280" :src="wushuju"></tm-image>
+		</view>
 	</tm-app>
 </template>
 <script setup>

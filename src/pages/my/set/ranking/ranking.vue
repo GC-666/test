@@ -11,7 +11,7 @@
 <script setup>
 	import ranking from "@/static/img/ranking.png"
 	import { onBeforeMount, ref } from 'vue'
-	import { useTmpiniaStore } from '@/xhui/tool/lib/tmpinia';
+	import { useTmpiniaStore } from '@/tmui/tool/lib/tmpinia';
 	import { My } from "@/api/api.ts"
 	const store = useTmpiniaStore();
 	const header = ref([

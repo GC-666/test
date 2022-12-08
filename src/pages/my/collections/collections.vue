@@ -13,7 +13,7 @@
 			<view v-if="mineFindCollReport.length>0" class="flex flex-row-center-between flex-wrap" style="margin: 0rpx 20rpx 0rpx 20rpx;">
 				<view v-if="index==1" class="relative" v-for="(data,index) in mineFindCollReport"
 					@click="gonav('pages/my/collections/collectionsType?id='+data.collId+'&collName='+data.collName)">
-					<tm-sheet :round="4" :shadow="0" :margin="[0,20]" :padding="[0,0]">
+					<tm-sheet :round="4" :shadow="0" :margin="[0,10]" :padding="[0,0]">
 						<tm-image class="round-t-4" :width="344" :height="344" :src="data.collImg">
 						</tm-image>
 						<view class="" style="margin: 0rpx 10rpx;">
@@ -30,7 +30,7 @@
 					</tm-sheet>
 				</view>
 				<view v-else class="relative" v-for="(data,index) in userRecrodFindCollPageList">
-					<tm-sheet :round="4" :shadow="0" :margin="[0,20]" :padding="[0,0]">
+					<tm-sheet :round="4" :shadow="0" :margin="[0,10]" :padding="[0,0]">
 						<tm-image class="round-t-4" :width="344" :height="344" :src="data.img">
 						</tm-image>
 						<view class="" style="margin: 0rpx 10rpx;">

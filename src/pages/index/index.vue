@@ -1,7 +1,7 @@
 <template>
-
+	<!-- <web-view v-if="find=='1'" src="http://appxunmeta.rocknft.top"></web-view>   v-if="find=='0'" -->
 	<tm-app>
-		<tm-navbar hideHome hideBack title="" :height="44" :shadow="0">
+		<tm-navbar hideHome hideBack title="" :shadow="0">
 			<template v-slot:left>
 				<view class="ml-20">
 					<tm-image :width="160" :height="33" :src="logoimg"></tm-image>
@@ -32,8 +32,7 @@
 			</tm-sheet>
 			<!-- 首发 盲盒tabs -->
 			<view class="ml-20 mr-20 flex">
-				<tm-text :fontSize="36" :color="index==0?'#07EBFE' :'' " label="即将开售"
-					@click="tabsChange(0)"></tm-text>
+				<tm-text :fontSize="36" :color="index==0?'#07EBFE' :'' " label="即将开售" @click="tabsChange(0)"></tm-text>
 				<tm-text :fontSize="36" :color="index==1? '#07EBFE' :'' " class="ml-20" label="盲盒"
 					@click="tabsChange(1)">
 				</tm-text>
@@ -84,9 +83,9 @@
 						<view class="flex flex-row-center-between">
 							<view class="flex">
 								<!-- <tm-avatar :round="12" :img="data.creatorImg"></tm-avatar> -->
-								
-								<tm-image v-if="data.creatorImg=='' || data.creatorImg==null" 
-									:round="25" :width="80" :height="80" :src="userHead">
+
+								<tm-image v-if="data.creatorImg=='' || data.creatorImg==null" :round="25" :width="80"
+									:height="80" :src="userHead">
 								</tm-image>
 								<tm-image v-else :round="25" :width="80" :height="80" :src="data.creatorImg">
 									<template v-slot:error>
@@ -189,7 +188,7 @@
 	</tm-app>
 </template>
 <script setup>
-	import { Home } from "@/api/api.ts"
+	import { Home, Ver } from "@/api/api.ts"
 	import logoimg from "@/static/logo.png"
 	import noticeImg from "@/static/img/noticeImg.png"
 	import { onMounted, ref } from "vue";
@@ -296,7 +295,15 @@
 			list.value = list.value.concat(res);
 		})
 	}
+	// const find = ref('1')
 	onMounted(() => {
+		// Ver.find().then(res => {
+		// 	if (res === '1') {
+		// 		 uni.hideTabBar()
+		// 	}
+		// 	find.value = res
+		// })
+
 		test()
 		Home.bannerList().then(res => {
 			listimg.value = res.map((item) => {
@@ -342,6 +349,6 @@
 	}
 
 	.scroll-Y {
-		height: calc(100vh - var(--status-bar-height) - 88rpx - var(--window-bottom));
+		height: calc(100vh - var(--status-bar-height) - 44px - var(--window-bottom));
 	}
 </style>

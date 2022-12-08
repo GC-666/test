@@ -10,7 +10,7 @@
 				<view class="baoxiang flex flex-between">
 					<tm-image @click="gonav('pages/activity/loot/lootExchange')" style="margin-top: 170rpx;" :round="4" :width="256" :height="61" :src="jifenduihuan">
 					</tm-image>
-					<tm-image style="margin-top: 90rpx;" :round="4" :width="256" :height="61" :src="wodejilu">
+					<tm-image @click="gonav('pages/activity/loot/lootRecord')" style="margin-top: 90rpx;" :round="4" :width="256" :height="61" :src="wodejilu">
 					</tm-image>
 				</view>
 				<view class="choujiangdabeijing flex flex-center">
@@ -307,7 +307,6 @@
 		background-size: 100% 100%;
 		width: 646rpx;
 		height: 408rpx;
-		margin-right: $0;
 	}
 
 	.choujiangdabeijing {

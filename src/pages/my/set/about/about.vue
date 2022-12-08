@@ -30,7 +30,7 @@
 	import logo1 from "@/static/img/logo1.png"
 	import logo2 from "@/static/img/logo2.png"
 	
-	import { useTmpiniaStore } from '@/xhui/tool/lib/tmpinia';
+	import { useTmpiniaStore } from '@/tmui/tool/lib/tmpinia';
 	const store = useTmpiniaStore();
 </script>
 

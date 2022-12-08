@@ -118,7 +118,7 @@
 		if (bool.value) {
 			My.userBoxFindPageList(pageData.value).then(res => {
 				userBoxFindPageList.value = userBoxFindPageList.value.concat(res)
-				if (res.length = pageData.value.limit) {
+				if (res.length == pageData.value.limit) {
 					bool.value = true;
 				} else {
 					bool.value = false;

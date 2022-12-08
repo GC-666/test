@@ -32,7 +32,7 @@
 							</view>
 						</view>
 					</tm-sheet>
-					<tm-sheet :margin="[20,10]" :round="4" :padding="[10,10]"  v-if="item.rewardData !==''">
+					<tm-sheet :margin="[20,10]" :round="4" :padding="[10,10]" v-if="item.rewardData !==''">
 						<view class="flex">
 							<view class="flex flex-around">
 								<tm-text :font-size="24" label="可获得一下报酬："></tm-text>
@@ -45,11 +45,11 @@
 					</tm-sheet>
 					<view class="flex flex-between ml-20 mr-10">
 						<view class="flex-center">
-							<tm-text :font-size="30" label="状态"></tm-text>
+							<!-- <tm-text :font-size="30" label="状态"></tm-text> -->
 						</view>
 
 						<view class="flex">
-							<tm-button v-if="item.status=='0'" :margin="[10, 10]" :width="140" :height="40" size="mini"
+							<!-- <tm-button v-if="item.status=='0'" :margin="[10, 10]" :width="140" :height="40" size="mini"
 								:shadow="0" label="进行中">
 							</tm-button>
 							<tm-button v-if="item.status=='2'" :margin="[10, 10]" :width="140" :height="40" size="mini"
@@ -57,12 +57,16 @@
 							</tm-button>
 							<tm-button v-if="item.status=='3'" disabled :margin="[10, 10]" :width="140" :height="40"
 								size="mini" :shadow="0" label="已结束">
-							</tm-button>
+							</tm-button> -->
+							<tm-image v-if="item.receiveNoCount>'0'" :round="0" class="" :width="160" :height="50"
+								:src="lqjl"></tm-image>
+							<tm-image class="ml-20" v-if="item.status=='0'" :round="0" :width="160" :height="50" :src="jsmx">
+							</tm-image>
+
 						</view>
 					</view>
 				</tm-sheet>
 			</view>
-
 		</scroll-view>
 		<view v-if="list.length<=0" class="flex flex-wrap flex-row-center-center" style="margin-top:150rpx">
 			<tm-image :round="4" class="flex-start" :width="320" :height="280" :src="wushuju"></tm-image>
@@ -75,6 +79,9 @@
 	import { Role } from "@/api/api.ts"
 	import { onBeforeMount, onMounted, reactive, ref } from 'vue';
 	import wushuju from "@/static/my/wushuju.png"
+	import jsmx from "@/static/role/jsmx.png"
+	import lqjl from "@/static/role/lqjl.png"
+	import { onLoad } from "@dcloudio/uni-app";
 	const lower = () => {
 		if (count.value > 0) {
 			params.value.page += 1
@@ -85,9 +92,11 @@
 	const count = ref(0)
 	const params = ref({
 		page: 1,
-		limit: 4
+		limit: 4,
+		heroTaskId: 0,
 	})
-	onBeforeMount(() => {
+	onLoad((o) => {
+		params.value.heroTaskId = o.heroTaskId
 		findTaskRecrodList()
 	})
 	const findTaskRecrodList = () => {

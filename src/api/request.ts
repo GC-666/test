@@ -1,6 +1,6 @@
 
 const BASE_URL = import.meta.env.VITE_APP_BASE_API
-//const BASE_URL = "https://xunmeta.rocknft.top/api"
+//const BASE_URL = "https://api.xunmeta.rocknft.top"
 // 封装 GET POST 请求并导出
 export function request(url: string = '', params = {}, type: "POST" | undefined) {
 	//设置 url params type 的默认值
@@ -42,7 +42,10 @@ export function request(url: string = '', params = {}, type: "POST" | undefined)
 						icon: 'none',
 					});
 					uni.reLaunch({
-						url: '/pages/login/login'
+						url: '/pages/login/login',
+						success:function(){
+							return
+						}
 					})
 					return
 				} else if (data.code === "10000") {

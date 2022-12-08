@@ -104,7 +104,8 @@
 					</tm-sheet>
 				</view>
 			</view>
-		</tm-sheet><tm-sheet :shadow="0" :margin="[20,0]" :padding="[20,10]">
+		</tm-sheet>
+		<tm-sheet :shadow="0" :margin="[20,0]" :padding="[20,10]">
 			<view class="pt-20 pb-20">
 				<tm-text :font-size="30" _class="text-weight-b" label="合成须知"></tm-text>
 				<tm-text class="mt-10" style="text-indent: 1.8em;letter-spacing:2rpx;letter-spacing:4rpx;" :font-size="22" label="数字藏品为虚拟数字商品，而非实物，仅限实名认证为年满14周岁的中国大陆用户购买。数字藏品的版权由发行方或原创者拥有，除另行取得版权拥有者书面同意外，不得将数字藏品用于任何商业用途，不支持退换。本商品源文件不支持本地下载。请勿对数字藏品进行炒作、场外交易、欺诈，或以任何其他非法方式进行使用"></tm-text>
@@ -147,7 +148,7 @@
 	import bg1 from "@/static/img/shopBg.png"
 	import bg from "@/static/img/bg.png"
 	import { Activity } from "@/api/api.ts"
-	import { useTmpiniaStore } from '@/xhui/tool/lib/tmpinia';
+	import { useTmpiniaStore } from '@/tmui/tool/lib/tmpinia';
 	const store = useTmpiniaStore();
 	//合成详情
 	const composeFind = ref({});

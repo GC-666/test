@@ -101,7 +101,7 @@
 		if (bool.value) {
 			My.userCollectionFindPageList(pageData.value).then(res => {
 				userCollectionFindPageList.value = userCollectionFindPageList.value.concat(res)
-				if (res.length = pageData.value.limit) {
+				if (res.length == pageData.value.limit) {
 					bool.value = true;
 				} else {
 					bool.value = false;

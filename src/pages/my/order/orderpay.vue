@@ -93,7 +93,7 @@
 	import { My } from "@/api/api.ts"
 	import { onLoad } from "@dcloudio/uni-app";
 	import { onBeforeMount, onMounted, ref, reactive } from "vue";
-	import { useTmpiniaStore } from '@/xhui/tool/lib/tmpinia';
+	import { useTmpiniaStore } from '@/tmui/tool/lib/tmpinia';
 	const store = useTmpiniaStore();
 	const data = ref({})
 	const id = ref('')

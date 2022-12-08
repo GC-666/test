@@ -44,7 +44,7 @@
 					<tm-text class="ml-10" color="#808080" :font-size="22" _class="text-weight-b" label="平台钱包">
 					</tm-text>
 				</view>
-				<tm-checkbox-group>
+				<tm-checkbox-group v-model="checkboxlist1">
 					<tm-checkbox disabled defaultChecked :size="30" :round="10" value="00"></tm-checkbox>
 				</tm-checkbox-group>
 			</view>
@@ -55,8 +55,8 @@
 					<tm-text class="ml-10" color="#808080" :font-size="22" _class="text-weight-b" label="云钱包"></tm-text>
 					<tm-text class="ml-10" color="red" :font-size="22" _class="text-weight-b" label="(推荐)"></tm-text>
 				</view>
-				<tm-checkbox-group v-if="orderFindMySellServiceCharge.isCloudWallet =='1'">
-					<tm-checkbox disabled defaultChecked :size="30" :round="10" value="05"></tm-checkbox>
+				<tm-checkbox-group v-if="orderFindMySellServiceCharge.isCloudWallet =='1'" v-model="checkboxlist">
+					<tm-checkbox defaultChecked :size="30" :round="10" value="05"></tm-checkbox>
 				</tm-checkbox-group>
 				<tm-text color="red" v-else :font-size="30" _class="text-weight-b" label="暂未开通"></tm-text>
 			</view>
@@ -124,17 +124,18 @@
 	import { onBeforeMount, ref, reactive } from "vue";
 	import bg1 from "@/static/img/shopBg.png"
 	import bg from "@/static/img/bg.png"
-	import { useTmpiniaStore } from '@/xhui/tool/lib/tmpinia';
+	import { useTmpiniaStore } from '@/tmui/tool/lib/tmpinia';
 	const store = useTmpiniaStore();
 	const loot = ref(true);
 	const price = ref("")
 	//配置参数
 	const config = ref({});
+	const checkboxlist = ref(['05'])
+	const checkboxlist1 = ref(['00'])
 	//藏品详情
 	const collectionDetails = ref({});
 	//我的寄售服务费和云钱包
 	const orderFindMySellServiceCharge = ref({});
-
 	onLoad((e) => {
 		config.value = e;
 		My.collectionDetails({
@@ -146,21 +147,7 @@
 			id: e.id
 		}).then(res => {
 			orderFindMySellServiceCharge.value = res;
-			if (res.isCloudWallet === '1') {
-				paymentPlatform.value.push({
-					type: "00",
-					name: "平台支付"
-				})
-				paymentPlatform.value.push({
-					type: "05",
-					name: "云钱包"
-				})
-			} else {
-				paymentPlatform.value.push({
-					type: "00",
-					name: "平台支付"
-				})
-			}
+
 		})
 	})
 	//获取支付平台
@@ -186,6 +173,22 @@
 	const content = ref("");
 	//寄售点击
 	const consignment = () => {
+
+		if (checkboxlist.value.length > 0 && checkboxlist1.value.length > 0) {
+			paymentPlatform.value.push({
+				type: "00",
+				name: "平台支付"
+			})
+			paymentPlatform.value.push({
+				type: "05",
+				name: "云钱包"
+			})
+		} else {
+			paymentPlatform.value.push({
+				type: "00",
+				name: "平台支付"
+			})
+		}
 		if (loot.value) {
 			if (getprice.value > 0) {
 				if (paymentPlatform.value.length > 0) {
@@ -222,11 +225,11 @@
 			payTypeJson: JSON.stringify(paymentPlatform.value)
 		}).then(res => {
 			uni.showToast({
-				title:'寄售成功',
-				icon:'none'
+				title: '寄售成功',
+				icon: 'none'
 			})
 		})
-
+		paymentPlatform.value = []
 	}
 	const beforeClose = () => {
 		if (pwd.value != '') {

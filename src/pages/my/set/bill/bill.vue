@@ -74,7 +74,7 @@
 
 <script setup>
 	import { onBeforeMount, ref } from 'vue'
-	import { useTmpiniaStore } from '@/xhui/tool/lib/tmpinia';
+	import { useTmpiniaStore } from '@/tmui/tool/lib/tmpinia';
 	import { My } from "@/api/api.ts"
 	import wushuju from "@/static/my/wushuju.png"
 	const store = useTmpiniaStore();

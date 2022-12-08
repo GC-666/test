@@ -66,7 +66,7 @@
 		address: '',
 		nickname: '',
 		code: '',
-		phone: '16636182265',
+		phone: '',
 		password: '',
 		password2: '',
 		uid: '',
