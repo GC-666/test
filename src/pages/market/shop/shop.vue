@@ -1,9 +1,9 @@
 <template>
 
 	<tm-app>
-		<tm-navbar :title="name">
+		<tm-navbar :title="name" :shadow="0">
 		</tm-navbar>
-		<tm-tabs :itemWidth="120" align="center" :list="tabsTitle" :width="750" :height="300" default-name="4"
+		<tm-tabs :transprent="false" :itemWidth="120" align="center" :list="tabsTitle" :width="750" :height="300" default-name="4"
 			@change="tabsChange">
 		</tm-tabs>
 		<scroll-view scroll-y="true" class="scroll-Y" @scrolltolower="lower" v-if="list.length>0">

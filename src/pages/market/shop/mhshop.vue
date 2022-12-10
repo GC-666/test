@@ -82,9 +82,7 @@
 	const list = ref([])
 	const name = ref('')
 	onShow(() => {
-		params.value.page = 1
-		list.value = []
-		findMarketBoxList()
+		
 	})
 	const findMarketBoxList = () => {
 		Market.findMarketBoxList(params.value).then(res => {
@@ -95,6 +93,9 @@
 	onLoad((e) => {
 		params.value.id = e.id
 		name.value = e.name
+		params.value.page = 1
+		list.value = []
+		findMarketBoxList()
 	})
 </script>
 

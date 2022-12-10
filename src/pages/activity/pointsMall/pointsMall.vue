@@ -42,10 +42,10 @@
 			</tm-sheet>
 		</view>
 		<view class="flex" style="margin:20rpx 0rpx 0rpx 24rpx;" >
-			<tm-image :round="4" :width="78" :height="44" :src="newpng">
+			<tm-image :round="4" :width="44" :height="44" :src="remen">
 			</tm-image>
 			<view class="flex flex flex-row-bottom-start">
-				<tm-text _class="text-weight-b" :font-size="26" label="最新上架"></tm-text>
+				<tm-text _class="text-weight-b" :font-size="26" label="热门兑换"></tm-text>
 			</view>
 		</view>
 		<view class="flex flex-between flex-wrap mt-5 pl-15 pr-15">
@@ -72,6 +72,7 @@
 	import newpng from "@/static/activity/pointsMall/new.png"
 	import zuiixn from "@/static/activity/pointsMall/zuiixn.png"
 	import jifen from "@/static/activity/pointsMall/jifen.png"
+	import remen from "@/static/activity/pointsMall/remen.png"
 	import { onShow, onLoad } from '@dcloudio/uni-app';
 	import { Activity } from "@/api/api.ts";
 	import { onMounted, reactive, ref } from 'vue';

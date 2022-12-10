@@ -16,16 +16,15 @@
 					</template>
 				</tm-image>
 				<view class="flex-5 mt-2 ml-20">
-					<tm-text class="text-weight-b" _class="text-overflow text-weight-b"
+					<tm-text class="text-weight-b mt-5" _class="text-overflow text-weight-b"
 						_style="width: 330rpx;text-overflow: ellipsis;" color="#333333" :fontSize="38"
 						:label="user.nickname"></tm-text>
 					<tm-text class="mt-18" color="#999999" :fontSize="22" :label="user.phone"></tm-text>
 				</view>
-				<view class="flex-row-center-end mr-20">
+				<view class="flex-row-center-end mr-20 mt--n10">
 					<tm-icon v-if="user.realnametype==0" :fontSize="40" name="xh-weishiming"></tm-icon>
 					<tm-icon v-if="user.realnametype==1" :fontSize="40" name="xh-daishenhe"></tm-icon>
 					<tm-icon v-if="user.realnametype==2" :fontSize="40" name="xh-yishiming"></tm-icon>
-
 				</view>
 			</view>
 		</view>
@@ -48,7 +47,7 @@
 				</view>
 			</view>
 			<view v-else class="flex flex-wrap flex-row-center-center" style="height:250rpx">
-				<tm-image :round="4" class="flex-start" :width="210" :height="210" :src="wushuju"></tm-image>
+				<tm-image :round="4" class="flex-start" :width="210" :height="180" :src="wushuju"></tm-image>
 			</view>
 		</tm-sheet>
 		<tm-sheet :round="4" :shadow="0" :margin="[20,0]" :padding="[10,10]">
@@ -69,12 +68,12 @@
 				</view>
 			</view>
 			<view v-else class="flex flex-wrap flex-row-center-center" style="height:250rpx">
-				<tm-image :round="4" class="flex-start" :width="210" :height="210" :src="wushuju"></tm-image>
+				<tm-image :round="4" class="flex-start" :width="210" :height="180" :src="wushuju"></tm-image>
 			</view>
 		</tm-sheet>
 
 		<tm-sheet :round="4" :shadow="0" :margin="[20,30]" :padding="[0,0]">
-			<tm-cell :margin="[20, 20]" :padding="[0, 0]" :titleFontSize="28" @click="gonav('pages/my/order/order')">
+			<tm-cell :margin="[20, 20]" :padding="[0, 5]" :titleFontSize="28" @click="gonav('pages/my/order/order')">
 				<template v-slot:title>
 					<view class="flex">
 						<tm-icon class="ml-10" :fontSize="32" name="xh-dingdan"></tm-icon>
@@ -83,7 +82,7 @@
 				</template>
 			</tm-cell>
 			<tm-divider color="grey" :margin="[1,1]"></tm-divider>
-			<tm-cell :margin="[20, 20]" :padding="[0, 0]" :titleFontSize="28"
+			<tm-cell :margin="[20, 20]" :padding="[0, 5]" :titleFontSize="28"
 				@click="gonav('pages/my/mymoney/mymoney')">
 				<template v-slot:title>
 					<view class="flex">
@@ -93,7 +92,7 @@
 				</template>
 			</tm-cell>
 			<tm-divider color="grey" :margin="[1,1]"></tm-divider>
-			<tm-cell :margin="[20, 20]" :padding="[0, 0]" :titleFontSize="28" @click="kefu">
+			<tm-cell :margin="[20, 20]" :padding="[0, 5]" :titleFontSize="28" @click="kefu">
 				<template v-slot:title>
 					<view class="flex">
 						<tm-icon class="ml-10" :fontSize="32" name="xh-kefu"></tm-icon>
@@ -102,7 +101,7 @@
 				</template>
 			</tm-cell>
 			<tm-divider color="grey" :margin="[1,1]"></tm-divider>
-			<tm-cell :margin="[20, 20]" :padding="[0, 0]" :titleFontSize="28" @click="gonav('pages/my/set/set')">
+			<tm-cell :margin="[20, 20]" :padding="[0, 5]" :titleFontSize="28" @click="gonav('pages/my/set/set')">
 				<template v-slot:title>
 					<view class="flex">
 						<tm-icon class="ml-10" :fontSize="32" name="xh-shezhi"></tm-icon>
@@ -132,6 +131,7 @@
 	import wushuju from "@/static/my/wushuju.png"
 	import userHead from "@/static/my/userHead.png"
 	import { useTmpiniaStore } from '@/tmui/tool/lib/tmpinia';
+	import { onBeforeMount } from 'vue';
 	const store = useTmpiniaStore();
 
 	const statusBarHeight = uni.getSystemInfoSync().statusBarHeight
@@ -179,8 +179,17 @@
 
 
 	// 切换暗黑 样式
-	const name = ref('tmicon-md-moon')
+	const name = ref('')
 	const color = ref('')
+	onBeforeMount(() => {
+		if (store.tmStore.dark) {
+			name.value = "tmicon-ios-sunny"
+			color.value = '#FFCC00'
+		} else {
+			
+			name.value = "tmicon-md-moon"
+		}
+	})
 	// 暗黑模式切换
 	const setDark = () => {
 		if (store.tmStore.dark) {

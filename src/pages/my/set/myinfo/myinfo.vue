@@ -30,7 +30,7 @@
 
 			<tm-divider color="grey" :margin="[0,1]"></tm-divider>
 			<tm-sheet :round="0" :margin="[0,0]" :padding="[20,30]" :shadow="0">
-				<view class="flex flex-row-center-between">
+				<view class="flex flex-row-center-between" @click="copy(user.address)">
 					<tm-text :font-size="30" _class="text-weight-b" label="区块链地址"></tm-text>
 					<tm-text _class="text-overflow" _style="width: 400rpx;text-overflow: ellipsis;" :font-size="30"
 						:label="user.address"></tm-text>
@@ -107,7 +107,18 @@
 		personal()
 	})
 
-
+	// 复制区块链地址
+	const copy = (data) => {
+		uni.setClipboardData({
+			data: data,
+			success: function() {
+				uni.showToast({
+					title: "复制成功",
+					icon: "none"
+				})
+			}
+		})
+	}
 	const avatarClick = () => {
 		console.log(user.value.avatar);
 		// uni.$tm.u.preview(user.value.avatar)

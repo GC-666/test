@@ -23,11 +23,11 @@
 							<view class="flex">
 								<view class="round-tl-5 round-bl-5 flex flex-center"
 									style="width: 100rpx; background-color: #FFD7A7; ">
-									<tm-text class="ma-5" :font-size="22" _class="text-weight-n" label="发行量"></tm-text>
+									<tm-text class="ma-5" color="#25262E" :font-size="22" _class="text-weight-n" label="发行量"></tm-text>
 								</view>
 								<view class="round-tr-5 round-br-5 flex flex-center"
 									style="width: 85rpx;background-color: #FFE6C8;">
-									<tm-text class="ma-5" :font-size="22" _class="text-weight-n"
+									<tm-text class="ma-5" color="#25262E" :font-size="22" _class="text-weight-n"
 										:label="data.totalNumber">
 									</tm-text>
 								</view>
@@ -35,11 +35,11 @@
 							<view class="flex ml-20">
 								<view class="round-tl-5 round-bl-5 flex flex-center"
 									style="width: 100rpx; background-color: #FFD7A7;">
-									<tm-text class="ma-5" :fontSize="22" _class="text-weight-n" label="流通量"></tm-text>
+									<tm-text class="ma-5" :fontSize="22" color="#25262E" _class="text-weight-n" label="流通量"></tm-text>
 								</view>
 								<view class="round-tr-5 round-br-5 flex flex-center"
 									style="width: 85rpx;background-color: #FFE6C8;">
-									<tm-text class="ma-5" :fontSize="22" _class="text-weight-n"
+									<tm-text class="ma-5" :fontSize="22" color="#25262E" _class="text-weight-n"
 										:label="data.circulation">
 									</tm-text>
 								</view>
@@ -93,12 +93,12 @@
 		</tm-sheet>
 		<tm-sheet :style="{'color': store.tmStore.dark?'#fff': '#25262E','font-size': '22rpx'}" :round="3" :shadow="0"
 			:margin="[20,10]" :padding="[20,10]">
-			<view class="flex flex-around">
+			<view class="flex flex-between">
 
 				<tm-text :fontSize="22" _class="text-weight-n ma-10" :label="`创作者：${data.creator}`">
 				</tm-text>
-				<tm-text :fontSize="22" _class="text-weight-n ma-10" :label="`发行者：${data.publisher}`">
-				</tm-text>
+				<!-- <tm-text :fontSize="22" _class="text-weight-n ma-10" :label="`发行者：${data.publisher}`">
+				</tm-text> -->
 				<tm-text :fontSize="22" _class="text-weight-n ma-10" :label="`持有者：${data.holderName}`">
 				</tm-text>
 			</view>

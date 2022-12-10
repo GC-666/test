@@ -1,9 +1,9 @@
 <template>
 	<tm-app style="">
-		<tm-navbar  title="藏品">
+		<tm-navbar  title="藏品" :shadow="0">
 		</tm-navbar>
 		<view style="">
-			<tm-sheet :margin="[0,0]">
+			<tm-sheet :transprent="false" :margin="[0,0]">
 				<tm-tabs @change="tabsChange" :transprent="false" activeFontColor="#07EBFE" align="center"
 					:list="tabsTitle" :itemHeight="30" :itemWidth="300" :width="700"  default-name="1">
 				</tm-tabs>

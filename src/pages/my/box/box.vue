@@ -1,6 +1,6 @@
 <template>
 	<tm-app style="">
-		<tm-navbar  title="盲盒">
+		<tm-navbar  title="盲盒" :shadow="0">
 		</tm-navbar>
 		<scroll-view scroll-y="true"  class="scroll-Y" @scrolltolower="lower">
 			<view v-if="userBoxFindReportPageList.length>0" class="flex flex-row-center-between flex-wrap" style="margin: 0rpx 20rpx 0rpx 20rpx;">

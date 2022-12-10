@@ -1,16 +1,17 @@
 <template>
 	<view class="">
-		<scroll-view scroll-y="true" :style="`height: calc(100vh - ${statusBarHeight}px - ${tabbarHeight}px);`" @scrolltolower="lower" v-if="list.length>0">
+		<scroll-view scroll-y="true" :style="`height: calc(100vh - ${statusBarHeight}px - ${tabbarHeight}px);`"
+			@scrolltolower="lower" v-if="list.length>0">
 			<view class="" v-for="item in list">
 				<view class="mt-20">
-					<tm-sheet :round="4" color="grey" :margin="[20,0]" :padding="[0,0]">
-						<tm-sheet :round="4" color="grey-3" :margin="[0,0]" :padding="[10,10]">
+					<tm-sheet :round="4" :margin="[20,0]" :padding="[0,0]">
+						<tm-sheet :round="4" :margin="[0,0]" :padding="[10,10]">
 							<view class="flex flex-between">
 								<view class="flex flex-col flex-around">
 									<tm-text :fontSize="40" _class="text-weight-b" :label="item.name"></tm-text>
 
 									<view class="flex" v-if="item.type=='1'"
-										style="background-color: #E8C34D; border-radius: 15rpx;">
+										style="background-color: #FFC300; border-radius: 15rpx;">
 										<tm-icon class="pt-2 ml-10" :fontSize="28" name="tmicon-clock"></tm-icon>
 										<tm-countdown class="text-size-n ml-10 text-size-xxs mr-10"
 											:time="parseInt(item.surplusTime)" format="HH:MM:SS" autoStart>
@@ -19,7 +20,7 @@
 								</view>
 								<tm-image :round="4" :width="100" :height="100" :src="item.img"></tm-image>
 							</view>
-							<tm-sheet :margin="[20,20]" :round="4" :padding="[10,10]">
+							<tm-sheet :margin="[20,20]" color="grey-3" :round="4" :padding="[10,10]">
 								<view class="flex flex-between">
 									<view class="">
 										<tm-text v-if="item.jobAskName!==''" :fontSize="24"
@@ -53,7 +54,7 @@
 									<view class="" v-if="item.totalCount !=='0'">
 										<tm-text :fontSize="24" :label="`总次数 (${item.useCount}/${item.totalCount})`">
 										</tm-text>
-										<tm-progress :width="300" :height="10"
+										<tm-progress :followTheme="false" :width="300" :height="10" color="yellow"
 											:percent="item.useCount===item.totalCount?100:0">
 										</tm-progress>
 									</view>
@@ -62,10 +63,9 @@
 									</view>
 								</view>
 								<view class="">
-									<tm-button :margin="[10, 10]" :width="140" :height="40" size="mini" :shadow="0"
-										label="开始冒险"
-										@click="gonav('pages/my/role/takelist/takelist?heroTaskId='+item.id)">
-									</tm-button>
+									<tm-image :round="0"
+										@click="gonav('pages/my/role/takelist/takelist?heroTaskId='+item.id)"
+										class="ml-10 mr-10" :width="160" :height="50" :src="ksmx"></tm-image>
 								</view>
 							</view>
 						</tm-sheet>
@@ -95,23 +95,24 @@
 		</view>
 		<view class="">
 			<view class="relative">
-				<tm-float-button :offset="[60,40]" :btn="{ icon: show? 'tmicon-ios-remove' : 'tmicon-plus'}"
-					class="mb-n25" @click="show = !show">
+				<tm-float-button :followTheme="false" :offset="[20,40]"
+					:btn="{ icon: show? 'tmicon-ios-remove' : 'tmicon-plus',color:'#0199FE'}" class="mb-n25"
+					@click="show = !show">
 				</tm-float-button>
-			</view>
-			<view class="absolute flex flex-col" style="bottom: 60rpx;right: 150rpx;z-index: 10;" v-if="show">
-				<tm-button style="position: absolute;right: -30rpx;bottom: -100rpx;" :margin="[20, 20]" size="mini"
-					:width="70" :height="70" :round="20" :shadow="0" label="冒险列表">
-				</tm-button>
-				<tm-button style="position: absolute;right: 22rpx;bottom: -8rpx;" :margin="[20, 20]" size="mini"
-					:width="70" :height="70" :round="20" :shadow="0" label="一键冒险" @click="heroOnekeyWork">
-				</tm-button>
-				<tm-button style="position: absolute;right: -32rpx;bottom: 88rpx;" :margin="[20, 20]" size="mini"
-					:width="70" :height="70" :round="20" :shadow="0" label="一键领取">
-				</tm-button>
-				<tm-button style="position: absolute;right: -136rpx;bottom: 92rpx;" :margin="[20, 20]" size="mini"
-					:width="70" :height="70" :round="20" :shadow="0" label="冒险记录"
-					@click="show=false;gonav('pages/my/role/takelist/takelist')"></tm-button>
+				<view class="absolute flex flex-col" style="bottom: 30rpx;right: 150rpx;z-index: 10;" v-if="show">
+					<tm-button color="#0199FE" style="position: absolute;right: 40rpx;bottom: -20rpx;"
+						:padding="[10,10]" :width="60" :height="60" :round="20" :fontSize="25" :shadow="0" label="冒险列表">
+					</tm-button>
+					<tm-button color="#0199FE" style="position: absolute;right: 20rpx;bottom: 72rpx;" :padding="[10,10]"
+						:width="60" :height="60" :round="20" :shadow="0" label="一键冒险" @click="heroOnekeyWork">
+					</tm-button>
+					<tm-button color="#0199FE" style="position: absolute;right: -52rpx;bottom: 130rpx;"
+						:padding="[10,10]" :width="60" :height="60" :round="20" :shadow="0" label="一键领取">
+					</tm-button>
+					<tm-button color="#0199FE" style="position: absolute;right: -144rpx;bottom: 140rpx;"
+						:padding="[10,10]" :width="60" :height="60" :round="20" :shadow="0" label="冒险记录"
+						@click="show=false;gonav('pages/my/role/takelist/takelist')"></tm-button>
+				</view>
 			</view>
 		</view>
 		<tm-modal :height="550" :border="0" title="" splitBtn hideCancel okText="立即收下" v-model:show="showWin2" @ok="ok">
@@ -130,6 +131,7 @@
 	import { Role } from "@/api/api.ts"
 	import { computed, onBeforeMount, reactive, ref } from 'vue';
 	import wushuju from "@/static/my/wushuju.png"
+	import ksmx from "@/static/role/ksmx.png"
 	const percent = computed((val, val2) => {
 		return val === val2 ? 100 : val
 

@@ -1,6 +1,6 @@
 <template>
 	<tm-app>
-		<tm-navbar  title="藏品详情">
+		<tm-navbar  title="藏品详情" :shadow="0">
 		</tm-navbar>
 		<view class="flex flex-row-center-center">
 			<tm-image :width="500" :height="500" :src="collectionDetails.img"></tm-image>

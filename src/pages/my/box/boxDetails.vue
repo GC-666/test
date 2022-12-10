@@ -1,6 +1,6 @@
 <template>
 	<tm-app>
-		<tm-navbar  title="盲盒详情">
+		<tm-navbar  title="盲盒详情" :shadow="0">
 		</tm-navbar>
 		<view class="flex-col 	flex-center	">
 			<tm-text class="mt-14" :font-size="32" _class="text-weight-b" :label="userBoxFindItem.boxName"></tm-text>

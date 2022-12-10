@@ -76,13 +76,13 @@
 					<tm-text _class="text-weight-b mt-20 flex flex-center" color="#ffffff" :font-size="36" label="兑换规则"></tm-text>
 					<view class="" style="color:#fff;font-size: 26rpx;font-weight: bold;margin: 0rpx 50rpx;">
 						<view class="" style="letter-spacing:2rpx;line-height: 50rpx;">
-							1 . 规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则
+							1 . 积分兑换以实际兑换为准
 						</view>
 						<view class="" style="letter-spacing:2rpx;line-height: 50rpx;">
-							2 . 规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则
+							2 . 如发生兑换错误或处理异常请重新兑换
 						</view>
 						<view class="" style="letter-spacing:2rpx;line-height: 50rpx;">
-							3 . 规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则
+							3 . 积分兑换不能反向兑换
 						</view>
 					</view>
 				</view>
@@ -229,11 +229,11 @@
 		Activity.lootIntegralExchange({
 			"id": contentD.value.id
 		}).then(res => {
-			mode(0);
 			uni.showToast({
 				title: "兑换成功",
 				icon: 'none'
 			})
+			getlootFindUserGrantExchange(0);
 		})
 	}
 	// 下拉刷新

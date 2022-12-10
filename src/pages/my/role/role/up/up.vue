@@ -28,11 +28,16 @@
 				</view>
 			</tm-sheet>
 			<tm-sheet :shadow="0" :round="4" :margin="[10,15]" :padding="[10,20]">
-				<view class="flex flex-row">
-					<tm-badge count="5" v-for="i in 4">
-						<tm-avatar :round="12" color="green" :font-size="42" :margin="[10,0]" icon="tmicon-QQ">
-						</tm-avatar>
-					</tm-badge>
+				<view class="flex flex-around">
+					<view class="flex flex-col" v-for="i in 4">
+						<view class="flex flex-row">
+							<tm-badge count="5" color="#99C2E1">
+								<tm-avatar color="green" :font-size="42" :margin="[10,0]" icon="tmicon-QQ"></tm-avatar>
+							</tm-badge>
+						</view>
+						<tm-text :font-size="22" color="#0B425B" label="经验: 1000">
+						</tm-text>
+					</view>
 				</view>
 			</tm-sheet>
 		</view>

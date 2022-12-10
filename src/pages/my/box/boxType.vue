@@ -1,9 +1,9 @@
 <template>
 	<tm-app style="">
-		<tm-navbar :title="config.boxName">
+		<tm-navbar :title="config.boxName" :shadow="0">
 		</tm-navbar>
 		<view style="">
-			<tm-sheet :margin="[0,0]">
+			<tm-sheet :transprent="false" :margin="[0,0]">
 				<tm-tabs @change="tabsChange" :transprent="false" activeFontColor="#07EBFE" align="center"
 					:list="tabsTitle" :itemHeight="30" :itemWidth="130" :width="700" :height="30" default-name="0">
 				</tm-tabs>
@@ -37,7 +37,7 @@
 								<tm-text color="#07EBFE" :font-size="18" _class="text-weight-n" :label="data.no">
 								</tm-text>
 							</view>
-							<view class="flex">
+							<view class="flex" v-if="data.time!=null || data.time!=''">
 								<view class="flex" v-if="data.type=='0'">
 									<!-- <tm-text color="#999" :font-size="18" _class="text-weight-b" label="获取时间"></tm-text> -->
 									<tm-text class="ml-4" color="#999" :font-size="18" _class="text-weight-b"
@@ -67,10 +67,9 @@
 
 
 <script setup>
-
 	const hh = ref("");
 	onLoad((e) => {
-		
+
 	})
 	import { onShow, onLoad } from '@dcloudio/uni-app';
 	import { onMounted, reactive, ref } from 'vue';

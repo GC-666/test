@@ -52,15 +52,15 @@
 				</view>
 			</view>
 		</scroll-view>
-		<view v-if="composeFindList.length<=0" class="flex flex-wrap flex-row-center-center" style="margin-top:150rpx">
+		<view v-if="composeFindList.length<=0 && index==1" class="flex flex-wrap flex-row-center-center" style="margin-top:150rpx">
 			<tm-image :round="4" class="flex-start" :width="320" :height="280" :src="wushuju"></tm-image>
 		</view>
 		<view v-if="index==2">
 			<tm-image @click="gonav('pages/activity/loot/loot')" class="mb-10" :width="750" :height="350" :src="jfdb">
 			</tm-image>
-			<tm-image class="mb-10" :width="750" :height="350" :src="jfdh"></tm-image>
+			<tm-image @click="gonav('pages/activity/pointsMall/pointsMall2')"  class="mb-10" :width="750" :height="350" :src="jfdh"></tm-image>
 			<!-- <tm-image :width="750" :height="350" :src="jfsc"></tm-image> -->
-			<tm-image @click="gonav('pages/activity/pointsMall/pointsMall')" :width="750" :height="350" :src="jfsc"></tm-image>
+			<tm-image @click="gonav('pages/activity/pointsMall/pointsMall2')" :width="750" :height="350" :src="jfsc"></tm-image>
 		</view>
 	</tm-app>
 </template>

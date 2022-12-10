@@ -1,9 +1,9 @@
 <template>
 	<tm-app style="">
-		<tm-navbar  :title="config.collName">
+		<tm-navbar  :title="config.collName" :shadow="0">
 		</tm-navbar>
 		<view style="">
-			<tm-sheet :margin="[0,0]">
+			<tm-sheet :transprent="false" :margin="[0,0]">
 				<tm-tabs @change="tabsChange" :transprent="false" activeFontColor="#07EBFE" align="center"
 					:list="tabsTitle" :itemHeight="30" :itemWidth="130" :width="700" :height="30" default-name="1">
 				</tm-tabs>

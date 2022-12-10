@@ -6,12 +6,12 @@
 			<tm-sheet :margin="[0,0]" :padding="[0,statusBarHeight]">
 			</tm-sheet>
 			<tm-sheet :round="0" :shadow="0" :margin="[0,0]" :padding="[0,0]">
-				<tm-input :margin="[20,10]" outlined prefix="tmicon-search" v-model="inp" placeholder="请输入名称"
-					placeholderStyle="text-align: center" @confirm="confirm">
+				<tm-input :margin="[20,10]" :fontSize="22" :round="12" outlined  prefix="tmicon-search" v-model="inp"
+					placeholder="请输入藏品、盲盒名称"  @confirm="confirm">
 				</tm-input>
 			</tm-sheet>
 			<tm-sheet :round="0" :shadow="0" :margin="[0,0]" :padding="[0,0]">
-				<view class="flex flex-around " style="align-items: center;height: 100rpx;">
+				<view class="flex flex-around" style="align-items: center;height: 100rpx;">
 					<tm-text :color="acvite === 0? `${bgColor}` :''"
 						:class="acvite === 0? `text-weight-b active` :'text-weight-n'" :font-size="acvite === 0? 30: 28"
 						label="推荐" @click="tabsClick(0)"></tm-text>
@@ -21,9 +21,9 @@
 					<tm-text :color="acvite === 2? `${bgColor}` :''"
 						:class="acvite === 2? `text-weight-b active` :'text-weight-n'" :font-size="acvite === 2? 30: 28"
 						label="盲盒" @click="tabsClick(2)"></tm-text>
-					<tm-text :color="acvite === 4? `${bgColor}` :''"
+					<!-- <tm-text :color="acvite === 4? `${bgColor}` :''"
 						:class="acvite === 4? `text-weight-b active` :'text-weight-n'" :font-size="acvite === 2? 30: 28"
-						label="求购" @click="tabsClick(4)"></tm-text>
+						label="求购" @click="tabsClick(4)"></tm-text> -->
 					<view class="flex" @click="tabsClick(3)">
 						<tm-text :color="acvite ===3? `${bgColor}` :''"
 							:class="acvite === 3? `text-weight-b active` :'text-weight-n'"
@@ -37,10 +37,20 @@
 				<tm-sheet v-if="typeShow" :round="0" :shadow="0" :margin="[0,0]" :padding="[0,0]">
 					<tm-sheet class="absolute flex flex-around" :width="750" :round="0" :shadow="0" :margin="[0,0]"
 						:padding="[0,0]">
-						<view class="flex overflow-y flex-wrap" style="max-height: 500rpx;">
-							<view class="" v-for=" (item,index) in classification">
-								<tm-tag checkable :checked="acc ===index? true :false" size="m" :label="item.label"
-									@click="tagChange(item,index)"></tm-tag>
+						<view class="flex overflow-y flex-wrap" style="max-height: 500rpx;overflow:auto;">
+							<view class="flex flex-center" style="width:50%" v-for=" (item,index) in classification">
+								<!-- <tm-tag class="" style="width:300rpx" checkable :checked="acc ===index? true :false" size="m" :label="item.label"
+									@click="tagChange(item,index)"></tm-tag> -->
+								<view v-if="acc===index" class="mt-10 mb-10 pt-5 pb-5 flex flex-center"
+									:style="`width:80%;border: 1px solid ${bgColor};border-radius: 15rpx;`">
+									<tm-text @click="tagChange(item,index)" :color="bgColor" :font-size="26"
+										:label="item.label"></tm-text>
+								</view>
+								<view v-else class="mt-10 mb-10 pt-5 pb-5 flex flex-center"
+									style="width:80%;border: 1px solid #999;border-radius: 15rpx;">
+									<tm-text @click="tagChange(item,index)" color="#999" :font-size="26"
+										:label="item.label"></tm-text>
+								</view>
 							</view>
 						</view>
 					</tm-sheet>
@@ -53,7 +63,8 @@
 			<view class="flex flex-between flex-wrap ml-5 mr-5">
 				<view v-for="(data,index) in list">
 					<tm-sheet :shadow="0" :round="4" :margin="[10,15]" :padding="[0,0]" @click="toShop(data)">
-						<tm-image extra class="round-t-4" :width="348" :height="344" model="aspectFill" :src="data.img">
+						<tm-image @click="toShop(data)" extra class="round-t-4" :width="348" :height="344"
+							model="aspectFill" :src="data.img">
 							<template v-slot:extra>
 								<view class="flex flex-center ml-20 mr-20"
 									:style="`background-image: url(${bg});background-size: 100% 100%;width:300rpx;height:40rpx`">
@@ -238,10 +249,10 @@
 	}
 	onMounted(() => {
 		params.value.isRecommend = 1
-		//findMarketList()
-		//getClassification()
+		findMarketList()
+		getClassification()
 
-		tabsClick(4);
+		//tabsClick(4);
 	})
 	const confirm = () => {
 		list.value = []
@@ -347,6 +358,7 @@
 		position: relative;
 		background-color: #fff;
 		z-index: 11;
+
 	}
 
 	.cover {

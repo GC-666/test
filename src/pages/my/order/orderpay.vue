@@ -51,7 +51,7 @@
 				<view class="flex flex-row-center-center">
 					<tm-icon v-if="item.key==='00'"  name="xh-zhanghuqianbao"></tm-icon>
 					<tm-icon  v-if="item.key==='04'" :fontSize="38" name="xh-bonus-line"></tm-icon>
-					<tm-icon  v-if="item.key==='05'" name="xh-zhanghuqianbao"></tm-icon>
+					<tm-icon  v-if="item.key==='05'" name="xh-yunqianbao"></tm-icon>
 					<tm-text class="ml-10" color="#808080" :font-size="22" _class="text-weight-b" :label="item.value">
 					</tm-text>
 				</view>

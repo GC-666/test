@@ -64,47 +64,52 @@
 				<view class="flex-2">
 					<view class="flex flex-around">
 						<tm-text :font-size="22" label="职业: 高级法师"></tm-text>
-						<tm-text :font-size="22" label="状态: 冒险中"></tm-text>
-						<tm-text :font-size="22" label="剩余冒险: 1次"></tm-text>
+						<tm-text v-if="item.status==='1'" :font-size="22" label="状态: 冒险中"></tm-text>
+						<tm-text v-if="item.status==='0'" :font-size="22" label="状态: 空闲中"></tm-text>
+						<tm-text :font-size="22" :label="`剩余冒险: ${item.workCount}次`"></tm-text>
 					</view>
-					<view class="flex flex-around" style="background-color: #f5f5f5;margin: 20rpx 20rpx;">
-						<view class="flex flex-col flex-center">
-							<tm-text :fontSize="20" label="生命"></tm-text>
-							<tm-text class="mt-10" :fontSize="20" label="20"></tm-text>
+					<tm-sheet :margin="[20,20]" color="grey-3" :round="2" :padding="[5,5]">
+						<view class="flex flex-around">
+							<view class="flex flex-col flex-center">
+								<tm-text :fontSize="20" label="生命"></tm-text>
+								<tm-text class="mt-10" :fontSize="20" :label="item.heroLife"></tm-text>
+							</view>
+							<view class="flex flex-col flex-center">
+								<tm-text :fontSize="20" label="力量"></tm-text>
+								<tm-text class="mt-10" :fontSize="20" :label="item.heroPower"></tm-text>
+							</view>
+							<view class="flex flex-col flex-center">
+								<tm-text :fontSize="20" label="敏捷"></tm-text>
+								<tm-text class="mt-10" :fontSize="20" :label="item.heroAgile"></tm-text>
+							</view>
+							<view class="flex flex-col flex-center">
+								<tm-text :fontSize="20" label="智力"></tm-text>
+								<tm-text class="mt-10" :fontSize="20" :label="item.heroIntelligence"></tm-text>
+							</view>
+							<view class="flex flex-col flex-center">
+								<tm-text :fontSize="20" label="攻击力"></tm-text>
+								<tm-text class="mt-10" :fontSize="20" :label="item.heroAttack"></tm-text>
+							</view>
+							<view class="flex flex-col flex-center">
+								<tm-text :fontSize="20" label="防御力"></tm-text>
+								<tm-text class="mt-10" :fontSize="20" :label="item.heroDefense"></tm-text>
+							</view>
+							<view class="flex flex-col flex-center">
+								<tm-text :fontSize="20" label="魔法抗性"></tm-text>
+								<tm-text class="mt-10" :fontSize="20" :label="item.heroMagic"></tm-text>
+							</view>
+							<view class="flex flex-col flex-center">
+								<tm-text :fontSize="20" label="命中"></tm-text>
+								<tm-text class="mt-10" :fontSize="20" :label="item.heroHit"></tm-text>
+							</view>
 						</view>
-						<view class="flex flex-col flex-center">
-							<tm-text :fontSize="20" label="力量"></tm-text>
-							<tm-text class="mt-10" :fontSize="20" label="20"></tm-text>
-						</view>
-						<view class="flex flex-col flex-center">
-							<tm-text :fontSize="20" label="敏捷"></tm-text>
-							<tm-text class="mt-10" :fontSize="20" label="20"></tm-text>
-						</view>
-						<view class="flex flex-col flex-center">
-							<tm-text :fontSize="20" label="智力"></tm-text>
-							<tm-text class="mt-10" :fontSize="20" label="20"></tm-text>
-						</view>
-						<view class="flex flex-col flex-center">
-							<tm-text :fontSize="20" label="攻击力"></tm-text>
-							<tm-text class="mt-10" :fontSize="20" label="20"></tm-text>
-						</view>
-						<view class="flex flex-col flex-center">
-							<tm-text :fontSize="20" label="防御力"></tm-text>
-							<tm-text class="mt-10" :fontSize="20" label="20"></tm-text>
-						</view>
-						<view class="flex flex-col flex-center">
-							<tm-text :fontSize="20" label="魔法抗性"></tm-text>
-							<tm-text class="mt-10" :fontSize="20" label="20"></tm-text>
-						</view>
-						<view class="flex flex-col flex-center">
-							<tm-text :fontSize="20" label="命中"></tm-text>
-							<tm-text class="mt-10" :fontSize="20" label="20"></tm-text>
-						</view>
-					</view>
+					</tm-sheet>
 					<view class="flex flex-end">
-						<tm-image :round="0" :width="160" :height="50" :src="cs" @click="gonav('pages/my/role/role/sell/sell?id='+22)"></tm-image>
+						<tm-image :round="0" :width="160" :height="50" :src="cs"
+							@click="gonav('pages/my/role/role/sell/sell?id='+22)"></tm-image>
 						<tm-image :round="0" class="ml-10 mr-10" :width="160" :height="50" :src="csz"></tm-image>
-						<tm-image :round="0" :width="160" :height="50" :src="sj" @click="gonav('pages/my/role/role/up/up')"></tm-image>
+						<tm-image :round="0" :width="160" :height="50" :src="sj"
+							@click="gonav('pages/my/role/role/up/up')"></tm-image>
 						<!-- <tm-image :round="0" :width="160" :height="50" :src="qxcs"></tm-image> -->
 					</view>
 				</view>

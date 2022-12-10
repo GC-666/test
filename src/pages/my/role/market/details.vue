@@ -19,10 +19,10 @@
 						</tm-text>
 					</view>
 				</view>
-				<view class="flex flex-row-center-center mr-20">
+				<view class="flex flex-center flex-end mr-20">
 					<tm-text :font-size="22" _class="text-weight-b" label="￥">
 					</tm-text>
-					<tm-text :font-size="28" _class="text-weight-b" label="999">
+					<tm-text :font-size="38" _class="text-weight-b ml-4" label="999">
 					</tm-text>
 				</view>
 			</view>
@@ -32,53 +32,53 @@
 				<tm-text :font-size="28" _class="text-weight-b" class=" ml-20 mt-20" label="米利恩·夏亚">
 				</tm-text>
 				<tm-divider :margin="[10,10]"></tm-divider>
-				<view class="flex flex-center">
-					<view class="flex flex-col flex-col-center-center ml-20">
-						<tm-text :font-size="20" _class="text-weight-s" label="命中">
+				<view class="flex flex-around">
+					<view class="flex flex-col flex-col-center-center ">
+						<tm-text :font-size="22" _class="text-weight-s" label="命中">
 						</tm-text>
-						<tm-text :font-size="18" _class="text-weight-s" class="mt-10 mb-10" label="999">
-						</tm-text>
-					</view>
-					<view class="flex flex-col flex-col-center-center ml-20">
-						<tm-text :font-size="20" _class="text-weight-s" label="力量">
-						</tm-text>
-						<tm-text :font-size="18" _class="text-weight-s" class="mt-10 mb-10" label="999">
+						<tm-text :font-size="20" _class="text-weight-s" class="mt-10 mb-10" label="999">
 						</tm-text>
 					</view>
-					<view class="flex flex-col flex-col-center-center ml-20">
-						<tm-text :font-size="20" _class="text-weight-s" label="敏捷">
+					<view class="flex flex-col flex-col-center-center ">
+						<tm-text :font-size="22" _class="text-weight-s" label="力量">
 						</tm-text>
-						<tm-text :font-size="18" _class="text-weight-s" class="mt-10 mb-10" label="999">
-						</tm-text>
-					</view>
-					<view class="flex flex-col flex-col-center-center ml-20">
-						<tm-text :font-size="20" _class="text-weight-s" label="智力">
-						</tm-text>
-						<tm-text :font-size="18" _class="text-weight-s" class="mt-10 mb-10" label="999">
+						<tm-text :font-size="20" _class="text-weight-s" class="mt-10 mb-10" label="999">
 						</tm-text>
 					</view>
-					<view class="flex flex-col flex-col-center-center ml-20">
-						<tm-text :font-size="20" _class="text-weight-s" label="命中">
+					<view class="flex flex-col flex-col-center-center ">
+						<tm-text :font-size="22" _class="text-weight-s" label="敏捷">
 						</tm-text>
-						<tm-text :font-size="18" _class="text-weight-s" class="mt-10 mb-10" label="-999">
-						</tm-text>
-					</view>
-					<view class="flex flex-col flex-col-center-center ml-20">
-						<tm-text :font-size="20" _class="text-weight-s" label="攻击力">
-						</tm-text>
-						<tm-text :font-size="18" _class="text-weight-s" class="mt-10 mb-10" label="999">
+						<tm-text :font-size="20" _class="text-weight-s" class="mt-10 mb-10" label="999">
 						</tm-text>
 					</view>
-					<view class="flex flex-col flex-col-center-center ml-20">
-						<tm-text :font-size="20" _class="text-weight-s" label="防御力">
+					<view class="flex flex-col flex-col-center-center ">
+						<tm-text :font-size="22" _class="text-weight-s" label="智力">
 						</tm-text>
-						<tm-text :font-size="18" _class="text-weight-s" class="mt-10 mb-10" label="1">
+						<tm-text :font-size="20" _class="text-weight-s" class="mt-10 mb-10" label="999">
 						</tm-text>
 					</view>
-					<view class="flex flex-col flex-col-center-center ml-20">
-						<tm-text :font-size="20" _class="text-weight-s" label="魔法抗性">
+					<view class="flex flex-col flex-col-center-center ">
+						<tm-text :font-size="22" _class="text-weight-s" label="命中">
 						</tm-text>
-						<tm-text :font-size="18" _class="text-weight-s" class="mt-10 mb-10" label="100%">
+						<tm-text :font-size="20" _class="text-weight-s" class="mt-10 mb-10" label="-999">
+						</tm-text>
+					</view>
+					<view class="flex flex-col flex-col-center-center ">
+						<tm-text :font-size="22" _class="text-weight-s" label="攻击力">
+						</tm-text>
+						<tm-text :font-size="20" _class="text-weight-s" class="mt-10 mb-10" label="999">
+						</tm-text>
+					</view>
+					<view class="flex flex-col flex-col-center-center ">
+						<tm-text :font-size="22" _class="text-weight-s" label="防御力">
+						</tm-text>
+						<tm-text :font-size="20" _class="text-weight-s" class="mt-10 mb-10" label="1">
+						</tm-text>
+					</view>
+					<view class="flex flex-col flex-col-center-center ">
+						<tm-text :font-size="22" _class="text-weight-s" label="魔法抗性">
+						</tm-text>
+						<tm-text :font-size="20" _class="text-weight-s" class="mt-10 mb-10" label="100%">
 						</tm-text>
 					</view>
 				</view>
@@ -118,7 +118,7 @@
 				<view class="flex flex-row-center-between">
 					<view class="flex flex-col ml-40">
 						<view class="flex  flex-col-bottom-center ">
-							<tm-text :font-size="18" _class="text-weight-n" label="¥"></tm-text>
+							<tm-text :font-size="22" _class="text-weight-b" label="¥"></tm-text>
 							<tm-text class="ml-10" :font-size="38" _class="text-weight-b" label="999">
 							</tm-text>
 						</view>
@@ -165,8 +165,8 @@
 		showWin.value = true
 	}
 	// 购买
-	const submit = ()=>{
-		console.log("购买",pwd.value);
+	const submit = () => {
+		console.log("购买", pwd.value);
 	}
 </script>
 <style>

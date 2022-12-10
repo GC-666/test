@@ -9,7 +9,7 @@
 			</template>
 			<template v-slot:right>
 				<view class="mr-20">
-					<tm-image :width="45" :height="45" :src="indexr" @click="kefu"></tm-image>
+					<tm-icon :fontSize="44" name="xh-xiaoxi" @click="kefu"></tm-icon>
 				</view>
 			</template>
 		</tm-navbar>
@@ -19,11 +19,11 @@
 				model="rect" color="#ccc" @click="carouselClick">
 			</tm-carousel>
 			<!-- 公告区域 -->
-			<tm-sheet :shadow="0" :round="4" :margin="[20,20]" :padding="[0,10]" _class="px-20">
-				<view class="flex flex-between" @click="gonav('pages/index/notice/notice')">
-					<tm-image :width="100" :height="40" :src="noticeImg"></tm-image>
-					<view class="ml-20" v-for="i in notice" :key="i.id">
-						<tm-text _class="text-overflow" _style="width: 498rpx;text-overflow: ellipsis;" :fontSize="28"
+			<tm-sheet :shadow="0" :round="4" :margin="[20,10]" :padding="[10,20]" v-if="notice.length>0">
+				<view class="flex" @click="gonav('pages/index/notice/notice')">
+					<tm-image :width="100" :height="30" class="flex-center" :src="noticeImg"></tm-image>
+					<view class="flex-center" v-for="i in notice" :key="i.id">
+						<tm-text _class="text-overflow" _style="width: 560rpx;text-overflow: ellipsis;" :fontSize="24"
 							:label="i.name">
 						</tm-text>
 					</view>
@@ -32,20 +32,21 @@
 			</tm-sheet>
 			<!-- 首发 盲盒tabs -->
 			<view class="ml-20 mr-20 flex">
-				<tm-text :fontSize="36" :color="index==0?'#07EBFE' :'' " label="即将开售" @click="tabsChange(0)"></tm-text>
-				<tm-text :fontSize="36" :color="index==1? '#07EBFE' :'' " class="ml-20" label="盲盒"
+
+				<tm-text :fontSize="30" :color="index==0?'#07EBFE' :'' " class="text-weight-b" label="即将开售"
+					@click="tabsChange(0)"></tm-text>
+				<tm-text :fontSize="30" :color="index==1? '#07EBFE' :'' " class="ml-n20 text-weight-b" label="盲盒"
 					@click="tabsChange(1)">
 				</tm-text>
-
 				<!-- <tm-tabs :round="4" @change="tabsChange" :itemFontSize="28" :activeFontSize="30" :list="tabsTitle"
 					:width="710" :height="60" default-name="0"></tm-tabs> -->
 			</view>
 			<view v-if="list.length>0" class="mt-20">
 				<tm-sheet :round="4" :shadow="0" :margin="[20,20]" :padding="[0,0]" @click="Go(data.id)"
 					v-for="data in list" :key="data.id">
-					<view class="relative flex flex-row-center-center ">
-						<tm-image style="filter: blur(5rpx);border-radius: 20rpx 20rpx 0rpx 0rpx;" :width="710"
-							:height="834" :src="data.collImg">
+					<view class="relative flex flex-row-center-center"
+						style="overflow:hidden;border-radius: 20rpx 20rpx 0rpx 0rpx;">
+						<tm-image style="filter: blur(5px);" :width="710" :height="834" :src="data.collImg">
 						</tm-image>
 						<!--  t-50 l-50 r-50 -->
 						<view class="absolute bb">
@@ -59,9 +60,11 @@
 								<view class="flex ml-10 mr-10 mt-5 mb-5" v-if="data.diffSeconds ==='0'">
 									<view class="flex flex-center" style="align-items: center;"
 										v-if="data.status=='2' || data.status=='3'">
-										<tm-icon class="pt-2" :fontSize="40" color="#999999" name="xh-gantanhaozhong">
+										<tm-icon class="flex-center" :fontSize="30" color="#999999"
+											name="tmicon-info-circle">
 										</tm-icon>
-										<tm-text class="ml-5" color="#999999" fontSiz="24" :label="data.statusName">
+										<tm-text class="ml-5 flex-center" color="#999999" fontSiz="24"
+											:label="data.statusName">
 										</tm-text>
 									</view>
 									<view class="flex flex-center" style="align-items: center;" v-if="data.status=='1'">
@@ -194,7 +197,6 @@
 	import { onMounted, ref } from "vue";
 	import { onShow, onLoad } from '@dcloudio/uni-app';
 	import wushuju from "@/static/my/wushuju.png"
-	import indexr from "@/static/img/indexr.png"
 	import userHead from "@/static/my/userHead.png"
 	const is = ref(true);
 	const test = () => {

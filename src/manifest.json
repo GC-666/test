@@ -62,9 +62,7 @@
             },
             /* SDK配置 */
             "sdkConfigs" : {
-                "ad" : {
-                    "ks" : {}
-                },
+                "ad" : {},
                 "payment" : {
                     "appleiap" : {}
                 }
@@ -103,9 +101,11 @@
             },
             "splashscreen" : {
                 "useOriginalMsgbox" : true,
-                "androidStyle" : "common",
+                "androidStyle" : "default",
                 "android" : {
-                    "hdpi" : "C:/Users/chen/Desktop/1.9.png"
+                    "hdpi" : "C:/Users/chen/Desktop/480.9.png",
+                    "xhdpi" : "C:/Users/chen/Desktop/720.9.png",
+                    "xxhdpi" : "C:/Users/chen/Desktop/1080.9.png"
                 }
             }
         },

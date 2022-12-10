@@ -1,8 +1,8 @@
 <template>
 	<tm-app>
-		<tm-navbar title="浔画之龙">
+		<tm-navbar :title="acc==0?'浔画之龙':acc==1?'浔画抽卡':acc==2 ? '英雄市场':acc==3 ? '我的英雄':''">
 			<template v-slot:right>
-				<tm-icon v-if="acc==0 || acc==1 || acc==3" _class="mr-20" :fontSize="28" name="tmicon-question-circle"
+				<tm-icon v-if="acc==0" _class="mr-20" :fontSize="28" name="tmicon-question-circle"
 					@click="showWin = !showWin">
 				</tm-icon>
 				<tm-text v-if="acc==2" :font-size="26" class=" mr-15" label="交易记录"

@@ -1,6 +1,6 @@
 <template>
 	<tm-app ref="app" color="grey-5">
-		<tm-navbar  title="用户出售协议">
+		<tm-navbar  title="用户出售协议" :shadow="0">
 		</tm-navbar>
 		<view class="pa-20" :style="store.tmStore.dark?'color:#fff':'color:#000'">
 			<tm-html :content="homeAgreementss" ></tm-html>

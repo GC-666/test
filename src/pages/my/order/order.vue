@@ -1,6 +1,6 @@
 <template>
 	<tm-app style="">
-		<tm-navbar title="订单管理">
+		<tm-navbar title="订单管理" :shadow="0">
 		</tm-navbar>
 		<view class="aaaa">
 			<tm-sheet :round="0" :shadow="0" :margin="[0,0]" :padding="[0,0]">
@@ -277,7 +277,6 @@
 <style>
 	.aaaa {
 		position: relative;
-		background-color: #fff;
 		z-index: 11;
 	}
 
