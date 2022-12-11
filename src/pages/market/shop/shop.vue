@@ -11,7 +11,7 @@
 				<tm-sheet :shadow="0" :round="4" :margin="[20,10]" :padding="[0,0]" v-for="(item,index) in list"
 					@click="gonav('pages/market/shop/goodpage?id='+item.id)">
 					<view class="flex flex-between mt-20 ml-20 mr-20">
-						<view class="flex flex-row-center-start">
+						<view class="flex flex-row-center-start ">
 							<tm-icon v-if="item.type == '2'" :fontSize="35" name="xh-jiaoyizhong">
 							</tm-icon>
 							<tm-text class="text-weight-b ml-10" :fontSize="32" :label="item.name"></tm-text>

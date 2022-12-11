@@ -42,7 +42,7 @@
 								<!-- <tm-tag class="" style="width:300rpx" checkable :checked="acc ===index? true :false" size="m" :label="item.label"
 									@click="tagChange(item,index)"></tm-tag> -->
 								<view v-if="acc===index" class="mt-10 mb-10 pt-5 pb-5 flex flex-center"
-									:style="`width:80%;border: 1px solid ${bgColor};border-radius: 15rpx;`">
+									:style="`width:80%;border: 1px  solid ${bgColor};border-radius: 15rpx;`">
 									<tm-text @click="tagChange(item,index)" :color="bgColor" :font-size="26"
 										:label="item.label"></tm-text>
 								</view>
@@ -68,7 +68,7 @@
 							<template v-slot:extra>
 								<view class="flex flex-center ml-20 mr-20"
 									:style="`background-image: url(${bg});background-size: 100% 100%;width:300rpx;height:40rpx`">
-									<tm-text :font-size="28" _class="text-weight-n" :label="`流通量:${data.circulation}`">
+									<tm-text color="#fff" :font-size="28" _class="text-weight-n" :label="`流通量:${data.circulation}`">
 									</tm-text>
 								</view>
 							</template>
@@ -276,13 +276,12 @@
 	}
 	const acc = ref('')
 	const tagChange = (val, index) => {
-		console.log(val);
 		acc.value = index
 		list.value = []
 		params.value.classId = val.value
 		params.value.page = 1
 		params.value.type = 1
-		params.value.name = ''
+		params.value.name = inp.value
 		params.value.isRecommend = ''
 		findMarketList()
 	}
@@ -303,13 +302,13 @@
 	})
 	const acvite = ref(0)
 	const tabsClick = (i) => {
-		inp.value = ''
-		if (i != 3) {
-			if (acvite.value == i) return
-		}
+		//inp.value = ''
+		// if (i != 3) {
+		// 	if (acvite.value == i) return
+		// }
 		acvite.value = i
 		params.value.page = 1
-		params.value.name = ''
+		params.value.name = inp.value
 		params.value.classId = ''
 
 		if (i == 3) {
@@ -344,7 +343,6 @@
 			findMarketList()
 		} else if (i == 4) {
 			//求购
-			console.log(1);
 			list.value = []
 			typeShow.value = false
 			cover.value = false

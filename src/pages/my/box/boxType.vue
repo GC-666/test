@@ -9,48 +9,50 @@
 				</tm-tabs>
 			</tm-sheet>
 		</view>
-		<scroll-view scroll-y="true" class="scroll-Y" @scrolltolower="lower">
-			<view v-if="userBoxFindPageList.length>0" style="margin: 0rpx 20rpx 0rpx 20rpx;">
+		<scroll-view scroll-y="true" class="scroll-Y" @scrolltolower="lower" v-if="userBoxFindPageList.length>0"> 
+			<view  style="margin: 0rpx 20rpx 0rpx 20rpx;">
 				<view class="" v-for="(data,index) in userBoxFindPageList"
 					@click="gonav('pages/my/box/boxDetails?id='+data.id)">
+
 					<tm-sheet :round="4" :shadow="0" :margin="[20,20]" :padding="[20,10]">
 						<view class="flex flex-between" style="margin: 0rpx 10rpx;">
 							<tm-text :font-size="32" _class="text-weight-b" :label="config.boxName"></tm-text>
 							<view class="flex flex-center">
-								<tm-text v-if="data.type=='0'" color="#FFCE92" :font-size="22" _class="text-weight-b"
+								<tm-text v-if="data.type=='0'" color="#FFCE92" :font-size="24" _class="text-weight-b"
 									label="未开启"></tm-text>
-								<tm-text v-else-if="data.type=='1'" color="#FFCE92" :font-size="22"
+								<tm-text v-else-if="data.type=='1'" color="#FFCE92" :font-size="24"
 									_class="text-weight-b" label="已开启"></tm-text>
-								<tm-text v-else-if="data.type=='2'" color="#FFCE92" :font-size="22"
+								<tm-text v-else-if="data.type=='2'" color="#FFCE92" :font-size="24"
 									_class="text-weight-b" label="待发行"></tm-text>
-								<tm-text v-else-if="data.type=='3'" color="#FFCE92" :font-size="22"
+								<tm-text v-else-if="data.type=='3'" color="#FFCE92" :font-size="24"
 									_class="text-weight-b" label="已上架"></tm-text>
-								<tm-text v-else-if="data.type=='5'" color="#FFCE92FFCE92" :font-size="22"
+								<tm-text v-else-if="data.type=='5'" color="#FFCE92FFCE92" :font-size="24"
 									_class="text-weight-b" label="交易中"></tm-text>
-								<tm-text v-else-if="data.type=='5'" color="#FFCE92" :font-size="22"
+								<tm-text v-else-if="data.type=='5'" color="#FFCE92" :font-size="24"
 									_class="text-weight-b" label="交易完成"></tm-text>
 							</view>
 						</view>
 						<view class="flex flex-between"
 							style="margin:20rpx 10rpx 0rpx 10rpx;padding: 0rpx 0rpx 10rpx 0rpx">
 							<view class="flex">
-								<tm-text color="#07EBFE" :font-size="18" _class="text-weight-n" :label="data.no">
+								<tm-text color="#07EBFE" :font-size="22" _class="text-weight-n" :label="data.no">
 								</tm-text>
 							</view>
-							<view class="flex" v-if="data.time!=null || data.time!=''">
+
+							<view class="flex" v-if="data.time!==null && data.time!==''">
 								<view class="flex" v-if="data.type=='0'">
 									<!-- <tm-text color="#999" :font-size="18" _class="text-weight-b" label="获取时间"></tm-text> -->
-									<tm-text class="ml-4" color="#999" :font-size="18" _class="text-weight-b"
+									<tm-text class="ml-4" color="#999" :font-size="22" _class="text-weight-b"
 										:label="DateUtils.formatDateTime(data.time)"></tm-text>
 								</view>
 								<view class="flex" v-else-if="data.type=='1' || data.type=='2'">
 									<!-- <tm-text color="#999" :font-size="20" _class="text-weight-b" label="开启时间"></tm-text> -->
-									<tm-text class="ml-4" color="#999" :font-size="18" _class="text-weight-b"
+									<tm-text class="ml-4" color="#999" :font-size="22" _class="text-weight-b"
 										:label="DateUtils.formatDateTime(data.time)"></tm-text>
 								</view>
 								<view class="flex" v-else-if="data.type=='3' || data.type=='4' || data.type=='5'">
 									<!-- <tm-text color="#999" :font-size="20" _class="text-weight-b" label="上架时间"></tm-text> -->
-									<tm-text class="ml-4" color="#999" :font-size="20" _class="text-weight-b"
+									<tm-text class="ml-4" color="#999" :font-size="22" _class="text-weight-b"
 										:label="DateUtils.formatDateTime(data.time)"></tm-text>
 								</view>
 							</view>
@@ -58,10 +60,12 @@
 					</tm-sheet>
 				</view>
 			</view>
-			<view v-else class="flex flex-wrap flex-row-center-center" style="margin-top:150rpx">
-				<tm-image :round="4" class="flex-start" :width="350" :height="350" :src="wushuju"></tm-image>
-			</view>
+			
+			
 		</scroll-view>
+		<view v-if="userBoxFindPageList.length<=0" class="flex flex-wrap flex-row-center-center" style="margin-top:150rpx">
+			<tm-image :round="4" class="flex-start" :width="350" :height="280" :src="wushuju"></tm-image>
+		</view>
 	</tm-app>
 </template>
 

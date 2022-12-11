@@ -2,7 +2,8 @@
 	<tm-app>
 		<tm-navbar title="公告中心" :height="44" :shadow="0"></tm-navbar>
 		<tm-sheet v-if="active!=0" :margin="[0,0]" :padding="[0,0]">
-			<tm-input v-model="noticeParams.name" @confirm="confirm" :margin="[10,10]" placeholder="请输入搜索内容"></tm-input>
+			<tm-input :round="12" prefix="tmicon-search" :fontSize="22" v-model="noticeParams.name" @confirm="confirm"
+				:margin="[10,10]" placeholder="请输入搜索内容"></tm-input>
 		</tm-sheet>
 		<tm-tabs swiper :itemWidth="115" :list="tabsTitle" :width="750" :default-name="defaultName"
 			@change="tabsChange"></tm-tabs>
@@ -10,11 +11,11 @@
 		<view v-if="active==0">
 			<view class="" v-if="noticeList.length>0">
 				<scroll-view scroll-y="true" class="scroll-Y1">
-					<tm-sheet :shadow="0" :padding="[10,10]" :margin="[20,20]" :round="4"
+					<tm-sheet :shadow="0" :padding="[10,0]" :margin="[20,20]" :round="4"
 						v-for="(item,index) in noticeList" :key="item.id">
 						<tm-cell :margin="[0,0]" :padding="[0,10]" :titleFontSize="28">
 							<template v-slot:title>
-								<tm-text _class="text-weight-b" :fontSize="34" :label="item.name"></tm-text>
+								<tm-text _class="text-weight-n" :fontSize="36" :label="item.name"></tm-text>
 							</template>
 							<template v-slot:right>
 								<view class="flex">
@@ -23,20 +24,24 @@
 						</tm-cell>
 						<tm-divider color="grey" :margin="[0,0]"></tm-divider>
 						<view class="" v-for="(data,i) in item.noticeList">
-							<view class="flex ma-10 "
+							<view class="flex ma-10 flex-between"
 								@click="gonav('pages/index/notice/noticeDesc/noticeDesc?id='+data.id)">
-								<view class="flex  flex-col flex-between" style="width: 430rpx;word-wrap:break-word;">
-									<tm-text :font-size="28" :label="data.name"></tm-text>
+								<view class="flex  flex-col flex-between">
+									<tm-sheet :margin="[0,0]" :padding="[0,0]" :width="450">
+										<tm-text _class="text-overflow-2" :label="data.name">
+										</tm-text>
+									</tm-sheet>
 									<view class="mt-10">
 										<tm-text color="#808080" :fontSize="22"
 											:label="DateUtils.formatDateTime(data.upTime)">
 										</tm-text>
 									</view>
 								</view>
-								<tm-image :round="6" :width="200" :height="150" :src="data.img">
+								<tm-image :round="4" :width="200" :height="150" :src="data.img">
 								</tm-image>
 							</view>
-							<tm-divider v-if="item.noticeList.length !== i+1" color="grey" :margin="[0,0]"></tm-divider>
+							<tm-divider v-if="item.noticeList.length !== i+1" color="grey" :margin="[0,10]">
+							</tm-divider>
 						</view>
 					</tm-sheet>
 				</scroll-view>

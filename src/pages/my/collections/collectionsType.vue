@@ -9,8 +9,8 @@
 				</tm-tabs>
 			</tm-sheet>
 		</view>
-		<scroll-view scroll-y="true" class="scroll-Y" @scrolltolower="lower">
-			<view v-if="userCollectionFindPageList.length>0" style="margin: 0rpx 20rpx 0rpx 20rpx;">
+		<scroll-view scroll-y="true" class="scroll-Y" @scrolltolower="lower" v-if="userCollectionFindPageList.length>0">
+			<view  style="margin: 0rpx 20rpx 0rpx 20rpx;">
 				<view class="" v-for="(data,index) in userCollectionFindPageList" @click="gonav('pages/my/collections/collectionsDetails?id='+data.id)">
 					<tm-sheet :shadow="0" :margin="[20,20]" :padding="[20,10]">
 						<view class="flex flex-between" style="margin: 0rpx 10rpx;">
@@ -23,7 +23,7 @@
 								<tm-text v-if="data.type=='2'" color="#07EBFE" :font-size="26" _class="text-weight-b" label="交易中">
 								</tm-text> -->
 								
-								<tm-text  :font-size="18" _class="text-weight-n" label="买入价："></tm-text>
+								<tm-text :font-size="18" _class="text-weight-n" label="买入价："></tm-text>
 								<tm-text color="red" :font-size="26" _class="text-weight-b" :label="data.buyPrice">
 								</tm-text>
 							</view>
@@ -42,10 +42,11 @@
 					</tm-sheet>
 				</view>
 			</view>
-			<view v-else class="flex flex-wrap flex-row-center-center" style="margin-top:150rpx">
-				<tm-image :round="4" class="flex-start" :width="350" :height="350" :src="wushuju"></tm-image>
-			</view>
+			
 		</scroll-view>
+		<view v-if="userCollectionFindPageList.length<=0" class="flex flex-wrap flex-row-center-center" style="margin-top:150rpx">
+			<tm-image :round="4" class="flex-start" :width="350" :height="280" :src="wushuju"></tm-image>
+		</view>
 	</tm-app>
 </template>
 

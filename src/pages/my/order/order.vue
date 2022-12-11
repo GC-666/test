@@ -64,20 +64,20 @@
 					<tm-sheet :round="4" :shadow="0" :margin="[0,10]" :padding="[20,20]" style="width:710rpx">
 						<view class="flex flex-between">
 							<view class="flex flex-center">
-								<tm-text :font-size="22" _class="text-weight-s" :label="`订单编号:${data.orderNo}`">
+								<tm-text :font-size="24" _class="text-weight-n" :label="`订单编号:${data.orderNo}`">
 								</tm-text>
 							</view>
 							<view class="flex flex-center" v-if="data.orderStatus==0">
-								<tm-text :font-size="28" color="red" _class="text-weight-b" label="剩余时间:"></tm-text>
+								<tm-text :font-size="30" color="red" _class="text-weight-b" label="剩余时间:"></tm-text>
 								<tm-countdown class="text-size-n ml-10" color="red"
 									:time="parseInt(data.endTime)-new Date().getTime()" format="HH:MM:SS" autoStart>
 								</tm-countdown>
 							</view>
-							<tm-text color="red" v-else-if="data.orderStatus==1" :font-size="22" _class="text-weight-b"
+							<tm-text color="red" v-else-if="data.orderStatus==1" :font-size="24" _class="text-weight-b"
 								label="待发货"></tm-text>
-							<tm-text color="green" v-else-if="data.orderStatus==2" :font-size="22"
+							<tm-text color="green" v-else-if="data.orderStatus==2" :font-size="24"
 								_class="text-weight-b" label="已完成"></tm-text>
-							<tm-text v-else-if="data.orderStatus==9" :font-size="22" _class="text-weight-b" label="已失效">
+							<tm-text v-else-if="data.orderStatus==9" :font-size="24" _class="text-weight-b" label="已失效">
 							</tm-text>
 						</view>
 						<view class="flex flex-between mt-20">
@@ -91,27 +91,27 @@
 								<tm-image v-else :round="3" :width="120" :height="120" :src="data.objectImg">
 								</tm-image>
 								<view class="flex flex-col flex-around ml-20">
-									<tm-text :font-size="26" _class="text-overflow text-weight-b"
+									<tm-text :font-size="28" _class="text-overflow text-weight-b"
 										_style="width: 230rpx;text-overflow: ellipsis;" :label="data.objectName">
 									</tm-text>
-									<tm-text :font-size="22" _class="text-weight-s" :label="`类型:${data.orderTypeName}`">
+									<tm-text :font-size="24" _class="text-weight-n" :label="`类型:${data.orderTypeName}`">
 									</tm-text>
-									<tm-text v-if="data.orderStatus==0" :font-size="22" _class="text-weight-s"
+									<tm-text v-if="data.orderStatus==0" :font-size="24" _class="text-weight-n"
 										label="状态:待付款"></tm-text>
-									<tm-text v-else-if="data.orderStatus==1" :font-size="22" _class="text-weight-s"
+									<tm-text v-else-if="data.orderStatus==1" :font-size="24" _class="text-weight-n"
 										label="状态:待发货"></tm-text>
-									<tm-text v-else-if="data.orderStatus==2" :font-size="22" _class="text-weight-s"
+									<tm-text v-else-if="data.orderStatus==2" :font-size="24" _class="text-weight-n"
 										label="状态:已完成"></tm-text>
-									<tm-text v-else-if="data.orderStatus==9" :font-size="22" _class="text-weight-s"
+									<tm-text v-else-if="data.orderStatus==9" :font-size="24" _class="text-weight-n"
 										label="状态:已失效"></tm-text>
 								</view>
 							</view>
 							<view class="flex flex-col flex-row-bottom-end">
-								<tm-text class="mb-10" :font-size="22" _class="text-weight-s"
+								<tm-text class="mb-10" :font-size="24" _class="text-weight-n"
 									:label="`${DateUtils.formatDateTime(data.orderTime)}`"></tm-text>
 								<view class="flex">
-									<tm-text :font-size="28" _class="text-weight-b" label="¥"></tm-text>
-									<tm-text :font-size="28" _class="text-weight-b" :label="data.totalMoney"></tm-text>
+									<tm-text :font-size="30" _class="text-weight-b" label="¥"></tm-text>
+									<tm-text :font-size="30" _class="text-weight-b" :label="data.totalMoney"></tm-text>
 								</view>
 							</view>
 						</view>

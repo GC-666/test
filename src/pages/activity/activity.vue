@@ -4,7 +4,7 @@
 		<tm-sheet :margin="[0,0]" :padding="[0,statusBarHeight]">
 		</tm-sheet>
 		<tm-sheet :margin="[0,0]">
-			<tm-tabs @change="tabsChange" :transprent="false" activeFontColor="#07EBFE" align="center" :list="tabsTitle"
+			<tm-tabs :itemFontSize="30" :activeFontSize="32" @change="tabsChange" :transprent="false" activeFontColor="#07EBFE" align="center" :list="tabsTitle"
 				:itemHeight="30" :itemWidth="300" :width="700" :default-name="index">
 			</tm-tabs>
 		</tm-sheet>

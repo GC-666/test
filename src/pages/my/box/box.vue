@@ -2,30 +2,31 @@
 	<tm-app style="">
 		<tm-navbar  title="盲盒" :shadow="0">
 		</tm-navbar>
-		<scroll-view scroll-y="true"  class="scroll-Y" @scrolltolower="lower">
-			<view v-if="userBoxFindReportPageList.length>0" class="flex flex-row-center-between flex-wrap" style="margin: 0rpx 20rpx 0rpx 20rpx;">
+		<scroll-view scroll-y="true"  class="scroll-Y" @scrolltolower="lower" v-if="userBoxFindReportPageList.length>0">
+			<view  class="flex flex-row-center-between flex-wrap" style="margin: 0rpx 20rpx 0rpx 20rpx;">
 				<view class="relative" v-for="(data,index) in userBoxFindReportPageList"
 					@click="gonav('pages/my/box/boxType?id='+data.boxId+'&boxName='+data.boxName)">
 					<tm-sheet :round="4" :shadow="0" :margin="[0,10]" :padding="[0,0]">
 						<tm-image class="round-t-4" :width="344" :height="344" :src="data.boxImg">
 						</tm-image>
 						<view class="" style="margin: 0rpx 20rpx;">
-							<tm-text :font-size="28" _class="text-weight-b" :label="data.boxName"></tm-text>
+							<tm-text :font-size="30" _class="text-weight-b" :label="data.boxName"></tm-text>
 						</view>
 						<view class="flex flex-between" style="margin: 10rpx 20rpx;">
 							<view class="flex flex-center" style="background-color: #FFE6C8;border-radius: 10rpx;padding: 4rpx 10rpx;">
-								<tm-text color="#999" :font-size="26" class="" :label="data.unOpenCount"></tm-text>
-								<tm-text color="#999" :font-size="26" class="" label="/"></tm-text>
-								<tm-text color="#999" :font-size="26" class="" :label="data.totalCount"></tm-text>
+								<tm-text color="#999" :font-size="28" class="" :label="data.unOpenCount"></tm-text>
+								<tm-text color="#999" :font-size="28" class="" label="/"></tm-text>
+								<tm-text color="#999" :font-size="28" class="" :label="data.totalCount"></tm-text>
 							</view>
 						</view>
 					</tm-sheet>
 				</view>
 			</view>
-			<view v-else class="flex flex-wrap flex-row-center-center" style="margin-top:150rpx">
-				<tm-image :round="4" class="flex-start" :width="350" :height="350" :src="wushuju"></tm-image>
-			</view>
+			
 		</scroll-view>
+		<view v-if="userBoxFindReportPageList.length<=0" class="flex flex-wrap flex-row-center-center" style="margin-top:150rpx">
+			<tm-image :round="4" class="flex-start" :width="350" :height="280" :src="wushuju"></tm-image>
+		</view>
 	</tm-app>
 </template>
 

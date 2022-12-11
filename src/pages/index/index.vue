@@ -41,7 +41,7 @@
 				<!-- <tm-tabs :round="4" @change="tabsChange" :itemFontSize="28" :activeFontSize="30" :list="tabsTitle"
 					:width="710" :height="60" default-name="0"></tm-tabs> -->
 			</view>
-			<view v-if="list.length>0" class="mt-20">
+			<view v-if="list.length>0" class="mt-10">
 				<tm-sheet :round="4" :shadow="0" :margin="[20,20]" :padding="[0,0]" @click="Go(data.id)"
 					v-for="data in list" :key="data.id">
 					<view class="relative flex flex-row-center-center"
@@ -118,10 +118,11 @@
 					</tm-sheet>
 				</tm-sheet>
 			</view>
-			<view v-else class="flex flex-wrap flex-row-center-center" style="margin-top:150rpx">
-				<tm-image :round="4" class="flex-start" :width="350" :height="350" :src="wushuju"></tm-image>
+			<view v-if="list.length<=0" class="flex flex-wrap flex-row-center-center" style="margin-top:150rpx">
+				<tm-image :round="4" class="flex-start" :width="350" :height="280" :src="wushuju"></tm-image>
 			</view>
 		</scroll-view>
+		
 		<!-- 首发藏品后6个 -->
 		<!-- <tm-sheet :shadow="0" :margin="[20,15]" :padding="[0,0]">
 				<view class="flex flex-row-center-between flex-wrap">
@@ -207,6 +208,7 @@
 			is.value = true
 		}
 	}
+	
 	// 下拉刷新
 	const content = ref([{
 		icon: '',

@@ -12,6 +12,8 @@
 	onShow(() => {
 		//#ifdef APP-PLUS 
 		plus.runtime.getProperty(plus.runtime.appid, (inf) => {
+			console.log(plus.runtime);
+			console.log(JSON.stringify(inf));
 			Ver.getEdition({
 				edition_type: plus.runtime.appid,
 				version_type: uni.getSystemInfoSync().platform, //android或者ios
@@ -38,7 +40,6 @@
 				}
 			})
 		});
-
 		//#endif    
 	})
 </script>
