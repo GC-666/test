@@ -5,16 +5,19 @@
 
 		<view class="mt-n4">
 			<tm-sheet :shadow="0" :margin="[0,0]" :padding="[0,0]">
-				<tm-cell :margin="[0, 10]" rightText="自定义充值必须是10的倍数" :rightTextSize="15" @click="">
+				<tm-cell :margin="[0, 10]" :padding="[0,0]" >
 					<template v-slot:title>
-						<view class="flex" style="align-items: center;">
-							<tm-icon class="ml-10" :fontSize="46" name="tmicon-yinhangqia"></tm-icon>
+						<view class="flex flex-center">
+							<tm-icon class="ml-10" :fontSize="60" name="xh-yinlian"></tm-icon>
 						</view>
+					</template>
+					<template v-slot:right>
+						<tm-text :fontSize="24" class="text-weight-b mr-20" label="自定义充值必须是10的倍数"></tm-text>
 					</template>
 				</tm-cell>
 			</tm-sheet>
 		</view>
-		<view class="mt-n24">
+		<view class="mt-n10">
 			<tm-sheet :shadow="0" :margin="[0,0]" :padding="[0,0]">
 				<view class="flex flex-around flex-wrap">
 					<view class="box" v-for="(item,index) in data" :key="item.id">
@@ -34,7 +37,7 @@
 				</view>
 			</tm-sheet>
 		</view>
-		<view class="flex flex-col flex-col-center-center" style="margin-top: 280rpx;">
+		<view class="flex flex-col flex-col-center-center" style="margin-top: 180rpx;">
 			<tm-button :fontSize="28" :round="12" :width="280" label="立即充值" @click="pay"></tm-button>
 			<tm-checkbox class="flex-row-center-center" v-model="loot" :size="28" :round="10">
 				<template v-slot:default="{checked}">
@@ -45,6 +48,7 @@
 				</template>
 			</tm-checkbox>
 		</view>
+		<web-view v-if="unionLink!==''" :src="unionLink"></web-view>
 	</tm-app>
 </template>
 
@@ -61,10 +65,10 @@
 	const btn = (index) => {
 		active.value = index
 	}
-
 	const focus = () => {
 		active.value = -1
 	}
+	const unionLink = ref('')
 	const pay = () => {
 		if (active.value == -1 && inp.value === '') {
 			uni.showToast({
@@ -80,24 +84,33 @@
 
 			}
 		})
-		My.placeOrder({ type: '00', value: num.value }).then(res => {
+		let aa = '0'
+		if (inp.value !== '') {
+			aa = inp.value
+		} else {
+			aa = num.value
+		}
+		My.placeOrder({ type: '00', value: aa }).then(res => {
 			uni.showLoading({
 				title: '支付请求中...',
 				mask: true
 			});
 			let order = res.operationData;
 			My.orderPay({ payType: '03', id: order.id }).then(resPay => {
-				
-				let unionLink = resPay.payData.payUrl;
+
+				let link = resPay.payData.payUrl;
 				//#ifdef APP-PLUS
-				plus.runtime.openURL(unionLink)
-				// #endif
-				// #ifdef H5
-				window.location.href = unionLink;
+				unionLink.value = resPay.payData.payUrl;
 				// #endif
 
+				// //#ifdef APP-PLUS
+				// plus.runtime.openURL(unionLink)
+				// // #endif
+				// #ifdef H5
+				location.href = link;
+				// #endif
 			})
-			console.log(res);
+			uni.hideLoading()
 		})
 	}
 </script>

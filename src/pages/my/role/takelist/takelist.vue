@@ -7,10 +7,12 @@
 					<view class="flex flex-between ml-20 mr-10">
 						<view class="flex flex-col flex-around">
 							<tm-text :font-size="32" _class="text-weight-b" :label="item.heroTaskName"></tm-text>
-							<view class="flex" v-if="item.surplusTime!==0">
-								<tm-icon class="pt-2" :fontSize="28" name="tmicon-clock"></tm-icon>
-								<tm-countdown class="text-size-n ml-10" :time="parseInt(item.surplusTime)"
-									format="HH:MM:SS" autoStart>
+							<view class="flex" v-if="item.surplusTime!==0"
+								style="background-color: #FFC300; border-radius: 15rpx;">
+
+								<tm-icon class="pt-2 ml-10" :fontSize="28" name="tmicon-clock"></tm-icon>
+								<tm-countdown class="text-size-n ml-10 text-size-xxs mr-10"
+									:time="parseInt(item.surplusTime)" format="HH:MM:SS" autoStart>
 								</tm-countdown>
 							</view>
 						</view>
@@ -58,11 +60,11 @@
 							<tm-button v-if="item.status=='3'" disabled :margin="[10, 10]" :width="140" :height="40"
 								size="mini" :shadow="0" label="已结束">
 							</tm-button> -->
-							<tm-image v-if="item.receiveNoCount>'0'" :round="0" class="" :width="160" :height="50"
-								:src="lqjl"></tm-image>
-							<tm-image class="ml-20" v-if="item.status=='0'" :round="0" :width="160" :height="50" :src="jsmx">
+							<tm-image v-if="Number(item.receiveNoCount)>0" :round="0" class="" :width="160" :height="50"
+								:src="lqjl" @click="heroReceive(item.id)"></tm-image>
+							<tm-image class="ml-20" v-if="item.status=='0'" :round="0" :width="160" :height="50"
+								:src="jsmx">
 							</tm-image>
-
 						</view>
 					</view>
 				</tm-sheet>
@@ -71,6 +73,19 @@
 		<view v-if="list.length<=0" class="flex flex-wrap flex-row-center-center" style="margin-top:150rpx">
 			<tm-image :round="4" class="flex-start" :width="320" :height="280" :src="wushuju"></tm-image>
 		</view>
+
+		<tm-overlay v-model:show="showWin" contentAnimation transprent>
+			<view class="mack" @click.stop="">
+				<view class="flex flex-center flex-col" style="padding-top: 390rpx;">
+					<tm-text color="#1A1A1A" :font-size="32" label="恭喜您获得以下收益"></tm-text>
+					<view class="flex flex-center " v-for="i in heroReceiveList">
+						<tm-text color="#1A1A1A" :font-size="32" :label="`${i.objectName}*${i.objectCount}`"></tm-text>
+					</view>
+					<tm-image :round="0" class="mt-n20" :width="528" :height="82" :src="lqbc1" @click="receive">
+					</tm-image>
+				</view>
+			</view>
+		</tm-overlay>
 	</tm-app>
 </template>
 
@@ -81,7 +96,10 @@
 	import wushuju from "@/static/my/wushuju.png"
 	import jsmx from "@/static/role/jsmx.png"
 	import lqjl from "@/static/role/lqjl.png"
+	import lqbc from "@/static/role/lqbc.png"
+	import lqbc1 from "@/static/role/lqbc1.png"
 	import { onLoad } from "@dcloudio/uni-app";
+	const showWin = ref(false)
 	const lower = () => {
 		if (count.value > 0) {
 			params.value.page += 1
@@ -89,6 +107,7 @@
 		}
 	}
 	const list = ref([])
+	const heroReceiveList = ref([])
 	const count = ref(0)
 	const params = ref({
 		page: 1,
@@ -105,10 +124,33 @@
 			list.value = list.value.concat(res)
 		})
 	}
+	const heroReceive = (id) => {
+		Role.heroReceive({ taskUserId: id }).then(res => {
+			heroReceiveList.value = res
+			showWin.value = true
+		})
+	}
+	const receive = () => {
+		showWin.value = false
+		uni.showToast({
+			title: '领取成功',
+			icon: 'none'
+		})
+	}
 </script>
 
 <style>
 	.scroll-Y {
 		height: calc(100vh - var(--status-bar-height) - 88rpx);
+	}
+
+	.mack {
+		width: 660rpx;
+		height: 970rpx;
+		background-image: url('@/static/role/lqbc.png');
+		background-size: 100% 100%;
+		display: flex;
+		justify-content: center;
+		align-content: center;
 	}
 </style>

@@ -19,12 +19,12 @@
 		<!-- 英雄 -->
 		<role v-if="acc==3"></role>
 
-
 		<tm-overlay v-model:show="showWin" contentAnimation transprent>
 			<view class="mack" @click.stop="">
 				<view class="mt-n25 ml-10 mr-10"
 					style="width: 640rpx;word-wrap:break-word;word-break:break-all;overflow: hidden;">
-					21ddddddddddddddddddddddddddddddddd23</view>
+					{{data.profitConsumeRemarks}}
+				</view>
 			</view>
 		</tm-overlay>
 		<view class="">
@@ -40,7 +40,7 @@
 
 
 <script setup>
-	import { My } from "@/api/api.ts"
+	import { My, Role } from "@/api/api.ts"
 	import { onBeforeMount, onMounted, reactive, ref } from 'vue';
 	import role from '@/pages/my/role/role/role.vue'
 	import take from '@/pages/my/role/take/take.vue'
@@ -58,6 +58,11 @@
 		}
 		// #endif
 
+	})
+	const data = ref({})
+	// 基础配置
+	Role.findBasic().then(res => {
+		data.value = res
 	})
 	const change = (i) => {
 		acc.value = i

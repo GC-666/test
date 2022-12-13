@@ -67,11 +67,14 @@
 								<tm-text :font-size="24" _class="text-weight-n" :label="`订单编号:${data.orderNo}`">
 								</tm-text>
 							</view>
-							<view class="flex flex-center" v-if="data.orderStatus==0">
+							<view class="flex flex-center" v-if="data.orderStatus==0 && data.orderType!='01'">
 								<tm-text :font-size="30" color="red" _class="text-weight-b" label="剩余时间:"></tm-text>
 								<tm-countdown class="text-size-n ml-10" color="red"
 									:time="parseInt(data.endTime)-new Date().getTime()" format="HH:MM:SS" autoStart>
 								</tm-countdown>
+							</view>
+							<view class="flex flex-center" v-if="data.orderStatus==0 && data.orderType=='01'">
+								<tm-text :font-size="30" color="red" _class="text-weight-b" label="审核中"></tm-text>
 							</view>
 							<tm-text color="red" v-else-if="data.orderStatus==1" :font-size="24" _class="text-weight-b"
 								label="待发货"></tm-text>
@@ -122,10 +125,10 @@
 							<tm-button :margin="[10, 0]" :padding="[0,4]"
 								@click="gonav('pages/my/order/orderDetails?id='+data.id)" :height="40" :width="160"
 								outlined :round="20" size="normal" :shadow="0" label="查看详情"></tm-button>
-							<tm-button v-if="data.orderStatus==0" :margin="[10, 0]" :padding="[0,4]"
+							<tm-button v-if="data.orderStatus==0 && data.orderType!='01'" :margin="[10, 0]" :padding="[0,4]"
 								@click="orderCancel(data.id)" :height="40" :width="160" outlined :round="20"
 								size="normal" :shadow="0" fontColor="#808080" color="#808080" label="取消订单"></tm-button>
-							<tm-button v-if="data.orderStatus==0" :margin="[10, 0]" :padding="[0,4]"
+							<tm-button v-if="data.orderStatus==0 && data.orderType!='01'" :margin="[10, 0]" :padding="[0,4]"
 								@click="gonav('pages/my/order/orderpay?id='+data.id)" :height="40" :width="160" outlined
 								:round="20" size="normal" :shadow="0" fontColor="#EB3938" color="#EB3938" label="立即支付">
 							</tm-button>

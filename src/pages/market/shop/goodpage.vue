@@ -16,14 +16,18 @@
 		<tm-sheet :round="3" :shadow="0" :margin="[20,10]" :padding="[0,0]">
 			<view class="flex flex-row-center-between">
 				<view class="flex ma-15">
-					<tm-avatar :round="12" :img="data.creatorImg"></tm-avatar>
+					<view class="">
+						<tm-avatar v-if="data.creatorImg" :round="12" :img="data.creatorImg"></tm-avatar>
+						<tm-avatar v-else :round="12" :img="logo"></tm-avatar>
+					</view>
 					<view class="flex flex-col ml-20" style="justify-content: space-around;">
-						<tm-text :font-size="28" _class="text-weight-b" :label="data.collName"></tm-text>
+						<tm-text :font-size="30" _class="text-weight-b" :label="data.name"></tm-text>
 						<view class="flex">
 							<view class="flex">
 								<view class="round-tl-5 round-bl-5 flex flex-center"
 									style="width: 100rpx; background-color: #FFD7A7; ">
-									<tm-text class="ma-5" color="#25262E" :font-size="22" _class="text-weight-n" label="发行量"></tm-text>
+									<tm-text class="ma-5" color="#25262E" :font-size="22" _class="text-weight-n"
+										label="发行量"></tm-text>
 								</view>
 								<view class="round-tr-5 round-br-5 flex flex-center"
 									style="width: 85rpx;background-color: #FFE6C8;">
@@ -35,7 +39,8 @@
 							<view class="flex ml-20">
 								<view class="round-tl-5 round-bl-5 flex flex-center"
 									style="width: 100rpx; background-color: #FFD7A7;">
-									<tm-text class="ma-5" :fontSize="22" color="#25262E" _class="text-weight-n" label="流通量"></tm-text>
+									<tm-text class="ma-5" :fontSize="22" color="#25262E" _class="text-weight-n"
+										label="流通量"></tm-text>
 								</view>
 								<view class="round-tr-5 round-br-5 flex flex-center"
 									style="width: 85rpx;background-color: #FFE6C8;">
@@ -64,7 +69,6 @@
 			</view>
 			<view class="mt-20 flex flex-around">
 				<view class="">
-
 					<tm-icon name="xh-bianhao" :fontSize="40"></tm-icon>
 
 
@@ -76,7 +80,6 @@
 					<tm-icon name="xh-kexin" :fontSize="40"></tm-icon>
 
 					<tm-text class="mt-20 mb-20" :fontSize="28" _class="text-weight-s" label="可信记录"></tm-text>
-
 				</view>
 				<view class="">
 					<tm-icon name="xh-cunzheng" :fontSize="40"></tm-icon>
@@ -145,7 +148,8 @@
 				</tm-sheet>
 			</view>
 		</view>
-		<tm-modal :height="320" splitBtn title="温馨提示" okText="确定" v-model:show="orderShow" @ok="pay(order.operationData.id)">
+		<tm-modal :height="320" splitBtn title="温馨提示" okText="确定" v-model:show="orderShow"
+			@ok="pay(order.operationData.id)">
 			<view class="flex flex-center">
 				<tm-text :fontSize="30" _class="text-weight-n" :label="order.operationMsg">
 				</tm-text>
@@ -160,6 +164,7 @@
 	import bg1 from "@/static/img/shopBg.png"
 	import bg from "@/static/img/bg.png"
 	import { useTmpiniaStore } from '@/tmui/tool/lib/tmpinia';
+	import logo from "@/static/img/logo3.png"
 	const store = useTmpiniaStore();
 	const id = ref('')
 	const data = ref({})
@@ -171,7 +176,7 @@
 	const pay = (id) => {
 		console.log(id);
 		uni.navigateTo({
-			url:'/pages/my/order/orderpay?id='+id
+			url: '/pages/my/order/orderpay?id=' + id
 		})
 	}
 	onBeforeMount(() => {
@@ -187,9 +192,9 @@
 				return
 			}
 			uni.navigateTo({
-				url:'/pages/my/order/orderpay?id='+res.operationData.id
+				url: '/pages/my/order/orderpay?id=' + res.operationData.id
 			})
-			
+
 		})
 	}
 </script>

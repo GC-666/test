@@ -6,8 +6,8 @@
 			<tm-sheet :margin="[0,0]" :padding="[0,statusBarHeight]">
 			</tm-sheet>
 			<tm-sheet :round="0" :shadow="0" :margin="[0,0]" :padding="[0,0]">
-				<tm-input :margin="[20,10]" :fontSize="22" :round="12" outlined  prefix="tmicon-search" v-model="inp"
-					placeholder="请输入藏品、盲盒名称"  @confirm="confirm">
+				<tm-input :margin="[20,10]" :fontSize="22" :round="12" outlined prefix="tmicon-search" v-model="inp"
+					placeholder="请输入藏品、盲盒名称" @confirm="confirm">
 				</tm-input>
 			</tm-sheet>
 			<tm-sheet :round="0" :shadow="0" :margin="[0,0]" :padding="[0,0]">
@@ -55,12 +55,11 @@
 						</view>
 					</tm-sheet>
 				</tm-sheet>
-
 			</tm-sheet>
 		</view>
 		<!-- :style="`height: calc(100vh  - 190rpx - 50px - ${statusBarHeight}px  - ${windowBottom}px)`" -->
-		<scroll-view scroll-y="true" class="scroll-Y" @scrolltolower="lower" v-if="list.length>0">
-			<view class="flex flex-between flex-wrap ml-5 mr-5">
+		<scroll-view scroll-y="true" :class="list.length>0?'scroll-Y':''" @scrolltolower="lower">
+			<view class="flex flex-between flex-wrap">
 				<view v-for="(data,index) in list">
 					<tm-sheet :shadow="0" :round="4" :margin="[10,15]" :padding="[0,0]" @click="toShop(data)">
 						<tm-image @click="toShop(data)" extra class="round-t-4" :width="348" :height="344"
@@ -68,15 +67,17 @@
 							<template v-slot:extra>
 								<view class="flex flex-center ml-20 mr-20"
 									:style="`background-image: url(${bg});background-size: 100% 100%;width:300rpx;height:40rpx`">
-									<tm-text color="#fff" :font-size="28" _class="text-weight-n" :label="`流通量:${data.circulation}`">
+									<tm-text color="#fff" :font-size="28" _class="text-weight-n"
+										:label="`流通量:${data.circulation}`">
 									</tm-text>
 								</view>
 							</template>
 						</tm-image>
 						<tm-text :font-size="30" _class="text-overflow text-weight-b ml-20"
-							_style="width: 330rpx;text-overflow: ellipsis;" class=" mt-15" :label="data.name">
+							_style="width: 230rpx;text-overflow: ellipsis;" class=" mt-15" :label="data.name">
 						</tm-text>
-						<tm-text :font-size="20" _class="text-weight-s ml-20" class=" mt-15" :label="data.publisher">
+						<tm-text :font-size="20" _class="text-overflow text-weight-s ml-20"
+							_style="width: 230rpx;text-overflow: ellipsis;" class=" mt-15" :label="data.publisher">
 						</tm-text>
 						<view class="mt-15  ml-20 flex">
 							<view class="flex flex-center"
@@ -249,11 +250,17 @@
 	}
 	onMounted(() => {
 		params.value.isRecommend = 1
-		findMarketList()
-		getClassification()
-
+		findMarketList();
+		getClassification();
 		//tabsClick(4);
 	})
+	//页面加载完成执行
+	// onShow(() => {
+	// 	params.value.page = 1
+	// 	list.value = []
+	// 	findMarketList();
+	// 	getClassification();
+	// })
 	const confirm = () => {
 		list.value = []
 		if (acvite.value == 0 || acvite.value == 1 || acvite.value == 3) {

@@ -9,9 +9,8 @@
 			"path": "pages/index/index",
 			"style": {
 				"navigationBarTitleText": "",
-				"navigationStyle": "custom",
-				"titlePenetrate": "YES",
-				"transparentTitle": "always"
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
 			}
 		}, {
 			"path": "pages/market/market",
@@ -48,7 +47,6 @@
 					"popGesture": "none",
 					"animationType": "fade-in",
 					"animationDuration": 200
-
 				}
 			}
 		}, {
@@ -498,7 +496,6 @@
 				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false
 			}
-
 		}, {
 			"path": "pages/my/role/market/transaction/transaction",
 			"style": {
@@ -548,31 +545,31 @@
 		"color": "#999",
 		"backgroundColor": "#FFFFFF",
 		"selectedColor": "#07EBFE",
-		"height":"55px",
-		"fontSize":"15px",
+		"height": "55px",
+		"fontSize": "15px",
 		"list": [{
 				"pagePath": "pages/index/index",
 				"text": "首页",
-				"iconPath": "/static/tabbar/index.png",
-				"selectedIconPath": "static/tabbar/index-activate.png"
+				"iconPath": "static/bar/index.png",
+				"selectedIconPath": "static/bar/index-activate.png"
 			},
 			{
 				"pagePath": "pages/market/market",
 				"text": "市场",
-				"iconPath": "/static/tabbar/market.png",
-				"selectedIconPath": "static/tabbar/market-activate.png"
+				"iconPath": "static/bar/market.png",
+				"selectedIconPath": "static/bar/market-activate.png"
 			},
 			{
 				"pagePath": "pages/activity/activity",
 				"text": "活动",
-				"iconPath": "/static/tabbar/activity.png",
-				"selectedIconPath": "static/tabbar/activity-activate.png"
+				"iconPath": "static/bar/activity.png",
+				"selectedIconPath": "static/bar/activity-activate.png"
 			},
 			{
 				"pagePath": "pages/my/my",
 				"text": "我的",
-				"iconPath": "/static/tabbar/my.png",
-				"selectedIconPath": "static/tabbar/my-activate.png"
+				"iconPath": "static/bar/my.png",
+				"selectedIconPath": "static/bar/my-activate.png"
 			}
 		]
 	}

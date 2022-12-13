@@ -9,7 +9,7 @@
 				</tm-tabs>
 			</tm-sheet>
 		</view>
-		<scroll-view scroll-y="true" class="scroll-Y" @scrolltolower="lower" v-if="userCollectionFindPageList.length>0">
+		<scroll-view scroll-y="true" :class="userCollectionFindPageList.length>0?'scroll-Y':''" @scrolltolower="lower" >
 			<view  style="margin: 0rpx 20rpx 0rpx 20rpx;">
 				<view class="" v-for="(data,index) in userCollectionFindPageList" @click="gonav('pages/my/collections/collectionsDetails?id='+data.id)">
 					<tm-sheet :shadow="0" :margin="[20,20]" :padding="[20,10]">
@@ -22,7 +22,6 @@
 								</tm-text>
 								<tm-text v-if="data.type=='2'" color="#07EBFE" :font-size="26" _class="text-weight-b" label="交易中">
 								</tm-text> -->
-								
 								<tm-text :font-size="18" _class="text-weight-n" label="买入价："></tm-text>
 								<tm-text color="red" :font-size="26" _class="text-weight-b" :label="data.buyPrice">
 								</tm-text>
@@ -42,7 +41,6 @@
 					</tm-sheet>
 				</view>
 			</view>
-			
 		</scroll-view>
 		<view v-if="userCollectionFindPageList.length<=0" class="flex flex-wrap flex-row-center-center" style="margin-top:150rpx">
 			<tm-image :round="4" class="flex-start" :width="350" :height="280" :src="wushuju"></tm-image>
@@ -80,13 +78,14 @@
 	//配置参数
 	const config=ref({});
 	//藏品类型详情
-	const userCollectionFindPageList = ref({});
+	const userCollectionFindPageList = ref([]);
 	onLoad((e)=>{
 		config.value=e;
 		pageData.value.collId=config.value.id
+		tabsChange(1);
 	})
 	onShow(() => {
-		tabsChange(1);
+		//tabsChange(1);
 	})
 	//配置参数
 	const pageData = ref({

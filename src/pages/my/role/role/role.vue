@@ -63,7 +63,7 @@
 				</tm-image>
 				<view class="flex-2">
 					<view class="flex flex-around">
-						<tm-text :font-size="22" label="职业: 高级法师"></tm-text>
+						<tm-text :font-size="22" :label="`职业: ${item.heroName}`"></tm-text>
 						<tm-text v-if="item.status==='1'" :font-size="22" label="状态: 冒险中"></tm-text>
 						<tm-text v-if="item.status==='0'" :font-size="22" label="状态: 空闲中"></tm-text>
 						<tm-text :font-size="22" :label="`剩余冒险: ${item.workCount}次`"></tm-text>
@@ -108,15 +108,12 @@
 						<tm-image :round="0" :width="160" :height="50" :src="cs"
 							@click="gonav('pages/my/role/role/sell/sell?id='+22)"></tm-image>
 						<tm-image :round="0" class="ml-10 mr-10" :width="160" :height="50" :src="csz"></tm-image>
+						{{item.heroId}}
 						<tm-image :round="0" :width="160" :height="50" :src="sj"
-							@click="gonav('pages/my/role/role/up/up')"></tm-image>
+							@click="gonav('pages/my/role/role/up/up?id='+item.heroId)"></tm-image>
 						<!-- <tm-image :round="0" :width="160" :height="50" :src="qxcs"></tm-image> -->
 					</view>
 				</view>
-
-
-
-
 			</view>
 		</tm-sheet>
 	</scroll-view>

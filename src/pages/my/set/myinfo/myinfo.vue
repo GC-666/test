@@ -51,7 +51,7 @@
 		</view>
 
 		<tm-sheet :round="0" :margin="[0,20]" :padding="[20,30]" :shadow="0">
-			<view class="flex flex-row-center-between" @click="gonav('pages/my/set/name/name')">
+			<view class="flex flex-row-center-between" @click="gonav('pages/my/set/name/name?isRealName='+user.isRealName)">
 				<tm-text :font-size="30" _class="text-weight-b" label="实名认证"></tm-text>
 				<tm-icon :font-size="25" name="tmicon-angle-right"></tm-icon>
 			</view>

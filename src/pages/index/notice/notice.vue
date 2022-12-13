@@ -37,7 +37,19 @@
 										</tm-text>
 									</view>
 								</view>
-								<tm-image :round="4" :width="200" :height="150" :src="data.img">
+								<tm-image v-if="data.img!='' && data.img!=null " :round="4" :width="200" :height="150" model="scaleToFill" :src="data.img">
+								</tm-image>
+								<tm-image v-else-if="data.type=='1'" :round="4" :width="200" :height="150" model="scaleToFill" :src="shangxin">
+								</tm-image>
+								<tm-image v-else-if="data.type=='2'" :round="4" :width="200" :height="150" model="scaleToFill" :src="jishou">
+								</tm-image>
+								<tm-image v-else-if="data.type=='3'" :round="4" :width="200" :height="150" model="scaleToFill" :src="funeng">
+								</tm-image>
+								<tm-image v-else-if="data.type=='4'" :round="4" :width="200" :height="150" model="scaleToFill" :src="huodong">
+								</tm-image>
+								<tm-image v-else-if="data.type=='5'" :round="4" :width="200" :height="150" model="scaleToFill" :src="xitong">
+								</tm-image>
+								<tm-image v-else-if="data.type=='6'" :round="4" :width="200" :height="150" model="scaleToFill" :src="hecheng">
 								</tm-image>
 							</view>
 							<tm-divider v-if="item.noticeList.length !== i+1" color="grey" :margin="[0,10]">
@@ -55,7 +67,7 @@
 				<scroll-view scroll-y="true" class="scroll-Y" @scrolltolower="lower">
 					<tm-sheet :shadow="0" :margin="[20,10]" :round="5" :padding="[10,0]">
 						<view class="" v-for="(item,i) in noticeList1">
-							<view class="flex mt-10 mb-10 ml-5 mr-5"
+							<!-- <view class="flex mt-10 mb-10 ml-5 mr-5"
 								@click="gonav('pages/index/notice/noticeDesc/noticeDesc?id='+item.id)">
 								<view class="flex  flex-col  flex-between" style="width: 430rpx;word-wrap:break-word;">
 									<tm-text :font-size="28" :label="item.name"></tm-text>
@@ -65,7 +77,35 @@
 										</tm-text>
 									</view>
 								</view>
-								<tm-image :round="3" :width="200" :height="150" :src="item.img"></tm-image>
+								<tm-image :round="3" :width="200" :height="150" src="https://picsum.photos/200/300"></tm-image>
+							</view> -->
+							<view class="flex ma-10 flex-between"
+								@click="gonav('pages/index/notice/noticeDesc/noticeDesc?id='+item.id)">
+								<view class="flex  flex-col flex-between">
+									<tm-sheet :margin="[0,0]" :padding="[0,0]" :width="450">
+										<tm-text _class="text-overflow-2" :label="item.name">
+										</tm-text>
+									</tm-sheet>
+									<view class="mt-10">
+										<tm-text color="#808080" :fontSize="22"
+											:label="DateUtils.formatDateTime(item.upTime)">
+										</tm-text>
+									</view>
+								</view>
+								<tm-image v-if="item.img!='' && item.img!=null " :round="4" :width="200" :height="150" model="scaleToFill" :src="item.img">
+								</tm-image>
+								<tm-image v-else-if="item.type=='1'" :round="4" :width="200" :height="150" model="scaleToFill" :src="shangxin">
+								</tm-image>
+								<tm-image v-else-if="item.type=='2'" :round="4" :width="200" :height="150" model="scaleToFill" :src="jishou">
+								</tm-image>
+								<tm-image v-else-if="item.type=='3'" :round="4" :width="200" :height="150" model="scaleToFill" :src="funeng">
+								</tm-image>
+								<tm-image v-else-if="item.type=='4'" :round="4" :width="200" :height="150" model="scaleToFill" :src="huodong">
+								</tm-image>
+								<tm-image v-else-if="item.type=='5'" :round="4" :width="200" :height="150" model="scaleToFill" :src="xitong">
+								</tm-image>
+								<tm-image v-else-if="item.type=='6'" :round="4" :width="200" :height="150" model="scaleToFill" :src="hecheng">
+								</tm-image>
 							</view>
 							<tm-divider v-if="noticeList1.length !== i+1" color="grey" :margin="[0,0]"></tm-divider>
 						</view>
@@ -80,9 +120,17 @@
 </template>
 
 <script setup>
-	import { Home } from "@/api/api.ts"
+	import { Home } from "@/api/api.ts";
 	import { onMounted, ref } from "vue";
-	import wushuju from "@/static/my/wushuju.png"
+	import wushuju from "@/static/my/wushuju.png";
+	import shangxin from "@/static/notice/shangxin.png";
+	import jishou from "@/static/notice/jishou.png";
+	import funeng from "@/static/notice/funeng.png";
+	import huodong from "@/static/notice/huodong.png";
+	import xitong from "@/static/notice/xitong.png";
+	import hecheng from "@/static/notice/hecheng.png";
+	
+	import kongtou from "@/static/notice/kongtou.png";
 	const id = ref('')
 	const tabsTitle = ref([])
 	// 综合公告列表
@@ -103,11 +151,9 @@
 		noticeList1.value = [];
 		noticeParams.value.page = 1
 		getNoticeList()
-		console.log(noticeParams.value.name);
 	}
 	// 下拉刷新
 	const lower = () => {
-		console.log("到底部");
 		if (noticeListNum.value > 0) {
 			noticeParams.value.page += 1
 			getNoticeList()

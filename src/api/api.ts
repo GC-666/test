@@ -159,15 +159,15 @@ export class My {
 	static async orderFindPageList(params: any) {
 		return await request("/order/findPageList", params, "POST")
 	}
-	
+
 	//验证码
 	static async sendCode(params: any) {
 		return await request("/system/get/verification/code", params, "POST")
 	}
-	 //邀请排行
+	//邀请排行
 	static async ranking(params: any) {
 		return await request("/activity/ranking", params, "POST")
-	} 
+	}
 	//邀请排行
 	static async MyInvitation(params: any) {
 		return await request("/activity/MyInvitation", params, "POST")
@@ -289,8 +289,8 @@ export class My {
 	static async getDefaultAddress(params: any) {
 		return await request("/userAddress/getDefaultAddress", params, "POST")
 	}
-	
-	
+
+
 }
 // 活动
 export class Activity {
@@ -356,8 +356,31 @@ export class Role {
 	static async findUserHeroList(params: any) {
 		return await request("/adventure/findUserHeroList", params, "POST")
 	}
-	
-	
+	//基础配置信息 
+	static async findBasic(params: any) {
+		return await request("/adventure/findBasic", params, "POST")
+	}
+	//获取英雄抽卡材料信息 
+	static async findDrawHeroesMaterial(params: any) {
+		return await request("/adventure/findDrawHeroesMaterial", params, "POST")
+	}
+	//抽英雄卡 
+	static async drawHeroes(params: any) {
+		return await request("/adventure/drawHeroes", params, "POST")
+	}
+	//获取升级英雄材料信息
+	static async findUpgradeHeroMaterial(params: any) {
+		return await request("/adventure/findUpgradeHeroMaterial", params, "POST")
+	}
+	//获取英雄等级信息 
+	static async findUserHeroItem(params: any) {
+		return await request("/adventure/findUserHeroItem", params, "POST")
+	}
+	//领取奖励
+	static async heroReceive(params: any) {
+		return await request("/hero/task/heroReceive", params, "POST")
+	}
+
 }
 export class Ver {
 	//版本更新
@@ -367,6 +390,6 @@ export class Ver {
 	static async find(params: any) {
 		return await request("/editionManage/find", params, "POST")
 	}
-	
-	
+
+
 }

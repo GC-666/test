@@ -7,7 +7,6 @@
 				<image src="@/static/img/cg.png" mode="" style="width: 180rpx;height: 180rpx;"></image>
 			</view>
 			<view class="namecard">
-
 				<view class="tip">
 					<image src="@/static/img/aq.png" mode="" style="background-size: 100% 100%;"></image>
 					<view class="text">
@@ -32,7 +31,7 @@
 				</view>
 			</view>
 		</view>
-		<view class="" v-if="type === '0'">
+		<view class="" v-if="type === 0">
 			<view class=" ml-20 mt-30">
 				<tm-text :font-size="58" _class="text-weight-b" label="实名认证"></tm-text>
 			</view>
@@ -70,7 +69,6 @@
 					</tm-input>
 				</tm-form-item>
 				<tm-button form-type="submit" :fontSize="38" linearDeep="accent" block label="确认"></tm-button>
-				<tm-button color="#999999" :fontSize="38" linearDeep="accent" block label="取消"></tm-button>
 			</tm-form>
 		</view>
 	</tm-app>
@@ -86,13 +84,22 @@
 		phone: '',
 		accountNo: ''
 	})
-	const type = ref('')
+	const type = ref(0)
 	const data = ref({})
-	My.realname().then(res => {
-		data.value = res
-		type.value = res.isRealName
+	const realname = () => {
+		My.realname().then(res => {
+			data.value = res
+			type.value = res.isRealName
+		})
+	}
+	onLoad((o) => {
+		if (o.isRealName == '1') {
+			realname()
+		}
+
 	})
 	const confirm = (val) => {
+		console.log(val);
 		if (uni.$tm.u.isPhone(val.data.phone) == false) {
 			uni.showToast({
 				title: '手机号格式错误',
@@ -101,9 +108,8 @@
 			return
 		}
 		My.addrealname(val.data).then(res => {
-			console.log(res);
+			realname()
 		})
-		console.log(val);
 	}
 </script>
 

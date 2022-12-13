@@ -109,7 +109,7 @@
 			</tm-checkbox>
 		</view>
 		<tm-modal :height="380" title="提示" splitBtn okText="确认" v-model:show="show" :beforeClose="beforeClose"
-			@ok="submit" :close="pwd=''">
+			@ok="submit" :close="pwd=''" @close="close">
 			<tm-input placeholder="请输入交易密码" v-model="pwd"></tm-input>
 			<view class="flex flex-row-center-center">
 				<tm-text class="mt-30" :font-size="26" :label="content"></tm-text>
@@ -228,6 +228,9 @@
 				title: '寄售成功',
 				icon: 'none'
 			})
+			uni.navigateBack({
+				delta:1,
+			})
 		})
 		paymentPlatform.value = []
 	}
@@ -241,6 +244,9 @@
 			})
 			return false;
 		}
+	}
+	const close = () => {
+		paymentPlatform.value = []
 	}
 </script>
 

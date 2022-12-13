@@ -63,9 +63,8 @@
 									</view>
 								</view>
 								<view class="">
-									<tm-image :round="0"
-										@click="gonav('pages/my/role/takelist/takelist?heroTaskId='+item.id)"
-										class="ml-10 mr-10" :width="160" :height="50" :src="ksmx"></tm-image>
+									<tm-image :round="0" @click="startTake" class="ml-10 mr-10" :width="160"
+										:height="50" :src="ksmx"></tm-image>
 								</view>
 							</view>
 						</tm-sheet>
@@ -74,16 +73,16 @@
 				<view v-if="parseInt(item.userReceiveCount) > 0" class="flex flex-row-center-between ml-40 mr-40"
 					:style="parseInt(item.userReceiveCount) > 0 ? 'background: -webkit-linear-gradient(left top, #fff 30%, #ABF34E 100%);' : 'background-color: #999'">
 					<view class="flex flex-row-center-between">
-						<tm-text class="mr-20 ml-10" :fontSize="24" label="参与角色"></tm-text>
+						<tm-text color="#1A1A1A" class="mr-20 ml-10" :fontSize="24" label="参与角色"></tm-text>
 						<view class="flex-center ">
 							<image class="bb" v-for="i in item.userList" :src="i.heroImg" mode="aspectFill"></image>
 						</view>
 					</view>
 					<!-- heroOnekeyReceive(item.id) -->
 					<view class="flex" @click="gonav('pages/my/role/takelist/takelist?heroTaskId='+item.id)">
-						<tm-text class="mr-10" :fontSize="24" label="可领取">
+						<tm-text class="mr-10" color="#1A1A1A" :fontSize="24" label="可领取">
 						</tm-text>
-						<tm-icon class="" :fontSize="28" name="tmicon-angle-right"></tm-icon>
+						<tm-icon class="" color="#1A1A1A" :fontSize="28" name="tmicon-angle-right"></tm-icon>
 					</view>
 				</view>
 			</view>
@@ -91,30 +90,30 @@
 		<view v-if="list.length<=0" class="flex flex-wrap flex-row-center-center" style="margin-top:150rpx">
 			<tm-image :round="4" class="flex-start" :width="320" :height="280" :src="wushuju"></tm-image>
 		</view>
+
 		<view v-show="show" class="cover" @click.stop="show=false">
 		</view>
-		<view class="">
-			<view class="relative">
-				<tm-float-button :followTheme="false" :offset="[20,40]"
-					:btn="{ icon: show? 'tmicon-ios-remove' : 'tmicon-plus',color:'#0199FE'}" class="mb-n25"
-					@click="show = !show">
-				</tm-float-button>
-				<view class="absolute flex flex-col" style="bottom: 30rpx;right: 150rpx;z-index: 10;" v-if="show">
-					<tm-button color="#0199FE" style="position: absolute;right: 40rpx;bottom: -20rpx;"
-						:padding="[10,10]" :width="60" :height="60" :round="20" :fontSize="25" :shadow="0" label="冒险列表">
-					</tm-button>
-					<tm-button color="#0199FE" style="position: absolute;right: 20rpx;bottom: 72rpx;" :padding="[10,10]"
-						:width="60" :height="60" :round="20" :shadow="0" label="一键冒险" @click="heroOnekeyWork">
-					</tm-button>
-					<tm-button color="#0199FE" style="position: absolute;right: -52rpx;bottom: 130rpx;"
-						:padding="[10,10]" :width="60" :height="60" :round="20" :shadow="0" label="一键领取">
-					</tm-button>
-					<tm-button color="#0199FE" style="position: absolute;right: -144rpx;bottom: 140rpx;"
-						:padding="[10,10]" :width="60" :height="60" :round="20" :shadow="0" label="冒险记录"
-						@click="show=false;gonav('pages/my/role/takelist/takelist')"></tm-button>
-				</view>
+		<view class="relative">
+			<tm-float-button :followTheme="false" :offset="[20,40]"
+				:btn="{ icon: show? 'tmicon-ios-remove' : 'tmicon-plus',color:'#0199FE'}" class="mb-n25"
+				@click="show = !show">
+			</tm-float-button>
+			<view class="absolute flex flex-col" style="bottom: 30rpx;right: 150rpx;z-index: 10;" v-if="show">
+				<tm-button color="#0199FE" style="position: absolute;right: 40rpx;bottom: -20rpx;" :padding="[10,10]"
+					:width="60" :height="60" :round="20" :fontSize="25" :shadow="0" label="冒险列表">
+				</tm-button>
+				<tm-button color="#0199FE" style="position: absolute;right: 20rpx;bottom: 72rpx;" :padding="[10,10]"
+					:width="60" :height="60" :round="20" :shadow="0" label="一键冒险" @click="heroOnekeyWork">
+				</tm-button>
+				<tm-button color="#0199FE" style="position: absolute;right: -52rpx;bottom: 130rpx;" :padding="[10,10]"
+					:width="60" :height="60" :round="20" :shadow="0" label="一键领取">
+				</tm-button>
+				<tm-button color="#0199FE" style="position: absolute;right: -144rpx;bottom: 140rpx;" :padding="[10,10]"
+					:width="60" :height="60" :round="20" :shadow="0" label="冒险记录"
+					@click="show=false;gonav('pages/my/role/takelist/takelist')"></tm-button>
 			</view>
 		</view>
+
 		<tm-modal :height="550" :border="0" title="" splitBtn hideCancel okText="立即收下" v-model:show="showWin2" @ok="ok">
 			<view class="flex flex-center flex-col">
 				<tm-text :fontSize="30" label="冒险完成"></tm-text>
@@ -125,6 +124,28 @@
 				</view>
 			</view>
 		</tm-modal>
+
+		<tm-drawer v-model:show="showWin" :round="8" :height="430" hideHeader>
+			<view class="flex flex-center">
+				<tm-text class="mt-20 text-weight-b" :fontSize="30" label="可打工角色（0/4）"></tm-text>
+			</view>
+			<scroll-view scroll-x="true" class="scrollX" @scrolltolower="lower">
+				<view class="flex flex-row">
+					<view class="flex flex-center" v-for="(item,index) in 20">
+						<view :class="imgIndex === index?'main':''">
+							<tm-image class="ma-20" :round="4" @click="imgClick(index)" :width="134" :height="180"
+								src="https://picsum.photos/200/300">
+							</tm-image>
+						</view>
+					</view>
+				</view>
+			</scroll-view>
+
+			<view class="flex flex-row-center-center mt-20 ">
+				<tm-image :round="0" @click="startTake" :width="382" :height="66" :src="ksmx1">
+				</tm-image>
+			</view>
+		</tm-drawer>
 	</view>
 </template>
 <script setup>
@@ -132,16 +153,17 @@
 	import { computed, onBeforeMount, reactive, ref } from 'vue';
 	import wushuju from "@/static/my/wushuju.png"
 	import ksmx from "@/static/role/ksmx.png"
+	import ksmx1 from "@/static/role/ksmx1.png"
 	const percent = computed((val, val2) => {
 		return val === val2 ? 100 : val
-
 	})
 
 	const height = ref('')
 	const show = ref(false)
 	const showWin2 = ref(false)
-
+	const showWin = ref(true)
 	const typeShow = ref(false)
+	const bgShow = ref(false)
 	const list = ref([])
 	const receiveList = ref([])
 	const count = ref(0)
@@ -165,6 +187,8 @@
 		// #endif
 		findTaskList()
 	})
+	const imgIndex = ref(-1)
+
 	const findTaskList = () => {
 		Role.findTaskList(params.value).then(res => {
 			count.value = res.heroTaskList.length
@@ -200,8 +224,15 @@
 			findTaskList()
 		}
 	}
-</script>
+	// 获取可冒险角色
+	const startTake = () => {
 
+	}
+
+	const imgClick = (index) => {
+		imgIndex.value = index
+	}
+</script>
 <style>
 	.aa {
 		margin-left: -5%;
@@ -222,5 +253,17 @@
 		height: 100%;
 		background-color: rgba(0, 0, 0, 0.5);
 		z-index: 1;
+	}
+
+	.scrollX {
+		width: 750rpx;
+		margin-top: 40rpx;
+		height: 220rpx;
+		background-color: #ccc;
+		padding: 0rpx 0rpx;
+	}
+
+	.main {
+		background-color: red;
 	}
 </style>

@@ -5,11 +5,22 @@
 
 		<view class="mt-n14">
 			<tm-text :fontSize="26" class="text-weight-b  ml-20" label="提现方式"></tm-text>
-			<tm-sheet :shadow="0" :margin="[20,20]" :padding="[0,0]">
+			<!-- <tm-sheet :shadow="0" :margin="[20,20]" :padding="[0,0]">
 				<tm-cell :margin="[10, 10]" :padding="[0,0]" rightText="单笔提现金额必须为100的倍数" :rightTextSize="15" @click="">
 					<template v-slot:title>
 						<view class="flex" style="align-items: center;">
 							<tm-icon class="ml-10" :fontSize="70" name="xh-yinlian"></tm-icon>
+						</view>
+					</template>
+				</tm-cell>
+			</tm-sheet> -->
+			<tm-sheet :shadow="0" :margin="[20,10]" :padding="[0,0]">
+				<tm-cell :margin="[10, 0]" :padding="[0,0]" :titleFontSize="28" :rightText="rightText"
+					@click="gonav('pages/my/mymoney/bdyhk/bdyhk')">
+					<template v-slot:title>
+						<view class="flex " style="align-items: center;">
+							<tm-icon class="ml-10" :fontSize="70" name="xh-yinlian"></tm-icon>
+							<tm-text class="ml-44" :fontSize="26" :label="data.alipay"></tm-text>
 						</view>
 					</template>
 				</tm-cell>
@@ -35,7 +46,7 @@
 						</tm-input>
 					</tm-form-item>
 				</tm-sheet>
-
+				<tm-text :fontSize="24" class="text-weight-n " label="tips：单笔提现金额必须为100的倍数"></tm-text>
 				<tm-button form-type="submit" :fontSize="38" linearDeep="accent" block label="提现"></tm-button>
 				<view class="flex-row-center-center mt-10">
 					<tm-checkbox class="flex-row-center-center" v-model="loot" :size="28" :round="10">
@@ -49,7 +60,6 @@
 				</view>
 			</tm-form>
 		</view>
-
 	</tm-app>
 </template>
 
@@ -60,6 +70,14 @@
 	const show = ref({
 		pwd: '',
 		value: '',
+	})
+	const data = ref({})
+	const rightText = ref('绑定银行卡')
+	My.Acsecurity().then(res => {
+		if (res.alipay !== '') {
+			rightText.value = "更换银行卡"
+		}
+		data.value = res
 	})
 	const confirm = (e) => {
 		My.placeOrder({ type: '01', value: e.data.value }).then(resPay => {

@@ -2,7 +2,7 @@
 	<tm-app style="">
 		<tm-navbar  title="盲盒" :shadow="0">
 		</tm-navbar>
-		<scroll-view scroll-y="true"  class="scroll-Y" @scrolltolower="lower" v-if="userBoxFindReportPageList.length>0">
+		<scroll-view scroll-y="true" :class="userBoxFindReportPageList.length>0?'scroll-Y':''" @scrolltolower="lower">
 			<view  class="flex flex-row-center-between flex-wrap" style="margin: 0rpx 20rpx 0rpx 20rpx;">
 				<view class="relative" v-for="(data,index) in userBoxFindReportPageList"
 					@click="gonav('pages/my/box/boxType?id='+data.boxId+'&boxName='+data.boxName)">
@@ -10,7 +10,9 @@
 						<tm-image class="round-t-4" :width="344" :height="344" :src="data.boxImg">
 						</tm-image>
 						<view class="" style="margin: 0rpx 20rpx;">
-							<tm-text :font-size="30" _class="text-weight-b" :label="data.boxName"></tm-text>
+							<tm-text _class="text-weight-b text-overflow" _style="width:320rpx;text-overflow: ellipsis;" :fontSize="28"
+								:label="data.boxName">
+							</tm-text>
 						</view>
 						<view class="flex flex-between" style="margin: 10rpx 20rpx;">
 							<view class="flex flex-center" style="background-color: #FFE6C8;border-radius: 10rpx;padding: 4rpx 10rpx;">
@@ -47,7 +49,7 @@
 	import wushuju from "@/static/my/wushuju.png"
 	
 	//页面加载完成执行
-	onShow(() => {
+	onLoad(() => {
 		tabsChange();
 	})
 	//藏品类型列表

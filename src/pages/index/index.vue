@@ -22,8 +22,8 @@
 			<tm-sheet :shadow="0" :round="4" :margin="[20,10]" :padding="[10,20]" v-if="notice.length>0">
 				<view class="flex" @click="gonav('pages/index/notice/notice')">
 					<tm-image :width="100" :height="30" class="flex-center" :src="noticeImg"></tm-image>
-					<view class="flex-center" v-for="i in notice" :key="i.id">
-						<tm-text _class="text-overflow" _style="width: 560rpx;text-overflow: ellipsis;" :fontSize="24"
+					<view class="flex-center ml-20" v-for="i in notice" :key="i.id">
+						<tm-text _class="text-overflow" _style="width: 530rpx;text-overflow: ellipsis;" :fontSize="24"
 							:label="i.name">
 						</tm-text>
 					</view>
@@ -57,7 +57,7 @@
 					<view class="absolute ml-25 mt-25">
 						<view class="flex countdown">
 							<view class="flex">
-								<view class="flex ml-10 mr-10 mt-5 mb-5" v-if="data.diffSeconds ==='0'">
+								<view class="flex ml-10 mr-10 mt-5 mb-5">
 									<view class="flex flex-center" style="align-items: center;"
 										v-if="data.status=='2' || data.status=='3'">
 										<tm-icon class="flex-center" :fontSize="30" color="#999999"
@@ -67,13 +67,26 @@
 											:label="data.statusName">
 										</tm-text>
 									</view>
-									<view class="flex flex-center" style="align-items: center;" v-if="data.status=='1'">
+									<view class="flex flex-center" style="align-items: center;"
+										v-if="data.status=='1' ">
+										<tm-icon class="mt-2" :fontSize="40" color="#07EBFE" name="xh-remen"></tm-icon>
+										<tm-text class="ml-5" color="#07EBFE" fontSiz="24" :label="data.statusName">
+										</tm-text>
+									</view>
+									<view class="flex flex-center" style="align-items: center;"
+										v-if="data.status=='0' && data.diffSeconds<0">
+										<tm-icon class="mt-2" :fontSize="40" color="#07EBFE" name="xh-remen"></tm-icon>
+										<tm-text class="ml-5" color="#07EBFE" fontSiz="24" label="进行中">
+										</tm-text>
+									</view>
+									<view class="flex flex-center" style="align-items: center;"
+										v-if="data.status=='0' && data.diffSeconds==0">
 										<tm-icon class="mt-2" :fontSize="40" color="#07EBFE" name="xh-remen"></tm-icon>
 										<tm-text class="ml-5" color="#07EBFE" fontSiz="24" :label="data.statusName">
 										</tm-text>
 									</view>
 								</view>
-								<view class="flex ml-10 mr-10  mt-5 mb-5" v-if="data.diffSeconds!=='0'">
+								<view class="flex ml-10 mr-10  mt-5 mb-5" v-if="data.diffSeconds>0 && data.status=='0'">
 									<tm-icon class="pt-2" :fontSize="30" color="#07EBFE" name="xh-remen"></tm-icon>
 									<tm-text class="ml-5" color="#07EBFE" fontSiz="24" label="即将开售："></tm-text>
 									<tm-countdown class="text-size-n" color="#07EBFE" :time="parseInt(data.diffSeconds)"
@@ -86,8 +99,11 @@
 						<view class="flex flex-row-center-between">
 							<view class="flex">
 								<!-- <tm-avatar :round="12" :img="data.creatorImg"></tm-avatar> -->
-
-								<tm-image v-if="data.creatorImg=='' || data.creatorImg==null" :round="25" :width="80"
+								<view class="">
+									<tm-avatar v-if="data.creatorImg" :round="12" :img="data.creatorImg"></tm-avatar>
+									<tm-avatar v-else :round="12" :img="logo"></tm-avatar>
+								</view>
+								<!-- <tm-image v-if="data.creatorImg=='' || data.creatorImg==null" :round="25" :width="80"
 									:height="80" :src="userHead">
 								</tm-image>
 								<tm-image v-else :round="25" :width="80" :height="80" :src="data.creatorImg">
@@ -95,14 +111,19 @@
 										<tm-image :width="80" :height="80" :src="userHead">
 										</tm-image>
 									</template>
-								</tm-image>
+								</tm-image> -->
 								<view class="flex flex-col ml-20" style="justify-content: space-around;">
 									<tm-text :font-size="28" _class="text-overflow text-weight-b"
 										_style="width: 330rpx;text-overflow: ellipsis;" :label="data.collName">
 									</tm-text>
-									<tm-text color="#999" :font-size="18" _class="text-weight-n"
-										:label="data.creatorName">
-									</tm-text>
+									<view class="">
+										<tm-text v-if="data.creatorName" color="#999" :font-size="18"
+											_class="text-weight-n" :label="data.creatorName">
+										</tm-text>
+										<tm-text v-else color="#999" :font-size="18" _class="text-weight-n"
+											label="浔画艺术">
+										</tm-text>
+									</view>
 								</view>
 							</view>
 							<view class="flex flex-col">
@@ -122,7 +143,7 @@
 				<tm-image :round="4" class="flex-start" :width="350" :height="280" :src="wushuju"></tm-image>
 			</view>
 		</scroll-view>
-		
+
 		<!-- 首发藏品后6个 -->
 		<!-- <tm-sheet :shadow="0" :margin="[20,15]" :padding="[0,0]">
 				<view class="flex flex-row-center-between flex-wrap">
@@ -199,6 +220,7 @@
 	import { onShow, onLoad } from '@dcloudio/uni-app';
 	import wushuju from "@/static/my/wushuju.png"
 	import userHead from "@/static/my/userHead.png"
+	import logo from "@/static/img/logo3.png"
 	const is = ref(true);
 	const test = () => {
 		const token = uni.getStorageSync('token')
@@ -208,7 +230,7 @@
 			is.value = true
 		}
 	}
-	
+
 	// 下拉刷新
 	const content = ref([{
 		icon: '',
@@ -299,15 +321,7 @@
 			list.value = list.value.concat(res);
 		})
 	}
-	// const find = ref('1')
-	onMounted(() => {
-		// Ver.find().then(res => {
-		// 	if (res === '1') {
-		// 		 uni.hideTabBar()
-		// 	}
-		// 	find.value = res
-		// })
-
+	onShow(() => {
 		test()
 		Home.bannerList().then(res => {
 			listimg.value = res.map((item) => {

@@ -35,7 +35,7 @@
 				</view>
 			</tm-sheet>
 		</view>
-		<scroll-view scroll-y="true" class="scroll-Y" @scrolltolower="lower" v-if="list.length>0">
+		<scroll-view scroll-y="true" :class="list.length>0?'scroll-Y':''" @scrolltolower="lower">
 				<tm-sheet :round="5" :shadow="0" :margin="[20,10]" :padding="[10,10]" v-for="item in list" :key="item.id">
 					<view class="flex flex-between ma-10">
 				

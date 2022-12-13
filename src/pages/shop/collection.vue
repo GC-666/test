@@ -1,11 +1,12 @@
 <template>
 	<tm-app class="overflow-y">
-		<tm-navbar hideHome title="藏品详情" :height="44" :shadow="0">
+		<tm-navbar  title="藏品详情" :height="44" :shadow="0">
 		</tm-navbar>
 		<view class="head">
 			<view class="bg"
 				:style="{'background-image': store.tmStore.dark? `url(${bg})`: `url(${bg1})` ,'background-size':' 100% 100%','margin':'0 auto','position':'relative','width':'500rpx','height':'200rpx'}">
 				<view class="img">
+					
 					<tm-image preview :round="4" :width="300" :height="300" :src="data.collImg">
 					</tm-image>
 				</view>
@@ -15,7 +16,10 @@
 		<tm-sheet :round="3" :shadow="0" :margin="[20,10]" :padding="[0,0]">
 			<view class="flex flex-row-center-between">
 				<view class="flex ma-15">
-					<tm-avatar :round="12" :img="data.creatorImg"></tm-avatar>
+					<view class="">
+						<tm-avatar v-if="data.creatorImg" :round="12" :img="data.creatorImg"></tm-avatar>
+						<tm-avatar v-else :round="12" :img="logo"></tm-avatar>
+					</view>
 					<view class="flex flex-col ml-20" style="justify-content: space-around;">
 						<tm-text :fontSize="28" _class="text-weight-b" :label="data.collName"></tm-text>
 						<view class="flex">
@@ -109,9 +113,6 @@
 
 			</view>
 		</tm-sheet>
-
-
-
 		<view class="fixed b-0 r-0 l-0" :style="{'background-color': store.tmStore.dark?'#fff': '#25262E' }">
 			<view class="" style="">
 				<tm-sheet _class=" " :round="0" :shadow="2" :margin="[0,0]" :padding="[0,0]">
@@ -149,6 +150,7 @@
 	import bg1 from "@/static/img/shopBg.png"
 	import bg from "@/static/img/bg.png"
 	import { useTmpiniaStore } from '@/tmui/tool/lib/tmpinia';
+	import logo from "@/static/img/logo3.png"
 	const store = useTmpiniaStore();
 	const id = ref('')
 	const data = ref({})

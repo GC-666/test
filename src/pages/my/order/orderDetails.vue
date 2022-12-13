@@ -25,11 +25,16 @@
 				<tm-text color="#808080" :font-size="24"  label="类型"></tm-text>
 				<tm-text :font-size="24" _class="text-weight-b" :label="find.orderTypeName"></tm-text>
 			</view>
+			<tm-divider v-if="find.isMy=='1' && find.rightsCollId!='0'" color="grey" :margin="[1,1]"></tm-divider>
+			<view class="flex flex-between pt-20 pb-20" v-if="find.isMy=='1' && find.rightsCollId!='0'">
+				<tm-text color="#808080" :font-size="24" label="权益"></tm-text>
+				<tm-text :font-size="30" _class="text-weight-b" :label="`${find.rightsCollName} ${parseInt(find.rightsCollValue)/100}折`"></tm-text>
+			</view>
 			<tm-divider color="grey" :margin="[1,1]"></tm-divider>
 			<view class="flex flex-between pt-20 pb-20">
 				<tm-text color="#808080" :font-size="24" label="实付款"></tm-text>
 				<tm-text v-if="find.isMy=='0'" :font-size="30" _class="text-weight-b" :label="`¥${find.totalMoney}`"></tm-text>
-				<tm-text v-else-if="find.isMy=='1'" :font-size="30" _class="text-weight-b" :label="`¥${find.totalMoney}`"></tm-text>
+				<tm-text v-else-if="find.isMy=='1'" :font-size="30" _class="text-weight-b" :label="`¥${find.payMoney}`"></tm-text>
 			</view>
 			<tm-divider color="grey" :margin="[1,1]"></tm-divider>
 			<view class="flex flex-between pt-20 pb-20">
@@ -103,6 +108,7 @@
 	const find=ref({});
 	onLoad((e)=>{
 		id.value=e.id;
+		
 	})
 	onShow(() => {
 		My.find({

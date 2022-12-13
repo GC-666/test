@@ -151,7 +151,6 @@
 	const lootFindItem = () => {
 		Activity.lootFindItem().then(res => {
 			balanceIntegralValue.value=res.balanceIntegralValue;
-			console.log(balanceIntegralValue.value);
 		})
 	}
 	//兑换方式
@@ -238,7 +237,6 @@
 	}
 	// 下拉刷新
 	const lower = () => {
-		console.log("滚动到底部")
 		if(lootFindUserGrantExchangeBool.value){
 			getlootFindUserGrantExchange(1);
 		}

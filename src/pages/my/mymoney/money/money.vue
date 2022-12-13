@@ -10,17 +10,13 @@
 			</view>
 			<view class="zf mt-n10">
 				<tm-icon :fontSize="80" name="tmicon-weixinzhifu"></tm-icon>
-				<tm-text :fontSize="22" class="text-weight-n " label="微信支付"></tm-text>
+				<tm-text :fontSize="22" class="text-weight-n  mt-10" label="微信支付"></tm-text>
 
 			</view>
 			<view class="zf mt-n10">
 				<tm-icon :fontSize="80" name="tmicon-alipay"></tm-icon>
-				<tm-text :fontSize="22" class="text-weight-n" label="支付宝支付"></tm-text>
+				<tm-text :fontSize="22" class="text-weight-n mt-10" label="支付宝支付"></tm-text>
 			</view>
-		</view>
-		<view class="flex flex-end">
-			<tm-text :fontSize="18" class="text-weight-s mt-n5 mr-n10" label="暂未支持 敬请期待"></tm-text>
-			<tm-text :fontSize="18" class="text-weight-s mt-n5 mr-n10" label="暂未支持 敬请期待"></tm-text>
 		</view>
 		<view class="mt-n25">
 			<tm-sheet :shadow="0" :margin="[0,0]" :padding="[0,0]">

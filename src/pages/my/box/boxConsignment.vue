@@ -51,7 +51,7 @@
 					<tm-text class="ml-10" color="red" :font-size="22" _class="text-weight-b" label="(推荐)"></tm-text>
 				</view>
 				<tm-checkbox-group v-if="orderFindMySellServiceCharge.isCloudWallet =='1'" v-model="checkboxlist">
-					<tm-checkbox defaultChecked  :size="30" :round="10" value="05"></tm-checkbox>
+					<tm-checkbox defaultChecked :size="30" :round="10" value="05"></tm-checkbox>
 				</tm-checkbox-group>
 				<tm-text color="red" v-else :font-size="30" _class="text-weight-b" label="暂未开通"></tm-text>
 			</view>
@@ -83,7 +83,7 @@
 				label="寄售"></tm-button>
 		</view>
 		<tm-modal :height="380" title="提示" splitBtn okText="确认" v-model:show="show" :beforeClose="beforeClose"
-			@ok="submit" :close="pwd=''">
+			@ok="submit" :close="pwd=''" @close="close">
 			<tm-input placeholder="请输入交易密码" v-model="pwd"></tm-input>
 			<view class="flex flex-row-center-center">
 				<tm-text class="mt-30" :font-size="26" :label="content"></tm-text>
@@ -122,7 +122,6 @@
 			id: e.id
 		}).then(res => {
 			orderFindMySellServiceCharge.value = res;
-			
 		})
 	})
 
@@ -151,7 +150,7 @@
 	const checkboxlist1 = ref(['00'])
 	//寄售点击
 	const consignment = () => {
-		
+
 		if (checkboxlist.value.length > 0 && checkboxlist1.value.length > 0) {
 			paymentPlatform.value.push({
 				type: "00",
@@ -212,6 +211,9 @@
 			})
 			return false;
 		}
+	}
+	const close = () => {
+		paymentPlatform.value = []
 	}
 </script>
 

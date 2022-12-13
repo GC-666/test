@@ -36,14 +36,13 @@
 		</tm-sheet>
 		<tm-sheet v-if="data.orderStatus == 0" :round="0" :shadow="0" :margin="[20,10]" :padding="[20,20]">
 			<view class="flex flex-between">
-				<tm-text :font-size="28" color="red" _class="text-weight-b" label="剩余时间:"></tm-text>
+				<tm-text :font-size="28" color="red" _class="text-weight-b" label="剩余时间"></tm-text>
 				<tm-countdown  class="text-size-n ml-10" color="red" @change="change"
 					:time="parseInt(data.endTime)- new Date().getTime()" format="HH:MM:SS" autoStart>
 				</tm-countdown>
 				
 			</view>
 		</tm-sheet>
-
 		<tm-sheet :round="3" :shadow="0" :margin="[20,10]" :padding="[0,10]">
 			<tm-text class="ml-15" :font-size="30" _class="text-weight-b" label="支付方式"></tm-text>
 			<tm-divider color="grey" :margin="[1,10]"></tm-divider>
@@ -64,7 +63,7 @@
 		
 		<tm-sheet v-if="radiolist=='00' || radiolist=='04'" :round="3" :shadow="0" :margin="[20,10]" :padding="[0,10]">
 			<tm-text class="ml-15" :font-size="30" _class="text-weight-b" label="支付密码"></tm-text>
-			<tm-input :margin="[20,10]" outlined v-model="inp" placeholder="请输入支付密码">
+			<tm-input password :margin="[20,10]" outlined v-model="inp" placeholder="请输入支付密码">
 			</tm-input>
 		</tm-sheet>
 		<view class="fixed b-0 r-0 l-0" :style="{'background-color': store.tmStore.dark?'#fff': '#25262E' }">

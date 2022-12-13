@@ -80,7 +80,6 @@
 	const userIntegal = ref(0);
 	//每次加载页面执行
 	onShow(() => {
-		console.log(12);
 		getLootFindItem();
 	})
 	const getLootFindItem = (e) => {

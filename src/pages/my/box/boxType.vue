@@ -9,7 +9,7 @@
 				</tm-tabs>
 			</tm-sheet>
 		</view>
-		<scroll-view scroll-y="true" class="scroll-Y" @scrolltolower="lower" v-if="userBoxFindPageList.length>0"> 
+		<scroll-view scroll-y="true" :class="userBoxFindPageList.length>0?'scroll-Y':''" @scrolltolower="lower" > 
 			<view  style="margin: 0rpx 20rpx 0rpx 20rpx;">
 				<view class="" v-for="(data,index) in userBoxFindPageList"
 					@click="gonav('pages/my/box/boxDetails?id='+data.id)">
@@ -102,10 +102,11 @@
 	onLoad((e) => {
 		config.value = e;
 		pageData.value.boxId = config.value.id
+		tabsChange(index.value);
 	})
 
 	onShow(() => {
-		tabsChange(index.value);
+		// tabsChange(index.value);
 	})
 	//配置参数
 	const pageData = ref({

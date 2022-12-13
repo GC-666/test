@@ -3,7 +3,7 @@
 		<tm-navbar title="开票记录" :shadow="0">
 		</tm-navbar>
 		<!-- 可开票列表 -->
-		<scroll-view scroll-y="true" class="scroll-Y" @scrolltolower="lower" v-if="list.length>0">
+		<scroll-view scroll-y="true" :class="list.length>0?'scroll-Y':''" @scrolltolower="lower">
 			<tm-sheet :round="3" :shadow="0" :margin="[20,20]" :padding="[0,10]" v-for="(item,i) in list" :key="i">
 				<view class="flex ma-15 flex-between">
 					<view class="flex flex-row-center-between">
@@ -86,10 +86,13 @@
 			list.value = list.value.concat(res)
 		})
 	}
-	onShow(() => {})
-	onBeforeMount(() => {
-		console.log(DateUtils.getLastNDays(7));
+	onShow(() => {
+		params.value.page = 1
+		list.value=[]
 		findUserTicketRecord()
+	})
+	onBeforeMount(() => {
+		
 
 	})
 </script>

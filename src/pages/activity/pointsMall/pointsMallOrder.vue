@@ -58,7 +58,6 @@
 	onShow(() => {
 		//获取子调用返回的地址ID
 		uni.$on('id',function(id){
-			console.log("id",id);
 			My.getUserAddressById({
 				id:id
 			}).then(res => {

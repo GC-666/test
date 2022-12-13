@@ -14,7 +14,10 @@
 		<tm-sheet :round="3" :shadow="0" :margin="[20,10]" :padding="[0,0]">
 			<view class="flex flex-row-center-between">
 				<view class="flex ma-15">
-					<tm-avatar :round="12" :img="data.creatorImg"></tm-avatar>
+					<view class="">
+						<tm-avatar v-if="data.creatorImg" :round="12" :img="data.creatorImg"></tm-avatar>
+						<tm-avatar v-else :round="12" :img="logo"></tm-avatar>
+					</view>
 					<view class="flex flex-col ml-20" style="justify-content: space-around;">
 						<tm-text :font-size="28" _class="text-weight-b" :label="data.collName"></tm-text>
 						<view class="flex">
@@ -166,6 +169,7 @@
 	import bg1 from "@/static/img/shopBg.png"
 	import bg from "@/static/img/bg.png"
 	import { useTmpiniaStore } from '@/tmui/tool/lib/tmpinia';
+	import logo from "@/static/img/logo3.png"
 	const store = useTmpiniaStore();
 	const id = ref('')
 	const data = ref({})

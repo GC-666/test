@@ -167,7 +167,6 @@
 	const typeIndex = ref(0);
 	// 类型点击
 	const tagChange = (type) => {
-		console.log(type);
 		if(typeIndex.value!=type){
 			typeIndex.value=type
 			if(type==0){
@@ -233,7 +232,6 @@
 	
 	// 下拉刷新
 	const lower = () => {
-		console.log("滚动到底部")
 		if(typeIndex.value==0){
 			if(lootFindUserItemRecordListBool.value){
 				getlootFindUserItemRecordList(1);

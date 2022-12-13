@@ -9,7 +9,7 @@
 
 		<!-- 可开票列表 -->
 
-		<scroll-view scroll-y="true" class="scroll-Y" @scrolltolower="lower" v-if="list.length>0">
+		<scroll-view scroll-y="true" :class="list.length>0?'scroll-Y':''" @scrolltolower="lower">
 			<tm-sheet :round="3" :shadow="0" :margin="[20,20]" :padding="[0,10]" v-for="(item,index) in list"
 				:key="index">
 				<view class="flex flex-between">
@@ -77,6 +77,7 @@
 	import { useTmpiniaStore } from '@/tmui/tool/lib/tmpinia';
 	import { My } from "@/api/api.ts"
 	import wushuju from "@/static/my/wushuju.png"
+import { onShow } from '@dcloudio/uni-app';
 	const store = useTmpiniaStore();
 	const checkboxText = ref("全选")
 	const list = ref([])
@@ -165,6 +166,11 @@
 		return result;
 	}
 	onBeforeMount(() => {
+		
+	})
+	onShow(()=>{
+		params.value.page = 1
+		list.value=[]
 		findOpenTicketForOrder()
 	})
 	const findOpenTicketForOrder = () => {

@@ -44,3 +44,10 @@ export function createApp() {
 		Pinia
 	};
 }
+
+if (import.meta.env.MODE !== 'production') {
+	//开发环境去除看一下效果
+} else {
+	//正式环境去除
+	console.log = () => { }
+}

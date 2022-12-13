@@ -8,8 +8,7 @@
 				:itemHeight="30" :itemWidth="300" :width="700" :default-name="index">
 			</tm-tabs>
 		</tm-sheet>
-		<scroll-view scroll-y="true" class="scroll-Y" @scrolltolower="lower"
-			v-if="composeFindList.length>0 && index==1">
+		<scroll-view scroll-y="true" :class="composeFindList.length>0 && index==1?'scroll-Y':''" @scrolltolower="lower" v-if="index==1">
 			<view class="flex flex-wrap flex-center" style="">
 				<view class="relative" v-for="(data,index) in composeFindList"
 					@click="gonav('pages/activity/syn/synDetails?id='+data.id)" style="width: 710rpx;">
@@ -89,7 +88,9 @@
 	const composeFindList = ref({});
 	//页面加载完成执行
 	onShow(() => {
-
+		params.value.page = 1;
+		composeFindList.value = [];
+		tabsChange(index.value);
 	})
 	//类型下标
 	const index = ref(1);
@@ -106,11 +107,6 @@
 	const params = ref({
 		page: 1,
 		limit: 10,
-	})
-	onMounted(() => {
-		params.value.page = 1;
-		composeFindList.value = [];
-		tabsChange(index.value);
 	})
 	const lower = () => {
 		if (composeFindListBool.value) {

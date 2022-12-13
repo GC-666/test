@@ -1,6 +1,6 @@
 
-//const BASE_URL = import.meta.env.VITE_APP_BASE_API
-const BASE_URL = "https://api.xunmeta.rocknft.top"
+const BASE_URL = import.meta.env.VITE_APP_BASE_API
+//const BASE_URL = "https://api.xunmeta.rocknft.top"
 // 封装 GET POST 请求并导出
 export function request(url: string = '', params = {}, type: "POST" | undefined) {
 	//设置 url params type 的默认值
@@ -9,14 +9,14 @@ export function request(url: string = '', params = {}, type: "POST" | undefined)
 		token: uni.getStorageSync("token")
 	};
 	return new Promise((resolve, reject) => {
-		uni.request({	
+		uni.request({
 			url: BASE_URL + url,
 			method: type,
 			data: params,
 			header: headerReSet,
 			success: (res) => {
 				const {
-					data 
+					data
 				} = res
 				if (data.code === "404") { //根据后台返回的状态码判断
 					uni.showToast({
