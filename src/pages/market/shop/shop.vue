@@ -14,7 +14,7 @@
 						<tm-icon v-if="item.type == '2'" :fontSize="40" name="xh-jiaoyizhong-copy">
 						</tm-icon>
 						<tm-text class="text-weight-b ml-10" :fontSize="36" :label="item.name"></tm-text>
-						<tm-text v-if="item.type=='2'" _class="text-weight-s ml-10" :fontSize="24" label="交易中">
+						<tm-text v-if="item.type=='2'" color="#d29850" _class="text-weight-b ml-10" :fontSize="24" label="交易中">
 						</tm-text>
 					</view>
 					<tm-text :fontSize="32" class="text-weight-b" :label="`￥${item.price}`"></tm-text>

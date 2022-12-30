@@ -143,7 +143,6 @@
 				<tm-image :round="4" class="flex-start" :width="350" :height="280" :src="wushuju"></tm-image>
 			</view>
 		</scroll-view>
-
 		<!-- 首发藏品后6个 -->
 		<!-- <tm-sheet :shadow="0" :margin="[20,15]" :padding="[0,0]">
 				<view class="flex flex-row-center-between flex-wrap">
@@ -216,7 +215,7 @@
 	import { Home, Ver } from "@/api/api.ts"
 	import logoimg from "@/static/logo.png"
 	import noticeImg from "@/static/img/noticeImg.png"
-	import { onMounted, ref } from "vue";
+	import { onBeforeMount, onMounted, ref } from "vue";
 	import { onShow, onLoad } from '@dcloudio/uni-app';
 	import wushuju from "@/static/my/wushuju.png"
 	import userHead from "@/static/my/userHead.png"
@@ -230,7 +229,6 @@
 			is.value = true
 		}
 	}
-
 	// 下拉刷新
 	const content = ref([{
 		icon: '',
@@ -242,6 +240,7 @@
 		})
 	}
 	const lower = () => {
+		return;
 		if (index.value == 0) {
 			if (ListNum.value > 0) {
 				params.value.page += 1
@@ -282,12 +281,9 @@
 				url: '/pages/shop/box?id=' + id
 			})
 		}
-
-
 	}
 	// 公告请求
 	const notice = ref([])
-
 
 	// 轮播图 相关
 	const listimg = ref([])
@@ -307,7 +303,7 @@
 	const ListNum = ref(0)
 	const params = ref({
 		page: 1,
-		limit: 4
+		limit: 10
 	})
 	const findSaleCollectionList = () => {
 		Home.findSaleCollectionList(params.value).then(res => {
@@ -321,7 +317,8 @@
 			list.value = list.value.concat(res);
 		})
 	}
-	onShow(() => {
+	onMounted(() => {
+		console.log("onBeforeMount");
 		test()
 		Home.bannerList().then(res => {
 			listimg.value = res.map((item) => {
@@ -331,6 +328,7 @@
 		Home.findPageList({ page: 1, limit: 1, objectType: 0 }).then(res => {
 			notice.value = res
 		})
+		list.value=[];
 		findSaleCollectionList()
 	})
 	// 暗黑模式切换
@@ -355,7 +353,6 @@
 		bottom: calc(var(--window-bottom) + 10rpx);
 
 	}
-
 	.bb {
 		display: flex;
 		justify-content: center;
@@ -367,6 +364,6 @@
 	}
 
 	.scroll-Y {
-		height: calc(100vh - var(--status-bar-height) - 44px - var(--window-bottom));
+		height: calc(100vh - var(--status-bar-height) - 88rpx - var(--window-bottom));
 	}
 </style>

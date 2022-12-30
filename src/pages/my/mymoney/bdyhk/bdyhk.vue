@@ -27,7 +27,7 @@
 			</view>
 			<tm-form-item label=""
 				:rules="[{required:true,message:'请输入银行预留手机号',validator:(val)=> val === '' ? false : true}]">
-				<tm-input placeholder="请输入银行预留手机号" :inputPadding="[0,0]" v-model="show.phone1" :transprent="true"
+				<tm-input disabled placeholder="请输入银行预留手机号" :inputPadding="[0,0]" v-model="show.phone1" :transprent="true"
 					:showBottomBotder="false">
 					<template v-slot:right>
 						<tm-button @click="btn" :disabled="smsShow" :width="140" :height="40" :margin="[0, 0]"
@@ -57,6 +57,7 @@
 	import logo2 from "@/static/img/logo2.png"
 	import { My } from "@/api/api.ts"
 	import { useTmpiniaStore } from '@/tmui/tool/lib/tmpinia';
+	import { onLoad } from "@dcloudio/uni-app";
 	const store = useTmpiniaStore();
 	import {
 		reactive,
@@ -72,9 +73,14 @@
 		name: '',
 		phone1: ''
 	})
+	onLoad(() => {
+		My.personal().then(res => {
+			show.phone1 = res.phone1
+			console.log(res);
+		})
+	})
 	const confirm = (e) => {
 		if (show.code != "" && show.phone != "" && show.name != "" && show.phone1 != "") {
-
 			My.aplPhone({ code: e.data.code, phone: e.data.phone, name: e.data.name }).then(res => {
 				uni.showToast({
 					title: "绑定成功",

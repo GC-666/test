@@ -12,33 +12,35 @@
 		<scroll-view scroll-y="true" :class="userCollectionFindPageList.length>0?'scroll-Y':''" @scrolltolower="lower" >
 			<view  style="margin: 0rpx 20rpx 0rpx 20rpx;">
 				<view class="" v-for="(data,index) in userCollectionFindPageList" @click="gonav('pages/my/collections/collectionsDetails?id='+data.id)">
-					<tm-sheet :shadow="0" :margin="[20,20]" :padding="[20,10]">
-						<view class="flex flex-between" style="margin: 0rpx 10rpx;">
-							<tm-text :font-size="32" _class="text-weight-b" :label="data.collName"></tm-text>
-							<view class="flex flex-center">
-								<!-- <tm-text v-if="data.type=='0'" color="#07EBFE" :font-size="26" _class="text-weight-b" label="已开启">
-								</tm-text>
-								<tm-text v-if="data.type=='1'" color="#07EBFE" :font-size="26" _class="text-weight-b" label="出售中">
-								</tm-text>
-								<tm-text v-if="data.type=='2'" color="#07EBFE" :font-size="26" _class="text-weight-b" label="交易中">
-								</tm-text> -->
-								<tm-text :font-size="18" _class="text-weight-n" label="买入价："></tm-text>
-								<tm-text color="red" :font-size="26" _class="text-weight-b" :label="data.buyPrice">
-								</tm-text>
+					<view class="pa-10">
+						<tm-sheet :round="4" :shadow="0" :margin="[0,0]" :padding="[20,10]">
+							<view class="flex flex-between" style="margin: 0rpx 10rpx;">
+								<tm-text :font-size="32" _class="text-weight-b" :label="data.collName"></tm-text>
+								<view class="flex flex-center">
+									<!-- <tm-text v-if="data.type=='0'" color="#07EBFE" :font-size="26" _class="text-weight-b" label="已开启">
+									</tm-text>
+									<tm-text v-if="data.type=='1'" color="#07EBFE" :font-size="26" _class="text-weight-b" label="出售中">
+									</tm-text>
+									<tm-text v-if="data.type=='2'" color="#07EBFE" :font-size="26" _class="text-weight-b" label="交易中">
+									</tm-text> -->
+									<tm-text :font-size="18" _class="text-weight-n" label="买入价："></tm-text>
+									<tm-text color="red" :font-size="26" _class="text-weight-b" :label="data.buyPrice">
+									</tm-text>
+								</view>
 							</view>
-						</view>
-						<view class="flex flex-between" style="margin:10rpx 10rpx 0rpx 10rpx;padding: 0rpx 0rpx 10rpx 0rpx">
-							<view class="flex">
-								<tm-text color="#999" :font-size="22" _class="text-weight-b" :label="data.collTruenumber">
-								</tm-text>
+							<view class="flex flex-between" style="margin:10rpx 10rpx 0rpx 10rpx;padding: 0rpx 0rpx 10rpx 0rpx">
+								<view class="flex">
+									<tm-text color="#999" :font-size="22" _class="text-weight-b" :label="data.collTruenumber">
+									</tm-text>
+								</view>
+								<view class="flex mr-2" v-if="data.type=='1' || data.type=='2' ">
+									<tm-text color="#999" :font-size="22" _class="text-weight-n" label="出售价:"></tm-text>
+									<tm-text color="#999" :font-size="26" _class="text-weight-b" :label="data.sellPrice">
+									</tm-text>
+								</view>
 							</view>
-							<view class="flex mr-2" v-if="data.type=='1' || data.type=='2' ">
-								<tm-text color="#999" :font-size="22" _class="text-weight-n" label="出售价:"></tm-text>
-								<tm-text color="#999" :font-size="26" _class="text-weight-b" :label="data.sellPrice">
-								</tm-text>
-							</view>
-						</view>
-					</tm-sheet>
+						</tm-sheet>
+					</view>
 				</view>
 			</view>
 		</scroll-view>

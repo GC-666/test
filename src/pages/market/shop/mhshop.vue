@@ -11,9 +11,9 @@
 				@click="gonav('pages/market/shop/mhgoodpage?id='+item.id)">
 				<view class="flex flex-between mt-20 ml-20 mr-20">
 					<view class="flex flex-row-center-start">
-						<tm-icon v-if="item.type == '4'" :fontSize="25" name="xh-jiaoyizhong">
+						<tm-icon v-if="item.type == '4'" :fontSize="40" name="xh-jiaoyizhong-copy">
 						</tm-icon>
-						<tm-text class="text-weight-b" :fontSize="32" :label="item.name"></tm-text>
+						<tm-text class="text-weight-b ml-10" :fontSize="32" :label="item.name"></tm-text>
 						<tm-text v-if="item.type=='4'" _class="text-weight-s ml-10" :fontSize="22" label="交易中">
 						</tm-text>
 					</view>

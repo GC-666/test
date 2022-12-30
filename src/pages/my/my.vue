@@ -152,23 +152,25 @@
 	My.mine().then(res => {
 		user.value = res;
 	})
-
+	
+	
 	//藏品列表
-	const mineFindCollReport = ref({});
-	My.mineFindCollReport({
-		page: 1,
-		limit: 3
-	}).then(res => {
-		mineFindCollReport.value = res;
-	})
-
+	const mineFindCollReport = ref([]);
 	//盲盒列表
-	const userBoxFindReportPageList = ref({});
-	My.userBoxFindReportPageList({
-		page: 1,
-		limit: 3
-	}).then(res => {
-		userBoxFindReportPageList.value = res;
+	const userBoxFindReportPageList = ref([]);
+	onShow(() => {
+		My.mineFindCollReport({
+			page: 1,
+			limit: 3
+		}).then(res => {
+			mineFindCollReport.value = res;
+		})
+		My.userBoxFindReportPageList({
+			page: 1,
+			limit: 3
+		}).then(res => {
+			userBoxFindReportPageList.value = res;
+		})
 	})
 	/* const loginOnt = () => {
 		uni.removeStorageSync('token')

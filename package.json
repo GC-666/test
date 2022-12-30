@@ -45,6 +45,7 @@
     "@dcloudio/uni-mp-toutiao": "^3.0.0-3060520221121001",
     "@dcloudio/uni-mp-weixin": "^3.0.0-3060520221121001",
     "@dcloudio/uni-quickapp-webview": "^3.0.0-3060520221121001",
+    "@tencentcloud/chat-uikit-uniapp": "^1.0.3",
     "echarts": "5.3.2",
     "pinia": "^2.0.14",
     "scss": "^0.2.4",

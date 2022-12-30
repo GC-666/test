@@ -56,7 +56,7 @@
 					<tm-text class="ml-10" color="red" :font-size="22" _class="text-weight-b" label="(推荐)"></tm-text>
 				</view>
 				<tm-checkbox-group v-if="orderFindMySellServiceCharge.isCloudWallet =='1'" v-model="checkboxlist">
-					<tm-checkbox defaultChecked :size="30" :round="10" value="05"></tm-checkbox>
+					<tm-checkbox :size="30" :round="10" value="05"></tm-checkbox>
 				</tm-checkbox-group>
 				<tm-text color="red" v-else :font-size="30" _class="text-weight-b" label="暂未开通"></tm-text>
 			</view>
@@ -174,7 +174,8 @@
 	//寄售点击
 	const consignment = () => {
 
-		if (checkboxlist.value.length > 0 && checkboxlist1.value.length > 0) {
+		if (checkboxlist.value.length > 0 && checkboxlist1.value.length > 0 && orderFindMySellServiceCharge.value
+			.isCloudWallet == '1') {
 			paymentPlatform.value.push({
 				type: "00",
 				name: "平台支付"
@@ -229,7 +230,7 @@
 				icon: 'none'
 			})
 			uni.navigateBack({
-				delta:1,
+				delta: 1,
 			})
 		})
 		paymentPlatform.value = []

@@ -36,7 +36,6 @@
 					@click="gonav('pages/my/mymoney/moneydetail/moneydetail?money='+data.balance)"></tm-text>
 			</view>
 		</view>
-
 		<view class="yqb">
 			<view class="flex ma-10">
 				<tm-icon :fontSize="35" name="xh-yunqianbao"></tm-icon>
@@ -71,6 +70,7 @@
 				</tm-text>
 			</view>
 		</tm-modal>
+		<web-view v-if="unionLink!==''" :src="unionLink"></web-view>
 	</tm-app>
 </template>
 
@@ -94,19 +94,19 @@
 			// #endif
 		})
 	}
+	const unionLink = ref('')
 	const cloudWallet = () => {
 		if (data.value.isCloudWallet === '0') {
 			Cloudshow.value = true
-
 		} else if (data.value.isCloudWallet === '1') {
 			My.openSdCloudWallet().then(res => {
 				// #ifdef H5
+				location.href = res
+				// #endif
+				//#ifdef APP-PLUS
+				unionLink.value = res;
+				// #endif
 
-				window.location.href = res
-				// #endif
-				// #ifdef APP-PLUS
-				plus.runtime.openURL(res)
-				// #endif
 			})
 
 		}
@@ -114,7 +114,6 @@
 </script>
 <style>
 	.zhye {
-
 		width: 710rpx;
 		height: 200rpx;
 		background-image: url('@/static/img/zhqb.png');

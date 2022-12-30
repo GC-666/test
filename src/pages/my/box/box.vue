@@ -9,12 +9,12 @@
 					<tm-sheet :round="4" :shadow="0" :margin="[0,10]" :padding="[0,0]">
 						<tm-image class="round-t-4" :width="344" :height="344" :src="data.boxImg">
 						</tm-image>
-						<view class="" style="margin: 0rpx 20rpx;">
+						<view class="pa-10">
 							<tm-text _class="text-weight-b text-overflow" _style="width:320rpx;text-overflow: ellipsis;" :fontSize="28"
 								:label="data.boxName">
 							</tm-text>
 						</view>
-						<view class="flex flex-between" style="margin: 10rpx 20rpx;">
+						<view class="flex flex-between mt-10 mb-10 pl-10 br-10">
 							<view class="flex flex-center" style="background-color: #FFE6C8;border-radius: 10rpx;padding: 4rpx 10rpx;">
 								<tm-text color="#999" :font-size="28" class="" :label="data.unOpenCount"></tm-text>
 								<tm-text color="#999" :font-size="28" class="" label="/"></tm-text>

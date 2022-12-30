@@ -65,6 +65,7 @@
 
 <script setup>
 	import { My } from "@/api/api.ts"
+	import { onShow } from "@dcloudio/uni-app";
 	import { ref } from "vue";
 	const loot = ref(true)
 	const show = ref({
@@ -73,15 +74,16 @@
 	})
 	const data = ref({})
 	const rightText = ref('绑定银行卡')
-	My.Acsecurity().then(res => {
-		if (res.alipay !== '') {
-			rightText.value = "更换银行卡"
-		}
-		data.value = res
+	onShow(() => {
+		My.Acsecurity().then(res => {
+			if (res.alipay !== '') {
+				rightText.value = "更换银行卡"
+			}
+			data.value = res
+		})
 	})
 	const confirm = (e) => {
 		My.placeOrder({ type: '01', value: e.data.value }).then(resPay => {
-
 			uni.showToast({
 				title: '提现成功',
 				icon: 'none'

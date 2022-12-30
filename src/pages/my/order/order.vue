@@ -112,8 +112,10 @@
 							<view class="flex flex-col flex-row-bottom-end">
 								<tm-text class="mb-10" :font-size="24" _class="text-weight-n"
 									:label="`${DateUtils.formatDateTime(data.orderTime)}`"></tm-text>
+								<tm-text v-if="data.payType=='00' || data.payType=='04'" :font-size="24" _class="text-weight-n" :label="`支付方式:${data.payType=='00'?'余额':'积分'}`">
+								</tm-text>
 								<view class="flex">
-									<tm-text :font-size="30" _class="text-weight-b" label="¥"></tm-text>
+									<tm-text v-if="data.payType=='00'"  :font-size="30" _class="text-weight-b" label="¥"></tm-text>
 									<tm-text :font-size="30" _class="text-weight-b" :label="data.totalMoney"></tm-text>
 								</view>
 							</view>

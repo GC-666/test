@@ -5,8 +5,8 @@
 		<view class="flex-col 	flex-center	">
 			<tm-text class="mt-14" :font-size="32" _class="text-weight-b" :label="userBoxFindItem.boxName"></tm-text>
 			<view class="flex flex-center">
-				<tm-text style="background-color: #FFCE92;padding:4rpx 6rpx;border-radius: 8rpx;" class="mt-14" :font-size="18" _class="text-weight-b" label="编号:"></tm-text>
-				<tm-text color="#FFCE92" class="mt-14" :font-size="18" _class="text-weight-n" :label="userBoxFindItem.no"></tm-text>
+				<tm-text style="background-color: #FFCE92;border-radius: 8rpx;height:40rpx;line-height: 40rpx;" class="mt-14" :font-size="24" _class="text-weight-b" label="编号"></tm-text>
+				<tm-text color="#FFCE92" class="mt-14" :font-size="24" _class="text-weight-n" :label="userBoxFindItem.no"></tm-text>
 			</view>
 		</view>
 		<view class="head">
@@ -20,7 +20,7 @@
 		</view>
 		<view class="detbox">
 			<tm-text style="margin: 0rpx 20rpx;padding: 10rpx 20rpx;" :font-size="30" color="#07EBFE" _class="text-weight-b" label="有机会获得："></tm-text>
-			<tm-sheet :shadow="0" :margin="[20,0]" :padding="[20,10]">
+			<tm-sheet :round="4" :shadow="0" :margin="[20,0]" :padding="[20,10]">
 				<view class="flex flex-between pt-20 pb-20" v-for="(item,index) in userBoxFindItem.boxProbablyList">
 					<tm-text color="#808080" :font-size="22" _class="text-weight-b" :label="item.name"></tm-text>
 					<tm-text :font-size="22" _class="text-weight-b" :label="`概率：${item.chance}%`"></tm-text>
@@ -50,10 +50,12 @@
 				<tm-text :font-size="26" label="确认开启盲盒"></tm-text>
 			</view>
 		</tm-modal>
-		<tm-overlay v-model:show="show3" :overlayClick="false">
-			<view class="cover">
-			</view>
-		</tm-overlay>
+		<view class="cover" v-if="show3">
+			<tm-image @load="aa" :width="750" :height="heig" :src="kj2">
+			</tm-image>
+		</view>
+		<!-- <tm-overlay v-model:show="show3" :overlayClick="false">
+		</tm-overlay> -->
 		<tm-modal :height="340" title="恭喜" okText="确认" splitBtn v-model:show="show4" @cancel="cancel" @ok="submit3" >
 			<view class="flex flex-row-center-center">
 				<tm-text :font-size="26" :label="`恭喜获得“藏品:${openRemarks}”`"></tm-text>
@@ -73,9 +75,10 @@
 	import bg1 from "@/static/img/shopBg.png"
 	import bg from "@/static/img/bg.png"
 	import kj from "@/static/my/kj.gif"
+	import kj2 from "@/static/my/kj2.gif"
 	import { useTmpiniaStore } from '@/tmui/tool/lib/tmpinia';
 	const store = useTmpiniaStore();
-	
+	const heig=uni.getWindowInfo().windowHeight * 2 - uni.getWindowInfo().statusBarHeight;
 	//盲盒详情
 	const userBoxFindItem = ref({});
 	//配置信息
@@ -102,24 +105,30 @@
 	//开启盲盒
 	const show4 = ref(false);
 	//开启的奖励
-	const openRemarks = ref("");
+	const openRemarks = ref({});
 	//点击确认开盲盒
 	const submit2=()=>{
-		show3.value=true;
 		My.userBoxOpenBox({
 			id: userBoxFindItem.value.id,
 		}).then(res => {
-			setTimeout(()=>{
-				openRemarks.value=res.openRemarks;
-				show4.value=true;
-				show3.value=false
-			},5000)
+			show3.value=true;
+			openRemarks.value=res;
 		})
+	}
+	const aa=(b)=>{
+		setTimeout(()=>{
+			uni.navigateTo({
+				url: '/pages/my/box/boxDetailsSuccess?config='+ encodeURIComponent(JSON.stringify(openRemarks.value))
+			});
+			show3.value=false
+			
+			//show4.value=true;
+		},2500)
 	}
 	//点击确认奖励
 	const submit3=()=>{
 		uni.navigateBack({
-			delta:1,
+			delta:2,
 		})
 	}
 	//点击取消奖励
@@ -155,12 +164,12 @@
 <style>
 	.cover {
 		position: fixed;
-		top: 0;
+		top: 88rpx;
 		left: 0;
 		width: 100%;
 		height: 100%;
-		background-image: url("@/static/my/kj.gif");
-		background-size: 100% 100%;
+		/* background-image: url("@/static/my/kj.gif");
+		background-size: 100% 100%; */
 		z-index: 1;
 	}
 	.img {

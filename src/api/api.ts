@@ -47,6 +47,10 @@ export class Home {
 	static async findSaleBoxItem(params: any) {
 		return await request("/home/new/findSaleBoxItem", params, "POST")
 	}
+	//批量购买接口 确认下单
+	static async orderConfirmOrder(params: any) {
+		return await request("/order/confirmOrder", params, "POST")
+	}
 }
 
 // 市场
@@ -154,6 +158,10 @@ export class My {
 	//我的盲盒开启盲盒
 	static async userBoxOpenBox(params: any) {
 		return await request("/user/box/openBox", params, "POST")
+	}
+	//我的盲盒开启盲盒10个
+	static async userBatchOpenBox(params: any) {
+		return await request("/user/box/batchOpenBox", params, "POST")
 	}
 	//我的订单	
 	static async orderFindPageList(params: any) {

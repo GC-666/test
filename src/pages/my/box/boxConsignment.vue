@@ -151,7 +151,8 @@
 	//寄售点击
 	const consignment = () => {
 
-		if (checkboxlist.value.length > 0 && checkboxlist1.value.length > 0) {
+		if (checkboxlist.value.length > 0 && checkboxlist1.value.length > 0 && orderFindMySellServiceCharge.value
+			.isCloudWallet == '1') {
 			paymentPlatform.value.push({
 				type: "00",
 				name: "平台支付"

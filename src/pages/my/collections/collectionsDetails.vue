@@ -5,7 +5,7 @@
 		<view class="flex flex-row-center-center">
 			<tm-image :width="500" :height="500" :src="collectionDetails.img"></tm-image>
 		</view>
-		<tm-sheet :shadow="0" :margin="[20,20]" :padding="[20,10]">
+		<tm-sheet :round="4"  :shadow="0" :margin="[20,20]" :padding="[20,10]">
 			<view class="flex flex-between pt-10 pb-10">
 				<view class="">
 					<tm-text :font-size="32" _class="text-weight-b" :label="collectionDetails.name"></tm-text>
@@ -17,7 +17,7 @@
 				</view>
 			</view>
 		</tm-sheet>
-		<tm-sheet :shadow="0" :margin="[20,0]" :padding="[20,10]">
+		<tm-sheet :round="4"  :shadow="0" :margin="[20,0]" :padding="[20,10]">
 			<view class="flex pt-20 pb-20">
 				<view class="" style="width: 375rpx;">
 					<tm-text color="#808080" :font-size="22" _class="text-weight-b" label="收藏者"></tm-text>
