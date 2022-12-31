@@ -113,7 +113,7 @@
 	}
 </script>
 
-<style>
+<style scoped>
 	.bgc {
 		background-size: 100% 100%;
 		width: 180rpx;

@@ -33,7 +33,7 @@
 	}
 </script>
 
-<style>
+<style scoped>
 	.main{
 		background-image: url("@/static/my/share.png");
 		background-size: 100% 100%;

@@ -169,7 +169,7 @@
 		console.log("购买", pwd.value);
 	}
 </script>
-<style>
+<style scoped>
 	.bg {
 		width: 100%;
 		height: 750rpx;

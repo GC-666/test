@@ -115,7 +115,7 @@
 	}
 </script>
 
-<style>
+<style scoped>
 	.box {}
 
 	.active {

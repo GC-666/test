@@ -1,5 +1,5 @@
 <template>
-	<tm-app style="">
+	<tm-app>
 		<tm-navbar  title="我要卖">
 		</tm-navbar>
 		<view class="mt-n5 ml-20 mr-20 scroll-Y2" style="overflow-y: auto;">

@@ -91,7 +91,7 @@
 	
 	
 </script>
-<style>
+<style scoped>
 	.head {
 		background-image: url("@/static/activity/pointsMall/head.png");
 		background-size: 100% 100%;

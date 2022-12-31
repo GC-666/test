@@ -165,7 +165,7 @@
 	}
 </script>
 
-<style>
+<style scoped>
 	.zhye {
 		width: 750rpx;
 		height: 190rpx;

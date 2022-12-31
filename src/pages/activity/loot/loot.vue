@@ -295,7 +295,7 @@
 		}, time);
 	}
 </script>
-<style>
+<style scoped>
 	.main {
 		background-image: url("@/static/activity/loot/bj.png");
 		background-size: 100% 100%;

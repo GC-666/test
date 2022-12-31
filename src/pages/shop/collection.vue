@@ -99,7 +99,8 @@
 			:margin="[20,10]" :padding="[20,10]" v-if="data.details">
 			<tm-text class="mt-20 mb-20" :fontSize="30" _class="text-weight-b" label="作品故事"></tm-text>
 			<view class="flex">
-				<tm-html :content="data.details"></tm-html>
+				<rich-text :nodes="data.details"></rich-text>
+				<!-- <tm-html :content="data.details"></tm-html> -->
 
 			</view>
 		</tm-sheet>

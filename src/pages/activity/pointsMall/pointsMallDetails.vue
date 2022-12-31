@@ -83,7 +83,7 @@
 	})
 </script>
 
-<style>
+<style scoped>
 	.img {
 		display: flex;
 		justify-content: center;

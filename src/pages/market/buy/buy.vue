@@ -1,5 +1,5 @@
 <template>
-	<tm-app style="">
+	<tm-app>
 		<tm-navbar  title="求购市场">
 			<template v-slot:right>
 				<tm-text class="mr-20" :fontSize="22" label="求购记录" @click="gonav('pages/market/buy/buyRecord')">
@@ -12,7 +12,7 @@
 					<tm-sheet @click="gonav('pages/market/buy/buyMy')" :round="4" :shadow="0" :margin="[0,10]" :padding="[0,0]">
 						<tm-image :round="4" :width="344" :height="344" :src="a1">
 						</tm-image>
-						<view class="mb-10 ml-10 mr-10" style="">
+						<view class="mb-10 ml-10 mr-10">
 							<tm-text :font-size="26" class="mt-5" _class="text-weight-b" label="《艺术藏品》"></tm-text>
 							<tm-text :font-size="22" class="mt-5" _class="text-weight-b" label="所属系列：xxddd"></tm-text>
 							<view class="flex flex-between mt-10 mb-5">
@@ -58,7 +58,7 @@
 	})
 </script>
 
-<style>
+<style scoped>
 	.scroll-Y {
 		height: calc(100vh - var(--status-bar-height) - 88rpx);
 	}

@@ -62,7 +62,7 @@ import { onShow } from "@dcloudio/uni-app";
 	}
 </script>
 
-<style>
+<style scoped>
 	.zf {
 		width: 207rpx;
 		height: 180rpx;

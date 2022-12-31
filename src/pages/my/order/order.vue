@@ -279,7 +279,7 @@
 	}
 </script>
 
-<style>
+<style scoped>
 	.aaaa {
 		position: relative;
 		z-index: 11;

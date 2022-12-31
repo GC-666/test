@@ -45,7 +45,7 @@
 	}
 </script>
 
-<style>
+<style scoped>
 	.aa {
 		border: 1px solid #cdcdcd;
 		padding: 6rpx 10rpx;

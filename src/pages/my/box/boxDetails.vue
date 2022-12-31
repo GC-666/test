@@ -161,7 +161,7 @@
 	
 </script>
 
-<style>
+<style scoped>
 	.cover {
 		position: fixed;
 		top: 88rpx;

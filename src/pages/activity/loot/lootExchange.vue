@@ -242,7 +242,7 @@
 		}
 	}
 </script>
-<style>
+<style scoped>
 	.main {
 		background-image: url("@/static/activity/loot/bj.png");
 		background-size: 100% 100%;
@@ -262,7 +262,7 @@
 		background-size: 100% 100%;
 		width: 710rpx;
 		height: 650rpx;
-		//padding-bottom: 100rpx;
+		/* padding-bottom: 100rpx; */
 	}
 	.lists{
 		height: 650rpx;

@@ -17,3 +17,8 @@
 '  :'1.0.0'// 版本名称 manifest里的版本名称
 ' edition_silence:0 // 是否静默更新 0代表否 1代表是
 
+
+
+npx @dcloudio/uvm
+
+npm update

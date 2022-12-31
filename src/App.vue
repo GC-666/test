@@ -1,92 +1,15 @@
+<template>
+</template>
 <script setup>
 	import { onLaunch, onShow, onLoad } from "@dcloudio/uni-app"
 	import { Ver } from "@/api/api.ts";
 	import silenceUpdate from '@/uni_modules/rt-uni-update/js_sdk/silence-update.js' //引入静默更新
-	// IM 
-	// import { genTestUserSig, aegisID } from "@/pages/TUIKit/debug/index.js";
-	// import { TIM, TIMUploadPlugin, Aegis } from '@/pages/TUIKit/debug/tim.js';
-	// const aegis = new Aegis({
-	// 	id: aegisID, // 项目key
-	// 	reportApiSpeed: true, // 接口测速
-	// });
-	// uni.$aegis = aegis;
-	// const config = {
-	// 	userID: "17770752052", //User ID
-	// 	SDKAppID: 1400777397, // Your SDKAppID
-	// 	secretKey: "15ef455a61f3087b009b5d7cd47cb5bbf13bad40fdb0348c89edaf6149fee60e", // Your secretKey
-	// };
-	// uni.$chat_SDKAppID = config.SDKAppID;
-	// const userSig = genTestUserSig(config).userSig;
-	// // 创建 sdk 实例
-	// uni.$TUIKit = TIM.create({
-	// 	SDKAppID: uni.$chat_SDKAppID,
-	// });
-	// uni.$TIM = TIM;
-	// // 注册文件上传插件
-	// // #ifdef MP-WEIXIN || H5
-	// uni.$TUIKit.registerPlugin({
-	// 	"tim-upload-plugin": TIMUploadPlugin,
-	// });
-	// // #endif
-	// // #ifdef APP-PLUS
-	// uni.$TUIKit.registerPlugin({
-	// 	"cos-wx-sdk": TIMUploadPlugin,
-	// });
-	// // #endif
-	// onLaunch(() => {
-	// 	bindTIMEvent();
-	// 	login();
-	// })
-
-	// const login = () => {
-	// 	// login TUIKit
-	// 	uni.$TUIKit.login({ userID: config.userID, userSig }).then((res) => {
-	// 		// sdk 初始化，当 sdk 处于ready 状态，才可以使用API，文档
-	// 		console.log(res);
-	// 		uni.showLoading({
-	// 			title: "初始化...",
-	// 		});
-	// 	});
-	// }
-	// const bindTIMEvent = () => {
-	// 	uni.$TUIKit.on(uni.$TIM.EVENT.SDK_READY, handleSDKReady);
-	// 	uni.$TUIKit.on(uni.$TIM.EVENT.SDK_NOT_READY, handleSDKNotReady);
-	// 	uni.$TUIKit.on(uni.$TIM.EVENT.KICKED_OUT, handleKickedOut);
-	// }
-	// const handleSDKReady = () => {
-	// 	uni.setStorageSync('$chat_SDKReady', true);
-	// 	uni.hideLoading();
-	// }
-	// const handleSDKNotReady = () => {
-	// 	uni.showToast({
-	// 		title: "SDK 未完成初始化",
-	// 	});
-	// }
-	// const handleKickedOut = () => {
-	// 	uni.clearStorageSync();
-	// 	uni.showToast({
-	// 		title: `${kickedOutReason(event.data.type)}被踢出，请重新登录。`,
-	// 		icon: "none",
-	// 	});
-	// }
-	// const kickedOutReason = (type) => {
-	// 	switch (type) {
-	// 		case uni.$TIM.TYPES.KICKED_OUT_MULT_ACCOUNT:
-	// 			return "由于多实例登录";
-	// 		case uni.$TIM.TYPES.KICKED_OUT_MULT_DEVICE:
-	// 			return "由于多设备登录";
-	// 		case uni.$TIM.TYPES.KICKED_OUT_USERSIG_EXPIRED:
-	// 			return "由于 userSig 过期";
-	// 		case uni.$TIM.TYPES.KICKED_OUT_REST_API:
-	// 			return "由于 REST API kick 接口踢出";
-	// 		default:
-	// 			return "";
-	// 	}
-	// }
+	
 	onShow(() => {
 		//#ifdef APP-PLUS 
 		plus.runtime.getProperty(plus.runtime.appid, (inf) => {
 			Ver.getEdition({
+				
 				edition_type: plus.runtime.appid,
 				version_type: uni.getSystemInfoSync().platform, //android或者ios
 				edition_number: inf.versionCode // 打包时manifest设置的版本号 
@@ -123,7 +46,6 @@
 
 	/* #ifndef APP-NVUE */
 	@import './tmui/scss/noNvue.css';
-
 	/* #endif */
 	/* #ifdef H5 */
 	body::-webkit-scrollbar,
@@ -141,7 +63,6 @@
 	text {
 		font-family: "sans-serif";
 	}
-
 	/* #endif */
 	@font-face {
 		font-family: "xh";
@@ -167,6 +88,7 @@
 	.xh-dingdan:before {
 		content: "\e615";
 	}
+
 
 	.xh-zichan:before {
 		content: "\e616";

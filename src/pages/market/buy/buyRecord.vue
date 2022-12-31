@@ -1,5 +1,5 @@
 <template>
-	<tm-app style="">
+	<tm-app>
 		<tm-navbar  title="求购记录">
 		</tm-navbar>
 		<scroll-view scroll-y="true"  class="scroll-Y" @scrolltolower="lower">
@@ -10,7 +10,7 @@
 						</tm-image>
 						<tm-image style="position: absolute;" :round="1" :width="99" :height="34" :src="yigoude">
 						</tm-image>
-						<view class="mb-10 ml-10 mr-10" style="">
+						<view class="mb-10 ml-10 mr-10">
 							<tm-text :font-size="26" class="mt-5" _class="text-weight-b" label="《艺术藏品》"></tm-text>
 							<tm-text :font-size="22" class="mt-5" _class="text-weight-b" label="所属系列：xxddd"></tm-text>
 							<view class="flex flex-between mt-10 mb-5">

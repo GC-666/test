@@ -78,9 +78,14 @@
 		<view v-if="userBoxFindPageList.length<=0" class="flex flex-wrap flex-row-center-center" style="margin-top:150rpx">
 			<tm-image :round="4" class="flex-start" :width="350" :height="280" :src="wushuju"></tm-image>
 		</view>
-		<tm-modal :height="300" title="提示" okText="确认" splitBtn v-model:show="show2" @ok="submit2" >
-			<view class="flex flex-row-center-center">
-				<tm-text :font-size="26" label="确认开启盲盒"></tm-text>
+		<tm-modal :height="350" title="提示" okText="确认" splitBtn v-model:show="show2" @ok="submit2" >
+			<view class="flex flex-col flex-center">
+				<view class="flex">
+					<tm-text :font-size="28" label="开启将消耗"></tm-text>
+					<tm-text :font-size="28" color="red" :label="`${config.boxName}x${idType}`"></tm-text>
+				</view>
+				
+				<tm-text :font-size="26" class="mt-10" label="是否确认开启盲盒"></tm-text>
 			</view>
 		</tm-modal>
 		<view class="cover" v-if="show3">
@@ -91,59 +96,59 @@
 			<view class="bj">
 				<view class="flex flex-between" v-if="idType==10">
 					<view class="flex flex-col flex-center" style="width: 250rpx;">
-						<tm-image v-if="batchOpenBox.length>0" class="main1 mt-n10 mb-n10" model="aspectFill" :round="0" :width="200" :height="200"
+						<tm-image v-if="batchOpenBox.length>0" class="main1 mt-n10 mb-n10" model="aspectFill" :round="4" :width="200" :height="200"
 							:src="batchOpenBox[0].boxImg">
 						</tm-image>
-						<tm-image v-if="batchOpenBox.length>3" class="main1 mt-n10 mb-n10" model="aspectFill" :round="0" :width="200" :height="200"
+						<tm-image v-if="batchOpenBox.length>3" class="main1 mt-n10 mb-n10" model="aspectFill" :round="4" :width="200" :height="200"
 							:src="batchOpenBox[3].boxImg">
 						</tm-image>
-						<tm-image v-if="batchOpenBox.length>6" class="main1 mt-n10 mb-n10" model="aspectFill" :round="0" :width="200" :height="200"
+						<tm-image v-if="batchOpenBox.length>6" class="main1 mt-n10 mb-n10" model="aspectFill" :round="4" :width="200" :height="200"
 							:src="batchOpenBox[6].boxImg">
 						</tm-image>
 					</view>
 					<view class="flex flex-col flex-center" style="width: 250rpx;">
-						<tm-image v-if="batchOpenBox.length>1" class="main1 mt-n10 mb-n10" model="aspectFill" :round="0" :width="200" :height="200"
+						<tm-image v-if="batchOpenBox.length>1" class="main1 mt-n10 mb-n10" model="aspectFill" :round="4" :width="200" :height="200"
 							:src="batchOpenBox[1].boxImg">
 						</tm-image>
-						<tm-image v-if="batchOpenBox.length>4" class="main1 mt-n10 mb-n10" model="aspectFill" :round="0" :width="200" :height="200"
+						<tm-image v-if="batchOpenBox.length>4" class="main1 mt-n10 mb-n10" model="aspectFill" :round="4" :width="200" :height="200"
 							:src="batchOpenBox[4].boxImg">
 						</tm-image>
-						<tm-image v-if="batchOpenBox.length>7" class="main1 mt-n10 mb-n10" model="aspectFill" :round="0" :width="200" :height="200"
+						<tm-image v-if="batchOpenBox.length>7" class="main1 mt-n10 mb-n10" model="aspectFill" :round="4" :width="200" :height="200"
 							:src="batchOpenBox[7].boxImg">
 						</tm-image>
-						<tm-image v-if="batchOpenBox.length>9" class="main1 mt-n10 mb-n10" model="aspectFill" :round="0" :width="200" :height="200"
+						<tm-image v-if="batchOpenBox.length>9" class="main1 mt-n10 mb-n10" model="aspectFill" :round="4" :width="200" :height="200"
 							:src="batchOpenBox[9].boxImg">
 						</tm-image>
 					</view>
 					<view class="flex flex-col flex-center" style="width: 250rpx;">
-						<tm-image v-if="batchOpenBox.length>2" class="main1 mt-n10 mb-n10" model="aspectFill" :round="0" :width="200" :height="200"
+						<tm-image v-if="batchOpenBox.length>2" class="main1 mt-n10 mb-n10" model="aspectFill" :round="4" :width="200" :height="200"
 							:src="batchOpenBox[2].boxImg">
 						</tm-image>
-						<tm-image v-if="batchOpenBox.length>5" class="main1 mt-n10 mb-n10" model="aspectFill" :round="0" :width="200" :height="200"
+						<tm-image v-if="batchOpenBox.length>5" class="main1 mt-n10 mb-n10" model="aspectFill" :round="4" :width="200" :height="200"
 							:src="batchOpenBox[5].boxImg">
 						</tm-image>
-						<tm-image v-if="batchOpenBox.length>8" class="main1 mt-n10 mb-n10" model="aspectFill" :round="0" :width="200" :height="200"
+						<tm-image v-if="batchOpenBox.length>8" class="main1 mt-n10 mb-n10" model="aspectFill" :round="4" :width="200" :height="200"
 							:src="batchOpenBox[8].boxImg">
 						</tm-image>
 					</view>
 				</view>
 				<view class="mt-n25" v-if="idType==5">
 					<view class="flex flex-around" style="width: 600rpx;margin: 0 auto;">
-						<tm-image v-if="batchOpenBox.length>0" class="main1 mt-n10 mb-n10" model="aspectFill" :round="0" :width="200" :height="200"
+						<tm-image v-if="batchOpenBox.length>0" class="main1 mt-n10 mb-n10" model="aspectFill" :round="4" :width="200" :height="200"
 							:src="batchOpenBox[0].boxImg">
 						</tm-image>
-						<tm-image v-if="batchOpenBox.length>3" class="main1 mt-n10 mb-n10" model="aspectFill" :round="0" :width="200" :height="200"
+						<tm-image v-if="batchOpenBox.length>3" class="main1 mt-n10 mb-n10" model="aspectFill" :round="4" :width="200" :height="200"
 							:src="batchOpenBox[1].boxImg">
 						</tm-image>
 					</view>
 					<view class="flex flex-around">
-						<tm-image class="main1 mt-n10 mb-n10" model="aspectFill" :round="0" :width="200" :height="200"
+						<tm-image round="4" class="main1 mt-n10 mb-n10" model="aspectFill" :round="4" :width="200" :height="200"
 							:src="batchOpenBox[2].boxImg">
 						</tm-image>
-						<tm-image class="main1 mt-n10 mb-n10" model="aspectFill" :round="0" :width="200" :height="200"
+						<tm-image round="4" class="main1 mt-n10 mb-n10" model="aspectFill" :round="4" :width="200" :height="200"
 							:src="batchOpenBox[3].boxImg">
 						</tm-image>
-						<tm-image class="main1 mt-n10 mb-n10" model="aspectFill" :round="0" :width="200" :height="200"
+						<tm-image round="4" class="main1 mt-n10 mb-n10" model="aspectFill" :round="4" :width="200" :height="200"
 							:src="batchOpenBox[4].boxImg">
 						</tm-image>
 					</view>
@@ -207,6 +212,8 @@
 			batchOpenBox.value=res;
 			show3.value=true;
 		})
+		ids5.value=[]
+		ids10.value=[]
 	}
 	const aa=(b)=>{
 		setTimeout(()=>{
@@ -214,7 +221,7 @@
 			if(batchOpenBox.value.length==10 || batchOpenBox.value.length==5){
 				show4.value=true
 			}
-		},2500)
+		},1500)
 	}
 	const close=()=>{
 		tabsChange(index.value);
@@ -233,6 +240,8 @@
 		//tabsChange(index.value);
 	})
 	onShow(() => {
+		ids5.value=[]
+		ids10.value=[]
 		batchOpenBox.value=[];
 		tabsChange(index.value);
 	})
@@ -293,7 +302,7 @@
 	}
 </script>
 
-<style>
+<style scoped>
 	.cover {
 		position: fixed;
 		top: 88rpx;
@@ -315,10 +324,10 @@
 		overflow: auto;
 	}
 	.main1{
-		 width: 200rpx;
+		/* width: 200rpx;
 		 height: 200rpx;
 		 background-color: antiquewhite;
-		 box-shadow: 0px 0px 20px red ;
-		 border-radius: 10rpx;
+		 box-shadow: 0px 0px 10px red ;
+		 border-radius: 10rpx; */
 	}
 </style>

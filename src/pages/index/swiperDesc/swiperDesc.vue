@@ -3,7 +3,8 @@
 		<tm-navbar  title="详情" :height="44" :shadow="0">
 		</tm-navbar>
 		<view class="main" >
-			<tm-html class="mt-10 ml-20 mr-20" :content="rx"></tm-html>
+			<rich-text class="mt-10 ml-20 mr-20" :nodes="rx"></rich-text>
+			<!-- <tm-html class="mt-10 ml-20 mr-20" :content="rx"></tm-html> -->
 		</view>
 	</tm-app>
 </template>
@@ -24,7 +25,7 @@
 	})
 </script>
 
-<style>
+<style scoped>
 
 .main{
 	background-color: #fbf9f9;

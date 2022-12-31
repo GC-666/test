@@ -1,5 +1,5 @@
 <template>
-	<tm-app class="overflow-y">
+	<tm-app >
 		<tm-navbar title="盲盒寄售" :height="44" :shadow="0">
 		</tm-navbar>
 		<view class="flex-col 	flex-center	">
@@ -218,7 +218,7 @@
 	}
 </script>
 
-<style>
+<style scoped>
 	.img {
 		display: flex;
 		justify-content: center;

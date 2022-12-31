@@ -9,18 +9,18 @@
 			<tm-text :fontSize="36" label="欢迎来到浔画艺术"></tm-text>
 		</view>
 		<tm-form @submit="confirm" v-model="show" transprent>
-			<view style="margin: 100rpx 0rpx  20rpx 12rpx;">
+			<view style="margin: 100rpx 0rpx  0rpx 12rpx;">
 				<tm-text :fontSize="36" label="账号"></tm-text>
 			</view>
-			<tm-form-item label=""
+			<tm-form-item label="" 
 				:rules="[{required:true,message:'请输入手机号',validator:(val)=> val === '' ? false : true}]">
 				<tm-input  placeholder="请输入手机号" :inputPadding="[0,0]" v-model="show.userAccount" :transprent="true" :showBottomBotder="false">
 				</tm-input>
 			</tm-form-item>
-			<view style="margin: 20rpx 0rpx  20rpx 12rpx;">
+			<view style="margin: 20rpx 0rpx  0rpx 12rpx;">
 				<tm-text :fontSize="36" label="密码"></tm-text>
 			</view>
-			<tm-form-item label=""
+			<tm-form-item label="" 
 				:rules="[{required:true,message:'请输入您的密码',validator:(val)=> val === '' ? false : true}]">
 				<tm-input  placeholder="请输入您的密码" :password="true"  :inputPadding="[0,0]" v-model="show.userPassword" :transprent="true" :showBottomBotder="false">
 				</tm-input>

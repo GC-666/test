@@ -69,7 +69,7 @@
 	}
 </script>
 
-<style>
+<style scoped>
 	.scroll-Y {
 		height: calc(100vh - var(--status-bar-height) - 88rpx);
 	}

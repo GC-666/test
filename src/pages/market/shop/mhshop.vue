@@ -39,7 +39,6 @@
 	</tm-app>
 </template>
 <script setup>
-	import tabbar from '@/components/tabbar.vue'
 	import { onLoad, onShow } from '@dcloudio/uni-app';
 	import { Market } from "@/api/api.ts"
 	import { onMounted, ref } from 'vue';
@@ -97,7 +96,7 @@
 	})
 </script>
 
-<style>
+<style scoped>
 	.scroll-Y {
 		height: calc(100vh - var(--status-bar-height) - 172rpx);
 	}

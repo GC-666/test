@@ -1,5 +1,5 @@
 <template>
-	<tm-app style="">
+	<tm-app>
 		<tm-navbar  title="订单详情">
 		</tm-navbar>
 		<tm-sheet :round="5" :shadow="0" :margin="[20,20]" :padding="[20,20]" style="width:710rpx">

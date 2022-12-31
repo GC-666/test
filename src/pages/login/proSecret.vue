@@ -3,7 +3,8 @@
 		<tm-navbar  title="用户隐私协议">
 		</tm-navbar>
 		<view class="pa-20" :style="store.tmStore.dark?'color:#fff':'color:#000'">
-			<tm-html :content="homeAgreementss" ></tm-html>
+			<rich-text class="mt-10 ml-20 mr-20" :nodes="homeAgreementss"></rich-text>
+			<!-- <tm-html :content="homeAgreementss" ></tm-html> -->
 		</view>
 	</tm-app>
 </template>

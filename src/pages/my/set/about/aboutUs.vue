@@ -3,7 +3,8 @@
 		<tm-navbar title="关于我们">
 		</tm-navbar>
 		<view class="pa-20" :style="store.tmStore.dark?'color:#fff':'color:#000'">
-			<tm-html :content="homeAgreementss" ></tm-html>
+			<rich-text  :nodes="homeAgreementss"></rich-text>
+			<!-- <tm-html :content="homeAgreementss" ></tm-html> -->
 		</view>
 	</tm-app>
 </template>

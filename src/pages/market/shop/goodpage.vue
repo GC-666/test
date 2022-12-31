@@ -110,8 +110,8 @@
 			:margin="[20,10]" :padding="[20,10]" v-if="data.details">
 			<tm-text class="mt-20 mb-20" :fontSize="30" _class="text-weight-b" label="作品故事"></tm-text>
 			<view class="flex">
-				<tm-html :content="data.details"></tm-html>
-
+				<!-- <tm-html :content="data.details"></tm-html> -->
+				<rich-text  :nodes="data.details"></rich-text>
 			</view>
 		</tm-sheet>
 
@@ -122,7 +122,6 @@
 					:style="{'color': store.tmStore.dark?'#fff': '#25262E','font-size': '22rpx','text-indent': '0.5cm' }">
 					数字藏品为虚拟数字商品，而非实物，仅限实名认证为年满14周岁的中国大陆用户购买。数字藏品的版权由发行方或原创者拥有，除另行取得版权拥有者书面同意外，不得将数字藏品用于任何商业用途，不支持退换。本商品源文件不支持本地下载。请勿对数字藏品进行炒作、场外交易、欺诈，或以任何其他非法方式进行使用
 				</view>
-
 			</view>
 		</tm-sheet>
 
@@ -199,7 +198,7 @@
 	}
 </script>
 
-<style>
+<style scoped>
 	.img {
 		display: flex;
 		justify-content: center;
