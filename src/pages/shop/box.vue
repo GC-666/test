@@ -38,7 +38,7 @@
 								<view class="round-tl-5 round-bl-5 flex flex-center"
 									style="width: 100rpx; background-color: #FFCE92;">
 									<tm-text class="ma-5" color="#25262E" :font-size="22" _class="text-weight-n"
-										label="剩余"></tm-text>
+										label="已售"></tm-text>
 								</view>
 								<view class="round-tr-5 round-br-5 flex flex-center"
 									style="width: 85rpx;background-color: #FFE6C8;">

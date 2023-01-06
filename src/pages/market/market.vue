@@ -1,7 +1,6 @@
 <template>
 
 	<tm-app>
-
 		<view class="aaaa">
 			<tm-sheet :margin="[0,0]" :padding="[0,statusBarHeight]">
 			</tm-sheet>
@@ -240,11 +239,15 @@
 	const toShop = (item) => {
 		if (acvite.value == 2) {
 			uni.navigateTo({
-				url: '/pages/market/shop/mhshop?id=' + item.id + '&name=' + item.name
+				url: '/pages/market/shop/mhshop?id=' + item.id + '&name=' + item.name 
+				+ '&img=' + item.img + '&limits=' + item.limits + '&circulation=' + item.circulation
+				+ '&publisher=' + item.publisher
 			})
 		} else {
 			uni.navigateTo({
-				url: '/pages/market/shop/shop?id=' + item.id + '&name=' + item.name
+				url: '/pages/market/shop/shop?id=' + item.id + '&name=' + item.name 
+				+ '&img=' + item.img + '&limits=' + item.limits + '&circulation=' + item.circulation
+				+ '&publisher=' + item.publisher
 			})
 		}
 	}

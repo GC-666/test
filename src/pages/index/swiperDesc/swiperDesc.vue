@@ -30,4 +30,8 @@
 .main{
 	background-color: #fbf9f9;
 }
+
+:deep(img) {
+  max-width: 100%;
+}
 </style>

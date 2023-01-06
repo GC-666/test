@@ -1,24 +1,25 @@
 <template>
-	<tm-app style="">
-		<tm-navbar  title="藏品" :shadow="0">
+	<tm-app>
+		<tm-navbar title="藏品" :shadow="0">
 		</tm-navbar>
 		<view style="">
 			<tm-sheet :transprent="false" :margin="[0,0]">
 				<tm-tabs @change="tabsChange" :transprent="false" activeFontColor="#07EBFE" align="center"
-					:list="tabsTitle" :itemHeight="30" :itemWidth="300" :width="700"  default-name="1">
+					:list="tabsTitle" :itemHeight="30" :itemWidth="135" :width="700" default-name="1">
 				</tm-tabs>
 			</tm-sheet>
 		</view>
 		<scroll-view :class="mineFindCollReport.length>0?'scroll-Y':''" scroll-y="true" @scrolltolower="lower">
-			<view  class="flex flex-row-center-between flex-wrap" style="margin: 0rpx 20rpx 0rpx 20rpx;">
+			<view class="flex flex-row-center-between flex-wrap" style="margin: 0rpx 20rpx 0rpx 20rpx;">
 				<view v-if="index==1" class="relative" v-for="(data,index) in mineFindCollReport"
-					@click="gonav('pages/my/collections/collectionsType?id='+data.collId+'&collName='+data.collName)">
+					@click="collectionsType(data.collId,data.collName,data.collImg)">
+					<!-- @click="gonav('pages/my/collections/collectionsType?id='+data.collId+'&collName='+data.collName)" -->
 					<tm-sheet :round="4" :shadow="0" :margin="[0,10]" :padding="[0,0]">
 						<tm-image class="round-t-4" :width="344" :height="344" :src="data.collImg">
 						</tm-image>
 						<view class="" style="margin: 0rpx 10rpx; ">
-							<tm-text _class="text-weight-b text-overflow" _style="width:320rpx;text-overflow: ellipsis;" :fontSize="28"
-								:label="data.collName">
+							<tm-text _class="text-weight-b text-overflow" _style="width:320rpx;text-overflow: ellipsis;"
+								:fontSize="28" :label="data.collName">
 							</tm-text>
 						</view>
 						<view class="flex flex-between" style="margin: 0rpx 10rpx;padding: 0rpx 0rpx 10rpx 0rpx">
@@ -36,8 +37,8 @@
 						<tm-image class="round-t-4" :width="344" :height="344" :src="data.img">
 						</tm-image>
 						<view class="" style="margin: 0rpx 10rpx;">
-							<tm-text _class="text-weight-b text-overflow" _style="width:320rpx;text-overflow: ellipsis;" :fontSize="28"
-								:label="data.collName">
+							<tm-text _class="text-weight-b text-overflow" _style="width:320rpx;text-overflow: ellipsis;"
+								:fontSize="28" :label="data.collName">
 							</tm-text>
 						</view>
 						<view class="flex flex-between" style="margin: 0rpx 10rpx;padding: 0rpx 0rpx 10rpx 0rpx">
@@ -51,12 +52,49 @@
 					</tm-sheet>
 				</view>
 			</view>
-			
 		</scroll-view>
-		<view v-if="mineFindCollReport.length<=0 && index==1" class="flex flex-wrap flex-row-center-center" style="margin-top:150rpx">
+		<tm-drawer :inContent="false" v-model:show="showWin" :round="5"
+			:hideHeader="true">
+			<view class="ml-20 mr-20 flex flex-row-center-start">
+				<tm-image class="ml-20 mt-10" :width="160" :height="160" :round="5" :src="collImg">
+				</tm-image>
+				<view class="ml-20">
+					<view class="flex flex-row-bottom-start mb-10">
+						<tm-text color="#1a1a1a" :font-size="32" _class="text-weight-b" :label="collName">
+						</tm-text>
+						<tm-text color="#808080" :font-size="28" _class="text-weight-b" label="/共25个">
+						</tm-text>
+					</view>
+					<tm-text color="#808080" :font-size="18" _class="text-weight-b" label="默认按编号排序">
+					</tm-text>
+				</view>
+			</view>
+			<scroll-view scroll-y="true" style="height:330rpx" @scrolltolower="lower2">
+				<view class="flex flex-wrap" style="margin: 0rpx 20rpx 0rpx 20rpx;">
+					<view class="mt-10" style="width:236.6rpx" v-for="(data,index) in userCollectionFindPageList">
+						<tm-image extra model="aspectFill" :width="230" :height="136" :src="data.type==1?jishou:mairu"
+						@click="gonav('pages/my/collections/collectionsDetails?id='+data.id)">
+							<template v-slot:extra>
+								<view class="" style="margin: auto auto;">
+									<tm-text _class="flex flex-center mt-20 text-overflow " color="#1a1a1a" _style="width:210rpx;text-overflow: ellipsis;" :fontSize="24"
+									:label="data.collTruenumber"></tm-text>
+									<tm-text class="flex flex-center mt-5" style="" color="#1a1a1a" :font-size="24" :label="`买入价：${data.buyPrice}`">
+									</tm-text>
+									<tm-text class="flex flex-center mt-5" v-if="data.type==1" color="#1a1a1a" :font-size="24" :label="`出售价：${data.sellPrice}`">
+									</tm-text>
+								</view>
+							</template>
+						</tm-image>
+					</view>
+				</view>
+			</scroll-view>
+		</tm-drawer>
+		<view v-if="mineFindCollReport.length<=0 && index==1" class="flex flex-wrap flex-row-center-center"
+			style="margin-top:150rpx">
 			<tm-image :round="4" class="flex-start" :width="350" :height="280" :src="wushuju"></tm-image>
 		</view>
-		<view v-if="userRecrodFindCollPageList.length<=0 && index!=1" class="flex flex-wrap flex-row-center-center" style="margin-top:150rpx">
+		<view v-if="userRecrodFindCollPageList.length<=0 && index!=1" class="flex flex-wrap flex-row-center-center"
+			style="margin-top:150rpx">
 			<tm-image :round="4" class="flex-start" :width="350" :height="280" :src="wushuju"></tm-image>
 		</view>
 	</tm-app>
@@ -78,15 +116,26 @@
 		ref
 	} from 'vue';
 	import wushuju from "@/static/my/wushuju.png"
+	import jishou from "@/static/img/jishou.png"
+	import mairu from "@/static/img/mairu.png"
 	const tabsTitle = ref([{
 			key: "1",
 			title: "我的藏品"
+		},
+		{
+			key: "3",
+			title: "浔画寄售"
+		},
+		{
+			key: "4",
+			title: "浔画X空间"
 		},
 		{
 			key: "2",
 			title: "藏品记录"
 		}
 	]);
+	const showWin = ref(false);
 	//类型下标
 	const index = ref(1);
 	//藏品类型列表
@@ -116,7 +165,7 @@
 						bool.value = false;
 					}
 				})
-			} else {
+			} else if (index.value == 2){
 				My.userRecrodFindCollPageList(pageData.value).then(res => {
 					userRecrodFindCollPageList.value = userRecrodFindCollPageList.value.concat(res)
 					if (res.length = pageData.value.limit) {
@@ -152,6 +201,51 @@
 				}
 			})
 		}
+	}
+	const collName = ref("");
+	const collImg = ref("");
+	const collectionsType = (id,name,img) => {
+		collName.value=name;
+		collImg.value=img;
+		showWin.value=true;
+		pageData2.value.collId = id
+		tabsChange2(1);
+	}
+	//藏品类型详情
+	const userCollectionFindPageList = ref([]);
+	//配置参数
+	const pageData2 = ref({
+		collId: 0,
+		page: 1,
+		limit: 20,
+		orderByType: 1
+	});
+	const bool2 = ref(true);
+	// 下拉刷新
+	const lower2 = () => {
+		pageData2.value.page = pageData2.value.page + 1;
+		if (bool2.value) {
+			My.userCollectionFindPageList(pageData2.value).then(res => {
+				userCollectionFindPageList.value = userCollectionFindPageList.value.concat(res)
+				if (res.length == pageData2.value.limit) {
+					bool2.value = true;
+				} else {
+					bool2.value = false;
+				}
+			})
+		}
+	}
+	const tabsChange2 = () => {
+		pageData2.value.page = 1;
+		userCollectionFindPageList.value = [];
+		My.userCollectionFindPageList(pageData2.value).then(res => {
+			userCollectionFindPageList.value = res;
+			if (res.length == pageData2.value.limit) {
+				bool2.value = true;
+			} else {
+				bool2.value = false;
+			}
+		})
 	}
 </script>
 

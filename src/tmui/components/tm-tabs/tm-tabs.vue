@@ -171,7 +171,8 @@
             </tm-sheet>
           </view>
         </view>
-        <view
+		<!-- 底部边线 -->
+        <!-- <view
           v-if="props.showTabsLineAni && props.itemWidth > 0"
           class="anilineBar absolute l-0"
           :style="{
@@ -184,7 +185,7 @@
                 : '#ebebeb'
               : '',
           }"
-        ></view>
+        ></view> -->
         <view
           v-if="props.showTabsLineAni && props.itemWidth > 0"
           class="anilineBar absolute l-0 b-0 flex flex-row flex-center"

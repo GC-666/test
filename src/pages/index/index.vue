@@ -19,7 +19,7 @@
 				model="rect" color="#ccc" @click="carouselClick">
 			</tm-carousel>
 			<!-- 公告区域 -->
-			<tm-sheet :shadow="0" :round="4" :margin="[20,10]" :padding="[10,20]" v-if="notice.length>0">
+			<!-- <tm-sheet :shadow="0" :round="4" :margin="[20,10]" :padding="[10,20]" v-if="notice.length>0">
 				<view class="flex" @click="gonav('pages/index/notice/notice')">
 					<tm-image :width="100" :height="30" class="flex-center" :src="noticeImg"></tm-image>
 					<view class="flex-center ml-20" v-for="i in notice" :key="i.id">
@@ -29,7 +29,13 @@
 					</view>
 					<tm-icon :font-size="25" name="tmicon-angle-right"></tm-icon>
 				</view>
-			</tm-sheet>
+			</tm-sheet> -->
+			<view class="ma-20 flex flex-between">
+				<tm-image model="aspectFill" @click="gonav('pages/index/notice/notice')" :round="4" :width="340" :height="160" :src="zxgg">
+				</tm-image>
+				<tm-image model="aspectFill" :round="4" :width="340" :height="160" :src="xhkj" @click="gonav('pages/space/space')">
+				</tm-image>
+			</view>
 			<!-- 首发 盲盒tabs -->
 			<view class="ml-20 mr-20 flex">
 
@@ -220,6 +226,8 @@
 	import wushuju from "@/static/my/wushuju.png"
 	import userHead from "@/static/my/userHead.png"
 	import logo from "@/static/img/logo3.png"
+	import zxgg from "@/static/img/zxgg.png"
+	import xhkj from "@/static/img/xhkj.png"
 	const is = ref(true);
 	const test = () => {
 		const token = uni.getStorageSync('token')

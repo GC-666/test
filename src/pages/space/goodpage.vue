@@ -1,10 +1,10 @@
 <template>
-	<tm-app class="overflow-y">
-		<tm-navbar title="藏品详情" :height="44" :shadow="0">
+	<tm-app class="overflow-y" style="background-color:#1E1F28;">
+		<tm-navbar title="藏品详情" :height="44" :shadow="0" color="#1E1F28">
 		</tm-navbar>
 		<view class="head">
 			<view class="bg"
-				:style="{'background-image': store.tmStore.dark? `url(${bg})`: `url(${bg1})` ,'background-size':' 100% 100%','margin':'0 auto','position':'relative','width':'500rpx','height':'200rpx'}">
+				:style="{'background-image': `url(${bg})`,'background-size':' 100% 100%','margin':'0 auto','position':'relative','width':'500rpx','height':'200rpx'}">
 				<view class="img">
 					<tm-image preview :round="4" :width="300" :height="300" :src="data.img">
 					</tm-image>
@@ -24,34 +24,55 @@
 				</view>
 			</view>
 		</view>
-		<tm-sheet :round="3" :shadow="0" :margin="[20,10]" :padding="[0,0]">
-			<view class="ml-25">
+		<tm-sheet color="#25262E" :round="3" :shadow="0" :margin="[20,10]" :padding="[0,0]">
+			<view class="ml-25 ">
 				<tm-text :font-size="40" _class="text-weight-b mt-20" :label="data.name"></tm-text>
-				<view class="flex mt-20">
+				<view class="flex mt-20 flex-between">
 					<view class="flex">
-						<view class="round-tl-2 round-bl-2 flex flex-center pa-4"
-							style="background: linear-gradient(90deg, #FFCAB7 0%, #FFC78B 100%); ">
-							<tm-text class="ma-5" color="#25262E" :font-size="22" _class="text-weight-n" label="发行量">
-							</tm-text>
+						<view class="flex">
+							<view class="round-tl-2 round-bl-2 flex flex-center "
+								style="background: linear-gradient(90deg, #FFCAB7 0%, #FFC78B 100%); ">
+								<tm-text class="ma-5" color="#25262E" :font-size="22" _class="text-weight-n"
+									label="发行量">
+								</tm-text>
+							</view>
+							<view class="round-tr-2 round-br-2 flex flex-center pa-4"
+								style="background-color: #FDF5EF;">
+								<tm-text class="ma-5" color="#25262E" :font-size="22" _class="text-weight-n"
+									:label="`${data.totalNumber}份`">
+								</tm-text>
+							</view>
 						</view>
-						<view class="round-tr-2 round-br-2 flex flex-center pa-4" style="background-color: #FDF5EF;">
-							<tm-text class="ma-5" color="#25262E" :font-size="22" _class="text-weight-n"
-								:label="`${data.totalNumber}份`">
-							</tm-text>
+						<view class="flex ml-20">
+							<view class="round-tl-2 round-bl-2 flex flex-center pa-4"
+								style="background-color: #FFD7A7;">
+								<tm-text class="ma-5" :fontSize="22" color="#25262E" _class="text-weight-n" label="流通量">
+								</tm-text>
+							</view>
+							<view class="round-tr-2 round-br-2 flex flex-center  pa-4"
+								style="background-color: #FDF5EF;">
+								<tm-text class="ma-5" :fontSize="22" color="#25262E" _class="text-weight-n"
+									:label="`${data.circulation}份`">
+								</tm-text>
+							</view>
 						</view>
 					</view>
-					<view class="flex ml-20">
-						<view class="round-tl-2 round-bl-2 flex flex-center pa-4" style="background-color: #FFD7A7;">
-							<tm-text class="ma-5" :fontSize="22" color="#25262E" _class="text-weight-n" label="流通量">
+					<view class="flex flex-col mr-30">
+						<view class="flex">
+							<tm-text class="" :fontSize="24" color="white" _class="text-weight-b" label="今日幅度">
+							</tm-text>
+							<tm-text class="ml-20" :fontSize="26" color="red" _class="text-weight-b" label="5%">
 							</tm-text>
 						</view>
-						<view class="round-tr-2 round-br-2 flex flex-center  pa-4" style="background-color: #FDF5EF;">
-							<tm-text class="ma-5" :fontSize="22" color="#25262E" _class="text-weight-n"
-								:label="`${data.circulation}份`">
+						<view class="flex">
+							<tm-text class="" :fontSize="24" color="white" _class="text-weight-b" label="较比昨日">
+							</tm-text>
+							<tm-text class="ml-20" :fontSize="26" color="green" _class="text-weight-b" label="5%">
 							</tm-text>
 						</view>
 					</view>
 				</view>
+				
 			</view>
 			<view class="flex">
 				<tm-text class="ml-25 mt-20" :fontSize="35" _class="text-weight-b" label="数字收藏小贴士"></tm-text>
@@ -76,38 +97,26 @@
 				</view>
 			</view>
 		</tm-sheet>
-		<tm-sheet :style="{'color': store.tmStore.dark?'#fff': '#25262E','font-size': '22rpx'}" :round="3" :shadow="0"
-			:margin="[20,10]" :padding="[20,10]">
-			<view class="flex flex-between">
-				<tm-text :fontSize="22" _class="text-weight-n ma-10" :label="`创作者：${data.creator}`">
-				</tm-text>
-				<!-- <tm-text :fontSize="22" _class="text-weight-n ma-10" :label="`发行者：${data.publisher}`">
-				</tm-text> -->
-				<tm-text :fontSize="22" _class="text-weight-n ma-10" :label="`持有者：${data.holderName}`">
-				</tm-text>
-			</view>
-		</tm-sheet>
-		<tm-sheet :style="{'color': store.tmStore.dark?'#fff': '#25262E','font-size': '22rpx'}" :round="3" :shadow="0"
-			:margin="[20,10]" :padding="[20,10]" v-if="data.details">
-			<tm-text class="mt-20 mb-20" :fontSize="30" _class="text-weight-b" label="作品故事"></tm-text>
+		<tm-text class="mt-20 mb-20 ml-25" color="#fff" :fontSize="30" _class="text-weight-b" label="作品故事"></tm-text>
+		<tm-sheet transprent :round="3" :shadow="0" :margin="[0,10]" :padding="[20,10]" v-if="data.details">
 			<view class="flex">
 				<!-- <tm-html :content="data.details"></tm-html> -->
 				<rich-text :nodes="data.details"></rich-text>
 			</view>
 		</tm-sheet>
-		<tm-sheet style="margin-bottom: 100rpx;" :round="3" :shadow="0" :margin="[20,10]" :padding="[0,10]">
+		<tm-sheet style="margin-bottom: 100rpx;" color="#1E1F28" :round="3" :shadow="0" :margin="[20,10]"
+			:padding="[0,10]">
 			<view class="">
 				<tm-text class="ml-25 mt-20" :fontSize="35" _class="text-weight-b" label="购买须知"></tm-text>
 				<view class="ml-25"
-					:style="{'color': store.tmStore.dark?'#fff': '#25262E','font-size': '22rpx','text-indent': '0.5cm' }">
+					:style="{'color': store.tmStore.dark?'#fff': '#808080','font-size': '22rpx','text-indent': '0.5cm' }">
 					数字藏品为虚拟数字商品，而非实物，仅限实名认证为年满14周岁的中国大陆用户购买。数字藏品的版权由发行方或原创者拥有，除另行取得版权拥有者书面同意外，不得将数字藏品用于任何商业用途，不支持退换。本商品源文件不支持本地下载。请勿对数字藏品进行炒作、场外交易、欺诈，或以任何其他非法方式进行使用
 				</view>
 			</view>
 		</tm-sheet>
-
 		<view class="fixed b-0 r-0 l-0" :style="{'background-color': store.tmStore.dark?'#fff': '#25262E' }">
 			<view class="" style="">
-				<tm-sheet _class=" " :round="0" :shadow="2" :margin="[0,0]" :padding="[0,0]">
+				<tm-sheet _class=" " color="#25262E" :round="0" :shadow="2" :margin="[0,0]" :padding="[0,0]">
 					<view class="flex flex-row-center-between aa">
 						<view class="flex flex-col ml-40">
 							<view class="flex  flex-col-bottom-center ">
@@ -200,7 +209,8 @@
 		margin: 0 auto;
 		margin-bottom: -100rpx;
 	}
+
 	:deep(img) {
-	  max-width: 100%;
+		max-width: 100%;
 	}
 </style>

@@ -32,10 +32,10 @@
 			:src="user.adventureCoverImg" @click="gonav('pages/my/role/index')"></tm-image>
 		<tm-sheet :round="4" :shadow="0" :margin="[20,30]" :padding="[10,10]">
 			<view class="flex flex-between">
-				<tm-text style="height: 50rpx;line-height: 50rpx;" :fontSize="26" _class="text-weight-b" label="我的藏品">
+				<tm-text class="flex flex-center" :fontSize="26" _class="text-weight-b" label="我的藏品">
 				</tm-text>
-				<view class="flex" @click="gonav('pages/my/collections/collections')">
-					<tm-text style="height: 50rpx;line-height: 50rpx;" :fontSize="26" label="更多"></tm-text>
+				<view class="flex flex-center" @click="gonav('pages/my/collections/collections')">
+					<tm-text class="flex flex-center" :fontSize="26" label="更多"></tm-text>
 					<tm-icon class="ml-10" :fontSize="26" name="tmicon-angle-right"></tm-icon>
 				</view>
 			</view>
@@ -52,10 +52,10 @@
 		</tm-sheet>
 		<tm-sheet :round="4" :shadow="0" :margin="[20,0]" :padding="[10,10]">
 			<view class="flex flex-between">
-				<tm-text style="height: 50rpx;line-height: 50rpx;" :fontSize="26" _class="text-weight-b" label="我的盲盒">
+				<tm-text class="flex flex-center" :fontSize="26" _class="text-weight-b" label="我的盲盒">
 				</tm-text>
 				<view class="flex" @click="gonav('pages/my/box/box')">
-					<tm-text style="height: 50rpx;line-height: 50rpx;" :fontSize="26" label="更多"></tm-text>
+					<tm-text class="flex flex-center" :fontSize="26" label="更多"></tm-text>
 					<tm-icon class="ml-10" :fontSize="26" name="tmicon-angle-right"></tm-icon>
 				</view>
 			</view>
