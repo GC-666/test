@@ -62,28 +62,29 @@
 				</tm-form-item>
 			</view>
 
-			<view class="fixed flex flex-center"
-				style="bottom:0rpx;left: 0;right: 0; background-color: #fff;width: 100%;height: 100rpx;">
-				<tm-button form-type="submit" :height="60" :width="710" label="提交开票"></tm-button>
-			</view>
+
 		</tm-form>
 		<tm-cell :margin="[0, 0]" :titleFontSize="30" title="总金额">
 			<template v-slot:right>
 				<view class="flex">
 					<tm-text class="ml-44 text-weight-b" color="red" :fontSize="32" :label="orderMoney">
 					</tm-text>
-					<tm-text class="text-weight-b" color="#000" :fontSize="32" label="元">
+					<tm-text class="text-weight-b" :fontSize="32" label="元">
 					</tm-text>
 				</view>
 			</template>
 		</tm-cell>
+		<view class="flex flex-center mt-40">
+			<tm-button form-type="submit" :height="70" :width="710" label="提交开票"></tm-button>
+		</view>
+
 		<tm-modal title="温馨提示" :height="300" hideCancel splitBtn v-model:show="showWin" @ok="back">
-			
+
 			<view class="flex flex-center">
 				<tm-text :fontSize="30" class="text-weight-b" label="申请开票成功"></tm-text>
 			</view>
 		</tm-modal>
-		
+
 		<tm-city-picker v-model="show.city" v-model:model-str="show.cityStr" v-model:show="showCity"
 			:default-value="show.city"></tm-city-picker>
 	</tm-app>
@@ -93,6 +94,8 @@
 	import { My } from '@/api/api';
 	import { onLoad } from '@dcloudio/uni-app';
 	import { ref } from 'vue';
+	import { useTmpiniaStore } from '@/tmui/tool/lib/tmpinia';
+	const store = useTmpiniaStore();
 	const orderMoney = ref(0)
 	const orderIds = ref('')
 	const radiolist = ref('')
@@ -109,8 +112,8 @@
 			}
 		})
 	})
-	const back = ()=>{
-		uni.navigateBack({delta:1})
+	const back = () => {
+		uni.navigateBack({ delta: 1 })
 	}
 	const ids = uni.getStorageSync('data').ids
 	const show = ref({
@@ -141,7 +144,7 @@
 		if (e.data.type == '0') {
 			data.address = e.data.mail
 		} else {
-			data.address = e.data.cityStr +"/"+ e.data.address
+			data.address = e.data.cityStr + "/" + e.data.address
 		}
 
 		My.openTicket(data).then(res => {

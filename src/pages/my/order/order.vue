@@ -38,11 +38,11 @@
 									@click="tagChange(1)"></tm-tag>
 							</view>
 							<view class="">
-								<tm-tag checkable :checked="acc ===2? true :false" size="m" label="市场"
+								<tm-tag checkable :checked="acc ===2? true :false" size="m" label="买入"
 									@click="tagChange(2)"></tm-tag>
 							</view>
 							<view class="">
-								<tm-tag checkable :checked="acc ===3? true :false" size="m" label="寄售"
+								<tm-tag checkable :checked="acc ===3? true :false" size="m" label="卖出"
 									@click="tagChange(3)"></tm-tag>
 							</view>
 							<view class="">
@@ -54,6 +54,20 @@
 									@click="tagChange(5)"></tm-tag>
 							</view>
 						</view>
+						<!-- <view v-if="acc==1 || acc==2 || acc==3" class="flex overflow-y flex-wrap" style="max-height: 500rpx;">
+							<view class="">
+								<tm-tag checkable :checked="acc2 ===''? true :false" size="m" label="全部"
+									@click="tagChange2(0)"></tm-tag>
+							</view>
+							<view class="">
+								<tm-tag checkable :checked="acc2 ===1? true :false" size="m" label="浔画寄售"
+									@click="tagChange2(1)"></tm-tag>
+							</view>
+							<view class="">
+								<tm-tag checkable :checked="acc2 ===2? true :false" size="m" label="X空间"
+									@click="tagChange2(2)"></tm-tag>
+							</view>
+						</view> -->
 					</tm-sheet>
 				</tm-sheet>
 			</tm-sheet>
@@ -140,9 +154,11 @@
 			</view>
 		</scroll-view>
 		<view v-if="orderFindPageList.length<=0" class="flex flex-wrap flex-row-center-center" style="margin-top:150rpx">
-			<tm-image :round="4" class="flex-start" :width="320" :height="280" :src="wushuju"></tm-image>
+			<tm-image :round="4" class="flex-start" :width="280" :height="230" :src="wushuju"></tm-image>
 		</view>
 		<view v-show="cover" class="cover" @click.stop="cover=false;typeShow = false"></view>
+		<view class="bottom">
+		</view>
 	</tm-app>
 </template>
 
@@ -172,7 +188,8 @@
 		page: 1,
 		limit: 10,
 		orderNewType: "",
-		orderStatus: ""
+		orderStatus: "",
+		platform:''
 	})
 	const tabsClick = (i) => {
 		acvite.value = i
@@ -211,9 +228,12 @@
 
 	const acc = ref(0)
 	const tagChange = (index) => {
+		console.log(index);
 		params.value.orderStatus = "2";
 		if (index == 0) {
 			params.value.orderNewType = "";
+			params.value.platform = "";
+			acc2.value="";
 		} else if (index == 1) {
 			params.value.orderNewType = "01";
 		} else if (index == 2) {
@@ -222,12 +242,30 @@
 			params.value.orderNewType = "03";
 		} else if (index == 4) {
 			params.value.orderNewType = "04";
+			params.value.platform = "";
+			acc2.value="";
 		} else if (index == 5) {
 			params.value.orderNewType = "05";
+			params.value.platform = "";
+			acc2.value="";
 		}
 		acc.value = index
 		tabsChange();
 	}
+	const acc2 = ref('')
+	const tagChange2 = (index) => {
+		acc2.value=index
+		if (index == 0) {
+			acc2.value='';
+			params.value.platform = "";
+		} else if (index == 1) {
+			params.value.platform = "0";
+		} else if (index == 2) {
+			params.value.platform = "1";
+		}
+		tagChange(acc.value);
+	}
+	
 	//页面加载完成执行
 	onMounted(() => {
 		tabsChange();
@@ -294,7 +332,13 @@
 		background-color: rgba(0, 0, 0, 0.5);
 		z-index: 1;
 	}
-
+	.bottom {  
+	  padding-bottom: 0;  
+	  padding-bottom: constant(safe-area-inset-bottom);  
+	  padding-bottom: env(safe-area-inset-bottom);  
+	  background: #fff;
+	  opacity: 0;
+	}  
 	.scroll-Y {
 		height: calc(100vh - var(--status-bar-height) - 188rpx - var(--window-bottom));
 	}

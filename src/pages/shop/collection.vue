@@ -99,8 +99,8 @@
 			:margin="[20,10]" :padding="[20,10]" v-if="data.details">
 			<tm-text class="mt-20 mb-20" :fontSize="30" _class="text-weight-b" label="作品故事"></tm-text>
 			<view class="flex">
-				<rich-text :nodes="data.details"></rich-text>
-				<!-- <tm-html :content="data.details"></tm-html> -->
+				<!-- <rich-text :nodes="data.details"></rich-text> -->
+				<tm-html :content="data.details"></tm-html>
 
 			</view>
 		</tm-sheet>
@@ -117,7 +117,7 @@
 		<view class="fixed b-0 r-0 l-0" :style="{'background-color': store.tmStore.dark?'#fff': '#25262E' }">
 			<view class="" style="">
 				<tm-sheet _class=" " :round="0" :shadow="2" :margin="[0,0]" :padding="[0,0]">
-					<view class="flex flex-row-center-between aa">
+					<view class="flex flex-row-center-between bottom">
 						<view class="flex flex-col ml-40">
 							<view class="flex  flex-col-bottom-center ">
 								<tm-text :font-size="18" _class="text-weight-n flex-row-bottom-end mb--8" label="¥">
@@ -185,7 +185,7 @@
 	}
 </script>
 
-<style>
+<style scoped>
 	.img {
 		display: flex;
 		justify-content: center;
@@ -193,7 +193,11 @@
 		position: relative;
 		top: -300rpx;
 	}
-
+	.bottom{
+		padding-bottom: 0;
+		padding-bottom: constant(safe-area-inset-bottom);  
+		padding-bottom: env(safe-area-inset-bottom);  
+	}
 	.head {
 		margin-top: 350rpx;
 	}

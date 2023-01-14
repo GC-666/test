@@ -13,13 +13,12 @@
 					:showBottomBotder="false">
 				</tm-input>
 			</tm-form-item>
-			<tm-form-item required label="选择地区" field="cityStr" :rules="[{required:false,message:'请选择地区'}]">
+			<tm-form-item required label="选择地区" field="cityStr" :rules="[{required:true,message:'请选择地区'}]">
 				<tm-input :inputPadding="[0,0]" :model-value.sync="show.cityStr" @click="testClick"
 					suffix="tmicon-angle-right" placeholder="请选择所在地区地址" disabled :transprent="true"
 					:showBottomBotder="false"></tm-input>
 			</tm-form-item>
-			<tm-form-item :border="false" required label="详细地址" field="addr"
-				:rules="[{required:true,message:'请输入详细地址'}]">
+			<tm-form-item required label="详细地址" field="detailAddress" :rules="[{required:true,message:'请输入详细地址'}]">
 				<tm-input placeholder="请输入详细地址" :inputPadding="[0,0]" v-model="show.detailAddress" :transprent="true"
 					:showBottomBotder="false">
 				</tm-input>
@@ -28,7 +27,7 @@
 				<tm-button :margin="[20,0]" form-type="submit" :fontSize="38" linearDeep="accent" block label="确认保存"></tm-button>
 			</view>
 		</tm-form>
-		<tm-city-picker v-model="show.city" v-model:model-str="show.cityStr" v-model:show="showCity"
+		<tm-city-picker :height="700" :round="4" v-model="show.city" v-model:model-str="show.cityStr" v-model:show="showCity"
 			:default-value="show.city"></tm-city-picker>
 	</tm-app>
 </template>

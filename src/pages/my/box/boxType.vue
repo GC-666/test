@@ -65,7 +65,7 @@
 		</scroll-view>
 		<view v-if="index==0" class="fixed b-0 r-0 l-0 ">
 			<tm-sheet :round="0" :shadow="2" :margin="[0,0]" :padding="[0,0]">
-				<view class="flex flex-center">
+				<view class="flex flex-center bottom">
 					<tm-button :round="4" :margin="[20, 10]" :padding="[0,0]" :fontSize="38" 
 						:shadow="0" :height="70" :width="300" label="开启5个" color="#60beff"
 						@click="conversion(5)"></tm-button>
@@ -76,7 +76,7 @@
 			</tm-sheet>
 		</view>
 		<view v-if="userBoxFindPageList.length<=0" class="flex flex-wrap flex-row-center-center" style="margin-top:150rpx">
-			<tm-image :round="4" class="flex-start" :width="350" :height="280" :src="wushuju"></tm-image>
+			<tm-image :round="4" class="flex-start" :width="280" :height="230" :src="wushuju"></tm-image>
 		</view>
 		<tm-modal :height="350" title="提示" okText="确认" splitBtn v-model:show="show2" @ok="submit2" >
 			<view class="flex flex-col flex-center">
@@ -315,6 +315,11 @@
 	}
 	.scroll-Y {
 		height: calc(100vh - var(--status-bar-height) - 172rpx);
+	}
+	.bottom{
+		padding-bottom: 0;
+		padding-bottom: constant(safe-area-inset-bottom);  
+		padding-bottom: env(safe-area-inset-bottom);  
 	}
 	.bj{
 		background-image: url("@/static/my/cj210.png");

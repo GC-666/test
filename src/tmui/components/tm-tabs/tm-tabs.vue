@@ -88,7 +88,7 @@
           :class="[_align]"
           :style="[{ height: `${props.itemHeight + 4}rpx` }]"
         >
-          <view :id="tabsid + item.key" v-for="(item, index) in cacheTabs" :key="index">
+          <view :id="tabsid + item.key" v-for="(item, index) in cacheTabs" :key="index" class="flex flex-shrink">
             <tm-sheet
               @click="changeKey(item.key)"
               :round="props.itemRound"
@@ -171,8 +171,8 @@
             </tm-sheet>
           </view>
         </view>
-		<!-- 底部边线 -->
-        <!-- <view
+		<!-- 底部线条 -->
+       <!-- <view
           v-if="props.showTabsLineAni && props.itemWidth > 0"
           class="anilineBar absolute l-0"
           :style="{
@@ -224,7 +224,7 @@
         :class="[_align]"
         :style="[{ width: `${props.width}rpx`, height: `${props.itemHeight + 4}rpx` }]"
       >
-        <view :id="tabsid + item.key" v-for="(item, index) in cacheTabs" :key="index">
+        <view :id="tabsid + item.key" v-for="(item, index) in cacheTabs" :key="index" class="flex flex-shrink">
           <tm-sheet
             @click="changeKey(item.key)"
             :round="props.itemRound"

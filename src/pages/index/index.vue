@@ -1,5 +1,4 @@
 <template>
-	<!-- <web-view v-if="find=='1'" src="http://appxunmeta.rocknft.top"></web-view>   v-if="find=='0'" -->
 	<tm-app>
 		<tm-navbar hideHome hideBack title="" :shadow="0">
 			<template v-slot:left>
@@ -146,7 +145,7 @@
 				</tm-sheet>
 			</view>
 			<view v-if="list.length<=0" class="flex flex-wrap flex-row-center-center" style="margin-top:150rpx">
-				<tm-image :round="4" class="flex-start" :width="350" :height="280" :src="wushuju"></tm-image>
+				<tm-image :round="4" class="flex-start" :width="280" :height="230" :src="wushuju"></tm-image>
 			</view>
 		</scroll-view>
 		<!-- 首发藏品后6个 -->

@@ -55,6 +55,7 @@
 			<view class="flex flex-between pt-20 pb-20" v-if="find.payType!=null && find.payType!=''" >
 				<tm-text color="#808080" :font-size="24" label="支付方式"></tm-text>
 				<tm-text v-if="find.payType=='00'" :font-size="24" _class="text-weight-b" label="账户余额"></tm-text>
+				<tm-text v-if="find.payType=='03'" :font-size="24" _class="text-weight-b" label="在线支付"></tm-text>
 				<tm-text v-if="find.payType=='04'" :font-size="24" _class="text-weight-b" label="积分"></tm-text>
 				<tm-text v-if="find.payType=='05'" :font-size="24" _class="text-weight-b" label="云钱包"></tm-text>
 			</view>

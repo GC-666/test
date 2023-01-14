@@ -199,6 +199,7 @@
 				title: '寄售成功',
 				icon: 'none'
 			})
+			uni.navigateBack({delta:1})
 		})
 		paymentPlatform.value = []
 	}

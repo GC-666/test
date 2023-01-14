@@ -21,7 +21,7 @@
 				</view>
 			</view>
 			<view v-else class="flex flex-wrap flex-row-center-center" style="margin-top:150rpx">
-				<tm-image :round="4" class="flex-start" :width="350" :height="350" :src="wushuju"></tm-image>
+				<tm-image :round="4" class="flex-start" :width="280" :height="230" :src="wushuju"></tm-image>
 			</view>
 		</scroll-view>
 	</tm-app>

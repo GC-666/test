@@ -26,39 +26,31 @@
 				</tm-cell>
 			</tm-sheet>
 		</view>
-		<view class="mt-n14">
-			<tm-form @submit="confirm" :margin="[0,0]" v-model="show" transprent :border="false">
-				<tm-text :fontSize="30" class="text-weight-b" label="请输入提现金额"></tm-text>
-				<tm-sheet :shadow="0" :margin="[0,20]" :padding="[10,10]">
-					<tm-form-item label=""
-						:rules="[{required:true,message:'请输入提现金额',validator:(val)=> val === '' ? false : true}]">
-						<tm-input placeholder="请输入提现金额" prefix="tmicon-renminbi3" :inputPadding="[0,0]"
-							v-model="show.value" :transprent="true" :showBottomBotder="false">
-						</tm-input>
-					</tm-form-item>
-				</tm-sheet>
-				<tm-text :fontSize="30" class="text-weight-b " label="请输入支付密码"></tm-text>
-				<tm-sheet :shadow="0" :margin="[0,20]" :padding="[10,10]">
-					<tm-form-item label=""
-						:rules="[{required:true,message:'请输入支付密码',validator:(val)=> val === '' ? false : true}]">
-						<tm-input placeholder="请输入支付密码" :password="true" :inputPadding="[0,0]" v-model="show.type"
-							:transprent="true" :showBottomBotder="false">
-						</tm-input>
-					</tm-form-item>
-				</tm-sheet>
-				<tm-text :fontSize="24" class="text-weight-n " label="tips：单笔提现金额必须为100的倍数"></tm-text>
-				<tm-button form-type="submit" :fontSize="38" linearDeep="accent" block label="提现"></tm-button>
-				<view class="flex-row-center-center mt-10">
-					<tm-checkbox class="flex-row-center-center" v-model="loot" :size="28" :round="10">
-						<template v-slot:default="{checked}">
-							<view class="flex flex-row">
-								<tm-text :fontSize="20" label="我已经阅读并同意"></tm-text>
-								<tm-text :fontSize="20" color="red" label="《浔画账户钱包提现协议》"></tm-text>
-							</view>
-						</template>
-					</tm-checkbox>
+		<view class="mt-n14 ml-20 mr-20">
+			<tm-text :fontSize="30" class="text-weight-b" label="请输入提现金额"></tm-text>
+			<tm-sheet :shadow="0" :margin="[0,20]" :padding="[10,10]">
+				<tm-input placeholder="请输入提现金额" prefix="tmicon-renminbi3" :inputPadding="[0,0]" v-model="show.value"
+					:transprent="true" :showBottomBotder="false">
+				</tm-input>
+			</tm-sheet>
+			<tm-text :fontSize="30" class="text-weight-b " label="请输入支付密码"></tm-text>
+			<tm-sheet :shadow="0" :margin="[0,20]" :padding="[0,10]">
+				<tm-input placeholder="请输入支付密码" password :inputPadding="[20,0]" v-model="show.pwd" :transprent="true"
+					:showBottomBotder="false">
+				</tm-input>
+			</tm-sheet>
+			<tm-text :fontSize="24" class="text-weight-n " label="tips：单笔提现金额必须为100的倍数"></tm-text>
+			<tm-button :fontSize="38" @click="submit" block label="提现"></tm-button>
+			<view class="flex-row-center-center mt-10">
+				<tm-checkbox class="flex-row-center-center" v-model="loot" :size="28" :round="10">
+					<template v-slot:default="{checked}">
+					</template>
+				</tm-checkbox>
+				<view class="flex flex-row">
+					<tm-text :fontSize="20" label="我已经阅读并同意"></tm-text>
+					<tm-text :fontSize="20" color="red" label="《浔画账户钱包提现协议》"></tm-text>
 				</view>
-			</tm-form>
+			</view>
 		</view>
 	</tm-app>
 </template>
@@ -82,8 +74,29 @@
 			data.value = res
 		})
 	})
-	const confirm = (e) => {
-		My.placeOrder({ type: '01', value: e.data.value }).then(resPay => {
+	const submit = (e) => {
+		if (show.value.value == '') {
+			uni.showToast({
+				title: '请填写金额',
+				icon: 'none'
+			})
+			return
+		}
+		if (show.value.pwd == '') {
+			uni.showToast({
+				title: '请输入密码',
+				icon: 'none'
+			})
+			return
+		}
+		if (!loot.value) {
+			uni.showToast({
+				title: '请同意钱包协议',
+				icon: 'none'
+			})
+			return
+		}
+		My.placeOrder({ type: '01', value: show.value.value }).then(resPay => {
 			uni.showToast({
 				title: '提现成功',
 				icon: 'none'

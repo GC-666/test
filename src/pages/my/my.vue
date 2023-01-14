@@ -47,7 +47,7 @@
 				</view>
 			</view>
 			<view v-else class="flex flex-wrap flex-row-center-center" style="height:250rpx">
-				<tm-image :round="4" class="flex-start" :width="210" :height="180" :src="wushuju"></tm-image>
+				<tm-image :round="4" class="flex-start" :width="280" :height="230" :src="wushuju"></tm-image>
 			</view>
 		</tm-sheet>
 		<tm-sheet :round="4" :shadow="0" :margin="[20,0]" :padding="[10,10]">
@@ -68,7 +68,7 @@
 				</view>
 			</view>
 			<view v-else class="flex flex-wrap flex-row-center-center" style="height:250rpx">
-				<tm-image :round="4" class="flex-start" :width="210" :height="180" :src="wushuju"></tm-image>
+				<tm-image :round="4" class="flex-start" :width="280" :height="230" :src="wushuju"></tm-image>
 			</view>
 		</tm-sheet>
 

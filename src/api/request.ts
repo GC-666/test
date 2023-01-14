@@ -1,8 +1,9 @@
 
 //const BASE_URL = import.meta.env.VITE_APP_BASE_API
-//const BASE_URL = "https://api.xunmeta.rocknft.top"
-const BASE_URL = "http://156.240.123.168:8200"
-//const BASE_URL = "http://360848e78y.wicp.vip:10704"
+const BASE_URL = "https://api.xunmeta.rocknft.top"
+//const BASE_URL = "http://156.240.123.168:8200"
+//const BASE_URL = "http://192.168.100.73:8200"
+//const BASE_URL = "https://360ga84878.yicp.fun"
 // 封装 GET POST 请求并导出
 export function request(url: string = '', params = {}, type: "POST" | undefined) {
 	//设置 url params type 的默认值
@@ -69,7 +70,6 @@ export function request(url: string = '', params = {}, type: "POST" | undefined)
 					});
 				}
 			},
-
 		})
 
 	})

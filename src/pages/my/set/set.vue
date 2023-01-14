@@ -24,9 +24,10 @@
 			<tm-cell _class="text-weight-b" :margin="[0, 0]" :titleFontSize="30" title="修改支付密码"
 				:rightText="set==='1'?'已设置':'请设置支付密码'" @click="gonav('pages/my/set/paypwd/paypwd')">
 			</tm-cell>
-			<!-- <tm-cell _class="text-weight-b" :margin="[0, 0]" :titleFontSize="30" title="设置收货地址"
+			<tm-divider color="grey" :margin="[1,1]"></tm-divider>
+			<tm-cell _class="text-weight-b" :margin="[0, 0]" :titleFontSize="30" title="设置收货地址"
 				@click="gonav('pages/my/set/address/address?type=0')">
-			</tm-cell> -->
+			</tm-cell>
 		</tm-sheet>
 		<tm-sheet :shadow="0" :margin="[0,15]" :padding="[0,0]">
 			<!-- #ifdef APP-PLUS -->

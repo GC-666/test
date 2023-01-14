@@ -9,10 +9,12 @@
 				</tm-tabs>
 			</tm-sheet>
 		</view>
-		<scroll-view :class="mineFindCollReport.length>0?'scroll-Y':''" scroll-y="true" @scrolltolower="lower">
+		<scroll-view :class="mineFindCollReport.length>0 || userRecrodFindCollPageList.length>0?'scroll-Y':''"
+			scroll-y="true" @scrolltolower="lower">
 			<view class="flex flex-row-center-between flex-wrap" style="margin: 0rpx 20rpx 0rpx 20rpx;">
-				<view v-if="index==1" class="relative" v-for="(data,index) in mineFindCollReport"
-					@click="collectionsType(data.collId,data.collName,data.collImg)">
+				<view v-if="index==1 || index==3 || index==4" class="relative"
+					v-for="(data,index) in mineFindCollReport"
+					@click="collectionsType(data.collId,data.collName,data.collImg,data.collCount)">
 					<!-- @click="gonav('pages/my/collections/collectionsType?id='+data.collId+'&collName='+data.collName)" -->
 					<tm-sheet :round="4" :shadow="0" :margin="[0,10]" :padding="[0,0]">
 						<tm-image class="round-t-4" :width="344" :height="344" :src="data.collImg">
@@ -53,34 +55,36 @@
 				</view>
 			</view>
 		</scroll-view>
-		<tm-drawer :inContent="false" v-model:show="showWin" :round="5"
-			:hideHeader="true">
+		<tm-drawer :inContent="false" v-model:show="showWin" :round="5" :hideHeader="true">
 			<view class="ml-20 mr-20 flex flex-row-center-start">
 				<tm-image class="ml-20 mt-10" :width="160" :height="160" :round="5" :src="collImg">
 				</tm-image>
 				<view class="ml-20">
 					<view class="flex flex-row-bottom-start mb-10">
-						<tm-text color="#1a1a1a" :font-size="32" _class="text-weight-b" :label="collName">
+						<tm-text :font-size="32" _class="text-weight-b" :label="collName">
 						</tm-text>
-						<tm-text color="#808080" :font-size="28" _class="text-weight-b" label="/共25个">
+						<tm-text color="#808080" :font-size="28" _class="text-weight-b" :label="`/共${collCount1}个`">
 						</tm-text>
 					</view>
 					<tm-text color="#808080" :font-size="18" _class="text-weight-b" label="默认按编号排序">
 					</tm-text>
 				</view>
 			</view>
-			<scroll-view scroll-y="true" style="height:330rpx" @scrolltolower="lower2">
+			<scroll-view scroll-y="true" style="height:360rpx" @scrolltolower="lower2">
 				<view class="flex flex-wrap" style="margin: 0rpx 20rpx 0rpx 20rpx;">
 					<view class="mt-10" style="width:236.6rpx" v-for="(data,index) in userCollectionFindPageList">
 						<tm-image extra model="aspectFill" :width="230" :height="136" :src="data.type==1?jishou:mairu"
-						@click="gonav('pages/my/collections/collectionsDetails?id='+data.id)">
+							@click="gonav('pages/my/collections/collectionsDetails?id='+data.id)">
 							<template v-slot:extra>
 								<view class="" style="margin: auto auto;">
-									<tm-text _class="flex flex-center mt-20 text-overflow " color="#1a1a1a" _style="width:210rpx;text-overflow: ellipsis;" :fontSize="24"
-									:label="data.collTruenumber"></tm-text>
-									<tm-text class="flex flex-center mt-5" style="" color="#1a1a1a" :font-size="24" :label="`买入价：${data.buyPrice}`">
+									<tm-text _class="flex flex-center mt-20 text-overflow "
+										_style="width:210rpx;text-overflow: ellipsis;" :fontSize="24"
+										:label="data.collTruenumber"></tm-text>
+									<tm-text class="flex flex-center mt-5" style="" :font-size="24"
+										:label="`买入价：${data.buyPrice}`">
 									</tm-text>
-									<tm-text class="flex flex-center mt-5" v-if="data.type==1" color="#1a1a1a" :font-size="24" :label="`出售价：${data.sellPrice}`">
+									<tm-text class="flex flex-center mt-5" v-if="data.type==1" :font-size="24"
+										:label="`出售价：${data.sellPrice}`">
 									</tm-text>
 								</view>
 							</template>
@@ -89,13 +93,13 @@
 				</view>
 			</scroll-view>
 		</tm-drawer>
-		<view v-if="mineFindCollReport.length<=0 && index==1" class="flex flex-wrap flex-row-center-center"
-			style="margin-top:150rpx">
-			<tm-image :round="4" class="flex-start" :width="350" :height="280" :src="wushuju"></tm-image>
+		<view v-if="mineFindCollReport.length<=0 && (index==1 || index==3 || index==4)"
+			class="flex flex-wrap flex-row-center-center" style="margin-top:150rpx">
+			<tm-image :round="4" class="flex-start" :width="280" :height="230" :src="wushuju"></tm-image>
 		</view>
-		<view v-if="userRecrodFindCollPageList.length<=0 && index!=1" class="flex flex-wrap flex-row-center-center"
+		<view v-if="userRecrodFindCollPageList.length<=0 && index==2" class="flex flex-wrap flex-row-center-center"
 			style="margin-top:150rpx">
-			<tm-image :round="4" class="flex-start" :width="350" :height="280" :src="wushuju"></tm-image>
+			<tm-image :round="4" class="flex-start" :width="280" :height="230" :src="wushuju"></tm-image>
 		</view>
 	</tm-app>
 </template>
@@ -149,11 +153,12 @@
 	//配置参数
 	const pageData = ref({
 		page: 1,
-		limit: 20
+		limit: 10,
 	});
 	const bool = ref(true);
 	// 下拉刷新
 	const lower = () => {
+		console.log("到底部");
 		pageData.value.page = pageData.value.page + 1;
 		if (bool.value) {
 			if (index.value == 1) {
@@ -165,7 +170,7 @@
 						bool.value = false;
 					}
 				})
-			} else if (index.value == 2){
+			} else if (index.value == 2) {
 				My.userRecrodFindCollPageList(pageData.value).then(res => {
 					userRecrodFindCollPageList.value = userRecrodFindCollPageList.value.concat(res)
 					if (res.length = pageData.value.limit) {
@@ -178,11 +183,23 @@
 		}
 	}
 	const tabsChange = (i) => {
+		bool.value = true;
 		index.value = i;
 		pageData.value.page = 1;
 		mineFindCollReport.value = [];
 		userRecrodFindCollPageList.value = [];
-		if (i == 1) {
+		if (i == 1 || i == 3 || i == 4) {
+			if (i == 1) {
+				//pageData.value.platform='';
+				pageData.value = {
+					page: 1,
+					limit: 10,
+				};
+			} else if (i == 3) {
+				pageData.value.platform = 0;
+			} else if (i == 4) {
+				pageData.value.platform = 1;
+			}
 			My.mineFindCollReport(pageData.value).then(res => {
 				mineFindCollReport.value = res;
 				if (res.length == pageData.value.limit) {
@@ -204,10 +221,12 @@
 	}
 	const collName = ref("");
 	const collImg = ref("");
-	const collectionsType = (id,name,img) => {
-		collName.value=name;
-		collImg.value=img;
-		showWin.value=true;
+	const collCount1 = ref("");
+	const collectionsType = (id, name, img, collCount) => {
+		collCount1.value = collCount
+		collName.value = name;
+		collImg.value = img;
+		showWin.value = true;
 		pageData2.value.collId = id
 		tabsChange2(1);
 	}

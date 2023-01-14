@@ -89,12 +89,12 @@
 								</tm-text>
 							</view>
 						</view>
-						<view class="flex mb-15">
-							<tm-text :font-size="26" class="text-weight-n ml-20 mt-8 flex-row-bottom-center" label="¥">
+						<view class="flex mb-10">
+							<tm-text :font-size="26" class="text-weight-n ml-20 flex-end" label="¥">
 							</tm-text>
-							<tm-text :font-size="38" class="text-weight-b ml-4 mt-8 flex-row-bottom-center"
+							<tm-text :font-size="38" class="text-weight-b ml-8 flex-row-bottom-end"
 								:label="data.minPrice"></tm-text>
-							<tm-text :font-size="20" class="text-weight-n ml-4 mt-8 flex-row-bottom-center" label="起">
+							<tm-text :font-size="20" class="text-weight-n ml-8 flex-end" label="起">
 							</tm-text>
 						</view>
 					</tm-sheet>
@@ -203,7 +203,7 @@
 		</view>
 		<view v-if="list.length<=0 && acvite!=4" class="flex flex-wrap flex-row-center-center"
 			style="margin-top:150rpx">
-			<tm-image :round="4" class="flex-start" :width="320" :height="280" :src="wushuju"></tm-image>
+			<tm-image :round="4" class="flex-start" :width="280" :height="230" :src="wushuju"></tm-image>
 		</view>
 		<view v-show="cover" class="cover" @click.stop="cover=false;typeShow = false"></view>
 	</tm-app>
@@ -239,15 +239,15 @@
 	const toShop = (item) => {
 		if (acvite.value == 2) {
 			uni.navigateTo({
-				url: '/pages/market/shop/mhshop?id=' + item.id + '&name=' + item.name 
-				+ '&img=' + item.img + '&limits=' + item.limits + '&circulation=' + item.circulation
-				+ '&publisher=' + item.publisher
+				url: '/pages/market/shop/mhshop?id=' + item.id + '&name=' + item.name +
+					'&img=' + item.img + '&limits=' + item.limits + '&circulation=' + item.circulation +
+					'&publisher=' + item.publisher
 			})
 		} else {
 			uni.navigateTo({
-				url: '/pages/market/shop/shop?id=' + item.id + '&name=' + item.name 
-				+ '&img=' + item.img + '&limits=' + item.limits + '&circulation=' + item.circulation
-				+ '&publisher=' + item.publisher
+				url: '/pages/market/shop/shop?id=' + item.id + '&name=' + item.name +
+					'&img=' + item.img + '&limits=' + item.limits + '&circulation=' + item.circulation +
+					'&publisher=' + item.publisher
 			})
 		}
 	}
@@ -293,6 +293,7 @@
 		params.value.type = 1
 		params.value.name = inp.value
 		params.value.isRecommend = ''
+
 		findMarketList()
 	}
 	const getClassification = () => {
@@ -308,7 +309,8 @@
 		type: 1,
 		name: '',
 		classId: '',
-		isRecommend: ''
+		isRecommend: '',
+		platform: '1'
 	})
 	const acvite = ref(0)
 	const tabsClick = (i) => {

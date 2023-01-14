@@ -56,11 +56,9 @@
 				</view>
 			</tm-sheet>
 		</scroll-view>
-
 		<view v-if="list.length<=0" class="flex flex-wrap flex-row-center-center" style="margin-top:150rpx">
-			<tm-image :round="4" class="flex-start" :width="320" :height="280" :src="wushuju"></tm-image>
+			<tm-image :round="4" class="flex-start" :width="280" :height="230" :src="wushuju"></tm-image>
 		</view>
-
 		<view v-show="cover" class="cover" @click.stop="cover=false;typeShow = false"></view>
 	</tm-app>
 </template>
@@ -203,6 +201,6 @@
 	}
 
 	.scroll-Y {
-		height: calc(100vh - var(--status-bar-height) - 88rpx - 190rpx);
+		height: calc(100vh - var(--status-bar-height) - 88rpx - 354rpx);
 	}
 </style>

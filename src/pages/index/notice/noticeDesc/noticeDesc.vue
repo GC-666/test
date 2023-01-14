@@ -18,8 +18,8 @@
 				</view>
 				<tm-divider color="grey" :padding="[0,0]" :margin="[0,20]"></tm-divider>
 			</tm-sheet>
-			<rich-text class="mt-10 ml-20 mr-20" :nodes="rx.content"></rich-text>
-			<!-- <tm-html class="mt-10 ml-20 mr-20" :content="rx.content"></tm-html> -->
+			<!-- <rich-text class="mt-10 ml-20 mr-20" :nodes="rx.content"></rich-text> -->
+			<tm-html class="mt-10 ml-20 mr-20" :content="rx.content"></tm-html>
 			
 		</view>
 

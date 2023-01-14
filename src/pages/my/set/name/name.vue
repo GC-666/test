@@ -41,19 +41,19 @@
 				</tm-text>
 			</view>
 			<tm-form :margin="[0,0]" @submit="confirm" v-model="user" transprent>
-				<view class="mt-n10 ml-20">
+				<view class="mt-10 ml-20">
 					<tm-text :fontSize="33" _class="text-weight-b mt-n10" label="真实姓名"></tm-text>
 				</view>
-				<tm-form-item label="" :margin="[20,0]" :padding="[0,40]"
+				<tm-form-item label="" :margin="[20,0]" :padding="[0,0]"
 					:rules="[{required:true,message:'请输入姓名',validator:(val)=> val === '' ? false : true}]">
-					<tm-input placeholder="请输入姓名" placeholderStyle="font-size:62rpx" :inputPadding="[0,0]"
+					<tm-input placeholder="请输入姓名" :inputPadding="[0,0]"
 						v-model="user.name" :transprent="true" :showBottomBotder="false">
 					</tm-input>
 				</tm-form-item>
 				<view class="mt-20 ml-20">
 					<tm-text :fontSize="33" _class="text-weight-b" label="身份证号"></tm-text>
 				</view>
-				<tm-form-item label="" :margin="[20,0]" :padding="[0,40]"
+				<tm-form-item label="" :margin="[20,0]" :padding="[0,0]"
 					:rules="[{required:true,message:'请输入身份证号',validator:(val)=> val === '' ? false : true}]">
 					<tm-input placeholder="请输入身份证号" placeholderStyle=” :inputPadding="[0,0]" v-model="user.idCardCode"
 						:transprent="true" :showBottomBotder="false">
@@ -62,7 +62,7 @@
 				<view class="mt-20 ml-20">
 					<tm-text :fontSize="33" _class="text-weight-b" label="手机号"></tm-text>
 				</view>
-				<tm-form-item label="" :margin="[20,0]" :padding="[0,40]"
+				<tm-form-item label="" :margin="[20,0]" :padding="[0,0]"
 					:rules="[{required:true,message:'请输入手机号',validator:(val)=> val === '' ? false : true}]">
 					<tm-input placeholder="请输入该身份证办理的身份证号" placeholderStyle=” :inputPadding="[0,0]" v-model="user.phone"
 						:transprent="true" :showBottomBotder="false">
@@ -96,10 +96,15 @@
 		if (o.isRealName == '1') {
 			realname()
 		}
-
 	})
 	const confirm = (val) => {
-		console.log(val);
+		if(val.data.name=='' || val.data.idCardCode==''){
+			uni.showToast({
+				title: '请填写信息',
+				icon: 'none'
+			})
+			return
+		}
 		if (uni.$tm.u.isPhone(val.data.phone) == false) {
 			uni.showToast({
 				title: '手机号格式错误',
@@ -107,6 +112,7 @@
 			})
 			return
 		}
+		
 		My.addrealname(val.data).then(res => {
 			realname()
 		})

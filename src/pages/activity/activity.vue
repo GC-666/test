@@ -52,7 +52,7 @@
 			</view>
 		</scroll-view>
 		<view v-if="composeFindList.length<=0 && index==1" class="flex flex-wrap flex-row-center-center" style="margin-top:150rpx">
-			<tm-image :round="4" class="flex-start" :width="320" :height="280" :src="wushuju"></tm-image>
+			<tm-image :round="4" class="flex-start" :width="280" :height="230" :src="wushuju"></tm-image>
 		</view>
 		<view v-if="index==2">
 			<tm-image @click="gonav('pages/activity/loot/loot')" class="mb-10" :width="750" :height="350" :src="jfdb">

@@ -401,3 +401,43 @@ export class Ver {
 
 
 }
+
+export class Space {
+	// collid=1   提交参数
+	//关注藏品
+	static async follow(params: any) {
+		return await request("/userfollow/follow", params, "POST")
+	}
+	//取消关注
+	static async unfollow(params: any) {
+		return await request("/userfollow/unfollow", params, "POST")
+	}
+	//行情热度
+	static async findMarketListX(params: any) {
+		return await request("/market/new/findMarketListX", params, "POST")
+	}
+	//是否开启x空间
+	static async isOpen(params: any) {
+		return await request("/Market/isOpen", params, "POST")
+	}
+	//我关注的藏品类型
+	static async classificationByFollow(params: any) {
+		return await request("/Market/classificationByFollow", params, "POST")
+	}
+	//藏品类型 下的小类型
+	static async findMarketListByFollow(params: any) {
+		return await request("/market/new/findMarketListByFollow", params, "POST")
+	}
+	//藏品类型 下的小类型
+	static async StatisticDdetails(params: any) {
+		return await request("/Collection/StatisticDdetails", params, "POST")
+	}
+	//签到状态
+	static async xsigninfo(params: any) {
+		return await request("/usersign/xsigninfo", params, "POST")
+	}
+	//签到
+	static async xsign(params: any) {
+		return await request("/usersign/xsign", params, "POST")
+	}
+}

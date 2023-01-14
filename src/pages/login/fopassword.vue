@@ -36,13 +36,13 @@
 			<view class="flex-row-center-center mt-10">
 				<tm-checkbox class="flex-row-center-center" v-model="loot" :size="28" :round="10">
 					<template v-slot:default="{checked}">
-						<view class="flex flex-row">
-							<tm-text :fontSize="20" label="我已经阅读并同意"></tm-text>
-							<tm-text @click="gonav('pages/login/proUser')" :fontSize="20" color="red" label="《用户服务协议》"></tm-text>
-							<tm-text @click="gonav('pages/login/proSecret')" :fontSize="20" color="red" label="《隐私权政策》"></tm-text>
-						</view>
 					</template>
 				</tm-checkbox>
+				<view class="flex flex-row">
+					<tm-text :fontSize="20" label="我已经阅读并同意"></tm-text>
+					<tm-text @click="gonav('pages/login/proUser')" :fontSize="20" color="red" label="《用户服务协议》"></tm-text>
+					<tm-text @click="gonav('pages/login/proSecret')" :fontSize="20" color="red" label="《隐私权政策》"></tm-text>
+				</view>
 			</view>
 		</tm-form>
 

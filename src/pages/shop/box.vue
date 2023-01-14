@@ -135,7 +135,7 @@
 		<view class="fixed b-0 r-0 l-0" :style="{'background-color': store.tmStore.dark?'#fff': '#25262E' }">
 			<view class="" style="">
 				<tm-sheet _class=" " :round="0" :shadow="2" :margin="[0,0]" :padding="[0,0]">
-					<view class="flex flex-row-center-between">
+					<view class="flex flex-row-center-between bottom">
 						<view class="flex flex-col ml-40">
 							<view class="flex  flex-col-bottom-center ">
 								<tm-text :font-size="18" _class="text-weight-n" class="flex-row-bottom-end mb--10"
@@ -211,7 +211,11 @@
 		position: relative;
 		top: -300rpx;
 	}
-
+	.bottom{
+		padding-bottom: 0;
+		padding-bottom: constant(safe-area-inset-bottom);  
+		padding-bottom: env(safe-area-inset-bottom);  
+	}
 	.head {
 		margin-top: 350rpx;
 	}

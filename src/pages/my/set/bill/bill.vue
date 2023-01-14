@@ -23,9 +23,9 @@
 						<view class="">
 							<tm-text class="ma-20 text-weight-b" :fontSize="26" :label="item.objectTruenumber">
 							</tm-text>
-							<tm-text class="ma-20 " color="#1A1A1A" :fontSize="18" :label="`订单编号：${item.orderNo}`">
+							<tm-text class="ma-20 "  :fontSize="18" :label="`订单编号：${item.orderNo}`">
 							</tm-text>
-							<tm-text class="ma-20" color="#1A1A1A" :fontSize="18"
+							<tm-text class="ma-20"  :fontSize="18"
 								:label="`时间：${DateUtils.formatDateTime(item.payTime)}`">
 							</tm-text>
 						</view>
@@ -42,7 +42,7 @@
 			</tm-sheet>
 		</scroll-view>
 		<view v-if="list.length<=0" class="flex flex-wrap flex-row-center-center" style="margin-top:150rpx">
-			<tm-image :round="4" class="flex-start" :width="320" :height="280" :src="wushuju"></tm-image>
+			<tm-image :round="4" class="flex-start" :width="280" :height="230" :src="wushuju"></tm-image>
 		</view>
 		<view v-if="list.length>0" class="fixed b-0 r-0 l-0"
 			:style="{'background-color': store.tmStore.dark?'#fff': '#25262E' }">
@@ -56,9 +56,9 @@
 							</template>
 						</tm-checkbox>
 						<view class="flex ml-20 mb-10 mt-15">
-							<tm-text color="#808080" :fontSize="18" label="已选中订单数量:"></tm-text>
+							<tm-text  :fontSize="18" label="已选中订单数量:"></tm-text>
 							<tm-text class="ml-10" :fontSize="18" :label="count"></tm-text>
-							<tm-text class="ml-20" color="#808080" :fontSize="18" label=" 开票金额:"></tm-text>
+							<tm-text class="ml-20"  :fontSize="18" label=" 开票金额:"></tm-text>
 							<tm-text class="ml-10" :fontSize="18" :label="`￥${money}`"></tm-text>
 						</view>
 					</view>

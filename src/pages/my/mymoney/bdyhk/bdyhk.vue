@@ -4,42 +4,39 @@
 		</tm-navbar>
 
 		<tm-form @submit="confirm" v-model="show" transprent>
-			<view style="margin: 30rpx 0rpx  20rpx 12rpx;">
+			<view style="margin: 30rpx 0rpx  0rpx 12rpx;">
 				<tm-text :fontSize="30" class="text-weight-b" label="银行卡账号"></tm-text>
 			</view>
-			<tm-form-item label=""
-				:rules="[{required:true,message:'请输入银行卡账号',validator:(val)=> val === '' ? false : true}]">
+
+			<tm-form-item required field="phone" :rules="[{required:true,message:'请输入银行卡账号'}]">
 				<tm-input placeholder="请输入银行卡账号" :inputPadding="[0,0]" v-model="show.phone" :transprent="true"
 					:showBottomBotder="false">
 				</tm-input>
 			</tm-form-item>
-			<view style="margin: 20rpx 0rpx  20rpx 12rpx;">
+			<view style="margin: 20rpx 0rpx  0rpx 12rpx;">
 				<tm-text :fontSize="30" class="text-weight-b" label="姓名"></tm-text>
 			</view>
-			<tm-form-item label=""
-				:rules="[{required:true,message:'请输入姓名',validator:(val)=> val === '' ? false : true}]">
+			<tm-form-item required field="name" :rules="[{required:true,message:'请输入姓名'}]">
 				<tm-input placeholder="请输入姓名" :inputPadding="[0,0]" v-model="show.name" :transprent="true"
 					:showBottomBotder="false">
 				</tm-input>
 			</tm-form-item>
-			<view style="margin: 20rpx 0rpx  20rpx 12rpx;">
+			<view style="margin: 20rpx 0rpx  0rpx 12rpx;">
 				<tm-text :fontSize="30" class="text-weight-b" label="手机号"></tm-text>
 			</view>
-			<tm-form-item label=""
-				:rules="[{required:true,message:'请输入银行预留手机号',validator:(val)=> val === '' ? false : true}]">
-				<tm-input disabled placeholder="请输入银行预留手机号" :inputPadding="[0,0]" v-model="show.phone1" :transprent="true"
-					:showBottomBotder="false">
+			<tm-form-item required field="phone1" :rules="[{required:true,message:'请输入银行预留手机号'}]">
+				<tm-input disabled placeholder="请输入银行预留手机号" :inputPadding="[0,0]" v-model="show.phone1"
+					:transprent="true" :showBottomBotder="false">
 					<template v-slot:right>
 						<tm-button @click="btn" :disabled="smsShow" :width="140" :height="40" :margin="[0, 0]"
 							:padding="[10, 2]" size="small" :shadow="0" :label="codeText"></tm-button>
 					</template>
 				</tm-input>
 			</tm-form-item>
-			<view style="margin: 20rpx 0rpx  20rpx 12rpx;">
+			<view style="margin: 20rpx 0rpx  0rpx 12rpx;">
 				<tm-text :fontSize="30" class="text-weight-b" label="验证码"></tm-text>
 			</view>
-			<tm-form-item label=""
-				:rules="[{required:true,message:'请输入验证码',validator:(val)=> val === '' ? false : true}]">
+			<tm-form-item required field="code" :rules="[{required:true,message:'请输入验证码'}]">
 				<tm-input placeholder="请输入验证码" :inputPadding="[0,0]" v-model="show.code" :transprent="true"
 					:showBottomBotder="false">
 				</tm-input>
