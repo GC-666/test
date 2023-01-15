@@ -35,7 +35,7 @@
 					</view>
 					<view class="flex flex-center mr-20" style="width:180rpx">
 						<tm-button v-if="xsigninfo.isSign && xsigninfo.isOpenSign" @click="ok" icon="tmicon-md-checkbox" size="small" label="签到"></tm-button>
-						<tm-button v-if="!xsigninfo.isSign && xsigninfo.isOpenSign" :padding="[10]" :margin="[10]" :shadow="0" text size="small" :width="170" outlined :label="`已签到:1${xsigninfo.signCount}天`"></tm-button>
+						<tm-button v-if="!xsigninfo.isSign && xsigninfo.isOpenSign" :padding="[10]" :margin="[10]" :shadow="0" text size="small" :width="170" outlined :label="`已签到:${xsigninfo.signCount}天`"></tm-button>
 					</view>
 				</view>
 			</view>
@@ -92,11 +92,11 @@
 								</view>
 								<tm-text v-if="item.historyDeal.jrpj>item.historyDeal.zrpj && item.historyDeal.jrpj!=0 && item.historyDeal.zrpj!=0"
 									class="flex-center" color="#F90808" :fontSize="30"
-									:label="`+${Math.round(((item.historyDeal.jrpj - item.historyDeal.zrpj) / item.historyDeal.zrpj) * 100) / 100}%`">
+									:label="`+${Math.round(((item.historyDeal.jrpj - item.historyDeal.zrpj) / item.historyDeal.zrpj) * 10000) / 100}%`">
 								</tm-text>
 								<tm-text v-if="item.historyDeal.jrpj<item.historyDeal.zrpj && item.historyDeal.jrpj!=0 && item.historyDeal.zrpj!=0"
 									class="flex-center" color="green" :fontSize="30"
-									:label="`${Math.round(((item.historyDeal.jrpj - item.historyDeal.zrpj) / item.historyDeal.zrpj) * 100) / 100}%`">
+									:label="`${Math.round(((item.historyDeal.jrpj - item.historyDeal.zrpj) / item.historyDeal.zrpj) * 10000) / 100}%`">
 								</tm-text>
 								<tm-text v-if="item.historyDeal.jrpj==item.historyDeal.zrpj || item.historyDeal.zrpj==0 || item.historyDeal.jrpj==0"
 									class="flex-center" color="#F90808" :fontSize="30" label="+0%"></tm-text>
@@ -121,11 +121,11 @@
 						<tm-text class="text-weight-b mt-10" color="red" :font-size="26" :label="item.price"></tm-text>
 						<tm-text v-if="item.historyDeal.jrpj>item.historyDeal.zrpj && item.historyDeal.jrpj!=0 && item.historyDeal.zrpj!=0"
 							class="flex-center" color="#F90808" :fontSize="30"
-							:label="`+${Math.round(((item.historyDeal.jrpj - item.historyDeal.zrpj) / item.historyDeal.zrpj) * 100) / 100}%`">
+							:label="`+${Math.round(((item.historyDeal.jrpj - item.historyDeal.zrpj) / item.historyDeal.zrpj) * 10000)/100}%`">
 						</tm-text>
 						<tm-text v-if="item.historyDeal.jrpj<item.historyDeal.zrpj && item.historyDeal.jrpj!=0 && item.historyDeal.zrpj!=0"
 							class="flex-center" color="green" :fontSize="30"
-							:label="`${Math.round(((item.historyDeal.jrpj - item.historyDeal.zrpj) / item.historyDeal.zrpj) * 100) / 100}%`">
+							:label="`${Math.round(((item.historyDeal.jrpj - item.historyDeal.zrpj) / item.historyDeal.zrpj) * 10000)/100}%`">
 						</tm-text>
 						<tm-text v-if="item.historyDeal.jrpj==item.historyDeal.zrpj || item.historyDeal.zrpj==0 || item.historyDeal.jrpj==0"
 							class="flex-center" color="#F90808" :fontSize="30" label="+0%"></tm-text>
@@ -179,11 +179,11 @@
 								</view>
 								<tm-text v-if="item.historyDeal.jrpj>item.historyDeal.zrpj && item.historyDeal.jrpj!=0 && item.historyDeal.zrpj!=0"
 									class="flex-center" color="#F90808" :fontSize="30"
-									:label="`+${Math.round(((item.historyDeal.jrpj - item.historyDeal.zrpj) / item.historyDeal.zrpj) * 100) / 100}%`">
+									:label="`+${Math.round(((item.historyDeal.jrpj - item.historyDeal.zrpj) / item.historyDeal.zrpj) * 10000) / 100}%`">
 								</tm-text>
 								<tm-text v-if="item.historyDeal.jrpj<item.historyDeal.zrpj && item.historyDeal.jrpj!=0 && item.historyDeal.zrpj!=0"
 									class="flex-center" color="green" :fontSize="30"
-									:label="`${Math.round(((item.historyDeal.jrpj - item.historyDeal.zrpj) / item.historyDeal.zrpj) * 100) / 100}%`">
+									:label="`${Math.round(((item.historyDeal.jrpj - item.historyDeal.zrpj) / item.historyDeal.zrpj) * 10000) / 100}%`">
 								</tm-text>
 								<tm-text v-if="item.historyDeal.jrpj==item.historyDeal.zrpj || item.historyDeal.zrpj==0 || item.historyDeal.jrpj==0"
 									class="flex-center" color="#F90808" :fontSize="30" label="+0%"></tm-text>

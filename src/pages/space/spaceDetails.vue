@@ -113,11 +113,11 @@
 					<view class="flex">
 						<tm-text v-if="item.jrpj>item.zrpj && item.jrpj!=0 && item.zrpj!=0"
 							class="flex-center" color="#F90808" :fontSize="30"
-							:label="`+${Math.round(((item.jrpj - item.zrpj) / item.zrpj) * 100) / 100}%`">
+							:label="`+${Math.round(((item.jrpj - item.zrpj) / item.zrpj) * 10000)/100}%`">
 						</tm-text>
 						<tm-text v-if="item.jrpj<item.zrpj && item.jrpj!=0 && item.zrpj!=0"
 							class="flex-center" color="green" :fontSize="30"
-							:label="`${Math.round(((item.jrpj - item.zrpj) / item.zrpj) * 100) / 100}%`">
+							:label="`${Math.round(((item.jrpj - item.zrpj) / item.zrpj) * 10000)/100}%`">
 						</tm-text>
 						<tm-text v-if="item.jrpj==item.zrpj || item.zrpj==0 || item.jrpj==0"
 							class="flex-center" color="#F90808" :fontSize="30" label="+0%"></tm-text>
@@ -192,7 +192,7 @@
 		})
 	})
 	let pj=computed(()=>{
-		return Math.round(((StatisticDdetails.value.jrpj - StatisticDdetails.value.zrpj) / StatisticDdetails.value.zrpj)*100)/100;
+		return Math.round(((StatisticDdetails.value.jrpj - StatisticDdetails.value.zrpj) / StatisticDdetails.value.zrpj)*10000)/100;
 	})
 	const follow1 = ref(true)
 	// 添加关注
